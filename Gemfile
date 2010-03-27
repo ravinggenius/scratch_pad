@@ -41,6 +41,11 @@ git 'git://github.com/datamapper/dm-rails.git'
 
 gem 'dm-rails', '~> 0.10.2'
 
+gem 'haml', '~> 2.2.22'
+gem 'compass', '~> 0.8.17'
+gem 'compass-susy-plugin', '~> 0.6.3'
+gem 'compass-jquery-plugin', '~> 0.2.5'
+
 git 'git://github.com/rspec/rspec.git'
 git 'git://github.com/rspec/rspec-core.git'
 git 'git://github.com/rspec/rspec-expectations.git'

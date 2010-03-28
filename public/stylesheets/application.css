@@ -1,0 +1,234 @@
+/* Welcome to Susy. Use this file to define screen styles.
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen" rel="stylesheet" type="text/css" /> */
+/* @group reset */
+/* line 6, ../../../../../../usr/lib/ruby/gems/1.8/gems/compass-0.8.17/frameworks/compass/stylesheets/compass/utilities/general/_reset.sass */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline; }
+
+/* line 17, ../../../../../../usr/lib/ruby/gems/1.8/gems/compass-0.8.17/frameworks/compass/stylesheets/compass/utilities/general/_reset.sass */
+*:focus {
+  outline: 0; }
+
+/* line 20, ../../../../../../usr/lib/ruby/gems/1.8/gems/compass-0.8.17/frameworks/compass/stylesheets/compass/utilities/general/_reset.sass */
+body {
+  line-height: 1em;
+  color: black;
+  background: #fff; }
+
+/* line 23, ../../../../../../usr/lib/ruby/gems/1.8/gems/compass-0.8.17/frameworks/compass/stylesheets/compass/utilities/general/_reset.sass */
+ol, ul {
+  list-style: none; }
+
+/* tables still need 'cellspacing="0"' in the markup */
+/* line 27, ../../../../../../usr/lib/ruby/gems/1.8/gems/compass-0.8.17/frameworks/compass/stylesheets/compass/utilities/general/_reset.sass */
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  vertical-align: middle; }
+
+/* line 30, ../../../../../../usr/lib/ruby/gems/1.8/gems/compass-0.8.17/frameworks/compass/stylesheets/compass/utilities/general/_reset.sass */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle; }
+
+/* line 33, ../../../../../../usr/lib/ruby/gems/1.8/gems/compass-0.8.17/frameworks/compass/stylesheets/compass/utilities/general/_reset.sass */
+q, blockquote {
+  quotes: "" ""; }
+  /* line 101, ../../../../../../usr/lib/ruby/gems/1.8/gems/compass-0.8.17/frameworks/compass/stylesheets/compass/utilities/general/_reset.sass */
+  q:before, q:after, blockquote:before, blockquote:after {
+    content: ""; }
+
+/* line 36, ../../../../../../usr/lib/ruby/gems/1.8/gems/compass-0.8.17/frameworks/compass/stylesheets/compass/utilities/general/_reset.sass */
+img a {
+  border: none; }
+
+/* @end */
+/* @group defaults */
+/* line 68, ../../app/stylesheets/_base.sass */
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  color: #444444; }
+
+/* @group links */
+/* line 74, ../../app/stylesheets/_base.sass */
+:focus {
+  outline: 1px dotted #777777;
+  color: #006666; }
+
+/* line 79, ../../app/stylesheets/_base.sass */
+a:link {
+  color: #009999; }
+/* line 81, ../../app/stylesheets/_base.sass */
+a:visited {
+  color: #990099; }
+/* line 83, ../../app/stylesheets/_base.sass */
+a:focus, a:hover, a:active {
+  color: #006666;
+  text-decoration: none; }
+
+/* @end */
+/* @group headers */
+/* line 92, ../../app/stylesheets/_base.sass */
+h1, h2, h3, h4, h5, h6 {
+  color: #333333;
+  font-weight: bold; }
+
+/* line 96, ../../app/stylesheets/_base.sass */
+h1, h2, h3 {
+  font-family: Baskerville, Palatino, serif; }
+
+/* line 99, ../../app/stylesheets/_base.sass */
+h1 {
+  font-size: 1.5em; }
+
+/* @end */
+/* @group forms */
+/* line 107, ../../app/stylesheets/_base.sass */
+form *:focus {
+  outline: none; }
+
+/* line 110, ../../app/stylesheets/_base.sass */
+fieldset {
+  margin: 1.5em 0; }
+
+/* line 113, ../../app/stylesheets/_base.sass */
+legend {
+  font-weight: bold;
+  font-variant: small-caps; }
+
+/* line 117, ../../app/stylesheets/_base.sass */
+label {
+  display: block;
+  margin-top: 1.5em; }
+
+/* line 121, ../../app/stylesheets/_base.sass */
+legend + label {
+  margin-top: 0; }
+
+/* line 124, ../../app/stylesheets/_base.sass */
+textarea, input[type="text"] {
+  color: #777777;
+  /* Mozilla (FireFox, Camino) */
+  -moz-box-sizing: border-box;
+  /* Webkit (Safari, Chrome) */
+  -webkit-box-sizing: border-box;
+  /* IE (8) */
+  -ms-box-sizing: border-box;
+  /* CSS3 */
+  box-sizing: border-box;
+  width: 100%; }
+
+/* @end */
+/* @group tables */
+/* tables still need 'cellspacing="0"' in the markup */
+/* line 136, ../../app/stylesheets/_base.sass */
+table {
+  width: 100%;
+  border: 0.063em solid #aaaaaa;
+  border-left: none;
+  border-right: none;
+  padding: 0.438em 0;
+  margin: 0.5em 0; }
+
+/* line 144, ../../app/stylesheets/_base.sass */
+tbody {
+  color: #777777; }
+
+/* line 147, ../../app/stylesheets/_base.sass */
+th {
+  font-weight: bold; }
+
+/* @end */
+/* @group block tags */
+/* line 155, ../../app/stylesheets/_base.sass */
+p {
+  margin: 1.5em 0; }
+
+/* line 171, ../../app/stylesheets/_base.sass */
+ol {
+  list-style: decimal;
+  margin: 0 1.5em 1.5em 1.5em; }
+
+/* line 174, ../../app/stylesheets/_base.sass */
+ul {
+  list-style: disc;
+  margin: 0 1.5em 1.5em 1.5em; }
+
+/* line 177, ../../app/stylesheets/_base.sass */
+blockquote {
+  margin: 1.5em;
+  color: #777777; }
+
+/* @end */
+/* @group inline tags */
+/* line 186, ../../app/stylesheets/_base.sass */
+cite {
+  font-style: italic;
+  color: #777777; }
+
+/* line 190, ../../app/stylesheets/_base.sass */
+em {
+  font-style: italic; }
+
+/* line 193, ../../app/stylesheets/_base.sass */
+strong {
+  font-weight: bold; }
+
+/* line 196, ../../app/stylesheets/_base.sass */
+ins {
+  text-decoration: underline; }
+
+/* line 199, ../../app/stylesheets/_base.sass */
+del {
+  text-decoration: line-through; }
+
+/* line 202, ../../app/stylesheets/_base.sass */
+q {
+  font-style: italic; }
+  /* line 204, ../../app/stylesheets/_base.sass */
+  q em {
+    font-style: normal; }
+
+/* @end */
+/* @group replaced tags */
+/* line 212, ../../app/stylesheets/_base.sass */
+img {
+  vertical-align: bottom; }
+
+/* @end */
+
+/* @end */
+/* @group STRUCTURE */
+/* line 17, ../../app/stylesheets/application.sass */
+body {
+  background-color: pink; }
+
+/* @end */
+/* @group COMPONENTS by type */
+/* @end */
+/* @group OVERRIDES by content */
+/* @end */
+/* @group OVERRIDES by page */
+/* @end */
+/* @group DEBUG */
+/* uncomment, adjust and use for debugging    */
+/* #page
+ *   +show-grid("grid.png") */
+/* @end */

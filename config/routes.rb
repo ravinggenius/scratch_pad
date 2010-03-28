@@ -1,4 +1,6 @@
 ScratchPad::Application.routes.draw do |map|
+  resources :nodes
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -48,7 +50,7 @@ ScratchPad::Application.routes.draw do |map|
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => "static#index"
+  root :to => "nodes#index"
 
   # See how all your routes lay out with "rake routes"
 

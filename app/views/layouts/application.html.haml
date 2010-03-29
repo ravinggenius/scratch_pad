@@ -14,18 +14,7 @@
     = stylesheet_link_tag 'application'
     = javascript_include_tag 'application'
 
-    :javascript
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-xxxxxx-x']);
-      _gaq.push(['_trackPageview']);
-
-      (function () {
-        var ga = document.createElement('script');
-        ga.type = 'text/javascript';
-        ga.async = true;
-        ga.src = ('https:' === document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
-      })();
+    = render 'layouts/tracking_google' if @show_tracking_google
 
   %body
     %header{ :id => 'branding' }
@@ -42,12 +31,5 @@
     %footer{ :id => 'credits' }
       %p= raw "&copy; 2010 #{@site_name}"
 
-    %div{ :id => 'unobtrusive_badge' }
-      %span{ :class => 'selector' }un
-      %span{ :class => 'brace' }{
-      %span{ :class => 'rule' }ob:tru-sive;
-      %span{ :class => 'brace' }}
-
-    %script{ :type => 'text/javascript', :src => '//static.woopra.com/js/woopra.v2.js' }
-    :javascript
-      woopraTracker.track();
+    = render 'layouts/unobtrusive' if @show_unobtrusive_badge
+    = render 'layouts/tracking_woopra' if @show_tracking_woopra

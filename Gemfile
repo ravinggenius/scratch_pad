@@ -27,7 +27,7 @@ gem 'do_sqlite3',        '~> 0.10.1'
 
 gem 'dm-core',             '~> 0.10.2', :git => 'git://github.com/datamapper/dm-core.git'
 
-git "git://github.com/datamapper/dm-more.git" do
+git 'git://github.com/datamapper/dm-more.git' do
   gem 'dm-types',          '~> 0.10.2'
   gem 'dm-validations',    '~> 0.10.2'
   gem 'dm-constraints',    '~> 0.10.2'
@@ -35,6 +35,8 @@ git "git://github.com/datamapper/dm-more.git" do
   gem 'dm-timestamps',     '~> 0.10.2'
   gem 'dm-migrations',     '~> 0.10.2'
   gem 'dm-observer',       '~> 0.10.2'
+  gem 'dm-is-list',        '~> 0.10.2'
+  gem 'dm-is-nested_set',  '~> 0.10.2'
 end
 
 git 'git://github.com/datamapper/dm-rails.git'
@@ -45,9 +47,6 @@ gem 'haml', '~> 2.2.22'
 gem 'compass', '~> 0.8.17'
 gem 'compass-susy-plugin', '~> 0.6.3'
 gem 'compass-jquery-plugin', '~> 0.2.5'
-gem 'dm-is-list', '~> 0.10.2'
-gem 'dm-is-nested_set', '~> 0.10.2'
-gem 'dm-timestamps', '~> 0.10.2'
 
 git 'git://github.com/rspec/rspec.git'
 git 'git://github.com/rspec/rspec-core.git'

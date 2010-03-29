@@ -14,7 +14,7 @@
     = stylesheet_link_tag 'application'
     = javascript_include_tag 'application'
 
-    = render 'layouts/tracking_google' if @show_tracking_google
+    = render 'layouts/tracking_google', :google_analytics_tracking_code => '123456789.00' if @show_tracking_google
 
   %body
     %header{ :id => 'branding' }

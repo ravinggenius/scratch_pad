@@ -12,12 +12,11 @@ class Node
   property :created_at, DateTime
   property :updated_at, DateTime
 
-  #belongs_to :user
-  #has n, :vocabularies, :through => Resource
-  #has n, :terms, :through => Resource
+  belongs_to :user
+  has n, :vocabularies, :through => Resource
+  has n, :terms, :through => Resource
 
   is :list
-  #is :tree
 
   def extension
     @extension ||= Kernel.const_get(type_name).get(type_id)

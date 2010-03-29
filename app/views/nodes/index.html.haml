@@ -1,1 +1,19 @@
-%p !!!
+%span.h Listing nodes
+
+%table
+  %tr
+    %th Slug
+    %th Title
+    %th Description
+    %th{:colspan => 3}
+
+- @nodes.each do |node|
+  %tr
+    %td = h node.slug
+    %td = h node.title
+    %td = h node.description
+    %td = link_to 'Show', node
+    %td = link_to 'Edit', edit_node_path(node)
+    %td = link_to 'Destroy', node, :confirm => 'Are you sure?', :method => :delete
+
+= link_to 'New node', new_node_path

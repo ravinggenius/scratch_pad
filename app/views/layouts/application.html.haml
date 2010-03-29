@@ -42,6 +42,12 @@
     %footer{ :id => 'credits' }
       %p= raw "&copy; 2010 #{@site_name}"
 
+    %div{ :id => 'unobtrusive_badge' }
+      %span{ :class => 'selector' }un
+      %span{ :class => 'brace' }{
+      %span{ :class => 'rule' }ob:tru-sive;
+      %span{ :class => 'brace' }}
+
     %script{ :type => 'text/javascript', :src => '//static.woopra.com/js/woopra.v2.js' }
     :javascript
       woopraTracker.track();

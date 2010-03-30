@@ -48,16 +48,5 @@ gem 'compass', '~> 0.8.17'
 gem 'compass-susy-plugin', '~> 0.6.3'
 gem 'compass-jquery-plugin', '~> 0.2.5'
 
-git 'git://github.com/rspec/rspec.git'
-git 'git://github.com/rspec/rspec-core.git'
-git 'git://github.com/rspec/rspec-expectations.git'
-git 'git://github.com/rspec/rspec-mocks.git'
-git 'git://github.com/rspec/rspec-rails.git'
-
 group(:test) do
-  gem 'rspec',              '2.0.0.beta.4'
-  gem 'rspec-core',         '2.0.0.beta.4', :require => 'rspec/core'
-  gem 'rspec-expectations', '2.0.0.beta.4', :require => 'rspec/expectations'
-  gem 'rspec-mocks',        '2.0.0.beta.4', :require => 'rspec/mocks'
-  gem 'rspec-rails',        '2.0.0.beta.4'
 end

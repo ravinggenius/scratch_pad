@@ -6,10 +6,10 @@
     %meta{ 'http-equiv' => 'Content-Type', 'content' => 'text/html; charset=utf-8' }/
 
     %link{ :rel => 'shortcut icon', :href => '/images/favicon.ico' }/
+    = auto_discovery_link_tag
 
     %script{ :type => 'text/javascript', :src => 'http://assets.ravinggenius.com/js?modernizr=1.1&jquery=1.4' }
     %style{ :type => 'text/css', :media => 'all'} @import url('http://assets.ravinggenius.com/css?html5reset=1.4');
-    = auto_discovery_link_tag
 
     = stylesheet_link_tag 'application'
     = javascript_include_tag 'application'
@@ -17,18 +17,18 @@
     = render 'layouts/tracking_google', :google_analytics_tracking_code => '123456789.00' if @show_tracking_google
 
   %body
-    %header{ :id => 'branding' }
+    %header#branding
       %a{ :href => '/' }
         %img{ :src => '/images/logo.png', :alt => 'logo' }/
-        %span{ :class => 'h' }= @site_name
+        %span.h= @site_name
       %span= @site_tagline
 
-    %nav{ :id => 'main_menu' }
+    %nav#main_menu
 
-    %section{ :id => 'content' }
+    %section#content
       = yield
 
-    %footer{ :id => 'credits' }
+    %footer#credits
       %p= raw "&copy; 2010 #{@site_name}"
 
     = render 'layouts/unobtrusive' if @show_unobtrusive_badge

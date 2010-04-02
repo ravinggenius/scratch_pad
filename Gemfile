@@ -5,9 +5,7 @@ git 'git://github.com/rails/rails.git'
 gem 'activesupport',     '~> 3.0.0.beta1', :require => 'active_support'
 gem 'actionpack',        '~> 3.0.0.beta1', :require => 'action_pack'
 gem 'railties',          '~> 3.0.0.beta1', :require => 'rails'
-
-# Uncomment this if you need actionmailer
-# gem 'actionmailer',      '~> 3.0.0.beta1', :require => 'action_mailer'
+gem 'actionmailer',      '~> 3.0.0.beta1', :require => 'action_mailer'
 
 gem 'data_objects',      '~> 0.10.1'
 gem 'do_sqlite3',        '~> 0.10.1'
@@ -44,9 +42,9 @@ git 'git://github.com/datamapper/dm-rails.git'
 gem 'dm-rails', '~> 0.10.2'
 
 gem 'haml', '~> 2.2.22'
-gem 'compass', '~> 0.8.17'
+gem 'compass', '~> 0.10.0.rc1'
 gem 'compass-susy-plugin', '~> 0.6.3'
 gem 'compass-jquery-plugin', '~> 0.2.5'
 
-group(:test) do
-end
+#group(:test) do
+#end

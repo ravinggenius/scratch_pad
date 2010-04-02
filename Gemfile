@@ -46,5 +46,6 @@ gem 'compass', '~> 0.10.0.rc1'
 gem 'compass-susy-plugin', '~> 0.6.3'
 gem 'compass-jquery-plugin', '~> 0.2.5'
 
-#group(:test) do
-#end
+group(:development) do
+  gem 'hirb'
+end

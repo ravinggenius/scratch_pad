@@ -3,12 +3,11 @@
 %table
   %tr
     %th Title
-    %th{:colspan => 3}
+    %th{ :colspan => 2 }
 
 - @nodes.each do |node|
   %tr
-    %td = h node.title
-    %td = link_to 'Show', node
+    %td = link_to h(node.title), node
     %td = link_to 'Edit', edit_node_path(node)
     %td = link_to 'Destroy', node, :confirm => 'Are you sure?', :method => :delete
 

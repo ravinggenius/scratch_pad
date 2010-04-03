@@ -12,7 +12,9 @@ gem 'railties',              rails_version, :require => 'rails'
 gem 'actionmailer',          rails_version, :require => 'action_mailer'
 
 gem 'data_objects',          do_version
+
 gem 'do_sqlite3',            do_version
+gem 'do_postgres',           do_version, :group => :production
 
 # You can use any of the other available database adapters.
 # This is only a small excerpt of the list of all available adapters
@@ -22,10 +24,6 @@ gem 'do_sqlite3',            do_version
 #  http://wiki.github.com/datamapper/dm-core/community-plugins
 #
 # for a rather complete list of available datamapper adapters and plugins
-
-# gem 'do_mysql',            do_version
-# gem 'do_postgres',         do_version
-# gem 'do_oracle',           do_version
 
 gem 'dm-core',               dm_version, :git => 'git://github.com/datamapper/dm-core.git'
 gem 'dm-transactions',       dm_version, :git => 'git://github.com/datamapper/dm-transactions.git'

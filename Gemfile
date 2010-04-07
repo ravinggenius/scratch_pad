@@ -1,4 +1,4 @@
-source 'http://gemcutter.org'
+source :gemcutter
 
 rails_version = '~> 3.0.0.beta2'
 do_version = '~> 0.10.1'
@@ -12,9 +12,7 @@ gem 'railties',              rails_version, :require => 'rails'
 gem 'actionmailer',          rails_version, :require => 'action_mailer'
 
 gem 'data_objects',          do_version
-
 gem 'do_sqlite3',            do_version
-gem 'do_postgres',           do_version, :group => :production
 
 # You can use any of the other available database adapters.
 # This is only a small excerpt of the list of all available adapters
@@ -46,7 +44,12 @@ gem 'haml',                  '~> 3.0.0.beta'
 gem 'compass',               '~> 0.10.0.rc1'
 gem 'compass-susy-plugin',   '~> 0.6.3'
 gem 'compass-jquery-plugin', '~> 0.2.5'
-gem 'thin' # temp fix for heroku
+
+group :production do
+  gem 'thin'
+  gem 'pg'
+  gem 'do_postgres',         do_version
+end
 
 group(:development) do
   gem 'hirb'

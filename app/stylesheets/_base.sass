@@ -45,13 +45,13 @@
 
 // COLORS
 // set any colors you will need later
-!font_color = #444
-!quiet_color = !font_color + #333
-!loud_color = !font_color - #222
-!header_color = !font_color - #111
-!link_color = #099
-!visited_color = #909
-!hover_color = !link_color - #333
+!font_color = #444444
+!quiet_color = !font_color + #333333
+!loud_color = !font_color - #222222
+!header_color = !font_color - #111111
+!link_color = #009999
+!visited_color = #990099
+!hover_color = !link_color - #333333
 !focus_color = !hover_color
 !active_color = !hover_color
 
@@ -66,6 +66,7 @@
 // Remember to add default styles to everything!
 
 body
+  +susy
   +sans-family
   :color= !font_color
 

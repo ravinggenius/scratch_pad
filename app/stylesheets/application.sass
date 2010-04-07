@@ -2,13 +2,28 @@
   Welcome to Susy. Use this file to define screen styles.
   Import this file using the following HTML or equivalent:
   <link href="/stylesheets/screen.css" media="screen" rel="stylesheet" type="text/css" />
+  More here:
+    http://github.com/ericam/compass-susy-plugin
+    http://natbat.net/2008/Sep/28/css-systems/
+    http://www.oddbird.net/susy/tutorial/
 
 /* @group reset */
-@import compass/reset.sass
 /* @end */
 
 /* @group defaults */
 @import base.sass
+@import helpers.sass
+@import border-radius.sass
+
+.h
+  display: inline-block
+  font-size: 1.3em
+
+.clearfix
+  +clearfix
+  margin: 0
+  border: none
+
 /* @end */
 
 
@@ -17,10 +32,8 @@
 
 /* @end */
 
-  
+
 /* @group COMPONENTS by type */
-
-
 
 /* @end */
 
@@ -45,6 +58,6 @@
 
 /*
   #page
-    +show-grid("grid.png")
+    +show-grid('grid.png')
 
 /* @end */

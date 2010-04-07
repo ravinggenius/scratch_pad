@@ -8,19 +8,16 @@
     %link{ :rel => 'shortcut icon', :href => '/images/favicon.ico' }/
     = auto_discovery_link_tag
 
-    %script{ :type => 'text/javascript', :src => 'http://assets.ravinggenius.com/js?modernizr=1.1&jquery=1.4' }
-    %style{ :type => 'text/css', :media => 'all'} @import url('http://assets.ravinggenius.com/css?html5reset=1.4');
+    = javascript_include_tag 'http://assets.ravinggenius.com/js?modernizr=1.1&jquery=1.4', 'application'
 
-    = stylesheet_link_tag 'application'
-    = javascript_include_tag 'application'
+    = stylesheet_link_tag 'http://assets.ravinggenius.com/css?html5reset=1.4', 'application'
 
     = render 'shared/tracking_google', :google_analytics_tracking_code => '123456789.00' if @show_tracking_google
 
   %body{ :id => page_id, :class => page_class }
     %header#branding
-      %a{ :href => '/' }
-        %img{ :src => '/images/logo.png', :alt => 'logo' }/
-        %span.h= @site_name
+      = link_to image_tag('logo.png', :alt => 'logo'), root_path
+      %span.h= link_to @site_name, root_path
       %span= @site_tagline
 
     %nav#main_menu
@@ -29,7 +26,7 @@
       = yield
 
     %footer#credits
-      %p= raw "&copy; 2010 #{@site_name}"
+      %p= raw "&copy; #{@site_name}"
 
     = render 'shared/unobtrusive' if @show_unobtrusive_badge
     = render 'shared/tracking_woopra' if @show_tracking_woopra

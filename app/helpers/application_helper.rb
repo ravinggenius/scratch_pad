@@ -27,8 +27,13 @@ module ApplicationHelper
     email.html_safe
   end
 
-  def filter text
+  def filter text, options = {}
+    options[:keep_paragraphs] = true unless options.key? :keep_paragraphs
+
     text = Maruku.new(text).to_html
+    text.gsub! /<p>/, '' unless options[:keep_paragraphs]
+    text.gsub! /<\/p>/, '' unless options[:keep_paragraphs]
+
     text.html_safe
   end
 

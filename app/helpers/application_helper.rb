@@ -37,7 +37,7 @@ module ApplicationHelper
     begin
       partial "#{node.machine_name}/views/#{part}", :node => node
     rescue
-      partial 'nodes/show', :node => node
+      partial "nodes/#{part}", :node => node
     end
   end
 end

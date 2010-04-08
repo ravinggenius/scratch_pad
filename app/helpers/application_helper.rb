@@ -1,3 +1,5 @@
+require 'maruku'
+
 module ApplicationHelper
   def page_id
     reply = "#{controller_name}_#{action_name}"
@@ -26,7 +28,8 @@ module ApplicationHelper
   end
 
   def filter text
-    #Maruku
+    text = Maruku.new(text).to_html
+    text = text.html_safe
     text
   end
 

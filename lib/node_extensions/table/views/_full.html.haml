@@ -2,11 +2,11 @@
   %span.h= node.title
 %section
   %table
-    %caption= node.caption
+    %caption= filter node.caption
     %thead
     %tfoot
     %tbody
       - node.data.each do |row|
         %tr
           - row.each do |cell|
-            %td= cell
+            %td= filter cell

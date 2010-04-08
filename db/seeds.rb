@@ -10,7 +10,7 @@ n.title = 'Welcome'
 n.user = user
 n.save
 
-n = Table.new :caption => 'That\'s what she said', :data => '"One","Two"'
+n = Table.new :caption => 'That\'s what *she* said', :data => '"_One_","Two"'
 n.title = 'Impressive dataset'
 n.user = user
 n.save

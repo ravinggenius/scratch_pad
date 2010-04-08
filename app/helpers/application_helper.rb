@@ -24,13 +24,12 @@ module ApplicationHelper
 
     email.reverse! if filter_level == :high
 
-    email
+    email.html_safe
   end
 
   def filter text
     text = Maruku.new(text).to_html
-    text = text.html_safe
-    text
+    text.html_safe
   end
 
   def partial name, locals = {}

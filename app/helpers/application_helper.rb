@@ -25,19 +25,18 @@ module ApplicationHelper
     email
   end
 
+  def filter text
+    #Maruku
+    text
+  end
+
   def partial name, locals = {}
     render :partial => name.to_s, :locals => locals
   end
 
   def show_node node, part
-    #path = "#{node.machine_name}/views/#{part}"
-    #path = 'nodes/show' unless template_exists? path
-    #partial path, :node => node
-
-    begin
-      partial "#{node.machine_name}/views/#{part}", :node => node
-    rescue
-      partial "nodes/#{part}", :node => node
-    end
+    path = "#{node.machine_name}/views/#{part}"
+    path = "nodes/#{part}" unless template_exists? path, nil, true
+    partial path, :node => node
   end
 end

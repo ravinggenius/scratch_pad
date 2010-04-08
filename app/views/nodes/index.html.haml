@@ -3,7 +3,9 @@
   = link_to 'New node', new_node_path
 
 - @featured.each do |node|
-  = full_node node
+  %article.node.featured
+    = full_node node
 
 - @nodes.each do |node|
-  = preview_node node
+  %article.node
+    = preview_node node

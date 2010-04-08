@@ -39,7 +39,7 @@ module ApplicationHelper
 
   def show_node node, size
     path = "#{node.type_name.underscore}/views/#{size}"
-    path = 'nodes/show' unless path
+    path = 'nodes/show' unless template_exists? path
     partial path, :node => node
   end
 end

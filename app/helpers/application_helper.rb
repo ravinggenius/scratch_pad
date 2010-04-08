@@ -32,7 +32,12 @@ module ApplicationHelper
     text.html_safe
   end
 
-  def partial name, locals = {}
+  # FIXME: incorporate the options hash
+  def partial name, locals = {}, options = {}
+    #options.merge! locals
+    #options[:partial] = name.to_s
+    #render options
+
     render :partial => name.to_s, :locals => locals
   end
 

@@ -2,11 +2,11 @@
   %span.h= node.title
 %section
   %table
-    %caption= node.extension.caption
+    %caption= node.caption
     %thead
     %tfoot
     %tbody
-      - node.extension.data.each do |row|
+      - node.data.each do |row|
         %tr
           - row.each do |cell|
             %td= cell

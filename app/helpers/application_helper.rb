@@ -29,17 +29,15 @@ module ApplicationHelper
     render :partial => name.to_s, :locals => locals
   end
 
-  def preview_node node
-    show_node node, :preview
-  end
+  def show_node node, part
+    #path = "#{node.machine_name}/views/#{part}"
+    #path = 'nodes/show' unless template_exists? path
+    #partial path, :node => node
 
-  def full_node node
-    show_node node, :full
-  end
-
-  def show_node node, size
-    path = "#{node.type_name.underscore}/views/#{size}"
-    path = 'nodes/show' unless template_exists? path
-    partial path, :node => node
+    begin
+      partial "#{node.machine_name}/views/#{part}", :node => node
+    rescue
+      partial 'nodes/show', :node => node
+    end
   end
 end

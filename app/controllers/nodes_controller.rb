@@ -2,7 +2,7 @@ class NodesController < ApplicationController
   # GET /nodes
   # GET /nodes.xml
   def index
-    @nodes = Node.all
+    @nodes = Node.all.map { |n| n.extension }
     @featured = [ @nodes.pop ]
 
     respond_to do |format|
@@ -14,7 +14,7 @@ class NodesController < ApplicationController
   # GET /nodes/1
   # GET /nodes/1.xml
   def show
-    @node_extension = Node.get(params[:id]).extension
+    @node = Node.get(params[:id]).extension
 
     respond_to do |format|
       format.html # show.html.erb

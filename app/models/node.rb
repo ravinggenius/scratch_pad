@@ -21,4 +21,8 @@ class Node
   def extension
     @extension ||= Kernel.const_get(type_name).get(type_id)
   end
+
+  def machine_name
+    type_name.underscore
+  end
 end

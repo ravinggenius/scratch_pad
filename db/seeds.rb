@@ -3,13 +3,20 @@
 
 user = User.create :name => 'Thomas Ingram', :email => 'thomas@ravinggenius.com'
 
+n = TextBlock.new :data => 'Welcome to the ScratchPad!'
+n.title = 'Welcome'
+n.user = user
+n.save
+
 =begin
 
-List.create :user => user, :title => 'Check out this mighty List!', :items => [ 'Make this work' ]
+l = List.new
+l.user = user
+l.title = 'Check out this mighty List!'
+l.items << 'Make this work'
+l.save
 
 Table.create :user => user, :title => 'Impressive dataset', :caption => '(It\'s not really that impressive)', :data => '"One","Two"'
-
-Text.create :user => user, :title => 'Welcome', :data => 'Welcome to Raving Genius\' ScratchPad!'
 
 n = Page.create :user => user, :title => 'About Us', :slug => 'about'
 n.nodes << Text.first

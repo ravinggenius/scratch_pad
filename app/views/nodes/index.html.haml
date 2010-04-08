@@ -1,14 +1,5 @@
 %span.h Listing nodes
-
-%table
-  %tr
-    %th Title
-    %th{ :colspan => 2 }
+= link_to 'New node', new_node_path
 
 - @nodes.each do |node|
-  %tr
-    %td = link_to h(node.title), node
-    %td = link_to 'Edit', edit_node_path(node)
-    %td = link_to 'Destroy', node, :confirm => 'Are you sure?', :method => :delete
-
-= link_to 'New node', new_node_path
+  = partial 'node', :node => node

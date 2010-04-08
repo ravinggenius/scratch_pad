@@ -22,7 +22,3 @@ class Node
     @extension ||= Kernel.const_get(type_name).get(type_id)
   end
 end
-
-require 'node_extension'
-require 'node_collection'
-require 'blob'

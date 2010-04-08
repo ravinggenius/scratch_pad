@@ -12,7 +12,7 @@ module ApplicationHelper
   # http://www.leftrightdesigns.com/library/jquery/nospam/nospam.phps
   # contact//305online/net
   #
-  def obfuscate(email_address, options={})
+  def obfuscate email_address, options = {}
     email = email_address
     add_hints = options[:add_hints] || false
     filter_level = options[:filter_level] || :low
@@ -23,5 +23,9 @@ module ApplicationHelper
     email.reverse! if filter_level == :high
 
     email
+  end
+
+  def partial name, locals = {}
+    render :partial => name.to_s, :locals => locals
   end
 end

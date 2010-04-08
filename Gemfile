@@ -45,12 +45,13 @@ gem 'compass',               '~> 0.10.0.rc1'
 gem 'compass-susy-plugin',   '~> 0.6.3'
 gem 'compass-jquery-plugin', '~> 0.2.5'
 
+group(:development) do
+  gem 'hirb'
+  gem 'awesome_print'
+end
+
 group :production do
   gem 'thin'
   gem 'pg'
   gem 'do_postgres',         do_version
-end
-
-group(:development) do
-  gem 'hirb'
 end

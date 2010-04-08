@@ -1,5 +1,9 @@
-%span.h Listing nodes
-= link_to 'New node', new_node_path
+%header
+  %span.h Listing nodes
+  = link_to 'New node', new_node_path
+
+- @featured.each do |node|
+  = full_node node
 
 - @nodes.each do |node|
-  = partial 'node', :node => node
+  = preview_node node

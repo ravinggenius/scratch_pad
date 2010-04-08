@@ -1,0 +1,13 @@
+%article
+  %header
+    %span.h= node.title
+  %section
+    %table
+      %caption= node.extension.caption
+      %thead
+      %tfoot
+      %tbody
+        - node.extension.data.each do |row|
+          %tr
+            - row.each do |cell|
+              %td= cell

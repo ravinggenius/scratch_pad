@@ -28,4 +28,18 @@ module ApplicationHelper
   def partial name, locals = {}
     render :partial => name.to_s, :locals => locals
   end
+
+  def preview_node node
+    show_node node, :preview
+  end
+
+  def full_node node
+    show_node node, :full
+  end
+
+  def show_node node, size
+    path = "#{node.type_name.underscore}/views/#{size}"
+    path = 'nodes/show' unless path
+    partial path, :node => node
+  end
 end

@@ -44,6 +44,7 @@ gem 'haml',                  '~> 3.0.0.beta'
 gem 'compass',               '~> 0.10.0.rc1'
 gem 'compass-susy-plugin',   '~> 0.6.3'
 gem 'compass-jquery-plugin', '~> 0.2.5'
+gem 'maruku',                '~> 0.6.0'
 
 group(:development) do
   gem 'hirb'

@@ -3,9 +3,7 @@
   = link_to 'New node', new_node_path
 
 - @featured.each do |node|
-  %article.node.featured{ :class => node.machine_name }
-    = show_node node, :full
+  = partial 'article', :node => node, :is_featured => true
 
 - @nodes.each do |node|
-  %article.node{ :class => node.machine_name }
-    = show_node node, :preview
+  = partial 'article', :node => node

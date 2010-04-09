@@ -25,4 +25,8 @@ class Node
   def machine_name
     type_name.underscore
   end
+
+  def self.collections
+    NodeCollection.all
+  end
 end

@@ -1,4 +1,4 @@
-class Collection
+class NodeCollection
   include DataMapper::Resource
   include NodeExtension
 
@@ -20,6 +20,6 @@ class Collection
 
   def nodes
     self.node_ids ||= []
-    @nodes ||= self.node_ids.map { |node_id| Node.get node_id.to_i }
+    @nodes ||= self.node_ids.map { |node_id| Node.get(node_id.to_i).extension }
   end
 end

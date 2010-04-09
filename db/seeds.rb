@@ -15,6 +15,13 @@ n.title = 'Impressive dataset'
 n.user = user
 n.save
 
+n = Post.new
+n.nodes << TextBlock.first
+n.nodes << Table.first
+n.title = 'About Us'
+n.user = user
+n.save
+
 =begin
 
 l = List.new
@@ -24,14 +31,14 @@ l.user = user
 l.save
 
 n = Page.new :slug => 'about'
-n.nodes << Text.first
+n.nodes << TextBlock.first
 n.nodes << List.first
 n.title = 'About Us'
 n.user = user
 n.save
 
 n = Comment.new
-n.nodes << Text.first
+n.nodes << TextBlock.first
 n.nodes << Table.first
 n.title = 'My Awesome Comment'
 n.user = user

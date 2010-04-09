@@ -2,8 +2,9 @@ class NodesController < ApplicationController
   # GET /nodes
   # GET /nodes.xml
   def index
-    @nodes = Node.all.map { |n| n.extension }
-    @featured = [ @nodes.pop ]
+    @nodes = NodeCollection.all.map { |n| n.extension }
+    @featured = []
+    @featured << @nodes.pop unless @nodes.empty?
 
     respond_to do |format|
       format.html # index.html.erb

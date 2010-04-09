@@ -2,7 +2,7 @@ class NodesController < ApplicationController
   # GET /nodes
   # GET /nodes.xml
   def index
-    @nodes = NodeCollection.all.map { |n| n.extension }
+    @nodes = NodeCollection.all
     @featured = []
     @featured << @nodes.pop unless @nodes.empty?
 

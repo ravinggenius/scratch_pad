@@ -3,6 +3,8 @@
 ScratchPad::Application.routes.draw do |map|
   resources :nodes
 
+  root :to => 'nodes#index'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -49,6 +51,4 @@ ScratchPad::Application.routes.draw do |map|
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-
-  root :to => "nodes#index"
 end

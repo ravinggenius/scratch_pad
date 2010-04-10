@@ -3,6 +3,7 @@
 
 DataMapper.auto_migrate!
 
+User.create :name => 'Anonymous', :email => 'anonymous@example.com'
 user = User.create :name => 'Thomas Ingram', :email => 'thomas@ravinggenius.com'
 
 n = TextBlock.new :data => 'Welcome to your new ScratchPad!'
@@ -12,6 +13,19 @@ n.save
 
 n = Table.new :caption => 'That\'s what *she* said', :data => '"_One_","Two"'
 n.title = 'Impressive dataset'
+n.user = user
+n.save
+
+n = TextBlock.new :data => 'Static pages with human-friendly URLs are very cool.'
+n.title = 'Stub'
+n.user = user
+n.save
+
+n = Post.new
+n.nodes << TextBlock.all[1]
+n.nodes << TextBlock.first
+n.nodes << Table.first
+n.title = 'Static Page'
 n.user = user
 n.save
 

@@ -1,6 +1,4 @@
 class NodesController < ApplicationController
-  # GET /nodes
-  # GET /nodes.xml
   def index
     @nodes = NodeCollection.all
     @featured = []
@@ -12,8 +10,6 @@ class NodesController < ApplicationController
     end
   end
 
-  # GET /nodes/1
-  # GET /nodes/1.xml
   def show
     @node = Node.get(params[:id]).extension
 
@@ -23,8 +19,6 @@ class NodesController < ApplicationController
     end
   end
 
-  # GET /nodes/new
-  # GET /nodes/new.xml
   def new
     @node = Node.new
 
@@ -34,13 +28,10 @@ class NodesController < ApplicationController
     end
   end
 
-  # GET /nodes/1/edit
   def edit
     @node = Node.get(params[:id])
   end
 
-  # POST /nodes
-  # POST /nodes.xml
   def create
     @node = Node.new(params[:node])
 
@@ -55,8 +46,6 @@ class NodesController < ApplicationController
     end
   end
 
-  # PUT /nodes/1
-  # PUT /nodes/1.xml
   def update
     @node = Node.get(params[:id])
 
@@ -71,8 +60,6 @@ class NodesController < ApplicationController
     end
   end
 
-  # DELETE /nodes/1
-  # DELETE /nodes/1.xml
   def destroy
     @node = Node.get(params[:id])
     @node.destroy

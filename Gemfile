@@ -49,5 +49,6 @@ end
 group :production do
   gem 'thin'
   gem 'pg'
+  gem 'postgres_adapter'
   gem 'do_postgres',         do_version
 end

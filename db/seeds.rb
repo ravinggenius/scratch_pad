@@ -6,6 +6,18 @@ DataMapper.auto_migrate!
 User.create :name => 'Anonymous', :email => 'anonymous@example.com'
 user = User.create :name => 'Thomas Ingram', :email => 'thomas@ravinggenius.com'
 
+n = List.new
+n.items << 'Make this work'
+n.title = 'Check out this mighty List!'
+n.user = user
+n.save
+
+n = List.new
+n.items = [ 'Line one', 'Line two' ]
+n.title = 'Another List!'
+n.user = user
+n.save
+
 n = TextBlock.new :data => 'Welcome to your new ScratchPad!'
 n.title = 'Welcome'
 n.user = user
@@ -13,6 +25,16 @@ n.save
 
 n = Table.new :caption => 'That\'s what *she* said', :data => '"_One_","Two"'
 n.title = 'Impressive dataset'
+n.user = user
+n.save
+
+n = Table.new :caption => 'That\'s what *she* said (again)'
+n.data = [
+  [ 'a', 'b', 'c' ],
+  [ '1', '2', '3' ],
+  [ '4', '5', '6' ]
+]
+n.title = 'Even better dataset'
 n.user = user
 n.save
 
@@ -37,12 +59,6 @@ n.user = user
 n.save
 
 =begin
-
-l = List.new
-l.items << 'Make this work'
-l.title = 'Check out this mighty List!'
-l.user = user
-l.save
 
 n = Page.new :slug => 'about'
 n.nodes << TextBlock.first

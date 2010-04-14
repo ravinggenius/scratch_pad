@@ -4,9 +4,7 @@
   %table
     %caption= filter node.caption, :keep_paragraphs => false
     %thead
+      = partial 'table/views/rows', :data => node.data.shift if node.has_header_row
     %tfoot
     %tbody
-      - node.data.each do |row|
-        %tr
-          - row.each do |cell|
-            %td= filter cell, :keep_paragraphs => false
+      = partial 'table/views/rows', :data => node.data

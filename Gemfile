@@ -46,7 +46,7 @@ gem 'compass-susy-plugin',   '~> 0.6.3'
 gem 'compass-jquery-plugin', '~> 0.2.5'
 gem 'maruku',                '~> 0.6.0'
 
-group(:development) do
+group :development do
   gem 'hirb'
   gem 'awesome_print'
 end

@@ -1,15 +1,9 @@
 source :gemcutter
 
-rails_version = '~> 3.0.0.beta2'
 do_version = '~> 0.10.1'
 dm_version = '~> 0.10.3'
 
-git 'git://github.com/rails/rails.git'
-
-gem 'activesupport',         rails_version, :require => 'active_support'
-gem 'actionpack',            rails_version, :require => 'action_pack'
-gem 'railties',              rails_version, :require => 'rails'
-gem 'actionmailer',          rails_version, :require => 'action_mailer'
+gem 'rails',                 '~> 3.0.0.beta3'
 
 gem 'data_objects',          do_version
 gem 'do_sqlite3',            do_version
@@ -45,6 +39,7 @@ gem 'compass',               '~> 0.10.0.rc1'
 gem 'compass-susy-plugin',   '~> 0.6.3'
 gem 'compass-jquery-plugin', '~> 0.2.5'
 gem 'maruku',                '~> 0.6.0'
+#gem 'unicorn'
 
 group :development do
   gem 'hirb'

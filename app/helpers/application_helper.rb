@@ -12,17 +12,16 @@ module ApplicationHelper
   end
 
   # http://www.leftrightdesigns.com/library/jquery/nospam/nospam.phps
-  # contact//305online/net
+  # contact//example/com
   #
-  def obfuscate email_address, options = {}
-    email = email_address
+  def obfuscate email, options = {}
     add_hints = options[:add_hints] || false
     filter_level = options[:filter_level] || :low
 
+    email.reverse! if filter_level == :high
+
     email.gsub!(/[@]/, add_hints ? '<span class="hint" title="replace with commercial at (@)">//</span>' : '//')
     email.gsub!(/[\.]/, add_hints ? '<span class="hint" title="replace with period (.)">/</span>' : '/')
-
-    email.reverse! if filter_level == :high
 
     email.html_safe
   end
@@ -37,13 +36,8 @@ module ApplicationHelper
     text.html_safe
   end
 
-  # FIXME: incorporate the options hash
   def partial name, locals = {}, options = {}
-    #options.merge! locals
-    #options[:partial] = name.to_s
-    #render options
-
-    render :partial => name.to_s, :locals => locals
+    render options.merge(:partial => name.to_s, :locals => locals)
   end
 
   def show_node node, part

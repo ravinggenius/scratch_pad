@@ -1,4 +1,4 @@
-source :gemcutter
+source :rubygems
 
 do_version = '~> 0.10.1'
 dm_version = '~> 0.10.3'
@@ -6,18 +6,11 @@ dm_version = '~> 0.10.3'
 gem 'rails',                 '~> 3.0.0.beta3'
 
 gem 'data_objects',          do_version
-gem 'do_sqlite3',            do_version
-
-# You can use any of the other available database adapters.
-# This is only a small excerpt of the list of all available adapters
-# Have a look at
-#
-#  http://wiki.github.com/datamapper/dm-core/adapters
-#  http://wiki.github.com/datamapper/dm-core/community-plugins
-#
-# for a rather complete list of available datamapper adapters and plugins
+gem 'do_postgres',           do_version, :group => :production
+gem 'do_sqlite3',            do_version, :group => :development
 
 gem 'dm-core',               dm_version, :git => 'git://github.com/datamapper/dm-core.git'
+gem 'dm-rails',              '~> 0.10.2', :git => 'git://github.com/datamapper/dm-rails.git'
 gem 'dm-transactions',       dm_version, :git => 'git://github.com/datamapper/dm-transactions.git'
 
 git 'git://github.com/datamapper/dm-more.git' do
@@ -32,8 +25,6 @@ git 'git://github.com/datamapper/dm-more.git' do
   gem 'dm-is-nested_set',    dm_version
 end
 
-gem 'dm-rails',              '~> 0.10.2', :git => 'git://github.com/datamapper/dm-rails.git'
-
 gem 'haml',                  '~> 3.0.0.beta'
 gem 'compass',               '~> 0.10.0.rc1'
 gem 'compass-susy-plugin',   '~> 0.6.3'
@@ -42,6 +33,7 @@ gem 'maruku',                '~> 0.6.0'
 #gem 'unicorn'
 
 group :development do
+  gem 'ruby-debug'
   gem 'hirb'
   gem 'awesome_print'
 end
@@ -49,5 +41,4 @@ end
 group :production do
   gem 'thin'
   gem 'pg'
-  gem 'do_postgres',         do_version
 end

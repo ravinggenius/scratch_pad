@@ -1,41 +1,40 @@
 source :rubygems
 
-do_version = '~> 0.10.1'
-dm_version = '~> 0.10.3'
+v = {
+  :datamapper => '~> 0.10.2',
+  :data_objects => '~> 0.10.1'
+}
 
-gem 'rails',                 '~> 3.0.0.beta3'
+gem 'data_objects',          v[:data_objects]
+gem 'do_postgres',           v[:data_objects], :group => :production
+gem 'do_sqlite3',            v[:data_objects], :group => :development
 
-gem 'data_objects',          do_version
-gem 'do_postgres',           do_version, :group => :production
-gem 'do_sqlite3',            do_version, :group => :development
+gem 'dm-aggregates',         v[:datamapper]
+gem 'dm-constraints',        v[:datamapper]
+gem 'dm-core',               v[:datamapper]
+gem 'dm-migrations',         v[:datamapper]
+gem 'dm-observer',           v[:datamapper]
+gem 'dm-rails',              v[:datamapper], :git => 'git://github.com/datamapper/dm-rails.git'
+gem 'dm-timestamps',         v[:datamapper]
+gem 'dm-transactions',       v[:datamapper], :git => 'git://github.com/datamapper/dm-transactions.git'
+gem 'dm-types',              v[:datamapper]
+gem 'dm-validations',        v[:datamapper]
 
-gem 'dm-core',               dm_version, :git => 'git://github.com/datamapper/dm-core.git'
-gem 'dm-rails',              '~> 0.10.2', :git => 'git://github.com/datamapper/dm-rails.git'
-gem 'dm-transactions',       dm_version, :git => 'git://github.com/datamapper/dm-transactions.git'
+gem 'dm-is-list',            v[:datamapper]
+gem 'dm-is-nested_set',      v[:datamapper]
 
-git 'git://github.com/datamapper/dm-more.git' do
-  gem 'dm-types',            dm_version
-  gem 'dm-validations',      dm_version
-  gem 'dm-constraints',      dm_version
-  gem 'dm-aggregates',       dm_version
-  gem 'dm-timestamps',       dm_version
-  gem 'dm-migrations',       dm_version
-  gem 'dm-observer',         dm_version
-  gem 'dm-is-list',          dm_version
-  gem 'dm-is-nested_set',    dm_version
-end
-
-gem 'haml',                  '~> 3.0.0.beta'
 gem 'compass',               '~> 0.10.0.rc1'
-gem 'compass-susy-plugin',   '~> 0.6.3'
 gem 'compass-jquery-plugin', '~> 0.2.5'
+gem 'compass-susy-plugin',   '~> 0.6.3'
+gem 'haml',                  '~> 3.0.0.beta'
 gem 'maruku',                '~> 0.6.0'
+gem 'rails',                 '~> 3.0.0.beta3'
 #gem 'unicorn'
 
 group :development do
-  gem 'ruby-debug'
-  gem 'hirb'
   gem 'awesome_print'
+  gem 'hirb'
+  gem 'ruby-debug'
 end
 
 group :production do

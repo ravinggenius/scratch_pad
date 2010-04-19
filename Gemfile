@@ -1,27 +1,27 @@
 source :rubygems
 
 v = {
-  :datamapper => '~> 0.10.2',
-  :data_objects => '~> 0.10.1'
+  :dm => '~> 0.10.2',
+  :do => '~> 0.10.1'
 }
 
-gem 'data_objects',          v[:data_objects]
-gem 'do_postgres',           v[:data_objects], :group => :production
-gem 'do_sqlite3',            v[:data_objects], :group => :development
+gem 'data_objects',          v[:do]
+gem 'do_postgres',           v[:do], :group => :production
+gem 'do_sqlite3',            v[:do], :group => :development
 
-gem 'dm-aggregates',         v[:datamapper]
-gem 'dm-constraints',        v[:datamapper]
-gem 'dm-core',               v[:datamapper]
-gem 'dm-migrations',         v[:datamapper]
-gem 'dm-observer',           v[:datamapper]
-gem 'dm-rails',              v[:datamapper], :git => 'git://github.com/datamapper/dm-rails.git'
-gem 'dm-timestamps',         v[:datamapper]
-gem 'dm-transactions',       v[:datamapper], :git => 'git://github.com/datamapper/dm-transactions.git'
-gem 'dm-types',              v[:datamapper]
-gem 'dm-validations',        v[:datamapper]
+gem 'dm-aggregates',         v[:dm]
+gem 'dm-constraints',        v[:dm]
+gem 'dm-core',               v[:dm]
+gem 'dm-migrations',         v[:dm]
+gem 'dm-observer',           v[:dm]
+gem 'dm-rails',              v[:dm], :git => 'git://github.com/datamapper/dm-rails.git'
+gem 'dm-timestamps',         v[:dm]
+gem 'dm-transactions',       v[:dm], :git => 'git://github.com/datamapper/dm-transactions.git'
+gem 'dm-types',              v[:dm]
+gem 'dm-validations',        v[:dm]
 
-gem 'dm-is-list',            v[:datamapper]
-gem 'dm-is-nested_set',      v[:datamapper]
+gem 'dm-is-list',            v[:dm]
+gem 'dm-is-nested_set',      v[:dm]
 
 gem 'compass',               '~> 0.10.0.rc1'
 gem 'compass-jquery-plugin', '~> 0.2.5'

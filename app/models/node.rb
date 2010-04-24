@@ -19,7 +19,7 @@ class Node
   is :list
 
   def extension
-    @extension ||= Kernel.const_get(type_name).get(type_id)
+    @extension ||= type_name.camelize.constantize.get(type_id)
   end
 
   def machine_name

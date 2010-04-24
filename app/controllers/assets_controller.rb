@@ -7,7 +7,7 @@ class AssetsController < ApplicationController
     enabled_extension_styles = {}
 
     Dir[Rails.root + 'lib/node_extensions/*'].each do |extension_path|
-      Dir["#{extension_path}/stylesheets/*"].map { |style| clean_filename style }.each do |style|
+      extract_media_names(Dir["#{extension_path}/stylesheets/*"]).each do |style|
         enabled_extension_styles[style] = enabled_extension_styles[style] || []
         enabled_extension_styles[style] << File.basename(extension_path)
       end
@@ -15,7 +15,7 @@ class AssetsController < ApplicationController
 
     template ||= 'default'
 
-    template_styles = Dir[Rails.root + "lib/templates/#{template}/stylesheets/*"].map { |style| clean_filename style }
+    template_styles = extract_media_names(Dir[Rails.root + "lib/templates/#{template}/stylesheets/*"])
 
     sass = <<-SASS
 @include 'reset'
@@ -45,12 +45,15 @@ class AssetsController < ApplicationController
 
   private
 
-  def clean_filename filename
-    File.basename(filename).split('.').first.to_sym
+  def extract_media_names paths
+    paths.map do |path|
+      reply = File.basename(path).split('.').first
+      reply.to_sym unless reply.starts_with? '_'
+    end.compact
   end
 
   def clean_media_names media_names
-    media_names.to_s.split('_').join(', ')
+    media_names.to_s.gsub /_/, ', '
   end
 
   def load_extension_styles media, extensions

@@ -3,7 +3,12 @@ require 'compass'
 class AssetsController < ApplicationController
   layout nil
 
+  # Slightly cludgy syntax is required for now.
+  # @reference http://groups.google.com/group/haml/browse_thread/thread/e459fbdfa5a6d467/f9ab5f5df3fe77de
   def styles
+    @imports = [ 'reset' ]
+    @sass = ''
+
     enabled_extension_styles = {}
 
     Dir[Rails.root + 'lib/node_extensions/*'].each do |extension_path|
@@ -17,31 +22,33 @@ class AssetsController < ApplicationController
 
     template_styles = extract_media_names(Dir[Rails.root + "lib/templates/#{template}/stylesheets/*"])
 
-    sass = <<-SASS
-/@include 'reset'
-    SASS
-
     if enabled_extension_styles.key? :all
-      sass << load_extension_styles(:all, enabled_extension_styles[:all])
+      load_extension_styles(:all, enabled_extension_styles[:all])
       enabled_extension_styles.delete :all
     end
 
     if template_styles.include? :all
-      sass << load_template_style(:all, template)
+      load_template_style(:all, template)
       template_styles.delete :all
     end
 
     enabled_extension_styles.each do |media, extension_styles|
-      sass << load_extension_styles(media, extension_styles)
+      load_extension_styles(media, extension_styles)
     end
 
     template_styles.each do |media|
-      sass << load_template_style(media, template)
+      load_template_style(media, template)
     end
 
+    final_sass = @imports.map do |inc|
+      <<-SASS
+@import '#{inc}'
+      SASS
+    end.join + @sass
+
     content_type, body = case params[:format].to_sym
-      when :sass then [ :text, sass ]
-      else            [ :css,  Sass::Engine.new(sass, Compass.sass_engine_options).render ]
+      when :sass then [ :text, final_sass ]
+      else            [ :css,  Sass::Engine.new(final_sass, Compass.sass_engine_options).render ]
     end
 
     render :content_type => content_type, :text => body
@@ -63,14 +70,15 @@ class AssetsController < ApplicationController
   def load_extension_styles media, extensions
     reply = ''
 
-    reply << <<-SASS
+    @sass << <<-SASS
 @media #{clean_media_names media}
     SASS
 
     extensions.each do |extension|
-      reply << <<-SASS
+      @imports << "node_extensions/#{extension}/stylesheets/#{media}"
+      @sass << <<-SASS
   .#{extension}
-    /@import 'node_extensions/#{extension}/stylesheets/#{media}'
+    @include extension_#{extension}_#{media}
       SASS
     end
 
@@ -78,9 +86,10 @@ class AssetsController < ApplicationController
   end
 
   def load_template_style media, template
-    <<-SASS
+    @imports << "templates/#{template}/stylesheets/#{media}"
+    @sass << <<-SASS
 @media #{clean_media_names media}
-  /@import 'templates/#{template}/stylesheets/#{media}'
+  @include template_#{template}_#{media}
     SASS
   end
 end

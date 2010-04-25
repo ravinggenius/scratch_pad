@@ -39,7 +39,12 @@ class AssetsController < ApplicationController
       sass << load_template_style(media, template)
     end
 
-    render :content_type => :css, :text => Sass::Engine.new(sass, Compass.sass_engine_options).render
+    content_type, body = case params[:format].to_sym
+      when :sass then [ :text, sass ]
+      else            [ :css,  Sass::Engine.new(sass, Compass.sass_engine_options).render ]
+    end
+
+    render :content_type => content_type, :text => body
   end
 
   private

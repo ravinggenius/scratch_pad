@@ -18,9 +18,8 @@ class AssetsController < ApplicationController
     template_styles = extract_media_names(Dir[Rails.root + "lib/templates/#{template}/stylesheets/*"])
 
     sass = <<-SASS
-@include 'reset'
+/@include 'reset'
     SASS
-    sass = ''
 
     if enabled_extension_styles.key? :all
       sass << load_extension_styles(:all, enabled_extension_styles[:all])
@@ -40,7 +39,7 @@ class AssetsController < ApplicationController
       sass << load_template_style(media, template)
     end
 
-    render :content_type => :css, :text => Sass::Engine.new(sass).render
+    render :content_type => :css, :text => Sass::Engine.new(sass, Compass.sass_engine_options).render
   end
 
   private
@@ -66,7 +65,7 @@ class AssetsController < ApplicationController
     extensions.each do |extension|
       reply << <<-SASS
   .#{extension}
-    /@include 'node_extensions/#{extension}/stylesheets/#{media}'
+    /@import 'node_extensions/#{extension}/stylesheets/#{media}'
       SASS
     end
 
@@ -76,7 +75,7 @@ class AssetsController < ApplicationController
   def load_template_style media, template
     <<-SASS
 @media #{clean_media_names media}
-  @include 'templates/#{template}/stylesheets/#{media}'
+  /@import 'templates/#{template}/stylesheets/#{media}'
     SASS
   end
 end

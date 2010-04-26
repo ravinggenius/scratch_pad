@@ -12,14 +12,14 @@ class AssetsController < ApplicationController
     enabled_extension_styles = {}
 
     Dir[Rails.root + 'lib/node_extensions/*'].each do |extension_path|
-      extract_media_names(Dir["#{extension_path}/stylesheets/*"]).each do |style|
+      extract_media_names(Dir["#{extension_path}/styles/*"]).each do |style|
         enabled_extension_styles[style] = enabled_extension_styles[style] || []
         enabled_extension_styles[style] << File.basename(extension_path)
       end
     end
 
     template_name ||= 'default'
-    template_styles = extract_media_names(Dir[Rails.root + "lib/templates/#{template_name}/stylesheets/*"])
+    template_styles = extract_media_names(Dir[Rails.root + "lib/templates/#{template_name}/styles/*"])
 
     enabled_extension_styles.each do |media, extension_styles|
       load_extension_styles(media, extension_styles)

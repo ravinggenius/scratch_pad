@@ -29,7 +29,9 @@ class AssetsController < ApplicationController
       load_template_style(media, template_name)
     end
 
-    final_sass = ''
+    final_sass = <<-SASS
+@charset "utf-8"
+    SASS
 
     @imports.each do |inc|
       final_sass << <<-SASS

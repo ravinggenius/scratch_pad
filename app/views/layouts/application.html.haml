@@ -6,12 +6,12 @@
     %meta{ 'http-equiv' => 'Content-Type', 'content' => 'text/html; charset=utf-8' }/
     = csrf_meta_tag
 
-    %link{ :rel => 'shortcut icon', :href => '/images/favicon.ico' }/
+    /%link{ :rel => 'shortcut icon', :href => '/images/favicon.ico' }/
     = auto_discovery_link_tag
 
-    = javascript_include_tag 'http://assets.ravinggenius.com/js?modernizr=1.1&jquery=1.4', 'application'
+    = style_tag '/assets/styles.css'
 
-    = stylesheet_link_tag 'http://assets.ravinggenius.com/css?html5reset=1.4'
+    = javascript_include_tag 'http://assets.ravinggenius.com/js?modernizr=1.1&jquery=1.4', 'application'
 
     = render 'shared/tracking_google', :google_analytics_tracking_code => '123456789.00' if @show_tracking_google
 

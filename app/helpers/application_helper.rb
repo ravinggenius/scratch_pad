@@ -45,4 +45,14 @@ module ApplicationHelper
     path = "nodes/#{part}" unless template_exists? path, nil, true
     partial path, :node => node
   end
+
+  def style_tag *files
+    reply = ''
+    files.each do |file|
+      reply << <<-HTML
+<style type="text/css" media="all">@import url('#{file}');</style>
+      HTML
+    end
+    reply.html_safe
+  end
 end

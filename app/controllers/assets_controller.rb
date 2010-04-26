@@ -81,7 +81,7 @@ class AssetsController < ApplicationController
   def load_extension_styles media, extensions
     m_key = init_media media
     extensions.each do |extension|
-      @imports << "node_extensions/#{extension}/stylesheets/#{media}"
+      @imports << "node_extensions/#{extension}/styles/#{media}"
       @medias[m_key] << <<-SASS
   .#{extension}
     @include extension_#{extension}_#{media}
@@ -91,7 +91,7 @@ class AssetsController < ApplicationController
 
   def load_template_style media, template
     m_key = init_media media
-    @imports << "templates/#{template}/stylesheets/#{media}"
+    @imports << "templates/#{template}/styles/#{media}"
     @medias[m_key] << <<-SASS
   @include template_#{template}_#{media}
     SASS

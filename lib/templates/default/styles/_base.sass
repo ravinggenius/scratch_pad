@@ -40,8 +40,8 @@
 // $base_line_height_px: 24
 
 // SUSY
-//  (don't move this @import above the GRID and FONT-SIZE overrides)
-@import susy/susy.sass
+// (don't move this @import above the GRID and FONT-SIZE overrides)
+@import susy/susy
 
 // COLORS
 // set any colors you will need later
@@ -61,101 +61,7 @@ $active_color: $hover_color
   font-family: Helvetica, Arial, sans-serif
 
 @mixin serif-family
-  font-family: Baskerville, Palatino, serif 
-
-// Remember to add default styles to everything!
-
-body
-  @include susy
-  @include sans-family
-  color: $font_color
-
-/* @group links */
-
-\:focus
-  outline: 1px dotted $quiet_color
-  color: $hover_color
-
-a
-  &:link
-    color: $link_color
-  &:visited
-    color: $visited_color
-  &:focus,
-  &:hover,
-  &:active
-    color: $hover_color
-    text-decoration: none
-
-/* @end */
-
-
-/* @group headers */
-
-.h
-  color: !header_color
-  font-weight: bold
-  @include serif-family
-
-h1
-  font-size: !base_line_height
-
-/* @end */
-
-
-/* @group forms */
-
-form *:focus
-  outline: none
-
-fieldset
-  margin: $base_line_height 0
-
-legend
-  font-weight: bold
-  font-variant: small-caps
-
-label
-  display block
-  margin-top: $base_line_height
-
-legend + label
-  margin-top: 0
-
-textarea,
-input[type="text"]
-  color: $quiet_color
-  @include box-sizing("border-box")
-  width: 100%
-
-/* @end */
-
-
-/* @group tables */
-
-/* tables still need 'cellspacing="0"' in the markup */
-
-table
-  width: 100%
-  border: 1/16 + "em solid" $quiet_color + #333
-    left: none
-    right: none
-  padding: 7/16 + "em 0"
-  margin: 8/16 + "em 0"
-
-tbody
-  color: !quiet_color
-
-th
-  font-weight: bold
-
-/* @end */
-
-
-/* @group block tags */
-
-p
-  margin: $base_line_height 0
+  font-family: Baskerville, Palatino, serif
 
 @mixin list-default($ol: false)
   @if !ol
@@ -169,49 +75,3 @@ p
   @include no-bullets
   margin: 0
   padding: 0
-
-ol
-  @include list-default("ol")
-
-ul
-  @include list-default
-
-blockquote
-  margin: !base_line_height
-  color: !quiet_color
-
-/* @end */
-
-
-/* @group inline tags */
-
-cite
-  font-style: italic
-  color: !quiet_color
-
-em
-  font-style: italic
-
-strong
-  font-weight: bold
-
-ins
-  text-decoration: underline
-
-del
-  text-decoration: line-through
-
-q
-  font-style: italic
-  em
-    font-style: normal
-
-/* @end */
-
-
-/* @group replaced tags */
-
-img
-  vertical-align: bottom
-
-/* @end */

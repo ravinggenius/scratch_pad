@@ -1,37 +1,145 @@
 @import border-radius
-/@import base
+@import base
 
 @mixin template_default_all
   /*
-    Welcome to Susy. Use this file to define screen styles.
-    Import this file using the following HTML or equivalent:
-    <link href="/stylesheets/screen.css" media="screen" rel="stylesheet" type="text/css" />
-    More here:
+    Welcome to Susy. More here:
       http://github.com/ericam/compass-susy-plugin
       http://natbat.net/2008/Sep/28/css-systems/
       http://www.oddbird.net/susy/tutorial/
 
-  /* @group reset */
+  /* @group links */
+  :focus
+    outline: 1px dotted $quiet_color
+    color: $hover_color
+
+  a
+    &:link
+      color: $link_color
+    &:visited
+      color: $visited_color
+    &:focus,
+    &:hover,
+    &:active
+      color: $hover_color
+      text-decoration: none
   /* @end */
 
-  /* @group defaults */
 
+  /* @group headers */
   .h
     display: inline-block
+    color: !header_color
+    font:
+      size: !base_line_height
+      weight: bold
+    @include serif-family
+  /* @end */
+
+
+  /* @group forms */
+  form *:focus
+    outline: none
+
+  fieldset
+    margin: $base_line_height 0
+
+  legend
+    font-weight: bold
+    font-variant: small-caps
+
+  label
+    display block
+    margin-top: $base_line_height
+
+  legend + label
+    margin-top: 0
+
+  textarea,
+  input[type="text"]
+    color: $quiet_color
+    @include box-sizing("border-box")
+    width: 100%
+  /* @end */
+
+
+  /* @group tables */
+  /* tables still need 'cellspacing="0"' in the markup */
+  table
+    width: 100%
+    border: 1/16 + "em solid" $quiet_color + #333
+      left: none
+      right: none
+    padding: 7/16 + "em 0"
+    margin: 8/16 + "em 0"
+
+  tbody
+    color: !quiet_color
+
+  th
+    font-weight: bold
+  /* @end */
+
+
+  /* @group block tags */
+  p
+    margin: $base_line_height 0
+
+  ol
+    @include list-default("ol")
+
+  ul
+    @include list-default
+
+  blockquote
+    margin: !base_line_height
+    color: !quiet_color
+  /* @end */
+
+
+  /* @group inline tags */
+  cite
+    font-style: italic
+    color: !quiet_color
+
+  em
+    font-style: italic
+
+  strong
+    font-weight: bold
+
+  ins
+    text-decoration: underline
+
+  del
+    text-decoration: line-through
+
+  q
+    font-style: italic
+    em
+      font-style: normal
+  /* @end */
+
+
+  /* @group replaced tags */
+  img
+    vertical-align: bottom
+  /* @end */
+
+
+  /* @group STRUCTURE */
+  body
+    @include susy
+    @include sans-family
+    color: $font_color
+    background-color: #FFA500
+    line-height: 1.625
+    font-size: 16px
 
   .clearfix
     // @include clearfix
     margin: 0
     border: none
-
-  /* @end */
-
-
-  /* @group STRUCTURE */
-
-  body
-    background-color: #FFA500
-    text-align: center
 
   #branding
 
@@ -40,38 +148,15 @@
   #content
 
   #credits
-
-  /* @end */
-
-
-  /* @group COMPONENTS by type */
-
-  /* @end */
-
-
-  /* @group OVERRIDES by content */
-
-
-
-  /* @end */
-
-
-  /* @group OVERRIDES by page */
-
-
-
   /* @end */
 
 
   /* @group DEBUG */
-
   /*   uncomment, adjust and use for debugging    */
-
   /*
     #branding,
     #main_menu,
     #content,
     #credits
       @include show-grid('grid.png')
-
   /* @end */

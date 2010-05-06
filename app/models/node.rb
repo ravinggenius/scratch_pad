@@ -23,7 +23,7 @@ class Node
   end
 
   def machine_name
-    class.name.underscore
+    self.class.name.underscore
   end
 
   private

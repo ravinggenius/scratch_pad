@@ -23,6 +23,7 @@ gem 'dm-validations',        v[:dm]
 gem 'dm-is-list',            v[:dm]
 gem 'dm-is-nested_set',      v[:dm]
 
+gem 'bcrypt-ruby',           '~> 2.1.2' , :require => 'bcrypt'
 gem 'compass',               '~> 0.10.0.rc1'
 gem 'compass-jquery-plugin', '~> 0.2.5'
 gem 'compass-susy-plugin',   '~> 0.6.3'

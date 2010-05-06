@@ -1,0 +1,19 @@
+default: &global_settings
+  host: 127.0.0.1
+  port: 27017
+
+development: &global_settings
+  <<: *global_settings
+  database: scratch_pad_development
+
+test:
+  <<: *global_settings
+  database: scratch_pad_test
+
+production:
+  <<: *global_settings
+  host: hostname
+  database: databasename
+  username: username
+  password: password
+

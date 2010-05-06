@@ -1,14 +1,19 @@
 class Group
-  include DataMapper::Resource
+  include MongoMapper::Document
 
-  property :id, Serial
-  property :access_code, Integer, :required => true, :unique => true
-  property :code, String, :required => true
-  property :name, String, :required => true
+  key :access_code, Integer
+  key :code, String
+  key :name, String
 
-  has n, :users, :through => Resource
+  many :users
 
-  before :save do
-    # validate access code
+  validates_presence_of :access_code, :code, :name
+  validates_uniqueness_of :access_code
+
+  before_save :validate_access_code
+
+  private
+
+  def validate_access_code
   end
 end

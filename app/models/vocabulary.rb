@@ -1,11 +1,12 @@
 class Vocabulary
-  include DataMapper::Resource
+  include MongoMapper::Document
 
-  property :id, Serial
-  property :code, String, :required => true
-  property :name, String, :required => true
+  key :code, String
+  key :name, String
   # ...
 
-  has n, :terms
-  has n, :nodes, :through => Resource
+  many :terms
+  many :nodes
+
+  validates_presence_of :code, :name
 end

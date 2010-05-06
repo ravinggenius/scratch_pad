@@ -1,9 +1,10 @@
 class Term
-  include DataMapper::Resource
+  include MongoMapper::Document
 
-  property :id, Serial
-  property :name, String, :required => true
+  key :name, String
 
   belongs_to :vocabulary
-  has n, :nodes, :through => Resource
+  many :nodes
+
+  validates_presence_of :name
 end

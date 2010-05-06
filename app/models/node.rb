@@ -1,28 +1,37 @@
-require 'dm-is-list'
-require 'dm-is-nested_set'
-require 'dm-timestamps'
+# http://railstips.org/blog/archives/2009/12/18/why-i-think-mongo-is-to-databases-what-rails-was-to-frameworks/
 
 class Node
-  include DataMapper::Resource
+  include MongoMapper::Document
 
-  property :id, Serial
-  property :title, String, :required => true
-  property :type_id, Integer, :required => true
-  property :type_name, String, :required => true
-  property :created_at, DateTime
-  property :updated_at, DateTime
+  key :children_ids, Array # TODO: validate proper sub-types
+  key :title, String
+  key :position, Integer
+
+  timestamps!
 
   belongs_to :user
-  has n, :vocabularies, :through => Resource
-  has n, :terms, :through => Resource
+  many :vocabularies
+  many :terms
 
-  is :list
+  validates_presence_of :title, :position
 
-  def extension
-    @extension ||= type_name.camelize.constantize.get(type_id)
+  before_save :set_children_ids
+
+  def children
+    self.children_ids ||= []
+    @children ||= self.children_ids.map { |child_id| Node.get(child_id) }
   end
 
   def machine_name
-    type_name.underscore
+    class.name.underscore
   end
+
+  private
+
+  def set_children_ids
+    @children ||= []
+    self.children_ids = @children.map { |child| child.id }
+  end
+
+  protected :children_ids
 end

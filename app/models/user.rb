@@ -1,11 +1,20 @@
 class User
-  include DataMapper::Resource
+  include MongoMapper::Document
 
-  property :id, Serial
-  property :name, String, :required => true
-  property :email, String, :required => true
+  key :name, String
+  key :email, String
+  key :username, String
+  key :hashword, String
+  key :salt, String
 
-  has n, :groups, :through => Resource
-  has n, :logins
-  has n, :nodes
+  many :groups
+  many :logins
+  many :nodes
+
+  validates_presence_of :name, :email, :username, :hashword, :salt
+
+  def login
+  end
+
+  private :hashword, :hashword=, :salt, :salt=
 end

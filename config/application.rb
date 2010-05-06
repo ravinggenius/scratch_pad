@@ -1,3 +1,5 @@
+# http://www.mongodb.org/display/DOCS/Rails+3+-+Getting+Started
+
 require File.expand_path('../boot', __FILE__)
 
 #require 'rails/all'

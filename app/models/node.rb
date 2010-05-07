@@ -5,11 +5,11 @@ class Node
 
   key :children_ids, Array # TODO: validate proper sub-types
   key :title, String
-  key :position, Integer
+  key :position, Integer, :default => 0
 
   timestamps!
+  userstamps!
 
-  belongs_to :user
   many :vocabularies
   many :terms
 

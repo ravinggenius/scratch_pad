@@ -19,10 +19,11 @@ class User
   many :logins
   many :nodes
 
+  validates_confirmation_of :password
   validates_presence_of :name, :email, :username, :hashword, :salt
 
-  def login
-    # TODO ...
+  def verify_password(password)
+    encrypt_password(password) == hashword
   end
 
   before_save :set_hashword
@@ -31,12 +32,13 @@ class User
 
   def set_hashword
     if hashword.nil? || hashword.empty?
-      # TODO ...
+      self.salt = '' # TODO make new secure salt
+      self.hashword = encrypt_password(password)
     end
   end
 
-  def encrypt_password
-    # TODO ...
+  def encrypt_password(password, salt = self.salt)
+    # TODO encrypt password
   end
 
   private :hashword, :hashword=, :salt, :salt=

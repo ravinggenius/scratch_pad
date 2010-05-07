@@ -1,15 +1,3 @@
 [submodule "lib/generators/haml"]
 	path = lib/generators/haml
 	url = git://github.com/psynix/rails3_haml_scaffold_generator.git
-[submodule "lib/node_extensions/list"]
-	path = lib/node_extensions/list
-	url = git@github.com:ravinggenius/sp_extensions-list.git
-[submodule "lib/node_extensions/post"]
-	path = lib/node_extensions/post
-	url = git@github.com:ravinggenius/sp_extensions-post.git
-[submodule "lib/node_extensions/table"]
-	path = lib/node_extensions/table
-	url = git@github.com:ravinggenius/sp_extensions-table.git
-[submodule "lib/node_extensions/text_box"]
-	path = lib/node_extensions/text_box
-	url = git@github.com:ravinggenius/sp_extensions-text_box.git

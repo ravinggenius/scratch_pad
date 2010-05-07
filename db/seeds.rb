@@ -1,7 +1,7 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
-User.create :name => 'Anonymous', :email => 'anonymous@example.com'
+User.create :user_name => 'anon', :name => 'Anonymous', :email => 'anonymous@example.com'
 user = User.create :name => 'Thomas Ingram', :email => 'thomas@ravinggenius.com'
 
 n = List.new

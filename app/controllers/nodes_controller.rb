@@ -11,7 +11,7 @@ class NodesController < ApplicationController
   end
 
   def show
-    @node = Node.get(params[:id]).extension
+    @node = Node.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -29,7 +29,7 @@ class NodesController < ApplicationController
   end
 
   def edit
-    @node = Node.get(params[:id])
+    @node = Node.find(params[:id])
   end
 
   def create
@@ -47,7 +47,7 @@ class NodesController < ApplicationController
   end
 
   def update
-    @node = Node.get(params[:id])
+    @node = Node.find(params[:id])
 
     respond_to do |format|
       if @node.update(params[:node])
@@ -61,7 +61,7 @@ class NodesController < ApplicationController
   end
 
   def destroy
-    @node = Node.get(params[:id])
+    @node = Node.find(params[:id])
     @node.destroy
 
     respond_to do |format|

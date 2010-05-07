@@ -8,4 +8,10 @@ class ApplicationController < ActionController::Base
     @site_name = 'ScratchPad'
     @site_tagline = ''
   end
+
+  before_filter do
+    User.anonymous = User.first :user_name => 'anon'
+    User.current = User.find(session[:current_user_id]) || User.anonymous
+    session[:current_user_id] = User.current.id if User.current
+  end
 end

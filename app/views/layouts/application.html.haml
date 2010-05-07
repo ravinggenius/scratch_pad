@@ -24,6 +24,7 @@
     %nav#main_menu
 
     %section#content
+      = User.current.inspect
       = yield
 
     %footer#credits

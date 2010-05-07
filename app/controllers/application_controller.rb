@@ -12,6 +12,9 @@ class ApplicationController < ActionController::Base
   before_filter do
     User.anonymous = User.first :user_name => 'anon'
     User.current = User.find(session[:current_user_id]) || User.anonymous
+  end
+
+  after_filter do
     session[:current_user_id] = User.current.id if User.current
   end
 end

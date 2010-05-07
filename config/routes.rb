@@ -1,8 +1,11 @@
 ScratchPad::Application.routes.draw do |map|
-  resources :n, :controller => :nodes, :as => :nodes
+  scope :path_names => { :new => 'n', :edit => 'e' } do
+    resources :n, :controller => :nodes, :as => :nodes
+    resources :s, :controller => :sessions, :as => :sessions, :only => [:new, :create, :destroy]
+  end
 
-  get 'assets/styles(.:format)', :to => 'assets#styles', :defaults => { :format => :css }
-  #get ':id' => redirect("nodes/%{id}"), :constraints => { :id => /\d+/ }
+  get 'a/scripts(.:format)', :to => 'assets#scripts', :as => :assets_scripts, :defaults => { :format => :js }
+  get 'a/styles(.:format)', :to => 'assets#styles', :as => :assets_styles, :defaults => { :format => :css }
 
   root :to => 'nodes#index'
 end

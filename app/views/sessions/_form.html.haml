@@ -1,0 +1,13 @@
+- form_for(:user, @user, :url => {:controller => 'sessions', :action => 'create'}) do |f|
+  = f.error_messages
+
+  %ul
+    %li
+      = f.label :username, 'Username'
+      = f.text_field :username
+    %li
+      = f.label :password, 'Password'
+      = f.text_field :password
+
+  .actions
+    = f.submit 'sign in'

@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
   # POST /sessions
   # POST /sessions.xml
   def create
-    @user = User.first(params[:user][:username])
+    @user = User.first(:username => params[:user][:username])
 
     respond_to do |format|
       if @user.verify_password params[:user][:password]

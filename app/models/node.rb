@@ -13,6 +13,7 @@ class Node
   many :vocabularies
   many :terms
 
+  validates_numericality_of :position, :only_integer => true
   validates_presence_of :title, :position
 
   before_save :set_children_ids

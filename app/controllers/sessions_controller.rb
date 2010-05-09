@@ -16,9 +16,9 @@ class SessionsController < ApplicationController
     @user = User.first(:username => params[:user][:username])
 
     respond_to do |format|
-      if @user.verify_password params[:user][:password]
+      if @user.password == params[:user][:password]
         User.current = @user
-        format.html { redirect_to(root_url, :notice => 'Session was successfully created.') }
+        format.html { redirect_to(root_url, :notice => 'You have successfully signed in.') }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
         format.html { render :action => "new" }

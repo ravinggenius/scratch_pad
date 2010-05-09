@@ -1,45 +1,57 @@
 require 'bcrypt'
 
+# http://github.com/codahale/bcrypt-ruby
 # http://api.rubyonrails.org/classes/ActionController/HttpAuthentication/Basic.html
 # http://charlesmaxwood.com/rails-metal-example-1-authentication/
 
 class User
   include MongoMapper::Document
+  include BCrypt
 
-  attr_accessor :password, :password_confirmation
+  attr_writer :password_confirmation
   cattr_accessor :anonymous, :current
 
   key :name, String
   key :email, String
   key :username, String
   key :hashword, String
-  key :salt, String
 
   many :groups
-  many :logins
   many :nodes
 
   validates_confirmation_of :password
-  validates_presence_of :name, :email, :username, :hashword, :salt
+  validates_presence_of :name, :email, :username
+  validates_uniqueness_of :username
 
-  def verify_password(password)
-    encrypt_password(password) == hashword
+  after_validation :ensure_hashword_is_set
+
+  def password
+    @password ||= Password.new(hashword) rescue nil
   end
 
-  before_save :set_hashword
+  def password=(new_password)
+    temp = []
 
-  private
+    if new_password.blank?
+      temp << 'can\'t be empty'
+    else
+      # TODO add other requirements here
+      temp << 'is too short' unless new_password.length > 6
+    end
 
-  def set_hashword
-    if hashword.nil? || hashword.empty?
-      self.salt = '' # TODO make new secure salt
-      self.hashword = encrypt_password(password)
+    if temp.empty?
+      @password = Password.create(new_password)
+      self.hashword = @password
+    else
+      temp.each { |message| errors.add(:password, message) }
     end
   end
 
-  def encrypt_password(password, salt = self.salt)
-    # TODO encrypt password
+  private
+
+  def ensure_hashword_is_set
+    errors.add(:password, 'can\'t be empty') if hashword.blank?
   end
 
-  private :hashword, :hashword=, :salt, :salt=
+  private :hashword, :hashword=
 end

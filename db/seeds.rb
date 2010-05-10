@@ -1,8 +1,11 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
-User.create :user_name => 'anon', :name => 'Anonymous', :email => 'anonymous@example.com'
-user = User.create :name => 'Thomas Ingram', :email => 'thomas@ravinggenius.com'
+anon = User.new :username => 'anon', :name => 'Anonymous', :email => 'anonymous@example.com', :position => 0
+anon.password = anon.password_confirmation = '12345678'
+anon.save
+
+=begin
 
 n = List.new
 n.items << 'Make this work'
@@ -42,7 +45,7 @@ n.user = user
 n.save
 
 n = Post.new
-n.nodes << TextBlock.all[1]
+n.nodes << TextBlock.last
 n.nodes << TextBlock.first
 n.nodes << Table.first
 n.title = 'Static Page'
@@ -55,8 +58,6 @@ n.nodes << Table.first
 n.title = 'About Us'
 n.user = user
 n.save
-
-=begin
 
 n = Page.new :slug => 'about'
 n.nodes << TextBlock.first

@@ -4,7 +4,7 @@ class Node
   include MongoMapper::Document
 
   key :children_ids, Array # TODO: validate proper sub-types
-  key :title, String
+  key :name, String
   key :position, Integer, :default => 0
 
   timestamps!
@@ -14,7 +14,7 @@ class Node
   many :terms
 
   validates_numericality_of :position, :only_integer => true
-  validates_presence_of :title, :position
+  validates_presence_of :name, :position
 
   before_save :set_children_ids
 
@@ -26,6 +26,9 @@ class Node
   def machine_name
     self.class.name.underscore
   end
+
+  alias :title :name
+  alias :title= :name=
 
   private
 

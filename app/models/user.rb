@@ -4,23 +4,20 @@ require 'bcrypt'
 # http://api.rubyonrails.org/classes/ActionController/HttpAuthentication/Basic.html
 # http://charlesmaxwood.com/rails-metal-example-1-authentication/
 
-class User
-  include MongoMapper::Document
+class User < Node
   include BCrypt
 
   attr_writer :password_confirmation
   cattr_accessor :anonymous, :current
 
-  key :name, String
   key :email, String
   key :username, String
   key :hashword, String
 
   many :groups
-  many :nodes
 
   validates_confirmation_of :password
-  validates_presence_of :name, :email, :username
+  validates_presence_of :email, :username
   validates_uniqueness_of :username
 
   after_validation :ensure_hashword_is_set

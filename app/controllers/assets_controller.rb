@@ -6,6 +6,22 @@ class AssetsController < ApplicationController
   # Slightly cludgy syntax is required for now.
   # @reference http://groups.google.com/group/haml/browse_thread/thread/e459fbdfa5a6d467/f9ab5f5df3fe77de
   def styles
+    body = ensure_styles_exist!
+    render :content_type => (params[:format].to_sym == :sass ? :text : :css), :text => body
+  end
+
+  private
+
+  def ensure_styles_exist!
+    template_name ||= 'default' # TODO dynamically assign a template name
+    cache_key = "core::styles::#{template_name}.#{params[:format]}"
+
+    cache = Cache.first :key => cache_key
+
+    if Rails.env.to_sym == :production
+      return cache.value unless cache.nil?
+    end
+
     @imports = [ 'reset' ]
     @medias = {}
 
@@ -18,7 +34,6 @@ class AssetsController < ApplicationController
       end
     end
 
-    template_name ||= 'default'
     template_styles = extract_media_names(Dir[Rails.root + "lib/templates/#{template_name}/styles/*"])
 
     enabled_extension_styles.each do |media, extension_styles|
@@ -48,15 +63,13 @@ class AssetsController < ApplicationController
       final_sass << extract_styles_for_media(media, sass)
     end
 
-    content_type, body = case params[:format].to_sym
-      when :sass then [ :text, final_sass ]
-      else            [ :css,  Sass::Engine.new(final_sass, Compass.sass_engine_options).render ]
-    end
+    body = params[:format].to_sym == :sass ? final_sass : Sass::Engine.new(final_sass, Compass.sass_engine_options).render
 
-    render :content_type => content_type, :text => body
+    cache = Cache.new if cache.nil?
+    cache.update_attributes!(:key => cache_key, :value => body)
+
+    body
   end
-
-  private
 
   def extract_media_names paths
     paths.map do |path|

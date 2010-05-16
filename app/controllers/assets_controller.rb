@@ -59,9 +59,7 @@ class AssetsController < ApplicationController
       @medias.delete :all
     end
 
-    @medias.each do |media, sass|
-      final_sass << extract_styles_for_media(media, sass)
-    end
+    @medias.each { |media, sass| final_sass << extract_styles_for_media(media, sass) }
 
     body = params[:format].to_sym == :sass ? final_sass : Sass::Engine.new(final_sass, Compass.sass_engine_options).render
 

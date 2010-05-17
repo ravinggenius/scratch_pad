@@ -7,7 +7,7 @@ module Node
       include Rails::Generators::ResourceHelpers
 
       def create_root_folder
-        empty_directory File.join(, controller_file_path)
+        #empty_directory File.join(, controller_file_path)
       end
 
       def copy_model_file

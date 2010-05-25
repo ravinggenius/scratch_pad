@@ -3,16 +3,30 @@ require 'compass'
 class AssetsController < ApplicationController
   layout nil
 
+  def scripts
+    render :content_type => (params[:format].to_sym == :txt ? :text : :js), :text => gather_scripts!
+  end
+
   # Slightly cludgy syntax is required for now.
   # @reference http://groups.google.com/group/haml/browse_thread/thread/e459fbdfa5a6d467/f9ab5f5df3fe77de
   def styles
-    body = ensure_styles_exist!
-    render :content_type => (params[:format].to_sym == :sass ? :text : :css), :text => body
+    render :content_type => (params[:format].to_sym == :sass ? :text : :css), :text => gather_styles!
   end
 
   private
 
-  def ensure_styles_exist!
+  def gather_scripts!
+    reply = script_files = []
+
+    # TODO hash all dependencies
+    # TODO load files in correct order
+
+    style_files.each { |filename| reply << File.read(filename) }
+
+    reply.join "\n\n\n\n\n"
+  end
+
+  def gather_styles!
     template_name ||= 'default' # TODO dynamically assign a template name
     cache_key = "core::styles::#{template_name}.#{params[:format]}"
 

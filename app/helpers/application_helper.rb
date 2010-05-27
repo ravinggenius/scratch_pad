@@ -29,8 +29,7 @@ module ApplicationHelper
   def filter text, options = {}
     options[:keep_paragraphs] = true unless options.key? :keep_paragraphs
 
-    text = text.to_s
-    text = Maruku.new(text).to_html
+    text = Maruku.new(text.to_s).to_html
     text.gsub! /<p>/, '' unless options[:keep_paragraphs]
     text.gsub! /<\/p>/, '' unless options[:keep_paragraphs]
 

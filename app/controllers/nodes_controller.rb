@@ -1,6 +1,6 @@
 class NodesController < ApplicationController
   def index
-    @nodes = Node.all
+    @nodes = Node.published
     @featured = []
     @featured << @nodes.pop unless @nodes.empty?
 

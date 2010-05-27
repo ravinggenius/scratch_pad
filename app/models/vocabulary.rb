@@ -1,12 +1,9 @@
 class Vocabulary
   include MongoMapper::Document
 
-  key :code, String
-  key :name, String
+  key :code, String, :required => true
+  key :name, String, :required => true
   # ...
 
   many :terms
-  many :nodes
-
-  validates_presence_of :code, :name
 end

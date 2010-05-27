@@ -2,7 +2,7 @@ source :rubygems
 
 gem 'bcrypt-ruby',           '~> 2.1.2' , :require => 'bcrypt'
 gem 'bson_ext'
-gem 'compass',               '~> 0.10.0.rc1'
+gem 'compass',               '~> 0.10'
 gem 'compass-jquery-plugin', '~> 0.2.5'
 gem 'compass-susy-plugin',   '~> 0.6.3'
 gem 'haml',                  '~> 3.0'

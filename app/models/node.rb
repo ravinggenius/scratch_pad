@@ -3,7 +3,7 @@
 class Node
   include MongoMapper::Document
 
-  key :children_ids, Array # TODO: validate proper sub-types
+  key :children_ids, Array # TODO validate proper sub-types
   key :is_published, Boolean, :default => false
   key :name, String
   key :position, Integer, :default => 0

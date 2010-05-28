@@ -1,6 +1,6 @@
 source :rubygems
 
-gem 'bcrypt-ruby',           '~> 2.1.2' , :require => 'bcrypt'
+gem 'bcrypt-ruby',           '~> 2.1.2', :require => 'bcrypt'
 gem 'bson_ext',              '~> 1.0'
 gem 'compass',               '~> 0.10'
 gem 'compass-jquery-plugin', '~> 0.2.5'

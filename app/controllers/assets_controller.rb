@@ -21,7 +21,7 @@ class AssetsController < ApplicationController
     # TODO hash all dependencies
     # TODO concatenate files in correct order
 
-    style_files.each { |filename| reply << File.read(filename) }
+    script_files.each { |filename| reply << File.read(filename) }
 
     reply.join "\n\n\n\n\n"
   end

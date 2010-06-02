@@ -5,21 +5,18 @@ class Node
 
   key :children_ids, Array # TODO validate proper sub-types
   key :is_published, Boolean, :default => false
-  key :name, String
+  key :name, String, :required => true
   key :position, Integer, :default => 0
 
   timestamps!
   userstamps!
-
-  validates_numericality_of :position, :only_integer => true
-  validates_presence_of :name, :position
 
   before_save :set_children_ids
   after_save :save_taggings
 
   def children
     self.children_ids ||= []
-    @children ||= self.children_ids.map { |child_id| Node.get(child_id) }
+    @children ||= self.children_ids.map { |child_id| Node.find(child_id) }
   end
 
   def terms
@@ -40,6 +37,10 @@ class Node
 
   alias :title :name
   alias :title= :name=
+  alias :author :creator
+  alias :author= :creator=
+  alias :editor :updater
+  alias :editor= :updater=
 
   private
 

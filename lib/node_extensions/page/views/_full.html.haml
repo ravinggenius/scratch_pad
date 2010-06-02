@@ -1,0 +1,6 @@
+%header
+  %span.h= node.title
+  %span= node.author.name
+%section
+  - node.children.each do |n|
+    = partial :article, :node => n, :showing_part => :full

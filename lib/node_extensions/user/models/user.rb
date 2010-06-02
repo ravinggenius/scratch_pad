@@ -1,5 +1,7 @@
 require 'bcrypt'
 
+require Rails.root + 'lib' + 'node_extensions' + 'user' + 'models' + 'group.rb'
+
 # http://github.com/codahale/bcrypt-ruby
 # http://api.rubyonrails.org/classes/ActionController/HttpAuthentication/Basic.html
 # http://charlesmaxwood.com/rails-metal-example-1-authentication/

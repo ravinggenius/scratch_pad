@@ -1,5 +1,3 @@
 class TextBlock < Node
-  key :data, Text
-
-  validates_presence_of :data
+  key :data, String, :required => true
 end

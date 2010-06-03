@@ -8,7 +8,7 @@ gem 'compass-susy-plugin',   '~> 0.6.3'
 gem 'haml',                  '~> 3.0'
 gem 'maruku',                '~> 0.6.0'
 gem 'mongo',                 '~> 1.0'
-gem 'mongo_mapper',          '~> 0.7.5'
+gem 'mongo_mapper',          '~> 0.7.6'
 gem 'rails',                 '~> 3.0.0.beta3'
 
 group :development do

@@ -4,6 +4,10 @@ ScratchPad::Application.routes.draw do |map|
     resources :s, :controller => :sessions, :as => :sessions, :only => [:new, :create, :destroy]
   end
 
+  namespace 'admin' do
+    # TODO add routes for administration
+  end
+
   get 'a/scripts(.:format)', :to => 'assets#scripts', :as => :assets_scripts, :defaults => { :format => :js }
   get 'a/styles(.:format)', :to => 'assets#styles', :as => :assets_styles, :defaults => { :format => :css }
 

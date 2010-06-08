@@ -30,10 +30,8 @@ class AssetsController < ApplicationController
     template_name ||= 'default' # TODO dynamically assign a template name
     cache_key = "core::styles::#{template_name}.#{params[:format]}"
 
-    cache = Cache.first :key => cache_key
-
     if Rails.env.to_sym == :production
-      return cache.value unless cache.nil?
+      return Cache[cache_key].value unless Cache[cache_key].value.nil?
     end
 
     @imports = [ 'reset' ]
@@ -77,8 +75,7 @@ class AssetsController < ApplicationController
 
     body = params[:format].to_sym == :sass ? final_sass : Sass::Engine.new(final_sass, Compass.sass_engine_options).render
 
-    cache = Cache.new if cache.nil?
-    cache.update_attributes!(:key => cache_key, :value => body)
+    Cache[cache_key].update_attributes! :value => body
 
     body
   end

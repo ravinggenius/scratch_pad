@@ -5,7 +5,6 @@ class CacheTest < ActiveSupport::TestCase
     @c = Cache.first_or_create(:key => 'test', :value => 'foobar')
   end
 
-  # Replace this with your real tests.
   test 'expected api' do
     expected_class_api Cache, :[]
     expected_instance_api Cache, :key, :key=, :value, :value=, :created_at, :updated_at

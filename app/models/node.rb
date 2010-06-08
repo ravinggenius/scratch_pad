@@ -27,10 +27,6 @@ class Node
     self.class.name.underscore
   end
 
-  def self.parents
-    all :children_ids => []
-  end
-
   def self.published(published = true)
     all :is_published => published
   end
@@ -54,5 +50,5 @@ class Node
     self.children_ids = @children.map { |child| child.id }
   end
 
-  protected :children_ids
+  protected :children_ids, :children_ids=
 end

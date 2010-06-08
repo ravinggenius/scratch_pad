@@ -5,4 +5,9 @@ class Cache
   key :value, String, :required => true
 
   timestamps!
+
+  def self.[](index)
+    @loaded ||= {}
+    @loaded[index] ||= Cache.first_or_new(:key => index)
+  end
 end

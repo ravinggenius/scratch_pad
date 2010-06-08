@@ -11,11 +11,12 @@ class CacheTest < ActiveSupport::TestCase
   end
 
   test 'static methods' do
+    assert_nil Cache[:otter].value
     assert_equal @c.value, Cache[:test].value
-    assert_equal nil, Cache[:dove].value
+    assert_nil Cache[:dove].value
     Cache[:dove].value = 'bird or soap?'
     assert_equal 'bird or soap?', Cache[:dove].value
-    assert_equal nil, Cache[:otter].value
+    assert_nil Cache[:otter].value
   end
 
   test 'only create need caches' do

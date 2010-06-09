@@ -12,11 +12,11 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
 
   def expected_class_api(klass, *methods)
-    methods.each { |method| assert klass.respond_to?(method), "#{klass.name} does not respond to :#{method}" }
+    methods.each { |method| assert_respond_to klass, method, "#{klass.name} does not respond to :#{method}" }
   end
 
   def expected_instance_api(klass, *methods)
     k = klass.new
-    methods.each { |method| assert k.respond_to?(method), "#{klass.name}.new does not respond to :#{method}" }
+    methods.each { |method| assert_respond_to k, method, "#{klass.name}.new does not respond to :#{method}" }
   end
 end

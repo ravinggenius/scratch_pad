@@ -18,8 +18,8 @@ class NodeTest < ActiveSupport::TestCase
     @n.name = 'Another Title'
     assert_equal @n.name, @n.title
 
-    #assert_equal @n.creator, @n.author
-    #assert_equal @n.updater, @n.editor
+    assert_equal @n.creator.id, @n.author.id
+    assert_equal @n.updater.id, @n.editor.id
   end
 
   test 'machine name' do

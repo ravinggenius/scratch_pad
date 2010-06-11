@@ -2,7 +2,7 @@ require 'test_helper'
 
 class TermTest < ActiveSupport::TestCase
   setup do
-    @c = Term.first_or_create(:name => 'test')
+    @t = Term.first_or_create(:name => 'test')
   end
 
   test 'expected api' do

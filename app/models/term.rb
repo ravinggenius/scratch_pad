@@ -4,7 +4,6 @@ class Term
   key :name, String, :required => true
 
   belongs_to :vocabulary
-  many :taggings
 
   after_save :save_taggings
 

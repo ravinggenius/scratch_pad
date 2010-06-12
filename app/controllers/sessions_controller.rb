@@ -1,17 +1,13 @@
 class SessionsController < ApplicationController
-  # GET /sessions/new
-  # GET /sessions/new.xml
   def new
     @user = User.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html
       format.xml  { render :xml => @user }
     end
   end
 
-  # POST /sessions
-  # POST /sessions.xml
   def create
     @user = User.first(:username => params[:user][:username])
 
@@ -27,8 +23,6 @@ class SessionsController < ApplicationController
     end
   end
 
-  # DELETE /sessions/1
-  # DELETE /sessions/1.xml
   def destroy
     User.current = User.anonymous
 

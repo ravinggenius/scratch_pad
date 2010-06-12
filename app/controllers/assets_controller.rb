@@ -17,12 +17,16 @@ class AssetsController < ApplicationController
   private
 
   def gather_scripts!
-    reply = script_files = []
+    reply = []
+    script_files = []
+
+    script_files << 'app/vendor/modernizr/1.1/modernizr.min.js'
+    script_files << 'app/vendor/jquery/1.4/jquery.min.js'
 
     # TODO hash all dependencies
     # TODO concatenate files in correct order
 
-    script_files.each { |filename| reply << File.read(filename) }
+    script_files.each { |filename| reply << File.read(Rails.root + filename) }
 
     reply.join "\n\n\n\n\n"
   end

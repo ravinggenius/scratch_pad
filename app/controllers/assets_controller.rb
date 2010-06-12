@@ -10,7 +10,8 @@ class AssetsController < ApplicationController
   # Slightly cludgy syntax is required for now.
   # @reference http://groups.google.com/group/haml/browse_thread/thread/e459fbdfa5a6d467/f9ab5f5df3fe77de
   def styles
-    render :content_type => (params[:format].to_sym == :sass ? 'text/plain' : 'text/css'), :text => gather_styles!
+    format = params[:format] || :css
+    render :content_type => (format == :css ? 'text/css' : 'text/plain'), :text => gather_styles!(format)
   end
 
   private
@@ -26,7 +27,7 @@ class AssetsController < ApplicationController
     reply.join "\n\n\n\n\n"
   end
 
-  def gather_styles!
+  def gather_styles!(format = :css)
     template_name ||= 'default' # TODO dynamically assign a template name
     cache_key = "core::styles::#{template_name}.#{params[:format]}"
 
@@ -73,7 +74,7 @@ class AssetsController < ApplicationController
 
     @medias.each { |media, sass| final_sass << extract_styles_for_media(media, sass) }
 
-    body = params[:format].to_sym == :sass ? final_sass : Sass::Engine.new(final_sass, Compass.sass_engine_options).render
+    body = format == :sass ? final_sass : Sass::Engine.new(final_sass, Compass.sass_engine_options).render
 
     Cache[cache_key].update_attributes! :value => body
 

@@ -30,9 +30,9 @@
   /* @group headers */
   .h
     display: inline-block
-    color: !header_color
+    color: $header_color
     font:
-      size: !base_line_height
+      size: $base_line_height
       weight: bold
     @include serif-family
   /* @end */
@@ -75,7 +75,7 @@
     margin: 8/16 + "em 0"
 
   tbody
-    color: !quiet_color
+    color: $quiet_color
 
   th
     font-weight: bold
@@ -93,15 +93,15 @@
     @include list-default
 
   blockquote
-    margin: !base_line_height
-    color: !quiet_color
+    margin: $base_line_height
+    color: $quiet_color
   /* @end */
 
 
   /* @group inline tags */
   cite
     font-style: italic
-    color: !quiet_color
+    color: $quiet_color
 
   em
     font-style: italic

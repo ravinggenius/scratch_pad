@@ -10,6 +10,7 @@ gem 'maruku',                '~> 0.6.0'
 gem 'mongo',                 '~> 1.0'
 gem 'mongo_mapper',          '= 0.7.6'
 gem 'rails',                 '~> 3.0.0.beta4'
+gem 'ruby-prof'
 
 group :development do
   gem 'awesome_print'

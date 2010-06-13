@@ -9,8 +9,8 @@ class NodeTest < ActiveSupport::TestCase
   end
 
   test 'expected api' do
-    expected_class_api TempNode, :published
-    expected_instance_api TempNode, :is_published, :name, :name=, :position, :position=, :created_at, :updated_at, :children, :terms, :machine_name
+    assert_class_api TempNode, :published
+    assert_instance_api TempNode, :is_published, :name, :name=, :position, :position=, :created_at, :updated_at, :children, :terms, :machine_name
   end
 
   test 'aliases' do

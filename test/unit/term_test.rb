@@ -6,7 +6,7 @@ class TermTest < ActiveSupport::TestCase
   end
 
   test 'expected api' do
-    expected_class_api Term
-    expected_instance_api Term, :name, :name=, :vocabulary, :vocabulary=
+    assert_class_api Term
+    assert_instance_api Term, :name, :name=, :vocabulary, :vocabulary=
   end
 end

@@ -6,8 +6,8 @@ class CacheTest < ActiveSupport::TestCase
   end
 
   test 'expected api' do
-    expected_class_api Cache, :[]
-    expected_instance_api Cache, :key, :key=, :value, :value=, :created_at, :updated_at
+    assert_class_api Cache, :[]
+    assert_instance_api Cache, :key, :key=, :value, :value=, :created_at, :updated_at
   end
 
   test 'static methods' do

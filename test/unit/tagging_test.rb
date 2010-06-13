@@ -6,7 +6,7 @@ class TaggingTest < ActiveSupport::TestCase
   end
 
   test 'expected api' do
-    expected_class_api Tagging, :nodes_for, :terms_for
-    expected_instance_api Tagging, :node, :node=, :term, :term=
+    assert_class_api Tagging, :nodes_for, :terms_for
+    assert_instance_api Tagging, :node, :node=, :term, :term=
   end
 end

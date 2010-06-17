@@ -50,7 +50,7 @@ class NodesController < ApplicationController
     @node = node_type.find(params[:id])
 
     respond_to do |format|
-      if @node.update(params[:node])
+      if @node.update_attributes(params[:node])
         format.html { redirect_to(@node, :notice => "#{node_type.name} was successfully updated.") }
         format.xml  { head :ok }
       else

@@ -1,9 +1,10 @@
 # http://railstips.org/blog/archives/2009/12/18/why-i-think-mongo-is-to-databases-what-rails-was-to-frameworks/
+# http://railstips.org/blog/archives/2010/06/16/mongomapper-08-goodies-galore/
 
 class Node
   include MongoMapper::Document
 
-  key :children_ids, Array # TODO validate proper sub-types
+  key :children_ids, Array, :typecast => 'ObjectId'
   key :is_published, Boolean, :default => false
   key :name, String, :required => true
   key :position, Integer, :default => 0

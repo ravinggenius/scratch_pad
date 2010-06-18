@@ -1,3 +1,13 @@
-= form_for @node do |node|
-  = node.label :title, 'Title'
-  = node.text_field :title
+= form_for :node, @node do |form|
+  %fieldset.node
+    %legend Common
+    %ul
+      %li
+        = form.label :title, 'Title'
+        = form.text_field :title
+    %fieldset.node{ :class => @node.machine_name }
+      %legend= "#{@node.class.name}"
+      = show_node @node, :fieldset, :form => form
+    %ul
+      %li= submit_tag 'Commit'
+      %li= link_to 'Cancel', root_path

@@ -40,6 +40,6 @@ class NodeTest < ActiveSupport::TestCase
     n.children << TempNode.create(:name => 'Child One')
     n.children << TempNode.create(:name => 'Child Two')
     n.save
-    assert_equal 2, TempNode.first(:name => 'Test Node').children.count
+    assert_equal 2, TempNode.first(:name => 'Parent Node').children.count
   end
 end

@@ -40,9 +40,9 @@ module ApplicationHelper
     render options.merge(:partial => name.to_s, :locals => locals)
   end
 
-  def show_node node, part
+  def show_node node, part, locals = {}
     path = "#{node.machine_name}/views/#{part}"
     path = "nodes/#{part}" unless template_exists? path, nil, true
-    partial path, :node => node
+    partial path, locals.merge(:node => node)
   end
 end

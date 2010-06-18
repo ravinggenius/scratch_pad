@@ -9,6 +9,7 @@ class NodesControllerTest < ActionController::TestCase
     get :index
     assert_response :success
     assert_not_nil assigns(:nodes)
+    assert_not_nil assigns(:featured)
   end
 
   test 'should get new' do

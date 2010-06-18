@@ -5,9 +5,10 @@
       %li
         = form.label :title, 'Title'
         = form.text_field :title
-    %fieldset.node{ :class => @node.machine_name }
-      %legend= "#{@node.class.name}"
-      = show_node @node, :fieldset, :form => form
+    - unless @node.machine_name == 'node'
+      %fieldset.node{ :class => @node.machine_name }
+        %legend= "#{@node.class.name}"
+        = show_node @node, :fieldset, :form => form
     %ul
       %li= submit_tag 'Commit'
       %li= link_to 'Cancel', root_path

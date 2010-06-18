@@ -20,3 +20,6 @@ class ActiveSupport::TestCase
     methods.each { |method| assert_respond_to k, method, "#{klass.name}.new does not respond to :#{method}" }
   end
 end
+
+class TempNode < Node
+end

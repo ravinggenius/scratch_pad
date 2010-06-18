@@ -1,8 +1,5 @@
 require 'test_helper'
 
-class TempNode < Node
-end
-
 class NodeTest < ActiveSupport::TestCase
   setup do
     @n = TempNode.first_or_create(:name => 'Test Node')

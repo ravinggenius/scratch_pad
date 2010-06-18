@@ -10,11 +10,19 @@ class AssetsController < ApplicationController
   # Slightly cludgy syntax is required for now.
   # @reference http://groups.google.com/group/haml/browse_thread/thread/e459fbdfa5a6d467/f9ab5f5df3fe77de
   def styles
-    format = params[:format] || :css
+    format = format(:css)
     render :content_type => (format == :css ? 'text/css' : 'text/plain'), :text => gather_styles!(format)
   end
 
   private
+
+  def format(default_format)
+    begin
+      params[:format].to_sym
+    rescue
+      default_format
+    end
+  end
 
   def gather_scripts!
     reply = []
@@ -33,7 +41,7 @@ class AssetsController < ApplicationController
 
   def gather_styles!(format = :css)
     template_name ||= 'default' # TODO dynamically assign a template name
-    cache_key = "core::styles::#{template_name}.#{params[:format]}"
+    cache_key = "core::styles::#{template_name}.#{format}"
 
     if Rails.env.to_sym == :production
       return Cache[cache_key].value unless Cache[cache_key].value.nil?

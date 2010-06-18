@@ -20,7 +20,7 @@ class NodesController < ApplicationController
   end
 
   def new
-    @node = Node.new
+    @node = node_type.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -29,7 +29,7 @@ class NodesController < ApplicationController
   end
 
   def edit
-    @node = Node.find(params[:id])
+    @node = node_type.find(params[:id])
   end
 
   def create

@@ -10,11 +10,23 @@ class ApplicationController < ActionController::Base
   end
 
   before_filter do
-    User.anonymous = User.first :user_name => 'anon'
-    User.current = User.find(session[:current_user_id]) || User.anonymous
+    Dir[Rails.root + user_class_files].each { |model| require model }
+    user_klass = user_class.constantize
+    user_klass.anonymous = User.first :user_name => 'anon'
+    user_klass.current = User.find(session[:current_user_id]) || User.anonymous
   end
 
   after_filter do
     session[:current_user_id] = User.current.id if User.current
+  end
+
+  private
+
+  def user_class
+    'User'
+  end
+
+  def user_class_files
+    'lib/user/models/*.rb'
   end
 end

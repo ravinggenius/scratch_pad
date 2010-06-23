@@ -7,7 +7,7 @@ require Rails.root + 'lib' + 'user' + 'models' + 'group.rb'
 # http://api.rubyonrails.org/classes/ActionController/HttpAuthentication/Basic.html
 # http://charlesmaxwood.com/rails-metal-example-1-authentication/
 
-class User < Node
+class User
   include BCrypt
 
   attr_writer :password_confirmation

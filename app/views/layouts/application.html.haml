@@ -22,10 +22,10 @@
 
     %nav#main_menu
       %ul
-        - if User.current == User.anonymous
+        - if @user_klass.current == @user_klass.anonymous
           %li= link_to 'Sign In', new_session_path
         -else
-          %li= link_to 'User Profile', node_path(User.current) 
+          %li= link_to 'User Profile', node_path(@user_klass.current) 
 
     %section#content
       = yield

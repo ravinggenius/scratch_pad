@@ -11,19 +11,20 @@ class ApplicationController < ActionController::Base
 
   before_filter do
     Dir[Rails.root + user_class_files].each { |model| require model }
-    user_klass = user_class.constantize
-    user_klass.anonymous = User.first :user_name => 'anon'
-    user_klass.current = User.find(session[:current_user_id]) || User.anonymous
+    @user_klass = user_class
+    @user_klass.anonymous = @user_klass.first :user_name => 'anon'
+    @user_klass.current = @user_klass.find(session[:current_user_id]) || @user_klass.anonymous
   end
 
   after_filter do
-    session[:current_user_id] = User.current.id if User.current
+    session[:current_user_id] = @user_klass.current.id if @user_klass.current
   end
 
   private
 
   def user_class
-    'User'
+    reply = 'User'
+    reply.constantize
   end
 
   def user_class_files

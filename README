@@ -18,6 +18,19 @@
 4 start hacking!
   * if you have rails 3 installed system-wide, you can run `rails` to see available commands, otherwise use `script/rails`
 
+== Coding Standards
+
+* tests are good and should remain passing to the extent possible
+* 2 spaces indents
+  * technically ruby doen't care about indentation or whether spaces or tabs are used
+    * however 2 space indents are the de facto standard that nearly every rubyist on the planet follows
+  * sass requires space-based indentation (no tabs!), and 2 spaces seems to be the norm
+  * scss doesn't care about about indentation (it uses { and }), but indenting really helps with readability
+* stylesheet selectors should be one per line
+  * (optionally) unless there are many selectors for the declared style
+* ruby def statements should wrap arguments with parantheses
+  * parantheses should be left off if no arguments are accepted
+
 == To Do
 
 * make users and groups easily swappable for another user system, in part or in whole

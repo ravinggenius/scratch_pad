@@ -22,26 +22,26 @@
 
 * tests are good and should remain passing to the extent possible
 * 2 spaces indents
-  * technically ruby doen't care about indentation or whether spaces or tabs are used
+  * technically ruby doesn't care about indentation or whether spaces or tabs are used
     * however 2 space indents are the de facto standard that nearly every rubyist on the planet follows
   * sass requires space-based indentation (no tabs!), and 2 spaces seems to be the norm
   * scss doesn't care about about indentation (it uses { and }), but indenting really helps with readability
-* stylesheet selectors should be one per line
+* style selectors should be one per line
   * (optionally) unless there are many selectors for the declared style
-* ruby def statements should wrap arguments with parantheses
-  * parantheses should be left off if no arguments are accepted
-
-== To Do
-
-* make users and groups easily swappable for another user system, in part or in whole
-* default theme should look better
-* themes and node extensions should have a manifest (probably yaml) to specify their javascript dependencies
+* ruby def statements should wrap arguments with parentheses
+  * parentheses should be left off if no arguments are accepted
 
 == Features
 
 * every piece of content is a node. every node may have arbitrary sub-nodes
   * some nodes are meant to be child nodes, for instance table. others are meant to be a collection of nodes, for instance post
 * figure out user preferences
+
+== To Do
+
+* make users and groups easily swappable for another user system, in part or in whole
+* default theme should look better
+* themes and node extensions should have a manifest (probably yaml) to specify their javascript dependencies
 
 == Wish List
 

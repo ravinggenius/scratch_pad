@@ -27,6 +27,7 @@
 
 * every piece of content is a node. every node may have arbitrary sub-nodes
   * some nodes are meant to be child nodes, for instance table. others are meant to be a collection of nodes, for instance post
+* figure out user preferences
 
 == Wish List
 

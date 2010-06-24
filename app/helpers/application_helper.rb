@@ -14,7 +14,7 @@ module ApplicationHelper
   # http://www.leftrightdesigns.com/library/jquery/nospam/nospam.phps
   # contact//example/com
   #
-  def obfuscate email, options = {}
+  def obfuscate(email, options = {})
     add_hints = options[:add_hints] || false
     filter_level = options[:filter_level] || :low
 
@@ -26,7 +26,7 @@ module ApplicationHelper
     email.html_safe
   end
 
-  def filter text, options = {}
+  def filter(text, options = {})
     options[:keep_paragraphs] = true unless options.key? :keep_paragraphs
 
     text = Maruku.new(text.to_s).to_html
@@ -36,11 +36,11 @@ module ApplicationHelper
     text.html_safe
   end
 
-  def partial name, locals = {}, options = {}
+  def partial(name, locals = {}, options = {})
     render options.merge(:partial => name.to_s, :locals => locals)
   end
 
-  def show_node node, part, locals = {}
+  def show_node(node, part, locals = {})
     path = "#{node.machine_name}/views/#{part}"
     path = "nodes/#{part}" unless template_exists? path, nil, true
     partial path, locals.merge(:node => node)

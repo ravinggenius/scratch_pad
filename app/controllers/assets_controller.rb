@@ -93,27 +93,27 @@ class AssetsController < ApplicationController
     body
   end
 
-  def extract_media_names paths
+  def extract_media_names(paths)
     paths.map do |path|
       reply = File.basename(path).split('.').first
       reply.to_sym unless reply.starts_with? '_'
     end.compact
   end
 
-  def init_media media_names
+  def init_media(media_names)
     m = media_names.to_s.gsub /_/, ', '
     @medias[m] ||= ''
     m
   end
 
-  def extract_styles_for_media media, sass
+  def extract_styles_for_media(media, sass)
     <<-SASS
 @media #{media}
 #{sass}
     SASS
   end
 
-  def load_extension_styles media, extensions
+  def load_extension_styles(media, extensions)
     m_key = init_media media
     extensions.each do |extension|
       @imports << "node_extensions/#{extension}/styles/#{media}"
@@ -124,7 +124,7 @@ class AssetsController < ApplicationController
     end
   end
 
-  def load_template_style media, template
+  def load_template_style(media, template)
     m_key = init_media media
     @imports << "templates/#{template}/styles/#{media}"
     @medias[m_key] << <<-SASS

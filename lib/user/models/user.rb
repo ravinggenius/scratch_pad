@@ -8,6 +8,7 @@ require Rails.root + 'lib' + 'user' + 'models' + 'group.rb'
 # http://charlesmaxwood.com/rails-metal-example-1-authentication/
 
 class User
+  include MongoMapper::Document
   include BCrypt
 
   attr_writer :password_confirmation

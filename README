@@ -20,6 +20,8 @@
 
 A nice looking introduction to Ruby and MongoDB can be found on GitHub: http://github.com/chicagoruby/MongoDB_Koans
 
+To run tests for custom extensions, use `RAILS_ENV=test rake test:custom`. Currently there is no way to avoid manually setting the environment
+
 == Coding Standards
 
 * tests are good and should remain passing to the extent possible

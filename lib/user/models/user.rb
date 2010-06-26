@@ -14,14 +14,13 @@ class User
   attr_writer :password_confirmation
   cattr_accessor :anonymous, :current
 
-  key :email, String
-  key :username, String
+  key :email, String, :required => true
+  key :username, String, :required => true
   key :hashword, String
 
   many :groups
 
   validates_confirmation_of :password
-  validates_presence_of :email, :username
   validates_uniqueness_of :username
 
   after_validation :ensure_hashword_is_set
@@ -47,6 +46,8 @@ class User
       temp.each { |message| errors.add(:password, message) }
     end
   end
+
+  
 
   private
 

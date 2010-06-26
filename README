@@ -18,6 +18,8 @@
 4 start hacking!
   * if you have rails 3 installed system-wide, you can run `rails` to see available commands, otherwise use `script/rails`
 
+A nice looking introduction to Ruby and MongoDB can be found on GitHub: http://github.com/chicagoruby/MongoDB_Koans
+
 == Coding Standards
 
 * tests are good and should remain passing to the extent possible

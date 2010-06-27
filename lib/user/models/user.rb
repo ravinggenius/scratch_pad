@@ -47,8 +47,6 @@ class User
     end
   end
 
-  
-
   private
 
   def ensure_hashword_is_set

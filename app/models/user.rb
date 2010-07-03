@@ -1,7 +1,5 @@
 require 'bcrypt'
-
-# FIXME Why do I have to require the group like this?
-require Rails.root + 'lib' + 'user' + 'models' + 'group.rb'
+require 'group'
 
 # http://github.com/codahale/bcrypt-ruby
 # http://api.rubyonrails.org/classes/ActionController/HttpAuthentication/Basic.html

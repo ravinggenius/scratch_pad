@@ -1,4 +1,4 @@
-require Rails.root + 'test' + 'test_helper'
+require 'test_helper'
 
 class GroupTest < ActiveSupport::TestCase
 end

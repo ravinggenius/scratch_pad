@@ -3,6 +3,7 @@
 
 class Node
   include MongoMapper::Document
+  extend Relationship
 
   key :children_ids, Array, :typecast => 'ObjectId'
   key :is_published, Boolean, :default => false
@@ -12,16 +13,14 @@ class Node
   timestamps!
   userstamps!
 
+  habtm :nodes, :terms, :tagging
+
   before_save :set_children_ids
   after_save :save_taggings
 
   def children
     self.children_ids ||= []
     @children ||= self.children_ids.map { |child_id| Node.find(child_id) }
-  end
-
-  def terms
-    @terms ||= Tagging.terms_for(self.id)
   end
 
   def machine_name
@@ -40,11 +39,6 @@ class Node
   alias :editor= :updater=
 
   private
-
-  def save_taggings
-    @terms ||= []
-    @terms.each { |term| Tagging.first_or_create(:node_id => self.id, :term_id => term.id) }
-  end
 
   def set_children_ids
     @children ||= []

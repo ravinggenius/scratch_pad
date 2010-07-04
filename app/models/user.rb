@@ -8,6 +8,7 @@ require 'group'
 class User
   include MongoMapper::Document
   include BCrypt
+  extend Relationship
 
   attr_writer :password_confirmation
   cattr_accessor :anonymous, :current
@@ -16,7 +17,7 @@ class User
   key :username, String, :required => true
   key :hashword, String
 
-  many :groups
+  habtm :users, :groups, :grouping
 
   validates_confirmation_of :password
   validates_uniqueness_of :username

@@ -70,7 +70,7 @@ class AssetsController < ApplicationController
     end
 
     final_sass = <<-SASS
-@charset "utf-8"
+@charset 'utf-8'
     SASS
 
     @imports.each do |inc|

@@ -84,7 +84,7 @@ class AssetsController < ApplicationController
       @medias.delete :all
     end
 
-    media_keys = @medias.keys.sort! do |a, b|
+    media_keys = @medias.keys.sort do |a, b|
       a, b = a.to_s, b.to_s
       reply = b.count('_') <=> a.count('_')
       reply = a <=> b if reply == 0

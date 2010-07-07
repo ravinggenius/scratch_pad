@@ -84,8 +84,13 @@ class AssetsController < ApplicationController
       @medias.delete :all
     end
 
-    # TODO ensure styles get output in correct order
-    @medias.each { |media, sass| final_sass << extract_styles_for_media(media, sass) }
+    media_keys = @medias.keys.sort! do |a, b|
+      a, b = a.to_s, b.to_s
+      reply = b.count('_') <=> a.count('_')
+      reply = a <=> b if reply == 0
+      reply
+    end
+    media_keys.each { |key| final_sass << extract_styles_for_media(key, @medias[key]) }
 
     body = format == :sass ? final_sass : Sass::Engine.new(final_sass, Compass.sass_engine_options).render
 

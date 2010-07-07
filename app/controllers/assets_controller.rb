@@ -84,6 +84,7 @@ class AssetsController < ApplicationController
       @medias.delete :all
     end
 
+    # TODO ensure styles get output in correct order
     @medias.each { |media, sass| final_sass << extract_styles_for_media(media, sass) }
 
     body = format == :sass ? final_sass : Sass::Engine.new(final_sass, Compass.sass_engine_options).render
@@ -100,24 +101,18 @@ class AssetsController < ApplicationController
     end.compact
   end
 
-  def init_media(media_names)
-    m = media_names.to_s.gsub /_/, ', '
-    @medias[m] ||= ''
-    m
-  end
-
   def extract_styles_for_media(media, sass)
     <<-SASS
-@media #{media}
+@media #{media.to_s.gsub /_/, ', '}
 #{sass}
     SASS
   end
 
   def load_extension_styles(media, extensions)
-    m_key = init_media media
+    @medias[media] ||= ''
     extensions.each do |extension|
       @imports << "node_extensions/#{extension}/styles/#{media}"
-      @medias[m_key] << <<-SASS
+      @medias[media] << <<-SASS
   .#{extension}
     @include extension_#{extension}_#{media}
       SASS
@@ -125,9 +120,9 @@ class AssetsController < ApplicationController
   end
 
   def load_template_style(media, template)
-    m_key = init_media media
+    @medias[media] ||= ''
     @imports << "templates/#{template}/styles/#{media}"
-    @medias[m_key] << <<-SASS
+    @medias[media] << <<-SASS
   @include template_#{template}_#{media}
     SASS
   end

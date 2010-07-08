@@ -51,22 +51,30 @@ class AssetsController < ApplicationController
     @medias = {}
 
     enabled_extension_styles = {}
-
     Dir[Rails.root + 'lib/node_extensions/*'].each do |extension_path|
       extract_media_names(Dir["#{extension_path}/styles/*"]).each do |style|
         enabled_extension_styles[style] = enabled_extension_styles[style] || []
         enabled_extension_styles[style] << File.basename(extension_path)
       end
     end
-
-    template_styles = extract_media_names(Dir[Rails.root + "lib/templates/#{template_name}/styles/*"])
-
     enabled_extension_styles.each do |media, extension_styles|
-      load_extension_styles(media, extension_styles)
+      @medias[media] ||= ''
+      extension_styles.each do |extension|
+        @imports << "node_extensions/#{extension}/styles/#{media}"
+        @medias[media] << <<-SASS
+  .#{extension}
+    @include extension_#{extension}_#{media}
+        SASS
+      end
     end
 
+    template_styles = extract_media_names(Dir[Rails.root + "lib/templates/#{template_name}/styles/*"])
     template_styles.each do |media|
-      load_template_style(media, template_name)
+      @medias[media] ||= ''
+      @imports << "templates/#{template_name}/styles/#{media}"
+      @medias[media] << <<-SASS
+  @include template_#{template_name}_#{media}
+      SASS
     end
 
     final_sass = <<-SASS
@@ -110,25 +118,6 @@ class AssetsController < ApplicationController
     <<-SASS
 @media #{media.to_s.gsub /_/, ', '}
 #{sass}
-    SASS
-  end
-
-  def load_extension_styles(media, extensions)
-    @medias[media] ||= ''
-    extensions.each do |extension|
-      @imports << "node_extensions/#{extension}/styles/#{media}"
-      @medias[media] << <<-SASS
-  .#{extension}
-    @include extension_#{extension}_#{media}
-      SASS
-    end
-  end
-
-  def load_template_style(media, template)
-    @medias[media] ||= ''
-    @imports << "templates/#{template}/styles/#{media}"
-    @medias[media] << <<-SASS
-  @include template_#{template}_#{media}
     SASS
   end
 end

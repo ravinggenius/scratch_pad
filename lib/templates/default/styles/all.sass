@@ -130,12 +130,13 @@
 
   /* @group STRUCTURE */
   body
-    @include susy
     @include sans-family
     color: $font_color
     background-color: #FFA500
     line-height: 1.625
     font-size: 16px
+
+  @include susy
 
   .clearfix
     // @include clearfix
@@ -153,8 +154,8 @@
 
 
   /* @group DEBUG */
-  /*   uncomment, adjust and use for debugging    */
-  /*
+  // uncomment, adjust and use for debugging
+  //
     #branding,
     #main_menu,
     #content,

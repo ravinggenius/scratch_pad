@@ -52,7 +52,7 @@ class AssetsController < ApplicationController
 
     enabled_extension_styles = {}
     Dir[Rails.root + 'lib/node_extensions/*'].each do |extension_path|
-      extract_media_names(Dir["#{extension_path}/styles/*"]).each do |style|
+      extract_media_names(Dir["#{extension_path}/views/styles/*"]).each do |style|
         enabled_extension_styles[style] = enabled_extension_styles[style] || []
         enabled_extension_styles[style] << File.basename(extension_path)
       end
@@ -60,7 +60,7 @@ class AssetsController < ApplicationController
     enabled_extension_styles.each do |media, extension_styles|
       @medias[media] ||= ''
       extension_styles.each do |extension|
-        @imports << "node_extensions/#{extension}/styles/#{media}"
+        @imports << "node_extensions/#{extension}/views/styles/#{media}"
         @medias[media] << <<-SASS
   .#{extension}
     @include extension_#{extension}_#{media}

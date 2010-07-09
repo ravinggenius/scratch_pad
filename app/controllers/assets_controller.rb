@@ -25,7 +25,12 @@ class AssetsController < ApplicationController
   end
 
   def gather_scripts!
-    reply = []
+    cache_key = "core::styles::#{template_name}.js"
+
+    if Rails.env.to_sym == :production
+      return Cache[cache_key].value unless Cache[cache_key].value.nil?
+    end
+
     script_files = []
 
     script_files << 'app/vendor/modernizr/1.1/modernizr.min.js'
@@ -34,9 +39,11 @@ class AssetsController < ApplicationController
     script_files << Dir[Rails.root + 'lib/node_extensions/**/views/scripts/*.js']
     script_files << Dir[Rails.root + "lib/templates/#{template_name}/scripts/*.js"]
 
-    script_files.flatten.each { |filename| reply << File.read(Rails.root + filename) }
+    reply = script_files.flatten.map { |filename| File.read(Rails.root + filename) }.join "\n\n\n\n\n"
 
-    reply.join "\n\n\n\n\n"
+    Cache[cache_key].update_attributes! :value => reply
+
+    reply
   end
 
   def gather_styles!(format = :css)

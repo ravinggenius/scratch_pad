@@ -31,16 +31,15 @@ class AssetsController < ApplicationController
     script_files << 'app/vendor/modernizr/1.1/modernizr.min.js'
     script_files << 'app/vendor/jquery/1.4/jquery.min.js'
 
-    # TODO hash all dependencies
-    # TODO concatenate files in correct order
+    script_files << Dir[Rails.root + 'lib/node_extensions/**/views/scripts/*.js']
+    script_files << Dir[Rails.root + "lib/templates/#{template_name}/scripts/*.js"]
 
-    script_files.each { |filename| reply << File.read(Rails.root + filename) }
+    script_files.flatten.each { |filename| reply << File.read(Rails.root + filename) }
 
     reply.join "\n\n\n\n\n"
   end
 
   def gather_styles!(format = :css)
-    template_name ||= 'default' # TODO dynamically assign a template name
     cache_key = "core::styles::#{template_name}.#{format}"
 
     if Rails.env.to_sym == :production
@@ -119,5 +118,10 @@ class AssetsController < ApplicationController
 @media #{media.to_s.gsub /_/, ', '}
 #{sass}
     SASS
+  end
+
+  def template_name
+    # TODO dynamically assign a template name (template should be selectable, at least by root)
+    @template_name ||= 'default'
   end
 end

@@ -21,7 +21,7 @@ module Relationship
         @models[this_model] ||= klass(this_model).find(self.send(id_key(this_model)))
       end
 
-      define_method "#{this_model}=".to_sym, new_model do
+      define_method "#{this_model}=".to_sym do |new_model|
         self.send "#{id_key(this_model)}=", new_model.id
         @models[this_model] = new_model
       end

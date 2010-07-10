@@ -26,7 +26,7 @@ module Relationship
         @models[this_model] = new_model
       end
 
-      define_class_method "#{plural(this_model)}_for".to_sym, that_model_id do
+      define_class_method "#{plural(this_model)}_for".to_sym do |that_model_id|
         all(id_key(that_model) => that_model_id.to_s).map { |tagging| tagging.send(this_model) }
       end
     end

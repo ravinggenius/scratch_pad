@@ -1,0 +1,16 @@
+%header
+  %span.h= node.title
+%section
+  %table
+    %caption= filter node.caption, :keep_paragraphs => false
+    %thead
+      - if node.has_header_row
+        %tr
+          - node.data.shift.each do |cell|
+            %th= filter cell, :keep_paragraphs => false
+    %tfoot
+    %tbody
+      - node.data.each do |row|
+        %tr
+          - row.each do |cell|
+            %td= filter cell, :keep_paragraphs => false

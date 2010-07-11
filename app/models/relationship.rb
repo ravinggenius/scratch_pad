@@ -21,12 +21,14 @@ module Relationship
         @models[this_model] ||= klass(this_model).find(self.send(id_key(this_model)))
       end
 
-      define_method "#{this_model}=".to_sym do |new_model|
+      define_method "#{this_model}=" do |new_model|
         self.send "#{id_key(this_model)}=", new_model.id
         @models[this_model] = new_model
       end
 
-      define_class_method "#{plural(this_model)}_for".to_sym do |that_model_id|
+      # http://stackoverflow.com/questions/752717/how-do-i-use-define-method-to-create-class-methods
+      # TODO find a way to integrate this method
+      define_method "self.#{plural(this_model)}_for" do |that_model_id|
         all(id_key(that_model) => that_model_id.to_s).map { |tagging| tagging.send(this_model) }
       end
     end

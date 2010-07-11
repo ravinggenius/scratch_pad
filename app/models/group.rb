@@ -9,7 +9,7 @@ class Group
   habtm :groups, :users, :grouping
 
   validates_presence_of :access_code, :code, :name
-  #validates_uniqueness_of :access_code
+  validates_uniqueness_of :access_code
 
   before_save :validate_access_code
 

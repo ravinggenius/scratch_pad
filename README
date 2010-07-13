@@ -46,6 +46,7 @@ To run tests for custom extensions, use `RAILS_ENV=test rake test:custom`. Curre
 
 == To Do
 
+* finish options/settings
 * make users and groups easily swappable for another user system, in part or in whole
 * default theme should look better
 * themes and node extensions should have a manifest (probably yaml) to specify their javascript dependencies

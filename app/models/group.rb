@@ -8,7 +8,7 @@ class Group
 
   habtm :groups, :users, :grouping
 
-  #validates_uniqueness_of :key => :access_code
+  validates_uniqueness_of :access_code
 
   before_save :validate_access_code
 

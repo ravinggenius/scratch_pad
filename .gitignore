@@ -6,13 +6,13 @@ config/database.yml
 config/deploy.rb
 config/imports/*
 coverage
+db/*.sqlite3
 doc/api
 doc/app
 doc/guides
 .DS_Store
 gems/gems/*
 gems/specifications/*
-log/*
 log/*.log
 nbproject
 nbproject/*
@@ -29,7 +29,6 @@ src/*
 *.sw?
 *.swp
 TAGS
-tmp/*
 tmp/**/*
 vendor/gems
 vendor/gems/*

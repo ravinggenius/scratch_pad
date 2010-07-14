@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   def new
-    @user = @user_klass.new
+    @user = User.new
 
     respond_to do |format|
       format.html
@@ -9,11 +9,11 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = @user_klass.first :username => params[:user][:username]
+    @user = User.first :username => params[:user][:username]
 
     respond_to do |format|
       if @user && (@user.password == params[:user][:password])
-        @user_klass.current = @user
+        User.current = @user
         format.html { redirect_to(root_url, :notice => 'You have successfully signed in.') }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
@@ -24,7 +24,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    @user_klass.current = @user_klass.anonymous
+    User.current = User.anonymous
 
     respond_to do |format|
       format.html { redirect_to(root_url) }

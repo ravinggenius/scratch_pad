@@ -1,15 +1,15 @@
-== Dependencies
+## Dependencies
 
-=== System
+### System
 * git
 * mongodb
   * optional bson_ext
 * ruby (works in 1.8.7, should work (not tested) in 1.9.*)
 
-=== RubyGems
+### RubyGems
 * bundler (handles installing everything else)
 
-== Getting Started
+## Getting Started
 
 1 clone the project
   * type `cd ~/code`
@@ -25,7 +25,7 @@ A nice looking introduction to Ruby and MongoDB can be found on GitHub: http://g
 
 To run tests for custom extensions, use `RAILS_ENV=test rake test:custom`. Currently there is no way to avoid manually setting the environment
 
-== Coding Standards
+## Coding Standards
 
 * tests are good and should remain passing to the extent possible
 * 2 spaces indents
@@ -38,19 +38,19 @@ To run tests for custom extensions, use `RAILS_ENV=test rake test:custom`. Curre
 * ruby def statements should wrap arguments with parentheses
   * parentheses should be left off if no arguments are accepted
 
-== Features
+## Features
 
 * every piece of content is a node. every node may have arbitrary sub-nodes
   * some nodes are meant to be child nodes, for instance table. others are meant to be a collection of nodes, for instance post
 * figure out user preferences
 
-== To Do
+## To Do
 
 * finish options/settings
 * make users and groups easily swappable for another user system, in part or in whole
 * default theme should look better
 * themes and node extensions should have a manifest (probably yaml) to specify their javascript dependencies
 
-== Wish List
+## Wish List
 
 * move styles and themes into the database to facilitate online editing by a website administrator

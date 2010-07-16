@@ -7,18 +7,19 @@
 * ruby (works in 1.8.7, should work (not tested) in 1.9.*)
 
 ### RubyGems
+* rails 3 beta (technically you should not have to install this system-wide, but it will make things easier if you do: `[sudo] gem install rails --pre`)
 * bundler (handles installing everything else)
 
 ## Getting Started
 
-1 clone the project
+1. clone the project
   * type `cd ~/code`
   * type `git clone -o github git://github.com/ravinggenius/scratch_pad.git`
     * this will create a directory called scratch_pad (feel free to rename it)
-2 change into the project directory
-3 type `bundle install`
+2. change into the project directory
+3. type `bundle install`
   * this will make sure every dependency in Gemfile is resolved and available
-4 start hacking!
+4. start hacking!
   * if you have rails 3 installed system-wide, you can run `rails` to see available commands, otherwise use `script/rails`
 
 A nice looking introduction to Ruby and MongoDB can be found on GitHub: http://github.com/chicagoruby/MongoDB_Koans
@@ -42,11 +43,10 @@ To run tests for custom extensions, use `RAILS_ENV=test rake test:custom`. Curre
 
 * every piece of content is a node. every node may have arbitrary sub-nodes
   * some nodes are meant to be child nodes, for instance table. others are meant to be a collection of nodes, for instance post
-* figure out user preferences
 
 ## To Do
 
-* finish options/settings
+* finish options/settings and user preferences
 * make users and groups easily swappable for another user system, in part or in whole
 * default theme should look better
 * themes and node extensions should have a manifest (probably yaml) to specify their javascript dependencies

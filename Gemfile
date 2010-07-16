@@ -1,7 +1,7 @@
 source :rubygems
 
 gem 'bcrypt-ruby',           '~> 2.1', :require => 'bcrypt'
-gem 'bson_ext',              '= 1.0.1'
+gem 'bson_ext',              '= 1.0.4'
 gem 'compass',               '~> 0.10'
 gem 'compass-susy-plugin',   '~> 0.7'
 gem 'haml',                  '~> 3.0'

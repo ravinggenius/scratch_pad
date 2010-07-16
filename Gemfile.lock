@@ -11,7 +11,7 @@ dependencies:
   bson_ext: 
     group: 
     - :default
-    version: = 1.0.1
+    version: = 1.0.4
   ruby-debug: 
     group: 
     - :development
@@ -110,7 +110,7 @@ specs:
 - bson: 
     version: 1.0.4
 - bson_ext: 
-    version: 1.0.1
+    version: 1.0.4
 - bundler: 
     version: 0.9.26
 - columnize: 
@@ -157,7 +157,7 @@ specs:
     version: 0.8.2
 - thin: 
     version: 1.2.7
-hash: ae808d0bc35bee3f7746645578e17352e5673ba1
+hash: d4a78961c1f90c0f5c660cdd5e5c93b33114c296
 sources: 
 - Rubygems: 
     uri: http://gemcutter.org

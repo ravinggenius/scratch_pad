@@ -13,14 +13,14 @@
 ## Getting Started
 
 1. clone the project
-  * type `cd ~/code`
-  * type `git clone -o github git://github.com/ravinggenius/scratch_pad.git`
-    * this will create a directory called scratch_pad (feel free to rename it)
+   * type `cd ~/code`
+   * type `git clone -o github git://github.com/ravinggenius/scratch_pad.git`
+     * this will create a directory called scratch_pad (feel free to rename it)
 2. change into the project directory
 3. type `bundle install`
-  * this will make sure every dependency in Gemfile is resolved and available
+   * this will make sure every dependency in Gemfile is resolved and available
 4. start hacking!
-  * if you have rails 3 installed system-wide, you can run `rails` to see available commands, otherwise use `script/rails`
+   * if you have rails 3 installed system-wide, you can run `rails` to see available commands, otherwise use `script/rails`
 
 A nice looking introduction to Ruby and MongoDB can be found on GitHub: http://github.com/chicagoruby/MongoDB_Koans
 

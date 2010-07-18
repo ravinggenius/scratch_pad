@@ -1,12 +1,13 @@
 class Setting
   include MongoMapper::Document
 
-  key :code, String, :required => true
   key :name, String, :required => true
   key :scope, String, :required => true
 
+  belongs_to :option
+
   def self.[](code)
     @loaded ||= {}
-    @loaded[code] ||= Setting.first_or_new(:code => code)
+    @loaded[code] ||= Setting.first('option.code' => code)
   end
 end

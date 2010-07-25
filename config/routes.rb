@@ -6,6 +6,7 @@ ScratchPad::Application.routes.draw do |map|
 
   namespace 'admin' do
     # TODO add routes for administration
+    root :to => 'dashboard#index'
   end
 
   get 'a/scripts(.:format)', :to => 'assets#scripts', :as => :assets_scripts, :defaults => { :format => :js }

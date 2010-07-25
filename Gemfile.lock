@@ -142,7 +142,7 @@ specs:
 - mongo_mapper: 
     version: 0.8.2
 - thor: 
-    version: 0.13.7
+    version: 0.13.8
 - railties: 
     version: 3.0.0.beta4
 - rails: 

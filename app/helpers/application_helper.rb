@@ -2,9 +2,13 @@ require 'maruku'
 
 module ApplicationHelper
   def page_id
-    reply = "#{controller_name}_#{action_name}"
+    reply = "#{controller.controller_name}_#{controller.action_name}"
     reply = "#{reply}_#{h params[:id]}" if params[:id]
     reply
+  end
+
+  def page_classes
+    page_class
   end
 
   # http://www.leftrightdesigns.com/library/jquery/nospam/nospam.phps

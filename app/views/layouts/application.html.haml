@@ -15,7 +15,7 @@
 
     = render 'shared/tracking_google', :google_analytics_tracking_code => '123456789.00' if @show_tracking_google
 
-  %body{ :id => page_id, :class => page_class }
+  %body{ :id => page_id, :class => page_classes }
     %header#branding
       %span.h= link_to @site_name, root_path
       %span= @site_tagline
@@ -25,7 +25,7 @@
         - if User.current == User.anonymous
           %li= link_to 'Sign In', new_session_path
         -else
-          %li= link_to 'User Profile', node_path(User.current) 
+          %li= link_to 'User Profile', node_path(User.current)
 
     %section#content
       = yield

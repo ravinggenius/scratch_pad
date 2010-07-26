@@ -1,0 +1,26 @@
+!!! 5
+%html{ :lang => 'en', :xmlns => 'http://www.w3.org/1999/xhtml', 'xml:lang' => 'en'}
+  %head
+    %title= @title
+
+    %meta{ 'http-equiv' => 'Content-Type', 'content' => 'application/xhtml+xml; charset=utf-8' }/
+    = csrf_meta_tag
+
+    - # %link{ :rel => 'shortcut icon', :href => '/images/favicon.ico' }/
+
+    = stylesheet_link_tag assets_styles_path, :media => 'all'
+
+    = javascript_include_tag assets_scripts_path
+
+  %body{ :id => page_id, :class => page_classes }
+    %header#branding
+      %span.h= link_to @site_name, root_path
+      %span= @site_tagline
+
+    %nav#main_menu
+
+    %section#content
+      = yield
+
+    %footer#credits
+      %p= raw "&copy; #{@site_name}"

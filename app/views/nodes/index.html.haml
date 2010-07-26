@@ -1,6 +1,5 @@
 %header
   %span.h Listing nodes
-  = link_to 'New node', new_node_path
 
 - @featured.each do |node|
   = partial :article, :node => node, :is_featured => true

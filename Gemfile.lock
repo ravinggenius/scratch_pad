@@ -1,163 +1,123 @@
---- 
-dependencies: 
-  mongo: 
-    group: 
-    - :default
-    version: ~> 1.0
-  compass: 
-    group: 
-    - :default
-    version: ~> 0.10
-  bson_ext: 
-    group: 
-    - :default
-    version: = 1.0.4
-  ruby-debug: 
-    group: 
-    - :development
-    version: ">= 0"
-  rails: 
-    group: 
-    - :default
-    version: ~> 3.0.0.beta4
-  maruku: 
-    group: 
-    - :default
-    version: ~> 0.6
-  mongo_mapper: 
-    group: 
-    - :default
-    version: ~> 0.8
-  haml: 
-    group: 
-    - :default
-    version: ~> 3.0
-  ruby-prof: 
-    group: 
-    - :default
-    version: ">= 0"
-  thin: 
-    group: 
-    - :production
-    version: ">= 0"
-  rails3-generators: 
-    group: 
-    - :development
-    version: ">= 0"
-  awesome_print: 
-    group: 
-    - :development
-    version: ">= 0"
-  hirb: 
-    group: 
-    - :development
-    version: ">= 0"
-  bcrypt-ruby: 
-    group: 
-    - :default
-    version: ~> 2.1
-    require: 
-    - bcrypt
-  compass-susy-plugin: 
-    group: 
-    - :default
-    version: ~> 0.7
-specs: 
-- rake: 
-    version: 0.8.7
-- abstract: 
-    version: 1.0.0
-- activesupport: 
-    version: 3.0.0.beta4
-- builder: 
-    version: 2.1.2
-- i18n: 
-    version: 0.4.1
-- activemodel: 
-    version: 3.0.0.beta4
-- erubis: 
-    version: 2.6.6
-- rack: 
-    version: 1.1.0
-- rack-mount: 
-    version: 0.6.9
-- rack-test: 
-    version: 0.5.4
-- tzinfo: 
-    version: 0.3.22
-- actionpack: 
-    version: 3.0.0.beta4
-- mime-types: 
-    version: "1.16"
-- polyglot: 
-    version: 0.3.1
-- treetop: 
-    version: 1.4.8
-- mail: 
-    version: 2.2.5
-- actionmailer: 
-    version: 3.0.0.beta4
-- arel: 
-    version: 0.4.0
-- activerecord: 
-    version: 3.0.0.beta4
-- activeresource: 
-    version: 3.0.0.beta4
-- awesome_print: 
-    version: 0.2.1
-- bcrypt-ruby: 
-    version: 2.1.2
-- bson: 
-    version: 1.0.4
-- bson_ext: 
-    version: 1.0.4
-- bundler: 
-    version: 0.9.26
-- columnize: 
-    version: 0.3.1
-- haml: 
-    version: 3.0.13
-- compass: 
-    version: 0.10.2
-- compass-susy-plugin: 
-    version: 0.7.0
-- daemons: 
-    version: 1.1.0
-- eventmachine: 
-    version: 0.12.10
-- hirb: 
-    version: 0.3.2
-- jnunemaker-validatable: 
-    version: 1.8.4
-- linecache: 
-    version: "0.43"
-- syntax: 
-    version: 1.0.0
-- maruku: 
-    version: 0.6.0
-- mongo: 
-    version: 1.0.5
-- plucky: 
-    version: 0.3.2
-- mongo_mapper: 
-    version: 0.8.2
-- thor: 
-    version: 0.13.8
-- railties: 
-    version: 3.0.0.beta4
-- rails: 
-    version: 3.0.0.beta4
-- rails3-generators: 
-    version: 0.10.3
-- ruby-debug-base: 
-    version: 0.10.3
-- ruby-debug: 
-    version: 0.10.3
-- ruby-prof: 
-    version: 0.8.2
-- thin: 
-    version: 1.2.7
-hash: d4a78961c1f90c0f5c660cdd5e5c93b33114c296
-sources: 
-- Rubygems: 
-    uri: http://gemcutter.org
+GEM
+  remote: http://rubygems.org/
+  specs:
+    abstract (1.0.0)
+    actionmailer (3.0.0.rc)
+      actionpack (= 3.0.0.rc)
+      mail (~> 2.2.5)
+    actionpack (3.0.0.rc)
+      activemodel (= 3.0.0.rc)
+      activesupport (= 3.0.0.rc)
+      builder (~> 2.1.2)
+      erubis (~> 2.6.6)
+      i18n (~> 0.4.1)
+      rack (~> 1.2.1)
+      rack-mount (~> 0.6.9)
+      rack-test (~> 0.5.4)
+      tzinfo (~> 0.3.22)
+    activemodel (3.0.0.rc)
+      activesupport (= 3.0.0.rc)
+      builder (~> 2.1.2)
+      i18n (~> 0.4.1)
+    activerecord (3.0.0.rc)
+      activemodel (= 3.0.0.rc)
+      activesupport (= 3.0.0.rc)
+      arel (~> 0.4.0)
+      tzinfo (~> 0.3.22)
+    activeresource (3.0.0.rc)
+      activemodel (= 3.0.0.rc)
+      activesupport (= 3.0.0.rc)
+    activesupport (3.0.0.rc)
+    arel (0.4.0)
+      activesupport (>= 3.0.0.beta)
+    awesome_print (0.2.1)
+    bcrypt-ruby (2.1.2)
+    bson (1.0.4)
+    bson_ext (1.0.4)
+    builder (2.1.2)
+    columnize (0.3.1)
+    compass (0.10.2)
+      haml (>= 3.0.4)
+    compass-susy-plugin (0.7.0)
+      compass (>= 0.10.0)
+    daemons (1.1.0)
+    erubis (2.6.6)
+      abstract (>= 1.0.0)
+    eventmachine (0.12.10)
+    haml (3.0.14)
+    hirb (0.3.2)
+    i18n (0.4.1)
+    jnunemaker-validatable (1.8.4)
+      activesupport (>= 2.3.4)
+    linecache (0.43)
+    mail (2.2.5)
+      activesupport (>= 2.3.6)
+      mime-types
+      treetop (>= 1.4.5)
+    maruku (0.6.0)
+      syntax (>= 1.0.0)
+    mime-types (1.16)
+    mongo (1.0.6)
+      bson (>= 1.0.4)
+    mongo_mapper (0.8.2)
+      activesupport (>= 2.3.4)
+      jnunemaker-validatable (~> 1.8.4)
+      plucky (~> 0.3.1)
+    plucky (0.3.2)
+      mongo (~> 1.0.1)
+    polyglot (0.3.1)
+    rack (1.2.1)
+    rack-mount (0.6.9)
+      rack (>= 1.0.0)
+    rack-test (0.5.4)
+      rack (>= 1.0)
+    rails (3.0.0.rc)
+      actionmailer (= 3.0.0.rc)
+      actionpack (= 3.0.0.rc)
+      activerecord (= 3.0.0.rc)
+      activeresource (= 3.0.0.rc)
+      activesupport (= 3.0.0.rc)
+      bundler (>= 1.0.0.rc.1)
+      railties (= 3.0.0.rc)
+    rails3-generators (0.11.0)
+    railties (3.0.0.rc)
+      actionpack (= 3.0.0.rc)
+      activesupport (= 3.0.0.rc)
+      rake (>= 0.8.3)
+      thor (~> 0.14.0)
+    rake (0.8.7)
+    ruby-debug (0.10.3)
+      columnize (>= 0.1)
+      ruby-debug-base (~> 0.10.3.0)
+    ruby-debug-base (0.10.3)
+      linecache (>= 0.3)
+    ruby-prof (0.8.2)
+    syntax (1.0.0)
+    thin (1.2.7)
+      daemons (>= 1.0.9)
+      eventmachine (>= 0.12.6)
+      rack (>= 1.0.0)
+    thor (0.14.0)
+    treetop (1.4.8)
+      polyglot (>= 0.3.1)
+    tzinfo (0.3.22)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  awesome_print
+  bcrypt-ruby (~> 2.1)
+  bson_ext (= 1.0.4)
+  compass (~> 0.10)
+  compass-susy-plugin (~> 0.7)
+  haml (~> 3.0)
+  hirb
+  maruku (~> 0.6)
+  mongo (~> 1.0)
+  mongo_mapper (~> 0.8)
+  rails (~> 3.0.0.rc)
+  rails3-generators
+  ruby-debug
+  ruby-prof
+  thin

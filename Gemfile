@@ -8,7 +8,7 @@ gem 'haml',                  '~> 3.0'
 gem 'maruku',                '~> 0.6'
 gem 'mongo',                 '~> 1.0'
 gem 'mongo_mapper',          '~> 0.8'
-gem 'rails',                 '~> 3.0.0.beta4'
+gem 'rails',                 '~> 3.0.0.rc'
 gem 'ruby-prof'
 
 group :development do

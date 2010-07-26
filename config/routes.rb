@@ -5,7 +5,7 @@ ScratchPad::Application.routes.draw do |map|
   end
 
   namespace 'admin' do
-    resources :nodes
+    resources :nodes, :only => [:new, :create, :edit, :update, :destroy]
     root :to => 'dashboard#index'
   end
 

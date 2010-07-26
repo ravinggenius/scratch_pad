@@ -21,9 +21,10 @@
       %ul
         %li
           = link_to 'New', new_admin_node_path
-          %ul
-            - @active_node_extensions.each do |extension|
-              %li= link_to extension.titleize, new_admin_node_path(:node_type => extension)
+          - unless @active_node_extensions.empty?
+            %ul
+              - @active_node_extensions.each do |extension|
+                %li= link_to extension.titleize, new_admin_node_path(:node_type => extension)
 
     %section#content
       = yield

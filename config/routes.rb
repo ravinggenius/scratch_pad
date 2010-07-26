@@ -1,11 +1,12 @@
 ScratchPad::Application.routes.draw do |map|
   scope :path_names => { :new => 'n', :edit => 'e' } do
-    resources :n, :controller => :nodes, :as => :nodes
+    resources :n, :controller => :nodes, :as => :nodes, :only => [:index, :show]
     resources :s, :controller => :sessions, :as => :sessions, :only => [:new, :create, :destroy]
   end
 
   namespace 'admin' do
     # TODO add routes for administration
+    resources :nodes
     root :to => 'dashboard#index'
   end
 

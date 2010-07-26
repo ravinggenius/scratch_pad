@@ -129,6 +129,6 @@ class AssetsController < ApplicationController
 
   def template_name
     # TODO dynamically assign a template name (template should be selectable, at least by root)
-    @template_name ||= 'default'
+    @template_name ||= params[:template]
   end
 end

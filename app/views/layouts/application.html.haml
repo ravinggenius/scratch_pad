@@ -9,9 +9,9 @@
     - # %link{ :rel => 'shortcut icon', :href => '/images/favicon.ico' }/
     = auto_discovery_link_tag
 
-    = stylesheet_link_tag assets_styles_path, :media => 'all'
+    = stylesheet_link_tag assets_styles_path(:template => 'default'), :media => 'all'
 
-    = javascript_include_tag assets_scripts_path
+    = javascript_include_tag assets_scripts_path(:template => 'default')
 
     = render 'shared/tracking_google', :google_analytics_tracking_code => '123456789.00' if @show_tracking_google
 

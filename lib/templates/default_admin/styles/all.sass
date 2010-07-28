@@ -21,7 +21,7 @@
 
   /* @group headers */
   .h
-    display: inline-block
+    display: block
     color: $header_color
     font:
       size: $base_line_height
@@ -36,6 +36,8 @@
 
   fieldset
     margin: $base_line_height 0
+    ul
+      @include no-bullets
 
   legend
     font-weight: bold
@@ -129,18 +131,52 @@
     line-height: 1.625
     font-size: 16px
 
-  .clearfix
-    // @include clearfix
-    margin: 0
-    border: none
+  //
+    .clearfix
+      // @include clearfix
+      margin: 0
+      border: none
 
   #branding
 
   #main_menu
+    ul
+      li
+        a
+    > ul
+      @include horizontal-list
+      > li
+        > a
 
   #content
 
   #credits
+
+  #nodes_index
+    #content_overview
+      .node-type
+        width: 10%
+      .node-title
+        width: 80%
+      .actions
+        width: 10%
+      th
+        .node-type
+        .node-title
+        .actions
+      td
+        .node-type
+        .node-title
+        .actions
+          .view
+          .edit
+          .destroy
+      @for $ancestors from 0 through 10
+        $size: 2% * $ancestors
+        .ancestors-#{$ancestors}
+          padding:
+            left: $size
+          width: 80% - $size
   /* @end */
 
 

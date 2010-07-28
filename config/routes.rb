@@ -5,12 +5,12 @@ ScratchPad::Application.routes.draw do |map|
   end
 
   namespace 'admin' do
-    resources :nodes, :only => [:new, :create, :edit, :update, :destroy]
+    resources :nodes, :except => :show
     root :to => 'dashboard#index'
   end
 
-  get 'a(/:template)/scripts(.:format)', :to => 'assets#scripts', :as => :assets_scripts, :defaults => { :format => :js }
-  get 'a(/:template)/styles(.:format)', :to => 'assets#styles', :as => :assets_styles, :defaults => { :format => :css }
+  get 'a(/:template)/scripts(.:format)', :to => 'assets#scripts', :as => :assets_scripts
+  get 'a(/:template)/styles(.:format)', :to => 'assets#styles', :as => :assets_styles
 
   root :to => 'nodes#index'
 end

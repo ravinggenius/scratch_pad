@@ -1,14 +1,22 @@
-= form_for @node, :as => :node, :url => { :controller => 'nodes' } do |form|
-  %fieldset.node
-    %legend Common
+# TODO find out why this doesn't work
+/= form_for admin_node_url(node) do |form|
+
+- if node.errors.any?
+  %section#error_explanation
+    %span.h= "#{pluralize node.errors.count, 'error'} prohibited this Node from being saved:"
     %ul
-      %li
-        = form.label :title, 'Title'
-        = form.text_field :title
-    - unless @node.machine_name == 'node'
-      %fieldset.node{ :class => @node.machine_name }
-        %legend= "#{@node.class.name}"
-        = show_node @node, :fieldset, :form => form
-    %ul
-      %li= submit_tag 'Commit'
-      %li= link_to 'Cancel', root_path
+    - node.errors.full_messages.each do |msg|
+      %li= msg
+%fieldset.node
+  %legend Common
+  %ul
+    %li
+      = form.label :title, 'Title'
+      = form.text_field :title
+  - unless node.machine_name == 'node'
+    %fieldset.node{ :class => node.machine_name }
+      %legend= "#{node.class.name}"
+      = show_node node, :fieldset, :form => form
+  %ul
+    %li= submit_tag 'Commit'
+    %li= link_to 'Cancel', root_path

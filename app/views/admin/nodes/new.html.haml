@@ -1,1 +1,2 @@
-= partial :fieldset, :node => @node
+= form_for @node, :as => :node, :url => { :controller => 'nodes', :node_type => @node.machine_name } do |form|
+  = partial :fieldset, :form => form, :node => @node

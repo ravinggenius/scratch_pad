@@ -1,1 +1,2 @@
-= partial :fieldset, :node => @node
+= form_for @node, :as => :node, :url => admin_node_url(@node) do |form|
+  = partial :fieldset, :form => form, :node => @node

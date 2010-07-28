@@ -25,6 +25,13 @@
             %ul
               - @active_node_extensions.each do |extension|
                 %li= link_to extension.titleize, new_admin_node_path(:node_type => extension)
+        %li= link_to 'Content', admin_nodes_path
+        %li
+          Templates
+          %ul
+            %li Frontend
+            %li Backend
+        %li Settings
 
     %section#content
       = yield

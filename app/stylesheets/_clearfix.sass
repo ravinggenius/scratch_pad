@@ -1,0 +1,14 @@
+// http://gist.github.com/493085
+// @include and @extend
+
+.clearfix:after
+  visibility: hidden
+  display: block
+  clear: both
+  height: 0
+  font-size: 0
+  content: ' '
+  * html &
+    height: 1%
+  *:first-child + html &
+    min-height: 1px

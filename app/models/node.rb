@@ -5,9 +5,9 @@ class Node
   include MongoMapper::Document
   extend Relationship
 
-  key :children_ids, Array, :typecast => 'ObjectId'
+  key :children_ids, Array, :typecast => 'ObjectId' # TODO look into moving heirarchy to separate model
   key :is_published, Boolean, :default => false
-  key :name, String, :required => true
+  key :title, String, :required => true
   key :position, Integer, :default => 0
 
   timestamps!
@@ -31,8 +31,8 @@ class Node
     all :is_published => published
   end
 
-  alias :title :name
-  alias :title= :name=
+  alias :name :title
+  alias :name= :title=
   alias :author :creator
   alias :author= :creator=
   alias :editor :updater

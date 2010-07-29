@@ -1,10 +1,7 @@
 var scratchPad;
 
 $(document).ready(function () {
-  var _sp = {
-    helpers: {
-    }
-  };
+  var _sp = {};
 
   scratchPad = {
     helpers: {

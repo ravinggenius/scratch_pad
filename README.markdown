@@ -7,7 +7,7 @@
 * ruby (works in 1.8.7, should work (not tested) in 1.9.*)
 
 ### RubyGems
-* rails 3 beta (technically you should not have to install this system-wide, but it will make things easier if you do: `[sudo] gem install rails --pre`)
+* rails 3 (technically you should not have to install this system-wide, but it will make things easier if you do: `[sudo] gem install rails --pre`)
 * bundler (handles installing everything else)
 
 ## Getting Started

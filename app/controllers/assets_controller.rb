@@ -3,6 +3,23 @@ require 'compass'
 class AssetsController < ApplicationController
   layout nil
 
+  def routes
+    render :text => begin
+      if params[:namedRoute]
+        params.delete :controller
+        params.delete :action
+        named_route = params.delete(:namedRoute).downcase.gsub(/[^a-z_]/, '')
+        send "#{named_route}_url", params
+      else
+        params[:controller] = params.delete :c if params[:c]
+        params[:action] = params.delete :a if params[:a]
+        url_for params
+      end
+    rescue
+      'invalid parameters'
+    end
+  end
+
   def scripts
     render :js => gather_scripts!
   end
@@ -35,6 +52,8 @@ class AssetsController < ApplicationController
 
     script_files << 'app/vendor/modernizr/1.1/modernizr.min.js'
     script_files << 'app/vendor/jquery/1.4/jquery.min.js'
+
+    script_files << 'public/javascripts/application.js'
 
     script_files << Dir[Rails.root + 'lib/node_extensions/**/views/scripts/*.js']
     script_files << Dir[Rails.root + "lib/templates/#{template_name}/scripts/*.js"]

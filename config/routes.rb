@@ -9,8 +9,9 @@ ScratchPad::Application.routes.draw do |map|
     root :to => 'dashboard#index'
   end
 
-  get 'a(/:template)/scripts(.:format)', :to => 'assets#scripts', :as => :assets_scripts
-  get 'a(/:template)/styles(.:format)', :to => 'assets#styles', :as => :assets_styles
+  get 'a/routes', :to => 'assets#routes', :as => :assets_routes
+  get 'a/(:template)/scripts(.:format)', :to => 'assets#scripts', :as => :assets_scripts
+  get 'a/(:template)/styles(.:format)', :to => 'assets#styles', :as => :assets_styles
 
   root :to => 'nodes#index'
 end

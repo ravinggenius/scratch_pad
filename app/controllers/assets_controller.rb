@@ -50,15 +50,27 @@ class AssetsController < ApplicationController
 
     script_files = []
 
-    script_files << 'app/vendor/modernizr/1.1/modernizr.min.js'
-    script_files << 'app/vendor/jquery/1.4/jquery.min.js'
+    script_files << Rails.root + 'app/vendor/modernizr/1.1/modernizr.min.js'
+    script_files << Rails.root + 'app/vendor/jquery/1.4/jquery.min.js'
 
-    script_files << 'public/javascripts/application.js'
+    script_files << Rails.root + 'public/javascripts/application.js'
 
     script_files << Dir[Rails.root + 'lib/node_extensions/**/views/scripts/*.js']
     script_files << Dir[Rails.root + "lib/templates/#{template_name}/scripts/*.js"]
 
-    reply = script_files.flatten.map { |filename| File.read(Rails.root + filename) }.join "\n\n\n\n\n"
+    reply = script_files.flatten.map do |filename|
+      <<-JS
+/**
+ * START #{filename}
+ */
+
+#{File.read(filename).strip}
+
+/**
+ * END #{filename}
+ */
+      JS
+    end.join("\n" * 5)
 
     Cache[cache_key].update_attributes! :value => reply
 

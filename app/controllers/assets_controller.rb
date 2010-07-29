@@ -45,7 +45,7 @@ class AssetsController < ApplicationController
     cache_key = "core::styles::#{template_name}.js"
 
     if Rails.env.to_sym == :production
-      return Cache[cache_key].value unless Cache[cache_key].value.nil?
+      return Cache[cache_key].value unless Cache[cache_key].expired?
     end
 
     script_files = []
@@ -81,7 +81,7 @@ class AssetsController < ApplicationController
     cache_key = "core::styles::#{template_name}.#{format}"
 
     if Rails.env.to_sym == :production
-      return Cache[cache_key].value unless Cache[cache_key].value.nil?
+      return Cache[cache_key].value unless Cache[cache_key].expired?
     end
 
     @imports = [ 'reset' ]

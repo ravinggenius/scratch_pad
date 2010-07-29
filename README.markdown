@@ -49,7 +49,11 @@ To run tests for custom extensions, use `RAILS_ENV=test rake test:custom`. Curre
 * finish options/settings and user preferences
 * make users and groups easily swappable for another user system, in part or in whole
 * default theme should look better
-* themes and node extensions should have a manifest (probably yaml) to specify their javascript dependencies
+* themes and node extensions should have a manifest (probably yaml) to specify their javascript dependencies and load order
+* find a way to make non-content nodes (small scripts or styles) work
+  * an admin may wish include some extra styles or scripts into the document
+  * these should allowed to be specified (optionally) to be injected at the bottom of <head> or <body>
+    * when injected they should not be wrapped with the normal <article> or <section>
 
 ## Wish List
 

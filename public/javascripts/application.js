@@ -26,13 +26,4 @@ $(document).ready(function () {
       }
     }
   };
-
-  //console.log(scratchPad.helpers.urlFor('root'));
-  //console.log(scratchPad.helpers.urlFor('admin_root', {
-  //  language: 'en'
-  //}));
-  //console.log(scratchPad.helpers.urlFor({
-  //  c: 'sessions',
-  //  a: 'new'
-  //}));
 });

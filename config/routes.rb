@@ -1,17 +1,17 @@
 ScratchPad::Application.routes.draw do |map|
-  scope :path_names => { :new => 'n', :edit => 'e' } do
-    resources :n, :controller => :nodes, :as => :nodes, :only => [:index, :show]
-    resources :s, :controller => :sessions, :as => :sessions, :only => [:new, :create, :destroy]
-  end
+  resources :nodes, :only => [:index, :show]
+  resources :sessions, :only => [:new, :create, :destroy]
 
-  namespace 'admin' do
+  namespace :admin do
     resources :nodes, :except => :show
     root :to => 'dashboard#index'
   end
 
-  get 'a/routes', :to => 'assets#routes', :as => :assets_routes
-  get 'a/:template/scripts.:format', :to => 'assets#scripts', :as => :assets_scripts, :defaults => { :format => :js }
-  get 'a/:template/styles.:format', :to => 'assets#styles', :as => :assets_styles, :defaults => { :format => :css }
+  namespace :assets do
+    get '/routes', :to => :routes, :as => :routes
+    get '/:template/scripts.:format', :to => :scripts, :as => :scripts, :defaults => { :format => :js }
+    get '/:template/styles.:format', :to => :styles, :as => :styles, :defaults => { :format => :css }
+  end
 
   root :to => 'nodes#index'
 end

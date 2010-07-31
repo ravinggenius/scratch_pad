@@ -143,10 +143,25 @@
     ul
       li
         a
+        label
+          a
+        ul
+          display: none
+      li:hover
+        a
+        label
+          a
+        ul
+          display: block
     > ul
       @include horizontal-list
       > li
         > a
+        > label
+          a
+        > ul
+          li
+            display: block
 
   #content
 

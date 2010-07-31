@@ -1,0 +1,15 @@
+- unless items.empty?
+  %ul
+    - items.each do |item|
+      %li
+        - if item[:href] && item[:children]
+          %label
+            = link_to item[:name], item[:href]
+        - elsif item[:href]
+          = link_to item[:name], item[:href]
+        - elsif item[:children]
+          %label= item[:name]
+        - else
+          = item[:name]
+        - if item[:children]
+          = partial 'shared/menu', :items => item[:children]

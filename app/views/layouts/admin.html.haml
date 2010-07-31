@@ -18,21 +18,7 @@
       %span= @site_tagline
 
     %nav#main_menu
-      %ul
-        %li= link_to 'Dashboard', admin_root_path
-        %li
-          = link_to 'New', new_admin_node_path
-          - unless @active_node_extensions.empty?
-            %ul
-              - @active_node_extensions.each do |extension|
-                %li= link_to extension.titleize, new_admin_node_path(:node_type => extension)
-        %li= link_to 'Content', admin_nodes_path
-        %li
-          Templates
-          %ul
-            %li Frontend
-            %li Backend
-        %li Settings
+      = partial 'shared/menu', :items => @main_menu_items
 
     %section#content
       = yield

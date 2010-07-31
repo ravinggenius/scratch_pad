@@ -11,7 +11,7 @@ class Admin::ApplicationController < ApplicationController
       { :name => 'New', :href => new_admin_node_path, :children => @active_node_extensions.map { |extension| { :name => extension.titleize, :href => new_admin_node_path(:node_type => extension) } }
       },
       { :name => 'Content', :href => admin_nodes_path },
-      { :name => 'Taxonomy', :href => admin_taxonomies_path },
+      { :name => 'Taxonomy', :href => admin_vocabularies_path },
       { :name => 'Templates', :children => [
         { :name => 'Frontend' },
         { :name => 'Backend' }

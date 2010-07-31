@@ -14,6 +14,3 @@ javascripts_dir = 'public/javascripts'
 add_import_path 'lib'
 
 http_path = '/'
-#http_stylesheets_path = '/a/styles'
-#http_images_path = '/assets/images'
-#http_javascripts_path = '/a/scripts'

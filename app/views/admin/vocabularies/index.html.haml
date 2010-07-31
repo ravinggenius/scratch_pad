@@ -1,9 +1,8 @@
 %ul
   - @vocabularies.each do |vocabulary|
     %li
-      = link_to vocabulary.name, edit_admin_vocabulary_path(vocabulary)
-      = link_to 'x', admin_vocabulary_path(vocabulary), :confirm => 'Are you sure?', :method => :delete
+      = link_to vocabulary.name, admin_vocabulary_path(vocabulary)
       %ul
         - vocabulary.terms.each do |term|
           %li
-            = link_to term.name, edit_admin_vocabulary_term_path(term)
+            = link_to term.name, admin_vocabulary_term_path(vocabulary, term)

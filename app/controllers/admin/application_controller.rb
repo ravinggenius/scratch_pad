@@ -16,6 +16,8 @@ class Admin::ApplicationController < ApplicationController
         { :name => 'Frontend' },
         { :name => 'Backend' }
       ]},
+      { :name => 'Widgets' },
+      { :name => 'Users' },
       { :name => 'Settings' }
     ]
   end

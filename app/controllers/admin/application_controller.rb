@@ -2,7 +2,7 @@ class Admin::ApplicationController < ApplicationController
   layout 'admin'
 
   before_filter do
-    @active_node_extensions = available_node_extensions
+    @active_node_extensions = NodeExtension.all
   end
 
   before_filter do
@@ -21,11 +21,5 @@ class Admin::ApplicationController < ApplicationController
       { :name => 'Filters' },
       { :name => 'Settings' }
     ]
-  end
-
-  private
-
-  def available_node_extensions
-    @available_node_extensions = NodeExtension.all
   end
 end

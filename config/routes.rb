@@ -4,6 +4,7 @@ ScratchPad::Application.routes.draw do |map|
 
   namespace :admin do
     resources :nodes, :except => :show
+    resources :templates
     resources :vocabularies do
       resources :terms
     end

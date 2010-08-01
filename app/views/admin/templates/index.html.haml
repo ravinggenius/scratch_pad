@@ -1,0 +1,9 @@
+%h1 Listing templates
+
+%ul
+  - @templates.each do |template|
+    %li #{template}
+
+%ul
+  - @admin_templates.each do |template|
+    %li #{template}

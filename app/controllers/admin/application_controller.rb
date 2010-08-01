@@ -13,11 +13,12 @@ class Admin::ApplicationController < ApplicationController
       { :name => 'Content', :href => admin_nodes_path },
       { :name => 'Taxonomy', :href => admin_vocabularies_path },
       { :name => 'Templates', :children => [
-        { :name => 'Frontend' },
-        { :name => 'Backend' }
+        { :name => 'Frontend', :href => admin_templates_path(:scope => :frontend) },
+        { :name => 'Backend', :href => admin_templates_path(:scope => :backend) }
       ]},
       { :name => 'Widgets' },
       { :name => 'Users' },
+      { :name => 'Filters' },
       { :name => 'Settings' }
     ]
   end
@@ -25,6 +26,6 @@ class Admin::ApplicationController < ApplicationController
   private
 
   def available_node_extensions
-    @available_node_extensions ||= (Dir.entries Rails.root + 'lib' + 'node_extensions').delete_if { |entry| entry =~ /^\./ }
+    @available_node_extensions = NodeExtension.all
   end
 end

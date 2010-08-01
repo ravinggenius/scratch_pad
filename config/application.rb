@@ -19,6 +19,7 @@ module ScratchPad
 
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
+    config.autoload_paths += %W(#{config.root}/app/scions)
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
@@ -36,7 +37,7 @@ module ScratchPad
     # config.i18n.default_locale = :de
 
     config.generators do |g|
-      g.orm = :mongomapper
+      g.orm = :mongo_mapper
       g.template_engine = :haml
       #g.test_framework = :shoulda, :fixtures => true
     end

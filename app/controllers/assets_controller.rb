@@ -55,8 +55,8 @@ class AssetsController < ApplicationController
 
     script_files << Rails.root + 'public/javascripts/application.js'
 
-    script_files << Dir[Rails.root + 'lib/node_extensions/**/views/scripts/*.js']
-    script_files << Dir[Rails.root + "lib/templates/#{template_name}/scripts/*.js"]
+    script_files << Dir[Rails.root + 'scions/node_extensions/**/views/scripts/*.js']
+    script_files << Dir[Rails.root + "scions/templates/#{template_name}/scripts/*.js"]
 
     reply = script_files.flatten.map do |filename|
       <<-JS
@@ -88,7 +88,7 @@ class AssetsController < ApplicationController
     @medias = {}
 
     enabled_extension_styles = {}
-    Dir[Rails.root + 'lib/node_extensions/*'].each do |extension_path|
+    Dir[Rails.root + 'scions/node_extensions/*'].each do |extension_path|
       extract_media_names(Dir["#{extension_path}/views/styles/*"]).each do |style|
         enabled_extension_styles[style] = enabled_extension_styles[style] || []
         enabled_extension_styles[style] << File.basename(extension_path)
@@ -105,7 +105,7 @@ class AssetsController < ApplicationController
       end
     end
 
-    template_styles = extract_media_names(Dir[Rails.root + "lib/templates/#{template_name}/styles/*"])
+    template_styles = extract_media_names(Dir[Rails.root + "scions/templates/#{template_name}/styles/*"])
     template_styles.each do |media|
       @medias[media] ||= ''
       @imports << "templates/#{template_name}/styles/#{media}"

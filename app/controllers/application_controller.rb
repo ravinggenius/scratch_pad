@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   layout 'application'
-  append_view_path 'vendor/scions/node_extensions'
+  append_view_path NodeExtension.path
 
   before_filter do
     @title = 'ScratchPad'

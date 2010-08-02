@@ -42,7 +42,7 @@ class AssetsController < ApplicationController
   end
 
   def gather_scripts!
-    cache_key = "core::styles::#{template_name}.js"
+    cache_key = "core::styles::#{template.name}.js"
 
     if Rails.env.to_sym == :production
       return Cache[cache_key].value unless Cache[cache_key].expired?
@@ -55,8 +55,8 @@ class AssetsController < ApplicationController
 
     script_files << Rails.root + 'public/javascripts/application.js'
 
-    script_files << NodeExtension['**/views/scripts/*.js']
-    script_files << Template["#{template_name}/scripts/*.js"]
+    script_files << NodeExtension.all.map { |ne| ne.glob 'views/scripts/*.js' }
+    script_files << template.glob('scripts/*.js')
 
     reply = script_files.flatten.map do |filename|
       <<-JS
@@ -78,7 +78,7 @@ class AssetsController < ApplicationController
   end
 
   def gather_styles!(format = :css)
-    cache_key = "core::styles::#{template_name}.#{format}"
+    cache_key = "core::styles::#{template.name}.#{format}"
 
     if Rails.env.to_sym == :production
       return Cache[cache_key].value unless Cache[cache_key].expired?
@@ -88,10 +88,10 @@ class AssetsController < ApplicationController
     @medias = {}
 
     enabled_extension_styles = {}
-    NodeExtension['*'].each do |extension_path|
-      extract_media_names(Dir["#{extension_path}/views/styles/*"]).each do |style|
+    NodeExtension.all.each do |ne|
+      extract_media_names(ne.glob 'views/styles/*').each do |style|
         enabled_extension_styles[style] = enabled_extension_styles[style] || []
-        enabled_extension_styles[style] << File.basename(extension_path)
+        enabled_extension_styles[style] << File.basename(ne.path)
       end
     end
     enabled_extension_styles.each do |media, extension_styles|
@@ -105,12 +105,12 @@ class AssetsController < ApplicationController
       end
     end
 
-    template_styles = extract_media_names Template["#{template_name}/styles/*"]
+    template_styles = extract_media_names template.glob('styles/*')
     template_styles.each do |media|
       @medias[media] ||= ''
-      @imports << "templates/#{template_name}/styles/#{media}"
+      @imports << "templates/#{template.name}/styles/#{media}"
       @medias[media] << <<-SASS
-  @include template_#{template_name}_#{media}
+  @include template_#{template.name}_#{media}
       SASS
     end
 
@@ -158,8 +158,8 @@ class AssetsController < ApplicationController
     SASS
   end
 
-  def template_name
-    # TODO dynamically assign a template name (template should be selectable, at least by root)
-    @template_name ||= params[:template]
+  def template
+    # TODO dynamically assign a template (template should be selectable, at least by root)
+    @template ||= Template.new params[:template]
   end
 end

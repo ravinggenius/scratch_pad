@@ -1,3 +1,3 @@
-NodeExtension['*'].each do |entry|
-  require "#{entry}/models/#{File.basename(entry)}"
+NodeExtension.all.each do |ne|
+  require "#{ne.path}/models/#{ne.name}.rb"
 end

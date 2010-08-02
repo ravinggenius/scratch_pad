@@ -18,7 +18,8 @@ class Admin::ApplicationController < ApplicationController
       { :name => 'Widgets' },
       { :name => 'Users' },
       { :name => 'Filters' },
-      { :name => 'Settings' }
+      { :name => 'Settings' },
+      { :name => 'Permissions' }
     ]
   end
 end

@@ -3,6 +3,7 @@ ScratchPad::Application.routes.draw do |map|
   resources :sessions, :only => [:new, :create, :destroy]
 
   namespace :admin do
+    resources :filters
     resources :nodes, :except => :show
     resources :templates
     resources :vocabularies do

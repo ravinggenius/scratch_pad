@@ -1,0 +1,17 @@
+%h1 Listing filters
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @filters.each do |filter|
+    %tr
+      %td= link_to 'Show', filter
+      %td= link_to 'Edit', edit_filter_path(filter)
+      %td= link_to 'Destroy', filter, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New filter', new_filter_path

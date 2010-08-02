@@ -1,0 +1,10 @@
+= form_for @filter do |f|
+  -if @filter.errors.any?
+    #errorExplanation
+      %h2= "#{pluralize(@filter.errors.count, "error")} prohibited this filter from being saved:"
+      %ul
+        - @filter.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save'

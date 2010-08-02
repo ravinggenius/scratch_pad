@@ -1,6 +1,6 @@
 module ScionBase
   def all
-    Dir.entries(Rails.root + 'scions' + path).delete_if { |entry| entry =~ /^\./ }
+    Dir.entries(Rails.root + 'vendor' + 'scions' + path).delete_if { |entry| entry =~ /^\./ }
   end
 
   private

@@ -141,12 +141,18 @@
 
   #main_menu
     ul
+      background:
+        color: #EEEEEE
       li
         a
         label
           a
         ul
           display: none
+          margin: 0
+          position: absolute
+          text:
+            align: left
       li:hover
         a
         label
@@ -154,8 +160,9 @@
         ul
           display: block
     > ul
-      @include horizontal-list
+      @include horizontal-list-container
       > li
+        @include horizontal-list-item
         > a
         > label
           a

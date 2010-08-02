@@ -1,3 +1,2 @@
-module NodeExtension
-  extend ScionBase
+class NodeExtension < ScionBase
 end

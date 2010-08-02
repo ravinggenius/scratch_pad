@@ -1,3 +1,2 @@
-module Filter
-  extend ScionBase
+class Filter < ScionBase
 end

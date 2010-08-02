@@ -1,6 +1,4 @@
-module Template
-  extend ScionBase
-
+class Template < ScionBase
   def self.admin
     all.select { |template| template.end_with? '_admin' }
   end

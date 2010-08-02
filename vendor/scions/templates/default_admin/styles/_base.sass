@@ -12,7 +12,7 @@
 // $total_cols: 12
 // $col_width: 4
 // $gutter_width: 1
-// $side_gutter_width: !gutter_width
+// $side_gutter_width: $gutter_width
 
 
 //**
@@ -34,7 +34,7 @@
   FONT-SIZE
   un-comment and override these values as needed (defaults are shown)
   - you set the font and line heights in pixels.
-  - Susy will do the math and give you !base_font_size and !base_line_height 
+  - Susy will do the math and give you $base_font_size and $base_line_height 
     variables, set flexibly against the common browser default of 16px
 // $base_font_size_px: 16
 // $base_line_height_px: 24
@@ -64,12 +64,11 @@ $active_color: $hover_color
   font-family: Baskerville, Palatino, serif
 
 @mixin list-default($ol: false)
-  @if !ol
+  @if $ol
     list-style: decimal
-    margin: 0 1.5em 1.5em 1.5em
   @else
     list-style: disc
-    margin: 0 1.5em 1.5em 1.5em
+  margin: 0 1.5em 1.5em 1.5em
 
 @mixin no-style-list
   @include no-bullets

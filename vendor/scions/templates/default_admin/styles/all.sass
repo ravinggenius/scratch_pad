@@ -140,35 +140,46 @@
   #branding
 
   #main_menu
+    // all menus
     ul
+      @include no-bullets
       background:
         color: #EEEEEE
       li
-        a
+        padding:
+          left: 0.25em
+          right: 0.25em
         label
           a
-        ul
-          display: none
-          margin: 0
-          position: absolute
-          text:
-            align: left
-      li:hover
         a
-        label
-          a
-        ul
-          display: block
+        &:hover
+          > ul
+            display: block
+    // top-level menu
     > ul
       @include horizontal-list-container
       > li
         @include horizontal-list-item
-        > a
         > label
           a
-        > ul
-          li
-            display: block
+        > a
+        &:hover
+          ul
+    // submenus
+    ul ul
+      display: none
+      margin: 0
+      position: absolute
+      li
+        text:
+          align: left
+        label
+          a
+        a
+        &:hover
+          ul
+            left: 100%
+            top: 0
 
   #content
 

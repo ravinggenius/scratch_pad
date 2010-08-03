@@ -1,14 +1,14 @@
 - unless items.empty?
-  %ul
+  %ul<>
     - items.each do |item|
-      %li
+      %li<>
         - if item[:href] && item[:children]
-          %label
+          %label<>
             = link_to item[:name], item[:href]
         - elsif item[:href]
           = link_to item[:name], item[:href]
         - elsif item[:children]
-          %label= item[:name]
+          %label<>= item[:name]
         - else
           = item[:name]
         - if item[:children]

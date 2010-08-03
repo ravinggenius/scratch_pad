@@ -145,6 +145,7 @@
       @include no-bullets
       background:
         color: #EEEEEE
+      cursor: default
       li
         padding:
           left: 0.25em
@@ -152,6 +153,8 @@
         label
           a
         a
+          display: block
+          width: 100%
         &:hover
           > ul
             display: block
@@ -171,6 +174,7 @@
       margin: 0
       position: absolute
       li
+        position: relative
         text:
           align: left
         label

@@ -2,7 +2,7 @@
   %span.h= node.title
 %section
   %table
-    %caption= filter node.caption, :keep_paragraphs => false
+    %caption= filter node.title, :keep_paragraphs => false
     %thead
       - if node.has_header_row
         %tr

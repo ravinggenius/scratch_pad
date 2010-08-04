@@ -23,7 +23,7 @@ class Filter < ScionBase
   end
 
   def self.from_mongo(value)
-    if value.respond_do? :name
+    if value.respond_to? :name
       value
     else
       Filter["#{value}.rb"]

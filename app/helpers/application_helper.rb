@@ -1,5 +1,3 @@
-require 'maruku'
-
 module ApplicationHelper
   def page_id
     reply = "#{controller.controller_name}_#{controller.action_name}"
@@ -26,14 +24,8 @@ module ApplicationHelper
     email.html_safe
   end
 
-  def filter(text, options = {})
-    options[:keep_paragraphs] = true unless options.key? :keep_paragraphs
-
-    text = Maruku.new(text.to_s).to_html
-    text.gsub! /<p>/, '' unless options[:keep_paragraphs]
-    text.gsub! /<\/p>/, '' unless options[:keep_paragraphs]
-
-    text.html_safe
+  def filter(text, filter_group)
+    Filter.process_all(text.to_s, filter_group).html_safe
   end
 
   def partial(name, locals = {}, options = {})

@@ -5,7 +5,8 @@ class Node
   include MongoMapper::Document
   extend Relationship
 
-  key :children_ids, Array, :typecast => 'ObjectId' # TODO look into moving heirarchy to separate model
+  key :filter_group_id, BSON::ObjectID, :required => true
+  key :children_ids, Array, :typecast => 'ObjectID' # TODO move heirarchy to separate model
   key :is_published, Boolean, :default => false
   key :title, String, :required => true
   key :position, Integer, :default => 0
@@ -13,6 +14,7 @@ class Node
   timestamps!
   userstamps!
 
+  belongs_to :filter_group
   habtm :nodes, :terms, :tagging
 
   before_save :set_children_ids

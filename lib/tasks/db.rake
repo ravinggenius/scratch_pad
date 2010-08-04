@@ -1,11 +1,13 @@
 namespace :db do
   desc 'Clear all collections'
   task :clear => :environment do
-    Cache.delete_all
-    Node.delete_all
-    Tagging.delete_all
-    Term.delete_all
-    Vocabulary.delete_all
+    [
+      Cache,
+      Node,
+      Tagging,
+      Term,
+      Vocabulary
+    ].each { |model| model.delete_all }
     puts 'Database truncated'
   end
 

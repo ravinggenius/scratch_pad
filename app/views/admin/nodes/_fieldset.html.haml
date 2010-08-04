@@ -13,9 +13,12 @@
     %li
       = form.label :title, 'Title'
       = form.text_field :title
+    %li
+      = form.label :filter_group_id, 'Filter Group'
+      = form.collection_select :filter_group_id, @filter_groups, :id, :name
   - unless node.machine_name == 'node'
     %fieldset.node{ :class => node.machine_name }
-      %legend= "#{node.class.name}"
+      %legend= node.class.name
       = show_node node, :fieldset, :form => form
   %ul
     %li= submit_tag 'Commit'

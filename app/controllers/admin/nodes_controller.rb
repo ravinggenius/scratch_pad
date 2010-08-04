@@ -19,6 +19,7 @@ class Admin::NodesController < Admin::ApplicationController
 
   def new
     @node = node_type.new
+    @filter_groups = FilterGroup.all
 
     respond_to do |format|
       format.html
@@ -28,6 +29,7 @@ class Admin::NodesController < Admin::ApplicationController
 
   def edit
     @node = node_type.find params[:id]
+    @filter_groups = FilterGroup.all
   end
 
   def create

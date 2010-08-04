@@ -29,7 +29,10 @@ class ScionBase
   end
 
   def self.all
-    Dir.entries(path).delete_if { |entry| entry =~ /^\./ }.map { |entry| new entry }
+    reply = Dir.entries(path)
+    reply.reject! { |entry| entry =~ /^\./ }
+    reply.map! { |entry| new entry }
+    reply
   end
 
   def self.enabled

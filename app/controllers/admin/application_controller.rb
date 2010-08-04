@@ -13,7 +13,7 @@ class Admin::ApplicationController < ApplicationController
         { :name => 'Frontend', :href => admin_templates_path(:scope => :frontend) },
         { :name => 'Backend', :href => admin_templates_path(:scope => :backend) }
       ]},
-      { :name => 'Filters' },
+      { :name => 'Filters', :href=> admin_filters_path },
       { :name => 'Users' },
       { :name => 'Permissions' },
       { :name => 'Settings' }

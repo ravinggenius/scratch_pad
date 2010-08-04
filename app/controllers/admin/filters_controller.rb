@@ -2,11 +2,11 @@ class Admin::FiltersController < Admin::ApplicationController
   # GET /admin/filters
   # GET /admin/filters.xml
   def index
-    @filters = Filter.all
+    @filter_groups = FilterGroup.all
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @filters }
+      format.xml  { render :xml => @filter_groups }
     end
   end
 

@@ -1,5 +1,9 @@
 %h1 Listing filters
 
 %ul
-  - @filters.each do |filter|
-    %li= filter.name
+  - @filter_groups.each do |filter_group|
+    %li
+      = filter_group.name
+      %ul
+        - filter_group.filters.each do |filter|
+          %li= filter

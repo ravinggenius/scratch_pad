@@ -1,6 +1,3 @@
-require 'bcrypt'
-require 'group'
-
 # http://github.com/codahale/bcrypt-ruby
 # http://api.rubyonrails.org/classes/ActionController/HttpAuthentication/Basic.html
 # http://charlesmaxwood.com/rails-metal-example-1-authentication/

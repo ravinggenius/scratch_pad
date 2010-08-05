@@ -1,5 +1,3 @@
-require 'compass'
-
 class AssetsController < ApplicationController
   layout nil
 

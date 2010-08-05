@@ -5,10 +5,18 @@ class ScionBase
     @name = name
   end
 
+  def <=>(other)
+    name <=> other.name
+  end
+
   def enable
   end
 
   def disable
+  end
+
+  def title
+    name.titleize
   end
 
   def purge
@@ -32,7 +40,7 @@ class ScionBase
     reply = Dir.entries(path)
     reply.reject! { |entry| entry =~ /^\./ }
     reply.map! { |entry| new entry }
-    reply
+    reply.sort
   end
 
   def self.enabled

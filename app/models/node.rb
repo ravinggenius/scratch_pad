@@ -25,8 +25,16 @@ class Node
     @children ||= self.children_ids.map { |child_id| Node.find(child_id) }
   end
 
+  def extension
+    NodeExtension[machine_name]
+  end
+
   def machine_name
     self.class.name.underscore
+  end
+
+  def may_convert?
+    new? || (machine_name == 'node')
   end
 
   def vocabularies

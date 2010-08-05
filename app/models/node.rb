@@ -29,6 +29,10 @@ class Node
     self.class.name.underscore
   end
 
+  def vocabularies
+    terms.map { |term| term.vocabulary }.uniq
+  end
+
   def self.published(published = true)
     all :is_published => published
   end

@@ -194,21 +194,29 @@
     #content_overview
       .node-type
         width: 10%
-      .node-title
-        width: 80%
+      .filter-group
+        width: 10%
+      .vocabularies
+        width: 10%
       .actions
         width: 10%
+      .node-title
+        width: 60%
       th
         .node-type
-        .node-title
+        .filter-group
+        .vocabularies
         .actions
+        .node-title
       td
         .node-type
-        .node-title
+        .filter-group
+        .vocabularies
         .actions
           .view
           .edit
           .destroy
+        .node-title
       @for $ancestors from 0 through 10
         $size: 2% * $ancestors
         .ancestors-#{$ancestors}

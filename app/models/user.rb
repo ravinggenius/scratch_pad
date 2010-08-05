@@ -8,7 +8,7 @@ require 'group'
 class User
   include MongoMapper::Document
   include BCrypt
-  extend Relationship
+  include Relationship
 
   attr_writer :password_confirmation
   cattr_accessor :anonymous, :current

@@ -3,7 +3,7 @@
 
 class Node
   include MongoMapper::Document
-  extend Relationship
+  include Relationship
 
   key :filter_group_id, BSON::ObjectID, :required => true
   key :children_ids, Array, :typecast => 'ObjectID' # TODO move heirarchy to separate model

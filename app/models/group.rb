@@ -1,6 +1,6 @@
 class Group
   include MongoMapper::Document
-  extend Relationship
+  include Relationship
 
   key :access_code, Integer, :required => true
   key :code, String, :required => true

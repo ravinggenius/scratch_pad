@@ -1,6 +1,6 @@
 class Term
   include MongoMapper::Document
-  extend Relationship
+  include Relationship
 
   key :vocabulary_id, BSON::ObjectID, :required => true
   key :name, String, :required => true

@@ -1,54 +1,61 @@
 module Relationship
-  def habtm(this_model, that_model, glue_model, options = {})
-    define_method plural(that_model) do
-      @those_models ||= klass(glue_model).send("#{plural(that_model)}_for".to_sym, self.id)
-    end
-
-    define_method "save_#{plural(glue_model)}".to_sym do
-      @those_models ||= []
-      @those_models.each { |om| klass(glue_model).first_or_create(id_key(this_model) => self.id, id_key(that_model) => om.id) }
-    end
+  module InstanceMethods
   end
 
-  def habtm_glue(model_a, model_b, options = {})
-    @models ||= {}
-
-    {
-      model_a => model_b,
-      model_b => model_a
-    }.each do |this_model, that_model|
-      define_method this_model do
-        @models[this_model] ||= klass(this_model).find(self.send(id_key(this_model)))
+  module ClassMethods
+    def habtm(this_model, that_model, glue_model, options = {})
+      define_method Private::plural(that_model) do
+        @those_models ||= Private::klass(glue_model).send("#{Private::plural(that_model)}_for", self.id)
       end
 
-      define_method "#{this_model}=" do |new_model|
-        self.send "#{id_key(this_model)}=", new_model.id
-        @models[this_model] = new_model
+      define_method "save_#{Private::plural(glue_model)}" do
+        @those_models ||= []
+        @those_models.each { |om| Private::klass(glue_model).first_or_create(Private::id_key(this_model) => self.id, Private::id_key(that_model) => om.id) }
       end
+    end
 
-      # http://stackoverflow.com/questions/752717/how-do-i-use-define-method-to-create-class-methods
-      # TODO find a way to integrate this method
-      define_method "self.#{plural(this_model)}_for" do |that_model_id|
-        all(id_key(that_model) => that_model_id.to_s).map { |tagging| tagging.send(this_model) }
+    def habtm_glue(model_a, model_b, options = {})
+      {
+        model_a => model_b,
+        model_b => model_a
+      }.each do |this_model, that_model|
+        key Private::id_key(this_model), BSON::ObjectID, :required => true
+
+        define_method this_model do
+          Private::klass(this_model).find(self.send(Private::id_key(this_model)))
+        end
+
+        define_method "#{this_model}=" do |new_model|
+          self.send "#{Private::id_key(this_model)}=", new_model.id
+          new_model
+        end
+
+        this_model_for = lambda { |that_model_id| all(Private::id_key(that_model) => that_model_id).map { |tagging| tagging.send(this_model) } }
+        self.class.send(:define_method, "#{Private::plural(this_model)}_for", this_model_for)
       end
     end
   end
 
-  private
+  module Private
+    def self.single(model_name)
+      model_name.to_s.singularize.to_sym
+    end
 
-  def single(model_name)
-    model_name.to_s.singularize.to_sym
+    def self.plural(model_name)
+      model_name.to_s.pluralize.to_sym
+    end
+
+    def self.id_key(model_name)
+      "#{single(model_name)}_id".to_sym
+    end
+
+    def self.klass(model_name)
+      single(model_name).to_s.capitalize.constantize
+    end
   end
 
-  def plural(model_name)
-    model_name.to_s.pluralize.to_sym
-  end
-
-  def id_key(model_name)
-    "#{single(model_name)}_id".to_sym
-  end
-
-  def klass(model_name)
-    single(model_name).to_s.capitalize.constantize
+  def self.included(base)
+    base.send :extend, ClassMethods
+    base.send :include, InstanceMethods
   end
 end

@@ -25,7 +25,7 @@
     %tbody
       - @nodes.each do |node|
         %tr
-          %td= node.class.name
+          %td= node.extension.title
           %td= node.filter_group.name
           %td= node.vocabularies.map { |vocabulary| vocabulary.name }.sort.join ', '
           %td

@@ -19,7 +19,7 @@ class Admin::NodesController < Admin::ApplicationController
 
   def new
     @node = node_type.new
-    @filter_groups = FilterGroup.all
+    set_fieldset_ivars
 
     respond_to do |format|
       format.html
@@ -29,7 +29,7 @@ class Admin::NodesController < Admin::ApplicationController
 
   def edit
     @node = node_type.find params[:id]
-    @filter_groups = FilterGroup.all
+    set_fieldset_ivars
   end
 
   def create
@@ -40,6 +40,7 @@ class Admin::NodesController < Admin::ApplicationController
         format.html { redirect_to(admin_nodes_url, :notice => "#{node_type.name} was successfully created.") }
         format.xml  { render :xml => @node, :status => :created, :location => node_url(@node) }
       else
+        set_fieldset_ivars
         format.html { render :action => 'new' }
         format.xml  { render :xml => @node.errors, :status => :unprocessable_entity }
       end
@@ -54,6 +55,7 @@ class Admin::NodesController < Admin::ApplicationController
         format.html { redirect_to(admin_nodes_url, :notice => "#{node_type.name} was successfully updated.") }
         format.xml  { head :ok }
       else
+        set_fieldset_ivars
         format.html { render :action => 'edit' }
         format.xml  { render :xml => @node.errors, :status => :unprocessable_entity }
       end
@@ -78,5 +80,13 @@ class Admin::NodesController < Admin::ApplicationController
     rescue
       Node
     end
+  end
+
+  def set_fieldset_ivars
+    if @node.may_convert?
+      @node_types = NodeExtension.enabled.map { |extension| [extension.title, extension.name] }.insert 0, ['Node', 'node']
+      @selected_node_type = params[:node_type] || @node.machine_name
+    end
+    @filter_groups = FilterGroup.all.sort_by &:name
   end
 end

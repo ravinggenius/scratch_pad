@@ -15,8 +15,14 @@
       = form.text_field :title
     %li
       = form.label :filter_group_id, 'Filter Group'
-      = form.collection_select :filter_group_id, @filter_groups, :id, :name
-    %li select node extension...
+      = form.collection_select :filter_group_id, @filter_groups, :id, :name, :selected => node.filter_group.id
+    %li
+      TODO list required and optional vocabularies and allow terms to be associated
+    - if node.may_convert?
+      %li
+        = label_tag :node_type, 'Node Type'
+        / TODO add onChange event handler to refresh #node_extension_fields
+        = select_tag :node_type, options_for_select(@node_types, @selected_node_type)
   %div#node_extension_fields
     - unless node.machine_name == 'node'
       = partial :node_extension_fieldset, :form => form, :node => node

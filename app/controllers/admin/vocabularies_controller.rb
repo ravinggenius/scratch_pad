@@ -6,7 +6,7 @@ class Admin::VocabulariesController < Admin::ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => [:admin, @vocabularies] }
+      format.xml  { render :xml => @vocabularies }
     end
   end
 
@@ -17,7 +17,7 @@ class Admin::VocabulariesController < Admin::ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => [:admin, @vocabulary] }
+      format.xml  { render :xml => @vocabulary }
     end
   end
 
@@ -28,7 +28,7 @@ class Admin::VocabulariesController < Admin::ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => [:admin, @vocabulary] }
+      format.xml  { render :xml => @vocabulary }
     end 
   end
 
@@ -45,9 +45,9 @@ class Admin::VocabulariesController < Admin::ApplicationController
     respond_to do |format|
       if @vocabulary.save
         format.html { redirect_to([:admin, @vocabulary], :notice => 'vocabulary was successfully created.') }
-        format.xml  { render :xml => [:admin, @vocabulary], :status => :created, :location => [:admin, @vocabulary] }
+        format.xml  { render :xml => @vocabulary, :status => :created, :location => [:admin, @vocabulary] }
       else
-        format.html { render :action => "new" }
+        format.html { render :action => 'new' }
         format.xml  { render :xml => @vocabulary.errors, :status => :unprocessable_entity }
       end
     end
@@ -63,7 +63,7 @@ class Admin::VocabulariesController < Admin::ApplicationController
         format.html { redirect_to([:admin, @vocabulary], :notice => 'vocabulary was successfully updated.') }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.html { render :action => 'edit' }
         format.xml  { render :xml => @vocabulary.errors, :status => :unprocessable_entity }
       end
     end

@@ -1,4 +1,4 @@
-= form_for @vocabulary do |f|
+= form_for [:admin, @vocabulary] do |f|
   -if @vocabulary.errors.any?
     #error_explanation
       %h2= "#{pluralize(@vocabulary.errors.count, "error")} prohibited this vocabulary from being saved:"

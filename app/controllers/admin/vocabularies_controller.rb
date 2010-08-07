@@ -6,7 +6,7 @@ class Admin::VocabulariesController < Admin::ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @vocabularies }
+      format.xml  { render :xml => [:admin, @vocabularies] }
     end
   end
 
@@ -17,7 +17,7 @@ class Admin::VocabulariesController < Admin::ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @vocabulary }
+      format.xml  { render :xml => [:admin, @vocabulary] }
     end
   end
 
@@ -28,7 +28,7 @@ class Admin::VocabulariesController < Admin::ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @vocabulary }
+      format.xml  { render :xml => [:admin, @vocabulary] }
     end 
   end
 
@@ -44,8 +44,8 @@ class Admin::VocabulariesController < Admin::ApplicationController
 
     respond_to do |format|
       if @vocabulary.save
-        format.html { redirect_to(@vocabulary, :notice => 'vocabulary was successfully created.') }
-        format.xml  { render :xml => @vocabulary, :status => :created, :location => @vocabulary }
+        format.html { redirect_to([:admin, @vocabulary], :notice => 'vocabulary was successfully created.') }
+        format.xml  { render :xml => [:admin, @vocabulary], :status => :created, :location => [:admin, @vocabulary] }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @vocabulary.errors, :status => :unprocessable_entity }
@@ -60,7 +60,7 @@ class Admin::VocabulariesController < Admin::ApplicationController
 
     respond_to do |format|
       if @vocabulary.update_attributes(params[:admin_vocabulary])
-        format.html { redirect_to(@vocabulary, :notice => 'vocabulary was successfully updated.') }
+        format.html { redirect_to([:admin, @vocabulary], :notice => 'vocabulary was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

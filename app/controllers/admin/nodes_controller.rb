@@ -1,6 +1,6 @@
 class Admin::NodesController < Admin::ApplicationController
   def index
-    @nodes = Node.all
+    @nodes = Node.sort(:created_at).all
 
     respond_to do |format|
       format.html

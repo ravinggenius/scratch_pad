@@ -8,6 +8,7 @@
     %col.vocabularies
     %col.actions
     %col.node-title
+    %col.node-status
     %thead
       %tr
         %th Type
@@ -15,8 +16,10 @@
         %th Vocabularies
         %th Actions
         %th Title
+        %th Status
     %tfoot
       %tr
+        %td
         %td
         %td
         %td
@@ -33,3 +36,4 @@
             %span.edit= link_to 'Edit', edit_admin_node_path(node)
             %span.destroy= link_to 'Delete', [:admin, node], :confirm => 'Are you sure?', :method => :delete # FIXME clicking this simply GETs the resource
           %td.ancestors-0= node.title
+          %td= node.is_published? ? 'Published' : 'Draft'

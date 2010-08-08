@@ -49,6 +49,7 @@ class Admin::NodesController < Admin::ApplicationController
 
   def update
     @node = node_type.find params[:id]
+    #@node.set(:_type => params[:node_type].camelize) if NodeExtension[params[:node_type]].is_valid?
 
     respond_to do |format|
       if @node.update_attributes(params[:node])

@@ -32,6 +32,10 @@ class ScionBase
     Dir[path + snip]
   end
 
+  def is_valid?
+    File.exists? path
+  end
+
   def self.[](name)
     new name
   end

@@ -1,0 +1,17 @@
+%h1 Listing users
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @users.each do |user|
+    %tr
+      %td= link_to 'Show', [:admin, user]
+      %td= link_to 'Edit', edit_admin_user_path(user)
+      %td= link_to 'Destroy', [:admin, user], :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New user', new_admin_user_path

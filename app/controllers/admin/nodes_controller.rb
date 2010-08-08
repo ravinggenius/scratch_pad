@@ -23,7 +23,7 @@ class Admin::NodesController < Admin::ApplicationController
 
     respond_to do |format|
       format.html
-      format.xml  { render :xml => admin_node_url(@node) }
+      format.xml  { render :xml => @node }
     end
   end
 

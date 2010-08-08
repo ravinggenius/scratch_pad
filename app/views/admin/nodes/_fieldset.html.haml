@@ -1,31 +1,29 @@
-/ TODO find out why this doesn't work
-/= form_for admin_node_url(node) do |form|
-
-- if node.errors.any?
-  %section#error_explanation
-    %span.h= "#{pluralize node.errors.count, 'error'} prohibited this Node from being saved:"
+= form_for [:admin, @node] do |form|
+  - if node.errors.any?
+    %section#error_explanation
+      %span.h= "#{pluralize node.errors.count, 'error'} prohibited this Node from being saved:"
+      %ul
+      - node.errors.full_messages.each do |msg|
+        %li= msg
+  %fieldset.node
+    %legend Common
     %ul
-    - node.errors.full_messages.each do |msg|
-      %li= msg
-%fieldset.node
-  %legend Common
-  %ul
-    %li
-      = form.label :title, 'Title'
-      = form.text_field :title
-    %li
-      = form.label :filter_group_id, 'Filter Group'
-      = form.collection_select :filter_group_id, @filter_groups, :id, :name, :selected => node.filter_group.id
-    %li
-      TODO list required and optional vocabularies and allow terms to be associated
-    - if node.may_convert?
       %li
-        = label_tag :node_type, 'Node Type'
-        / TODO add onChange event handler to refresh #node_extension_fields
-        = select_tag :node_type, options_for_select(@node_types, @selected_node_type)
-  %div#node_extension_fields
-    - unless node.machine_name == 'node'
-      = partial :node_extension_fieldset, :form => form, :node => node
-  %ul
-    %li= submit_tag 'Commit'
-    %li= link_to 'Cancel', admin_root_path
+        = form.label :title, 'Title'
+        = form.text_field :title
+      %li
+        = form.label :filter_group_id, 'Filter Group'
+        = form.collection_select :filter_group_id, @filter_groups, :id, :name, :selected => node.filter_group.id
+      %li
+        TODO list required and optional vocabularies and allow terms to be associated
+      - if node.may_convert?
+        %li
+          = label_tag :node_type, 'Node Type'
+          / TODO add onChange event handler to refresh #node_extension_fields
+          = select_tag :node_type, options_for_select(@node_types, @selected_node_type)
+    %div#node_extension_fields
+      - unless node.machine_name == 'node'
+        = partial :node_extension_fieldset, :form => form, :node => node
+    %ul
+      %li= submit_tag 'Commit'
+      %li= link_to 'Cancel', admin_root_path

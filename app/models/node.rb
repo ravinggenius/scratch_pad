@@ -41,6 +41,16 @@ class Node
     terms.map { |term| term.vocabulary }.uniq
   end
 
+  def self.model_name
+    name = 'node'
+    name.instance_eval do
+      def plural;   pluralize;   end
+      def singular; singularize; end
+      def human;    singularize; end
+    end
+    return name
+  end
+
   def self.published(published = true)
     all :is_published => published
   end

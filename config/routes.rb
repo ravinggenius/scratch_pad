@@ -6,6 +6,7 @@ ScratchPad::Application.routes.draw do |map|
     resources :filters
     resources :nodes, :except => :show
     resources :templates
+    resources :users
     resources :vocabularies do
       resources :terms
     end

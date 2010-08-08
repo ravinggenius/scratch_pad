@@ -25,6 +25,7 @@ class Admin::VocabulariesController < Admin::ApplicationController
   # GET /admin/vocabularies/new.xml
   def new
     @vocabulary = Vocabulary.new
+    set_fieldset_ivars
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,18 +36,20 @@ class Admin::VocabulariesController < Admin::ApplicationController
   # GET /admin/vocabularies/1/edit
   def edit
     @vocabulary = Vocabulary.find(params[:id])
+    set_fieldset_ivars
   end
 
   # POST /admin/vocabularies
   # POST /admin/vocabularies.xml
   def create
-    @vocabulary = Vocabulary.new(params[:admin_vocabulary])
+    @vocabulary = Vocabulary.new(params[:vocabulary])
 
     respond_to do |format|
       if @vocabulary.save
         format.html { redirect_to([:admin, @vocabulary], :notice => 'vocabulary was successfully created.') }
         format.xml  { render :xml => @vocabulary, :status => :created, :location => [:admin, @vocabulary] }
       else
+        set_fieldset_ivars
         format.html { render :action => 'new' }
         format.xml  { render :xml => @vocabulary.errors, :status => :unprocessable_entity }
       end
@@ -59,10 +62,11 @@ class Admin::VocabulariesController < Admin::ApplicationController
     @vocabulary = Vocabulary.find(params[:id])
 
     respond_to do |format|
-      if @vocabulary.update_attributes(params[:admin_vocabulary])
+      if @vocabulary.update_attributes(params[:vocabulary])
         format.html { redirect_to([:admin, @vocabulary], :notice => 'vocabulary was successfully updated.') }
         format.xml  { head :ok }
       else
+        set_fieldset_ivars
         format.html { render :action => 'edit' }
         format.xml  { render :xml => @vocabulary.errors, :status => :unprocessable_entity }
       end
@@ -79,5 +83,14 @@ class Admin::VocabulariesController < Admin::ApplicationController
       format.html { redirect_to(admin_vocabularies_url) }
       format.xml  { head :ok }
     end
+  end
+
+  private
+
+  def set_fieldset_ivars
+    @node_extensions_optional = NodeExtension.all.map { |ne| [ne.title, ne.name] }
+    @node_extensions_optional_selected = []
+    @node_extensions_required = NodeExtension.all.map { |ne| [ne.title, ne.name] }
+    @node_extensions_required_selected = []
   end
 end

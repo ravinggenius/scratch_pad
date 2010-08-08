@@ -5,7 +5,4 @@
     %li
       = link_to vocabulary.name, [:admin, vocabulary]
       = link_to 'Edit', edit_admin_vocabulary_path(vocabulary)
-      %ul
-        - vocabulary.terms.each do |term|
-          %li
-            = link_to term.name, [:admin, vocabulary, term]
+      = partial :terms, :vocabulary => vocabulary

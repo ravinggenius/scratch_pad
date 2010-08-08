@@ -1,10 +1,31 @@
 = form_for [:admin, @vocabulary] do |f|
-  -if @vocabulary.errors.any?
+  - if @vocabulary.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@vocabulary.errors.count, "error")} prohibited this vocabulary from being saved:"
+      %h2= "#{pluralize(@vocabulary.errors.count, 'error')} prohibited this vocabulary from being saved:"
       %ul
         - @vocabulary.errors.full_messages.each do |msg|
           %li= msg
-
-  .actions
-    = f.submit 'Save'
+  %fieldset.vocabulary
+    %legend Vocabulary
+    %ul
+      %li
+        = f.label :name, 'Name'
+        = f.text_field :name
+      %li
+        = f.label :code, 'Code'
+        = f.text_field :code
+      %li
+        = f.label :is_freetagging_allowed, 'Allow Freetagging'
+        = f.check_box :is_freetagging_allowed
+      %li
+        = f.label :may_select_multiple, 'Multiple Selections'
+        = f.check_box :may_select_multiple
+      %li
+        = f.label :node_types_optional, 'Optional Node Extensions'
+        = f.select :node_types_optional, options_for_select(@node_extensions_optional, @node_extensions_optional_selected), {}, :multiple => true, :size => 5
+      %li
+        = f.label :node_types_required, 'Required Node Extensions'
+        = f.select :node_types_required, options_for_select(@node_extensions_required, @node_extensions_required_selected), {}, :multiple => true, :size => 5
+    %ul
+      %li= submit_tag 'Commit'
+      %li= link_to 'Cancel', admin_vocabularies_path

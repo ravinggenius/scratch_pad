@@ -1,7 +1,7 @@
 = form_for [:admin, @node] do |form|
   - if node.errors.any?
     %section#error_explanation
-      %span.h= "#{pluralize node.errors.count, 'error'} prohibited this Node from being saved:"
+      %span.h= "#{pluralize node.errors.count, 'error'} prohibited this #{node.class.name} from being saved:"
       %ul
       - node.errors.full_messages.each do |msg|
         %li= msg
@@ -16,7 +16,7 @@
         = form.collection_select :filter_group_id, @filter_groups, :id, :name, :selected => node.filter_group.id
       %li
         TODO list required and optional vocabularies and allow terms to be associated
-      - if node.may_convert?
+      - if node.new?
         %li
           = label_tag :node_type, 'Node Type'
           / TODO add onChange event handler to refresh #node_extension_fields

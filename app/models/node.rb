@@ -33,10 +33,6 @@ class Node
     self.class.name.underscore
   end
 
-  def may_convert?
-    new? || (machine_name == 'node')
-  end
-
   def vocabularies
     terms.map { |term| term.vocabulary }.uniq
   end

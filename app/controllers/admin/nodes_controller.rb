@@ -49,7 +49,6 @@ class Admin::NodesController < Admin::ApplicationController
 
   def update
     @node = node_type.find params[:id]
-    #@node.set(:_type => params[:node_type].camelize) if NodeExtension[params[:node_type]].is_valid?
 
     respond_to do |format|
       if @node.update_attributes(params[:node])
@@ -77,16 +76,19 @@ class Admin::NodesController < Admin::ApplicationController
 
   def node_type
     @n ||= begin
-      params[:node_type].camelize.constantize
+      ne = NodeExtension[params[:node_type]]
+      raise 'Invalid Node Extension' unless ne.is_valid?
+      ne.name.camelize.constantize
     rescue
       Node
     end
   end
 
   def set_fieldset_ivars
-    if @node.may_convert?
+    if @node.new?
       @node_types = NodeExtension.enabled.map { |extension| [extension.title, extension.name] }.insert 0, ['Node', 'node']
-      @selected_node_type = params[:node_type] || @node.machine_name
+      ne = NodeExtension[params[:node_type]]
+      @selected_node_type = ne.is_valid? ? ne.name : @node.machine_name
     end
     @filter_groups = FilterGroup.all.sort_by &:name
   end

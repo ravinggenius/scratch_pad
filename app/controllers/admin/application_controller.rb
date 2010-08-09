@@ -19,6 +19,7 @@ class Admin::ApplicationController < ApplicationController
       { :name => 'Users', :href => admin_users_path, :children => [
         { :name => 'New', :href => new_admin_user_path }
       ]},
+      { :name => 'Groups' },
       { :name => 'Permissions' },
       { :name => 'Settings' }
     ]

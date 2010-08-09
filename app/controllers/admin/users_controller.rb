@@ -40,14 +40,14 @@ class Admin::UsersController < Admin::ApplicationController
   # POST /admin/users
   # POST /admin/users.xml
   def create
-    @user = User.new(params[:admin_user])
+    @user = User.new(params[:user])
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to(@user, :notice => 'User was successfully created.') }
-        format.xml  { render :xml => @user, :status => :created, :location => @user }
+        format.html { redirect_to([:admin, @user], :notice => 'User was successfully created.') }
+        format.xml  { render :xml => @user, :status => :created, :location => [:admin, @user] }
       else
-        format.html { render :action => "new" }
+        format.html { render :action => 'new' }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
     end
@@ -59,11 +59,11 @@ class Admin::UsersController < Admin::ApplicationController
     @user = User.find(params[:id])
 
     respond_to do |format|
-      if @user.update_attributes(params[:admin_user])
-        format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
+      if @user.update_attributes(params[:user])
+        format.html { redirect_to([:admin, @user], :notice => 'User was successfully updated.') }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.html { render :action => 'edit' }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
     end

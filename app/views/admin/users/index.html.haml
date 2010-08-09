@@ -1,17 +1,31 @@
-%h1 Listing users
+%header
+  %span.h Listing users
 
-%table
-  %tr
-    %th
-    %th
-    %th
-
-  - @users.each do |user|
-    %tr
-      %td= link_to 'Show', [:admin, user]
-      %td= link_to 'Edit', edit_admin_user_path(user)
-      %td= link_to 'Destroy', [:admin, user], :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New user', new_admin_user_path
+%section
+  %table#users_overview
+    %col.groups
+    %col.actions
+    %col.user-username
+    %col.user-email
+    %thead
+      %tr
+        %th Groups
+        %th Actions
+        %th Username
+        %th Email
+    %tfoot
+      %tr
+        %td
+        %td
+        %td
+        %td
+    %tbody
+      - @users.each do |user|
+        %tr
+          %td= user.groups.map { |group| group.name }.sort.join ', '
+          %td
+            %span.view= link_to 'View', [:admin, user]
+            %span.edit= link_to 'Edit', edit_admin_user_path(user)
+            %span.destroy= link_to 'Delete', [:admin, user], :confirm => 'Are you sure?', :method => :delete # FIXME clicking this simply GETs the resource
+          %td= user.username
+          %td= mail_to user.email

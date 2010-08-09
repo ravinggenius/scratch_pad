@@ -15,7 +15,7 @@ class Node
   userstamps!
 
   belongs_to :filter_group
-  habtm :nodes, :terms, :tagging
+  habtm :nodes, :terms, :glue_model => :tagging
 
   before_save :set_children_ids
   after_save :save_taggings

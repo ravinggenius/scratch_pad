@@ -6,7 +6,7 @@ class Group
   key :code, String, :required => true
   key :name, String, :required => true
 
-  habtm :groups, :users, :grouping
+  habtm :groups, :users
 
   validates_uniqueness_of :access_code
 

@@ -3,7 +3,8 @@ module Relationship
   end
 
   module ClassMethods
-    def habtm(this_model, that_model, glue_model, options = {})
+    def habtm(this_model, that_model, options = {})
+      glue_model = options.has_key?(:glue_model) ? options[:glue_model] : [this_model, that_model].map { |m| Private.single(m).to_s }.sort.join('_')
       define_method Private::plural(that_model) do
         @those_models ||= Private::klass(glue_model).send("#{Private::plural(that_model)}_for", self.id)
       end
@@ -50,7 +51,7 @@ module Relationship
     end
 
     def self.klass(model_name)
-      single(model_name).to_s.capitalize.constantize
+      single(model_name).to_s.camelize.constantize
     end
   end
 

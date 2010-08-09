@@ -14,7 +14,7 @@ class User
   key :username, String, :required => true
   key :hashword, String
 
-  habtm :users, :groups, :grouping
+  habtm :users, :groups
 
   validates_confirmation_of :password
   validates_uniqueness_of :username

@@ -6,7 +6,7 @@ class Term
   key :name, String, :required => true
 
   belongs_to :vocabulary
-  habtm :terms, :nodes, :tagging
+  habtm :terms, :nodes, :glue_model => :tagging
 
   after_save :save_taggings
 end

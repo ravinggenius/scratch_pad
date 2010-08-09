@@ -2,14 +2,10 @@
   %ul<>
     - items.each do |item|
       %li<>
-        - if item[:href] && item[:children]
-          %label<>
-            = link_to item[:name], item[:href]
-        - elsif item[:href]
-          = link_to item[:name], item[:href]
-        - elsif item[:children]
-          %label<>= item[:name]
+        - link = link_to_if item[:href], item[:name], item[:href]
+        - if item[:children]
+          %label<>= link
         - else
-          = item[:name]
+          = link
         - if item[:children]
           = partial 'shared/menu', :items => item[:children]

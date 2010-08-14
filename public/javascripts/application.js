@@ -3,21 +3,29 @@ var scratchPad;
 $(document).ready(function () {
   var _sp = {
     helpers: {
-      flash: function (level, messages) {
-        var container, list;
-        container = $('#flash');
-        list = container.find('.' + level);
-        if (list.length === 0) {
-          container.append('<ul class="' + level + '"></ul>');
+      flash: {
+        add: function (level, messages) {
+          var container, list;
+          container = $('#flash');
           list = container.find('.' + level);
+          if (list.length === 0) {
+            container.append('<ul class="' + level + '"></ul>');
+            list = container.find('.' + level);
+          }
+          if (typeof messages === 'string') {
+            messages = [ messages ];
+          }
+          console.log(level + ': ' + messages);
+          messages.forEach(function (message) {
+            list.append('<li class="dynamic">' + message + '</li>');
+          });
+        },
+        reset: function (level) {
+          $('#flash .' + level).find('.dynamic').remove();
+        },
+        clearAll: function (level) {
+          $('#flash .' + level).remove();
         }
-        if (typeof messages === 'string') {
-          messages = [ messages ];
-        }
-        console.log(level + ': ' + messages);
-        messages.forEach(function (message) {
-          list.append('<li>' + message + '</li>');
-        });
       }
     }
   };
@@ -25,15 +33,39 @@ $(document).ready(function () {
   scratchPad = {
     helpers: {
       flash: {
-        error: function (messages) {
-          _sp.helpers.flash('error', messages);
+        error: {
+          add: function (messages) {
+            _sp.helpers.flash.add('error', messages);
+          },
+          reset: function () {
+            _sp.helpers.flash.reset('error');
+          },
+          clearAll: function () {
+            _sp.helpers.flash.clearAll('error');
+          }
         },
-        warning: function (messages) {
-          _sp.helpers.flash('warning', messages);
+        warning: {
+          add: function (messages) {
+            _sp.helpers.flash.add('warning', messages);
+          },
+          reset: function () {
+            _sp.helpers.flash.reset('warning');
+          },
+          clearAll: function () {
+            _sp.helpers.flash.clearAll('warning');
+          }
         },
-        notice: function (messages) {
-          _sp.helpers.flash('notice', messages);
-        }
+        notice: {
+          add: function (messages) {
+            _sp.helpers.flash.add('notice', messages);
+          },
+          reset: function () {
+            _sp.helpers.flash.reset('notice');
+          },
+          clearAll: function () {
+            _sp.helpers.flash.clearAll('notice');
+          }
+        },
       },
       urlFor: function (namedRoute, options) {
         if (typeof options === 'undefined') {
@@ -65,7 +97,7 @@ $(document).ready(function () {
         $('div#node_extension_fields').html(data);
       },
       error: function (XMLHttpRequest, textStatus, errorThrown) {
-        // TODO also show error message in flash
+        scratchPad.helpers.flash.warning.add('Invalid node type selected.');
         $('div#node_extension_fields').html('');
       }
     });

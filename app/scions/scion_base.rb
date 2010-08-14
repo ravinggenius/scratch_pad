@@ -33,7 +33,7 @@ class ScionBase
   end
 
   def is_valid?
-    File.exists? path
+    !name.nil? && File.exists?(path)
   end
 
   def self.[](name)

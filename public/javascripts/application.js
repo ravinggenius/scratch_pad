@@ -1,10 +1,40 @@
 var scratchPad;
 
 $(document).ready(function () {
-  var _sp = {};
+  var _sp = {
+    helpers: {
+      flash: function (level, messages) {
+        var container, list;
+        container = $('#flash');
+        list = container.find('.' + level);
+        if (list.length === 0) {
+          container.append('<ul class="' + level + '"></ul>');
+          list = container.find('.' + level);
+        }
+        if (typeof messages === 'string') {
+          messages = [ messages ];
+        }
+        console.log(level + ': ' + messages);
+        messages.forEach(function (message) {
+          list.append('<li>' + message + '</li>');
+        });
+      }
+    }
+  };
 
   scratchPad = {
     helpers: {
+      flash: {
+        error: function (messages) {
+          _sp.helpers.flash('error', messages);
+        },
+        warning: function (messages) {
+          _sp.helpers.flash('warning', messages);
+        },
+        notice: function (messages) {
+          _sp.helpers.flash('notice', messages);
+        }
+      },
       urlFor: function (namedRoute, options) {
         if (typeof options === 'undefined') {
           options = {};

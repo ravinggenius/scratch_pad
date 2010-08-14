@@ -24,3 +24,20 @@ $(document).ready(function () {
     }
   };
 });
+
+$(document).ready(function () {
+  $('select#node_type').change(function (eventObject) {
+    $.ajax({
+      url: scratchPad.helpers.urlFor('admin_nodes_new_node_type', {
+        node_type: $(this).find('option:selected').val()
+      }),
+      success: function (data, textStatus, XMLHttpRequest) {
+        $('div#node_extension_fields').html(data);
+      },
+      error: function (XMLHttpRequest, textStatus, errorThrown) {
+        // TOOD also show error message in flash
+        $('div#node_extension_fields').html('');
+      }
+    });
+  });
+});

@@ -1,3 +1,4 @@
-%fieldset.node{ :class => node.machine_name }
-  %legend= node.class.name
-  = show_node node, :fieldset, :form => form
+= fields_for :node, node do |form|
+  %fieldset.node{ :class => node.machine_name }
+    %legend= node.class.name
+    = show_node node, :fieldset, :form => form

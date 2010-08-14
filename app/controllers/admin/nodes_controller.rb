@@ -72,6 +72,10 @@ class Admin::NodesController < Admin::ApplicationController
     end
   end
 
+  def new_node_type
+    render :partial => 'node_extension_fieldset', :locals => { :node => node_type.new }
+  end
+
   private
 
   def node_type

@@ -10,6 +10,7 @@ ScratchPad::Application.routes.draw do |map|
     resources :vocabularies do
       resources :terms
     end
+    get '/nodes/new_node_type', :to => 'nodes#new_node_type'
     root :to => 'dashboard#index'
   end
 

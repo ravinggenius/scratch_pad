@@ -35,7 +35,7 @@ $(document).ready(function () {
         $('div#node_extension_fields').html(data);
       },
       error: function (XMLHttpRequest, textStatus, errorThrown) {
-        // TOOD also show error message in flash
+        // TODO also show error message in flash
         $('div#node_extension_fields').html('');
       }
     });

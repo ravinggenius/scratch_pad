@@ -3,10 +3,10 @@ class AssetsController < ApplicationController
 
   def routes
     render :text => begin
-      if params[:namedRoute]
+      if params[:named_route]
         params.delete :controller
         params.delete :action
-        named_route = params.delete(:namedRoute).downcase.gsub(/[^a-z_]/, '')
+        named_route = params.delete(:named_route).downcase.gsub(/[^a-z_]/, '')
         send "#{named_route}_url", params
       else
         params[:controller] = params.delete :c if params[:c]

@@ -14,7 +14,7 @@ ScratchPad::Application.routes.draw do |map|
   end
 
   namespace :assets do
-    get '/routes', :to =>  :routes, :as => :routes
+    get '/routes', :to => :routes, :as => :routes
     get '/:template/scripts.:format', :to => :scripts, :as => :scripts, :defaults => { :format => :js }
     get '/:template/styles.:format', :to => :styles, :as => :styles, :defaults => { :format => :css }
   end

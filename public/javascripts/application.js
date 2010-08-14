@@ -10,13 +10,13 @@ $(document).ready(function () {
           options = {};
         }
         if (typeof namedRoute === 'string') {
-          options['namedRoute'] = namedRoute;
+          options['named_route'] = namedRoute;
         } else if (typeof namedRoute === 'object') {
           options = namedRoute;
         }
         return $.ajax({
           type: 'GET',
-          url: '/a/routes',
+          url: '/assets/routes',
           data: options,
           async: false
         }).responseText;

@@ -22,7 +22,7 @@
 
     %section#flash
       / TODO move all messages to flash
-      - [ :error, :notice, :info ].each do |level|
+      - [ :error, :warning, :notice ].each do |level|
         = partial 'shared/flash', :level => level, :messages => flash[level] if flash[level]
 
     %section#content

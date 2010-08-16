@@ -21,7 +21,11 @@ $(document).ready(function () {
           });
         },
         reset: function (level) {
-          $('#flash .' + level).find('.dynamic').remove();
+          var list = $('#flash .' + level);
+          list.find('.dynamic').remove();
+          if (list.children().length === 0) {
+            list.remove();
+          }
         },
         clearAll: function (level) {
           $('#flash .' + level).remove();

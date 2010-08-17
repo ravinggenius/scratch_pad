@@ -7,7 +7,7 @@ class Cache
   timestamps!
 
   def expired?
-    value.nil? || ((c.updated_at + 1.day) < Time.now)
+    value.nil? || ((updated_at + 1.day) < Time.now)
   end
 
   def self.[](index)

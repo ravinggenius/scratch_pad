@@ -41,7 +41,10 @@ class Admin::NodesController < Admin::ApplicationController
         format.xml  { render :xml => @node, :status => :created, :location => node_url(@node) }
       else
         set_fieldset_ivars
-        format.html { render :action => 'new' }
+        format.html do
+          flash[:error] = @node.errors.full_messages
+          render :action => 'new'
+        end
         format.xml  { render :xml => @node.errors, :status => :unprocessable_entity }
       end
     end

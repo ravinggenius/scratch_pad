@@ -1,10 +1,4 @@
 = form_for [:admin, @node] do |form|
-  - if node.errors.any?
-    %section#error_explanation
-      %span.h= "#{pluralize node.errors.count, 'error'} prohibited this #{node.class.name} from being saved:"
-      %ul
-      - node.errors.full_messages.each do |msg|
-        %li= msg
   %fieldset.node
     %legend Common
     %ul

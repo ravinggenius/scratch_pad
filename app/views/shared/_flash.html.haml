@@ -1,2 +1,4 @@
 %ul{ :class => level }
-  %li= message
+  - messages = [messages] if messages.is_a? String
+  - messages.each do |message|
+    %li= message

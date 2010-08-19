@@ -61,3 +61,11 @@ To run tests for custom extensions, use `RAILS_ENV=test rake test:custom`. Curre
 ## Wish List
 
 * move styles and themes into the database to facilitate online editing by a website administrator
+
+## Inspiration
+
+* administration
+	* http://codex.wordpress.org/Administration_Panels
+	* http://docs.harmonyapp.com/managing-content/
+* nodes and taxonomy
+	* http://drupal.org/getting-started/before/terminology

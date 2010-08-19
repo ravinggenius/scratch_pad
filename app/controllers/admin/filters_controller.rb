@@ -44,10 +44,13 @@ class Admin::FiltersController < Admin::ApplicationController
 
     respond_to do |format|
       if @filter.save
-        format.html { redirect_to(@filter, :notice => 'Filter was successfully created.') }
-        format.xml  { render :xml => @filter, :status => :created, :location => @filter }
+        format.html { redirect_to([:admin, @filter], :notice => 'Filter was successfully created.') }
+        format.xml  { render :xml => @filter, :status => :created, :location => [:admin, @filter] }
       else
-        format.html { render :action => "new" }
+        format.html do
+          flash[:error] = @filter.errors.full_messages
+          render :action => 'new'
+        end
         format.xml  { render :xml => @filter.errors, :status => :unprocessable_entity }
       end
     end
@@ -60,10 +63,13 @@ class Admin::FiltersController < Admin::ApplicationController
 
     respond_to do |format|
       if @filter.update_attributes(params[:admin_filter])
-        format.html { redirect_to(@filter, :notice => 'Filter was successfully updated.') }
+        format.html { redirect_to([:admin, @filter], :notice => 'Filter was successfully updated.') }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.html do
+          flash[:error] = @filter.errors.full_messages
+          render :action => 'edit'
+        end
         format.xml  { render :xml => @filter.errors, :status => :unprocessable_entity }
       end
     end

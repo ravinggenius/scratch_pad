@@ -59,7 +59,10 @@ class Admin::NodesController < Admin::ApplicationController
         format.xml  { head :ok }
       else
         set_fieldset_ivars
-        format.html { render :action => 'edit' }
+        format.html do
+          flash[:error] = @node.errors.full_messages
+          render :action => 'edit'
+        end
         format.xml  { render :xml => @node.errors, :status => :unprocessable_entity }
       end
     end

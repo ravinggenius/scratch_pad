@@ -50,7 +50,10 @@ class Admin::VocabulariesController < Admin::ApplicationController
         format.xml  { render :xml => @vocabulary, :status => :created, :location => [:admin, @vocabulary] }
       else
         set_fieldset_ivars
-        format.html { render :action => 'new' }
+        format.html do
+          flash[:error] = @vocabulary.errors.full_messages
+          render :action => 'new'
+        end
         format.xml  { render :xml => @vocabulary.errors, :status => :unprocessable_entity }
       end
     end
@@ -67,7 +70,10 @@ class Admin::VocabulariesController < Admin::ApplicationController
         format.xml  { head :ok }
       else
         set_fieldset_ivars
-        format.html { render :action => 'edit' }
+        format.html do
+          flash[:error] = @vocabulary.errors.full_messages
+          render :action => 'edit'
+        end
         format.xml  { render :xml => @vocabulary.errors, :status => :unprocessable_entity }
       end
     end

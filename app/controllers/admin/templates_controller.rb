@@ -45,10 +45,13 @@ class Admin::TemplatesController < Admin::ApplicationController
 
     respond_to do |format|
       if @template.save
-        format.html { redirect_to(@template, :notice => 'Template was successfully created.') }
-        format.xml  { render :xml => @template, :status => :created, :location => @template }
+        format.html { redirect_to([:admin, @template], :notice => 'Template was successfully created.') }
+        format.xml  { render :xml => @template, :status => :created, :location => [:admin, @template] }
       else
-        format.html { render :action => "new" }
+        format.html do
+          flash[:error] = @template.errors.full_messages
+          render :action => 'new'
+        end
         format.xml  { render :xml => @template.errors, :status => :unprocessable_entity }
       end
     end
@@ -61,10 +64,13 @@ class Admin::TemplatesController < Admin::ApplicationController
 
     respond_to do |format|
       if @template.update_attributes(params[:template])
-        format.html { redirect_to(@template, :notice => 'Template was successfully updated.') }
+        format.html { redirect_to([:admin, @template], :notice => 'Template was successfully updated.') }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.html do
+          flash[:error] = @template.errors.full_messages
+          render :action => 'edit'
+        end
         format.xml  { render :xml => @template.errors, :status => :unprocessable_entity }
       end
     end

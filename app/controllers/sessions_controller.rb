@@ -17,8 +17,9 @@ class SessionsController < ApplicationController
         format.html { redirect_to(root_url, :notice => 'You have successfully signed in.') }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
-        format.html { render :action => 'new' }
-        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+        message = 'You supplied an incorrect username or password.'
+        format.html { render :action => 'new', :error => message }
+        format.xml  { render :xml => message, :status => :unprocessable_entity }
       end
     end
   end

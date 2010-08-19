@@ -47,7 +47,10 @@ class Admin::UsersController < Admin::ApplicationController
         format.html { redirect_to([:admin, @user], :notice => 'User was successfully created.') }
         format.xml  { render :xml => @user, :status => :created, :location => [:admin, @user] }
       else
-        format.html { render :action => 'new' }
+        format.html do
+          flash[:error] = @user.errors.full_messages
+          render :action => 'new'
+        end
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
     end
@@ -63,7 +66,10 @@ class Admin::UsersController < Admin::ApplicationController
         format.html { redirect_to([:admin, @user], :notice => 'User was successfully updated.') }
         format.xml  { head :ok }
       else
-        format.html { render :action => 'edit' }
+        format.html do
+          flash[:error] = @user.errors.full_messages
+          render :action => 'edit'
+        end
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
     end

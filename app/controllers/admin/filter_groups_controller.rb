@@ -27,7 +27,7 @@ class Admin::FilterGroupsController < Admin::ApplicationController
     @filter_group = FilterGroup.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html { render 'shared/edit_new' }
       format.xml { render :xml => @filter_group }
     end
   end
@@ -35,6 +35,7 @@ class Admin::FilterGroupsController < Admin::ApplicationController
   # GET /admin/filters/1/edit
   def edit
     @filter_group = FilterGroup.find(params[:id])
+    render 'shared/edit_new'
   end
 
   # POST /admin/filters
@@ -49,7 +50,7 @@ class Admin::FilterGroupsController < Admin::ApplicationController
       else
         format.html do
           flash[:error] = @filter_group.errors.full_messages
-          render :action => 'new'
+          render 'shared/edit_new'
         end
         format.xml { render :xml => @filter_group.errors, :status => :unprocessable_entity }
       end
@@ -68,7 +69,7 @@ class Admin::FilterGroupsController < Admin::ApplicationController
       else
         format.html do
           flash[:error] = @filter_group.errors.full_messages
-          render :action => 'edit'
+          render 'shared/edit_new'
         end
         format.xml { render :xml => @filter_group.errors, :status => :unprocessable_entity }
       end

@@ -22,7 +22,7 @@ class Admin::NodesController < Admin::ApplicationController
     set_fieldset_ivars
 
     respond_to do |format|
-      format.html
+      format.html { render 'shared/edit_new' }
       format.xml { render :xml => @node }
     end
   end
@@ -30,6 +30,7 @@ class Admin::NodesController < Admin::ApplicationController
   def edit
     @node = node_type.find params[:id]
     set_fieldset_ivars
+    render 'shared/edit_new'
   end
 
   def create
@@ -43,7 +44,7 @@ class Admin::NodesController < Admin::ApplicationController
         set_fieldset_ivars
         format.html do
           flash[:error] = @node.errors.full_messages
-          render :action => 'new'
+          render 'shared/edit_new'
         end
         format.xml { render :xml => @node.errors, :status => :unprocessable_entity }
       end
@@ -61,7 +62,7 @@ class Admin::NodesController < Admin::ApplicationController
         set_fieldset_ivars
         format.html do
           flash[:error] = @node.errors.full_messages
-          render :action => 'edit'
+          render 'shared/edit_new'
         end
         format.xml { render :xml => @node.errors, :status => :unprocessable_entity }
       end

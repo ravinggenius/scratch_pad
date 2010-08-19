@@ -28,7 +28,7 @@ class Admin::TemplatesController < Admin::ApplicationController
     @template = Template.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html { render 'shared/edit_new' }
       format.xml { render :xml => @template }
     end
   end
@@ -36,6 +36,7 @@ class Admin::TemplatesController < Admin::ApplicationController
   # GET /admin/templates/1/edit
   def edit
     @template = Template.find(params[:id])
+    render 'shared/edit_new'
   end
 
   # POST /admin/templates
@@ -50,7 +51,7 @@ class Admin::TemplatesController < Admin::ApplicationController
       else
         format.html do
           flash[:error] = @template.errors.full_messages
-          render :action => 'new'
+          render 'shared/edit_new'
         end
         format.xml { render :xml => @template.errors, :status => :unprocessable_entity }
       end
@@ -69,7 +70,7 @@ class Admin::TemplatesController < Admin::ApplicationController
       else
         format.html do
           flash[:error] = @template.errors.full_messages
-          render :action => 'edit'
+          render 'shared/edit_new'
         end
         format.xml { render :xml => @template.errors, :status => :unprocessable_entity }
       end

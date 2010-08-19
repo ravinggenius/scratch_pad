@@ -27,7 +27,7 @@ class Admin::UsersController < Admin::ApplicationController
     @user = User.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html { render 'shared/edit_new' }
       format.xml { render :xml => @user }
     end
   end
@@ -35,6 +35,7 @@ class Admin::UsersController < Admin::ApplicationController
   # GET /admin/users/1/edit
   def edit
     @user = User.find(params[:id])
+    render 'shared/edit_new'
   end
 
   # POST /admin/users
@@ -49,7 +50,7 @@ class Admin::UsersController < Admin::ApplicationController
       else
         format.html do
           flash[:error] = @user.errors.full_messages
-          render :action => 'new'
+          render 'shared/edit_new'
         end
         format.xml { render :xml => @user.errors, :status => :unprocessable_entity }
       end
@@ -68,7 +69,7 @@ class Admin::UsersController < Admin::ApplicationController
       else
         format.html do
           flash[:error] = @user.errors.full_messages
-          render :action => 'edit'
+          render 'shared/edit_new'
         end
         format.xml { render :xml => @user.errors, :status => :unprocessable_entity }
       end

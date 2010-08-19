@@ -28,7 +28,7 @@ class Admin::VocabulariesController < Admin::ApplicationController
     set_fieldset_ivars
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html { render 'shared/edit_new' }
       format.xml { render :xml => @vocabulary }
     end
   end
@@ -37,6 +37,7 @@ class Admin::VocabulariesController < Admin::ApplicationController
   def edit
     @vocabulary = Vocabulary.find(params[:id])
     set_fieldset_ivars
+    render 'shared/edit_new'
   end
 
   # POST /admin/vocabularies
@@ -52,7 +53,7 @@ class Admin::VocabulariesController < Admin::ApplicationController
         set_fieldset_ivars
         format.html do
           flash[:error] = @vocabulary.errors.full_messages
-          render :action => 'new'
+          render 'shared/edit_new'
         end
         format.xml { render :xml => @vocabulary.errors, :status => :unprocessable_entity }
       end
@@ -72,7 +73,7 @@ class Admin::VocabulariesController < Admin::ApplicationController
         set_fieldset_ivars
         format.html do
           flash[:error] = @vocabulary.errors.full_messages
-          render :action => 'edit'
+          render 'shared/edit_new'
         end
         format.xml { render :xml => @vocabulary.errors, :status => :unprocessable_entity }
       end

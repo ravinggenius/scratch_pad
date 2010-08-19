@@ -1,29 +1,23 @@
 class Admin::TemplatesController < Admin::ApplicationController
-  # GET /admin/templates
-  # GET /admin/templates.xml
   def index
     @templates = Template.regular
     @admin_templates = Template.admin
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
       format.xml { render :xml => @templates }
     end
   end
 
-  # GET /admin/templates/1
-  # GET /admin/templates/1.xml
   def show
     @template = Template.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html
       format.xml { render :xml => @template }
     end
   end
 
-  # GET /admin/templates/new
-  # GET /admin/templates/new.xml
   def new
     @template = Template.new
 
@@ -33,14 +27,11 @@ class Admin::TemplatesController < Admin::ApplicationController
     end
   end
 
-  # GET /admin/templates/1/edit
   def edit
     @template = Template.find(params[:id])
     render 'shared/edit_new'
   end
 
-  # POST /admin/templates
-  # POST /admin/templates.xml
   def create
     @template = Template.new(params[:admin_template])
 
@@ -58,8 +49,6 @@ class Admin::TemplatesController < Admin::ApplicationController
     end
   end
 
-  # PUT /admin/templates/1
-  # PUT /admin/templates/1.xml
   def update
     @template = Template.find(params[:id])
 
@@ -77,8 +66,6 @@ class Admin::TemplatesController < Admin::ApplicationController
     end
   end
 
-  # DELETE /admin/templates/1
-  # DELETE /admin/templates/1.xml
   def destroy
     @template = Template.find(params[:id])
     @template.destroy

@@ -1,28 +1,22 @@
 class Admin::VocabulariesController < Admin::ApplicationController
-  # GET /admin/vocabularies
-  # GET /admin/vocabularies.xml
   def index
     @vocabularies = Vocabulary.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
       format.xml { render :xml => @vocabularies }
     end
   end
 
-  # GET /admin/vocabularies/1
-  # GET /admin/vocabularies/1.xml
   def show
     @vocabulary = Vocabulary.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html
       format.xml { render :xml => @vocabulary }
     end
   end
 
-  # GET /admin/vocabularies/new
-  # GET /admin/vocabularies/new.xml
   def new
     @vocabulary = Vocabulary.new
     set_fieldset_ivars
@@ -33,15 +27,12 @@ class Admin::VocabulariesController < Admin::ApplicationController
     end
   end
 
-  # GET /admin/vocabularies/1/edit
   def edit
     @vocabulary = Vocabulary.find(params[:id])
     set_fieldset_ivars
     render 'shared/edit_new'
   end
 
-  # POST /admin/vocabularies
-  # POST /admin/vocabularies.xml
   def create
     @vocabulary = Vocabulary.new(params[:vocabulary])
 
@@ -60,8 +51,6 @@ class Admin::VocabulariesController < Admin::ApplicationController
     end
   end
 
-  # PUT /admin/vocabularies/1
-  # PUT /admin/vocabularies/1.xml
   def update
     @vocabulary = Vocabulary.find(params[:id])
 
@@ -80,8 +69,6 @@ class Admin::VocabulariesController < Admin::ApplicationController
     end
   end
 
-  # DELETE /admin/vocabularies/1
-  # DELETE /admin/vocabularies/1.xml
   def destroy
     @vocabulary = Vocabulary.find(params[:id])
     @vocabulary.destroy

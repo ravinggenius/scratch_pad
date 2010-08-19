@@ -5,7 +5,7 @@ class NodesController < ApplicationController
     @featured << @nodes.pop unless @nodes.empty?
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
       format.xml { render :xml => @nodes }
     end
   end
@@ -14,7 +14,7 @@ class NodesController < ApplicationController
     @node = Node.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html
       format.xml { render :xml => @node }
     end
   end

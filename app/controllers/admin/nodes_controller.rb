@@ -8,15 +8,6 @@ class Admin::NodesController < Admin::ApplicationController
     end
   end
 
-  #def show
-  #  @node = node_type.find params[:id]
-
-  #  respond_to do |format|
-  #    format.html
-  #    format.xml { render :xml => @node }
-  #  end
-  #end
-
   def new
     @node = node_type.new
     set_fieldset_ivars

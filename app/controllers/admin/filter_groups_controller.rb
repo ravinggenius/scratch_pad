@@ -1,28 +1,22 @@
 class Admin::FilterGroupsController < Admin::ApplicationController
-  # GET /admin/filters
-  # GET /admin/filters.xml
   def index
     @filter_groups = FilterGroup.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
       format.xml { render :xml => @filter_groups }
     end
   end
 
-  # GET /admin/filters/1
-  # GET /admin/filters/1.xml
   def show
     @filter_group = FilterGroup.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html
       format.xml { render :xml => @filter_group }
     end
   end
 
-  # GET /admin/filters/new
-  # GET /admin/filters/new.xml
   def new
     @filter_group = FilterGroup.new
 
@@ -32,14 +26,11 @@ class Admin::FilterGroupsController < Admin::ApplicationController
     end
   end
 
-  # GET /admin/filters/1/edit
   def edit
     @filter_group = FilterGroup.find(params[:id])
     render 'shared/edit_new'
   end
 
-  # POST /admin/filters
-  # POST /admin/filters.xml
   def create
     @filter_group = FilterGroup.new(params[:admin_filter])
 
@@ -57,8 +48,6 @@ class Admin::FilterGroupsController < Admin::ApplicationController
     end
   end
 
-  # PUT /admin/filters/1
-  # PUT /admin/filters/1.xml
   def update
     @filter_group = FilterGroup.find(params[:id])
 
@@ -76,8 +65,6 @@ class Admin::FilterGroupsController < Admin::ApplicationController
     end
   end
 
-  # DELETE /admin/filters/1
-  # DELETE /admin/filters/1.xml
   def destroy
     @filter_group = FilterGroup.find(params[:id])
     @filter_group.destroy

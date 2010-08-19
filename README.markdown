@@ -49,12 +49,14 @@ To run tests for custom extensions, use `RAILS_ENV=test rake test:custom`. Curre
 * finish options/settings and user preferences
 * make users and groups easily swappable for another user system, in part or in whole
 * default templates should look better
-* themes and node extensions should have a manifest (probably yaml) to specify their images and javascript dependencies and load order
+* templates and node extensions should have a manifest (probably yaml) to specify their images and javascript dependencies and load order
 * find a way to make non-content nodes (small scripts or styles) work
   * an admin may wish to include some extra styles or scripts into the document
   * these should allowed to be specified (optionally) these to be injected at the bottom of <head> or <body>
     * when injected they should not be wrapped with the normal <article> or <section> (naked)
 * 100% test code coverage
+* multiple different layouts à la http://www.primarycss.com/
+	* templates could specify which layout(s) they support in their manifest
 
 ## Wish List
 

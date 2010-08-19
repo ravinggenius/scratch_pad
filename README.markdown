@@ -55,7 +55,7 @@ To run tests for custom extensions, use `RAILS_ENV=test rake test:custom`. Curre
   * these should allowed to be specified (optionally) these to be injected at the bottom of <head> or <body>
     * when injected they should not be wrapped with the normal <article> or <section> (naked)
 * 100% test code coverage
-* multiple different layouts à la http://www.primarycss.com/
+* multiple different layouts à la http://www.primarycss.com/, but without presentations classes in the markup
 	* templates could specify which layout(s) they support in their manifest
 
 ## Wish List

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Admin::FiltersControllerTest < ActionController::TestCase
+class Admin::FilterGroupsControllerTest < ActionController::TestCase
   setup do
     @admin_filter = admin_filters(:one)
   end

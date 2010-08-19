@@ -15,8 +15,8 @@ class Admin::ApplicationController < ApplicationController
         { :name => 'Frontend', :href => admin_templates_path(:scope => :frontend) },
         { :name => 'Backend', :href => admin_templates_path(:scope => :backend) }
       ]},
-      { :name => 'Filters', :href=> admin_filters_path, :children => [
-        { :name => 'New', :href => new_admin_filter_path }
+      { :name => 'Filters', :href=> admin_filter_groups_path, :children => [
+        { :name => 'New', :href => new_admin_filter_group_path }
       ]},
       { :name => 'Users', :href => admin_users_path, :children => [
         { :name => 'New', :href => new_admin_user_path }

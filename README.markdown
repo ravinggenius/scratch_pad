@@ -28,7 +28,7 @@ To run tests for custom extensions, use `RAILS_ENV=test rake test:custom`. Curre
 
 ## Coding Standards
 
-* tests are good and should remain passing to the extent possible
+* tests are good and should remain passing at least to the extent that they were
 * 2 spaces indents
   * technically ruby doesn't care about indentation or whether spaces or tabs are used
     * however 2 space indents are the de facto standard that nearly every rubyist on the planet follows
@@ -48,12 +48,13 @@ To run tests for custom extensions, use `RAILS_ENV=test rake test:custom`. Curre
 
 * finish options/settings and user preferences
 * make users and groups easily swappable for another user system, in part or in whole
-* default theme should look better
-* themes and node extensions should have a manifest (probably yaml) to specify their javascript dependencies and load order
+* default templates should look better
+* themes and node extensions should have a manifest (probably yaml) to specify their images and javascript dependencies and load order
 * find a way to make non-content nodes (small scripts or styles) work
   * an admin may wish to include some extra styles or scripts into the document
   * these should allowed to be specified (optionally) these to be injected at the bottom of <head> or <body>
     * when injected they should not be wrapped with the normal <article> or <section> (naked)
+* 100% test code coverage
 
 ## Wish List
 

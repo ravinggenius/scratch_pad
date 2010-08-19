@@ -6,7 +6,7 @@ class Admin::FiltersController < Admin::ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @filter_groups }
+      format.xml { render :xml => @filter_groups }
     end
   end
 
@@ -17,7 +17,7 @@ class Admin::FiltersController < Admin::ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @filter }
+      format.xml { render :xml => @filter }
     end
   end
 
@@ -28,7 +28,7 @@ class Admin::FiltersController < Admin::ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @filter }
+      format.xml { render :xml => @filter }
     end
   end
 
@@ -45,13 +45,13 @@ class Admin::FiltersController < Admin::ApplicationController
     respond_to do |format|
       if @filter.save
         format.html { redirect_to([:admin, @filter], :notice => 'Filter was successfully created.') }
-        format.xml  { render :xml => @filter, :status => :created, :location => [:admin, @filter] }
+        format.xml { render :xml => @filter, :status => :created, :location => [:admin, @filter] }
       else
         format.html do
           flash[:error] = @filter.errors.full_messages
           render :action => 'new'
         end
-        format.xml  { render :xml => @filter.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @filter.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -64,13 +64,13 @@ class Admin::FiltersController < Admin::ApplicationController
     respond_to do |format|
       if @filter.update_attributes(params[:admin_filter])
         format.html { redirect_to([:admin, @filter], :notice => 'Filter was successfully updated.') }
-        format.xml  { head :ok }
+        format.xml { head :ok }
       else
         format.html do
           flash[:error] = @filter.errors.full_messages
           render :action => 'edit'
         end
-        format.xml  { render :xml => @filter.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @filter.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -83,7 +83,7 @@ class Admin::FiltersController < Admin::ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(admin_filters_url) }
-      format.xml  { head :ok }
+      format.xml { head :ok }
     end
   end
 end

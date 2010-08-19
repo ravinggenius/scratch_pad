@@ -4,7 +4,7 @@ class Admin::NodesController < Admin::ApplicationController
 
     respond_to do |format|
       format.html
-      format.xml  { render :xml => @nodes }
+      format.xml { render :xml => @nodes }
     end
   end
 
@@ -13,7 +13,7 @@ class Admin::NodesController < Admin::ApplicationController
 
   #  respond_to do |format|
   #    format.html
-  #    format.xml  { render :xml => @node }
+  #    format.xml { render :xml => @node }
   #  end
   #end
 
@@ -23,7 +23,7 @@ class Admin::NodesController < Admin::ApplicationController
 
     respond_to do |format|
       format.html
-      format.xml  { render :xml => @node }
+      format.xml { render :xml => @node }
     end
   end
 
@@ -38,14 +38,14 @@ class Admin::NodesController < Admin::ApplicationController
     respond_to do |format|
       if @node.save
         format.html { redirect_to(admin_nodes_url, :notice => "#{node_type.name} was successfully created.") }
-        format.xml  { render :xml => @node, :status => :created, :location => node_url(@node) }
+        format.xml { render :xml => @node, :status => :created, :location => node_url(@node) }
       else
         set_fieldset_ivars
         format.html do
           flash[:error] = @node.errors.full_messages
           render :action => 'new'
         end
-        format.xml  { render :xml => @node.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @node.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -56,14 +56,14 @@ class Admin::NodesController < Admin::ApplicationController
     respond_to do |format|
       if @node.update_attributes(params[:node])
         format.html { redirect_to(admin_nodes_url, :notice => "#{node_type.name} was successfully updated.") }
-        format.xml  { head :ok }
+        format.xml { head :ok }
       else
         set_fieldset_ivars
         format.html do
           flash[:error] = @node.errors.full_messages
           render :action => 'edit'
         end
-        format.xml  { render :xml => @node.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @node.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -74,7 +74,7 @@ class Admin::NodesController < Admin::ApplicationController
 
     respond_to do |format|
       format.html { redirect_to admin_nodes_url }
-      format.xml  { head :ok }
+      format.xml { head :ok }
     end
   end
 

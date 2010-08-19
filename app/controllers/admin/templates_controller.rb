@@ -7,7 +7,7 @@ class Admin::TemplatesController < Admin::ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @templates }
+      format.xml { render :xml => @templates }
     end
   end
 
@@ -18,7 +18,7 @@ class Admin::TemplatesController < Admin::ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @template }
+      format.xml { render :xml => @template }
     end
   end
 
@@ -29,7 +29,7 @@ class Admin::TemplatesController < Admin::ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @template }
+      format.xml { render :xml => @template }
     end
   end
 
@@ -46,13 +46,13 @@ class Admin::TemplatesController < Admin::ApplicationController
     respond_to do |format|
       if @template.save
         format.html { redirect_to([:admin, @template], :notice => 'Template was successfully created.') }
-        format.xml  { render :xml => @template, :status => :created, :location => [:admin, @template] }
+        format.xml { render :xml => @template, :status => :created, :location => [:admin, @template] }
       else
         format.html do
           flash[:error] = @template.errors.full_messages
           render :action => 'new'
         end
-        format.xml  { render :xml => @template.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @template.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -65,13 +65,13 @@ class Admin::TemplatesController < Admin::ApplicationController
     respond_to do |format|
       if @template.update_attributes(params[:template])
         format.html { redirect_to([:admin, @template], :notice => 'Template was successfully updated.') }
-        format.xml  { head :ok }
+        format.xml { head :ok }
       else
         format.html do
           flash[:error] = @template.errors.full_messages
           render :action => 'edit'
         end
-        format.xml  { render :xml => @template.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @template.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -84,7 +84,7 @@ class Admin::TemplatesController < Admin::ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(admin_templates_url) }
-      format.xml  { head :ok }
+      format.xml { head :ok }
     end
   end
 end

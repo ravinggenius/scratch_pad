@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.xml  { render :xml => @user }
+      format.xml { render :xml => @user }
     end
   end
 
@@ -15,11 +15,11 @@ class SessionsController < ApplicationController
       if @user && (@user.password == params[:user][:password])
         User.current = @user
         format.html { redirect_to(root_url, :notice => 'You have successfully signed in.') }
-        format.xml  { render :xml => @user, :status => :created, :location => @user }
+        format.xml { render :xml => @user, :status => :created, :location => @user }
       else
         message = 'You supplied an incorrect username or password.'
         format.html { render :action => 'new', :error => message }
-        format.xml  { render :xml => message, :status => :unprocessable_entity }
+        format.xml { render :xml => message, :status => :unprocessable_entity }
       end
     end
   end
@@ -29,7 +29,7 @@ class SessionsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(root_url) }
-      format.xml  { head :ok }
+      format.xml { head :ok }
     end
   end
 end

@@ -6,7 +6,7 @@ class Admin::VocabulariesController < Admin::ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @vocabularies }
+      format.xml { render :xml => @vocabularies }
     end
   end
 
@@ -17,7 +17,7 @@ class Admin::VocabulariesController < Admin::ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @vocabulary }
+      format.xml { render :xml => @vocabulary }
     end
   end
 
@@ -29,8 +29,8 @@ class Admin::VocabulariesController < Admin::ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @vocabulary }
-    end 
+      format.xml { render :xml => @vocabulary }
+    end
   end
 
   # GET /admin/vocabularies/1/edit
@@ -47,14 +47,14 @@ class Admin::VocabulariesController < Admin::ApplicationController
     respond_to do |format|
       if @vocabulary.save
         format.html { redirect_to([:admin, @vocabulary], :notice => 'vocabulary was successfully created.') }
-        format.xml  { render :xml => @vocabulary, :status => :created, :location => [:admin, @vocabulary] }
+        format.xml { render :xml => @vocabulary, :status => :created, :location => [:admin, @vocabulary] }
       else
         set_fieldset_ivars
         format.html do
           flash[:error] = @vocabulary.errors.full_messages
           render :action => 'new'
         end
-        format.xml  { render :xml => @vocabulary.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @vocabulary.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -67,14 +67,14 @@ class Admin::VocabulariesController < Admin::ApplicationController
     respond_to do |format|
       if @vocabulary.update_attributes(params[:vocabulary])
         format.html { redirect_to([:admin, @vocabulary], :notice => 'vocabulary was successfully updated.') }
-        format.xml  { head :ok }
+        format.xml { head :ok }
       else
         set_fieldset_ivars
         format.html do
           flash[:error] = @vocabulary.errors.full_messages
           render :action => 'edit'
         end
-        format.xml  { render :xml => @vocabulary.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @vocabulary.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -87,7 +87,7 @@ class Admin::VocabulariesController < Admin::ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(admin_vocabularies_url) }
-      format.xml  { head :ok }
+      format.xml { head :ok }
     end
   end
 

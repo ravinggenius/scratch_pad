@@ -21,7 +21,6 @@
       = partial 'shared/menu', :items => @main_menu_items
 
     %section#flash
-      / TODO move all messages to flash
       - [ :error, :warning, :notice ].each do |level|
         = partial 'shared/flash', :level => level, :messages => flash[level] if flash[level]
 

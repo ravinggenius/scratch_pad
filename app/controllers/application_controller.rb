@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   layout 'application'
   append_view_path NodeExtension.path
 
+  # TODO move these to settings in the database
   before_filter do
     @title = 'ScratchPad'
     @site_name = 'ScratchPad'

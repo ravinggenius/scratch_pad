@@ -112,8 +112,14 @@ class AssetsController < ApplicationController
       SASS
     end
 
+    # TODO Add settings for admin to select experimental support
     final_sass = <<-SASS
 @charset 'utf-8'
+$experimental-support-for-khtml: false
+$experimental-support-for-microsoft: false
+$experimental-support-for-mozilla: false
+$experimental-support-for-opera: false
+$experimental-support-for-webkit: false
     SASS
 
     @imports.each do |inc|

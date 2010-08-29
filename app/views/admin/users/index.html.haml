@@ -3,14 +3,14 @@
 
 %section
   %table#users_overview
-    %col.groups
     %col.actions
+    %col.groups
     %col.user-username
     %col.user-email
     %thead
       %tr
-        %th Groups
         %th Actions
+        %th Groups
         %th Username
         %th Email
     %tfoot
@@ -22,10 +22,10 @@
     %tbody
       - @users.each do |user|
         %tr
-          %td= user.groups.map { |group| group.name }.sort.join ', '
           %td
             %span.view= link_to 'View', [:admin, user]
             %span.edit= link_to 'Edit', edit_admin_user_path(user)
             %span.destroy= link_to 'Delete', [:admin, user], :confirm => 'Are you sure?', :method => :delete # FIXME clicking this simply GETs the resource
+          %td= user.groups.map { |group| group.name }.sort.join ', '
           %td= user.username
           %td= mail_to user.email

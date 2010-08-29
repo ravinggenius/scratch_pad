@@ -3,18 +3,18 @@
 
 %section
   %table#content_overview
+    %col.actions
     %col.node-type
     %col.filter-group
     %col.vocabularies
-    %col.actions
     %col.node-title
     %col.node-status
     %thead
       %tr
+        %th Actions
         %th Type
         %th Filter Group
         %th Vocabularies
-        %th Actions
         %th Title
         %th Status
     %tfoot
@@ -28,12 +28,12 @@
     %tbody
       - @nodes.each do |node|
         %tr
-          %td= node.extension.title
-          %td= node.filter_group.name
-          %td= node.vocabularies.map { |vocabulary| vocabulary.name }.sort.join ', '
           %td
             %span.view= link_to 'View', node
             %span.edit= link_to 'Edit', edit_admin_node_path(node)
             %span.destroy= link_to 'Delete', [:admin, node], :confirm => 'Are you sure?', :method => :delete # FIXME clicking this simply GETs the resource
+          %td= node.extension.title
+          %td= node.filter_group.name
+          %td= node.vocabularies.map { |vocabulary| vocabulary.name }.sort.join ', '
           %td.ancestors-0= node.title
           %td= node.is_published? ? 'Published' : 'Draft'

@@ -116,7 +116,7 @@ DEPENDENCIES
   maruku (~> 0.6)
   mongo (~> 1.0)
   mongo_mapper (~> 0.8)
-  rails (~> 3.0.0.rc)
+  rails (~> 3.0.0.rc2)
   rails3-generators
   ruby-debug
   ruby-prof

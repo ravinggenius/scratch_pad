@@ -5,9 +5,11 @@ class ApplicationController < ActionController::Base
 
   # TODO move these to settings in the database
   before_filter do
+    # TODO load default settings
     @title = 'ScratchPad'
     @site_name = 'ScratchPad'
     @site_tagline = ''
+    # TODO load user settings
   end
 
   after_filter do

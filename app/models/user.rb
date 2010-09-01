@@ -16,16 +16,16 @@ class User
 
   habtm :users, :groups
 
-  validates_confirmation_of :password
   validates_uniqueness_of :username
-
-  after_validation :ensure_hashword_is_set
+  validate :ensure_hashword_is_set
 
   def password
     @password ||= Password.new(hashword) rescue nil
   end
 
   def password=(new_password)
+    User.validates_confirmation_of :password
+
     temp = []
 
     if new_password.blank?

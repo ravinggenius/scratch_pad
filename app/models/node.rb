@@ -18,7 +18,6 @@ class Node
   habtm :nodes, :terms, :glue_model => :tagging
 
   before_save :set_children_ids
-  after_save :save_taggings
 
   def children
     self.children_ids ||= []

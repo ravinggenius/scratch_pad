@@ -7,6 +7,4 @@ class Term
 
   belongs_to :vocabulary
   habtm :terms, :nodes, :glue_model => :tagging
-
-  after_save :save_taggings
 end

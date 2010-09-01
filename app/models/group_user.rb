@@ -2,5 +2,5 @@ class GroupUser
   include MongoMapper::Document
   include Relationship
 
-  habtm_glue :group, :node
+  habtm_glue :group, :user
 end

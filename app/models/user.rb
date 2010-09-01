@@ -11,6 +11,7 @@ class User
   cattr_accessor :anonymous, :current
 
   key :email, String, :required => true
+  key :name, String, :required => true
   key :username, String, :required => true
   key :hashword, String
 
@@ -24,7 +25,7 @@ class User
   end
 
   def password=(new_password)
-    User.validates_confirmation_of :password
+    #User.validates_confirmation_of :password # TODO find a home for this
 
     temp = []
 

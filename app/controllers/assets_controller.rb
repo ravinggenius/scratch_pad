@@ -113,6 +113,9 @@ class AssetsController < ApplicationController
     end
 
     # TODO Add settings for admin to select experimental support
+    # variable reference
+    # http://compass-style.org/docs/index/variables/
+    # http://compass-users.googlegroups.com/web/_skeleton.css.sass
     final_sass = <<-SASS
 @charset 'utf-8'
 $experimental-support-for-khtml: false

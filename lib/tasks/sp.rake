@@ -3,7 +3,7 @@ def password(length = 12)
   (0...length).map { alphanumerics[Kernel.rand(alphanumerics.size)] }.join
 end
 
-namespace :scratch_pad do
+namespace :sp do
   desc 'Sets up users, groups and default settings'
   task :setup => [:environment, :users, :settings] do
   end

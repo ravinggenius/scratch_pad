@@ -14,8 +14,8 @@
 
   %body{ :id => page_id, :class => page_classes }
     %header#branding
-      %span.h= link_to @site_name, root_path
-      %span= @site_tagline
+      %span.h= link_to setting('core.site.name'), root_path
+      %span= setting('core.site.tagline')
 
     %nav#main_menu
       = partial 'shared/menu', :items => @main_menu_items

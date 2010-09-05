@@ -3,16 +3,11 @@ class ApplicationController < ActionController::Base
   layout 'application'
   append_view_path NodeExtension.path
 
-  # TODO move these to settings in the database
   before_filter do
-    # TODO load default settings
-    @title = 'ScratchPad'
-    @site_name = 'ScratchPad'
-    @site_tagline = ''
-    # TODO load user settings
+    @title = Setting['core.site.name'].value_for(User.current).value
   end
 
   after_filter do
-    session[:current_user_id] = User.current.id if User.current
+    session[:current_user_id] = User.current.id
   end
 end

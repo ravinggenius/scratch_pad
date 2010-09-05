@@ -7,14 +7,15 @@ class Setting
   many :options
   many :values
 
-  # TODO need to load default value before user-specific value
   def value_for(user)
-    values.first :creator_id => user.id
+    begin
+      values.first :creator_id => user.id
+    rescue
+      values.first :creator_id => User.anonymous.id
+    end
   end
 
-  # this loads all values associated with this setting
   def self.[](code)
-    @loaded ||= {}
-    @loaded[code] ||= Setting.first(:scope => code)
+    Setting.first :scope => code
   end
 end

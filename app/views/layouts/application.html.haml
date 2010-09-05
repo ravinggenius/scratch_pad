@@ -13,12 +13,13 @@
 
     = javascript_include_tag assets_scripts_path(:template => 'default')
 
+    / TODO implement as a scion
     = render 'shared/tracking_google', :google_analytics_tracking_code => '123456789.00' if @show_tracking_google
 
   %body{ :id => page_id, :class => page_classes }
     %header#branding
-      %span.h= link_to @site_name, root_path
-      %span= @site_tagline
+      %span.h= link_to setting('core.site.name'), root_path
+      %span= setting('core.site.tagline')
 
     %nav#main_menu
       %ul
@@ -31,7 +32,9 @@
       = yield
 
     %footer#credits
-      %p= raw "&copy; #{@site_name}"
+      %p= raw "&copy; #{setting('core.site.name')}"
 
+    / TODO implement as a scion
     = render 'shared/unobtrusive' if @show_unobtrusive_badge
+    / TODO implement as a scion
     = render 'shared/tracking_woopra' if @show_tracking_woopra

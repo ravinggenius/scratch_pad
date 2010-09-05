@@ -4,7 +4,7 @@ def password(length = 12)
 end
 
 namespace :scratch_pad do
-  desc 'Sets up users and groups'
+  desc 'Sets up users, groups and default settings'
   task :setup => [:environment, :users, :settings] do
   end
 
@@ -23,7 +23,7 @@ namespace :scratch_pad do
     root.groups << Group.first(:code => :root)
     root.save
 
-    puts 'Added users'
+    puts 'Added users and groups'
   end
 
   desc 'Adds the minimal required user groups'
@@ -35,12 +35,12 @@ namespace :scratch_pad do
 
   desc 'Initialize settings'
   task :settings => [:environment, :users] do
-    root = User.first :username => :root
+    user = User.anonymous
 
-    Value.create :creator_id => root.id, :updater_id => root.id, :setting_id => Setting.create(:scope => 'core.templates.active', :name => 'Frontend Template').id, :value => 'default'
-    Value.create :creator_id => root.id, :updater_id => root.id, :setting_id => Setting.create(:scope => 'core.templates.active.admin', :name => 'Backend Template').id, :value => 'default_admin'
-    Value.create :creator_id => root.id, :updater_id => root.id, :setting_id => Setting.create(:scope => 'core.site.name', :name => 'Site Name').id, :value => 'ScratchPad'
-    Value.create :creator_id => root.id, :updater_id => root.id, :setting_id => Setting.create(:scope => 'core.site.tagline', :name => 'Site Tagline').id, :value => '...'
+    Value.create :creator_id => user.id, :updater_id => user.id, :setting_id => Setting.create(:scope => 'core.templates.active', :name => 'Frontend Template').id, :value => 'default'
+    Value.create :creator_id => user.id, :updater_id => user.id, :setting_id => Setting.create(:scope => 'core.templates.active.admin', :name => 'Backend Template').id, :value => 'default_admin'
+    Value.create :creator_id => user.id, :updater_id => user.id, :setting_id => Setting.create(:scope => 'core.site.name', :name => 'Site Name').id, :value => 'ScratchPad'
+    Value.create :creator_id => user.id, :updater_id => user.id, :setting_id => Setting.create(:scope => 'core.site.tagline', :name => 'Site Tagline').id, :value => '...'
 
     puts 'Default settings have been loaded'
   end
@@ -55,9 +55,8 @@ namespace :scratch_pad do
   namespace :scions do
     desc 'List Templates with status'
     task :templates => :environment do
-      root = User.first :username => :root
-      active_template = Setting['core.templates.active'].value_for(root).value
-      active_admin_template = Setting['core.templates.active.admin'].value_for(root).value
+      active_template = Setting['core.templates.active'].value_for(User.anonymous).value
+      active_admin_template = Setting['core.templates.active.admin'].value_for(User.anonymous).value
       Template.all.each do |template|
         puts "#{template.title} is #{template.name == active_template ? 'active' : 'inactive'}"
       end

@@ -8,7 +8,6 @@ class User
   include Relationship
 
   attr_writer :password_confirmation
-  cattr_accessor :anonymous, :current
 
   key :email, String, :required => true
   key :name, String, :required => true
@@ -42,6 +41,22 @@ class User
     else
       temp.each { |message| errors.add(:password, message) }
     end
+  end
+
+  def self.current
+    @current || anonymous
+  end
+
+  def self.current=(user)
+    @current = user
+  end
+
+  def self.anonymous
+    @anon ||= first :username => 'anon'
+  end
+
+  def self.root
+    @root ||= first :username => 'root'
   end
 
   private

@@ -37,4 +37,16 @@ module ApplicationHelper
     path = "nodes/#{part}" unless template_exists? path, nil, true
     partial path, locals.merge(:node => node)
   end
+
+  # Usage:
+  # setting('core.templates.active')       #=> 'default'
+  # setting('core.templates.active.admin') #=> 'default_admin'
+  # setting('core.site.name')              #=> 'ScratchPad'
+  # setting('core.site.tagline')           #=> '...'
+  # setting('template.<name>.<some_setting>') #=> 3
+  # setting('node_extension.<name>.<...>') #=> 'alternate'
+  # TODO this method likely will require modification
+  def setting(scope)
+    Setting[scope].value_for(User.current).value
+  end
 end

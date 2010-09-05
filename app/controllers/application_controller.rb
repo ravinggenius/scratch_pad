@@ -15,17 +15,4 @@ class ApplicationController < ActionController::Base
   after_filter do
     session[:current_user_id] = User.current.id if User.current
   end
-
-  protected
-
-  # Usage:
-  # setting('core.templates.active')       #=> 'default'
-  # setting('core.templates.active.admin') #=> 'default_admin'
-  # setting('core.site.name')              #=> 'ScratchPad'
-  # setting('core.site.tagline')           #=> '...'
-  # setting('template.<name>.<some_setting>') #=> 3
-  # setting('node_extension.<name>.<...>') #=> 'alternate'
-  def setting(scope)
-    Setting[scope].value_for(User.current).value
-  end
 end

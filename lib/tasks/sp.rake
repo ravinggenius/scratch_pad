@@ -35,12 +35,12 @@ namespace :sp do
 
   desc 'Initialize settings'
   task :settings => [:environment, :users] do
-    user = User.anonymous
+    common = { :creator_id => User.anonymous.id, :updater_id => User.anonymous.id }
 
-    Value.create :creator_id => user.id, :updater_id => user.id, :setting_id => Setting.create(:scope => 'core.templates.active', :name => 'Frontend Template').id, :value => 'default'
-    Value.create :creator_id => user.id, :updater_id => user.id, :setting_id => Setting.create(:scope => 'core.templates.active.admin', :name => 'Backend Template').id, :value => 'default_admin'
-    Value.create :creator_id => user.id, :updater_id => user.id, :setting_id => Setting.create(:scope => 'core.site.name', :name => 'Site Name').id, :value => 'ScratchPad'
-    Value.create :creator_id => user.id, :updater_id => user.id, :setting_id => Setting.create(:scope => 'core.site.tagline', :name => 'Site Tagline').id, :value => '...'
+    Value.create common.merge(:setting_id => Setting.create(:scope => 'core.templates.active', :name => 'Frontend Template').id, :value => 'default')
+    Value.create common.merge(:setting_id => Setting.create(:scope => 'core.templates.active.admin', :name => 'Backend Template').id, :value => 'default_admin')
+    Value.create common.merge(:setting_id => Setting.create(:scope => 'core.site.name', :name => 'Site Name').id, :value => 'ScratchPad')
+    Value.create common.merge(:setting_id => Setting.create(:scope => 'core.site.tagline', :name => 'Site Tagline').id, :value => '...')
 
     puts 'Default settings have been loaded'
   end

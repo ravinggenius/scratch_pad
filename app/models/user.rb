@@ -19,6 +19,10 @@ class User
   validates_uniqueness_of :username
   validate :ensure_hashword_is_set
 
+  def is_locked?
+    groups.include? Group.locked
+  end
+
   def password
     @password ||= Password.new(hashword) rescue nil
   end

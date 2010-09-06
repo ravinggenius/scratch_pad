@@ -17,4 +17,12 @@ class Group
   def validate_access_code
     # TODO fill this in
   end
+
+  def self.locked
+    @locked ||= first :code => :locked
+  end
+
+  def self.root
+    @root ||= first :code => :root
+  end
 end

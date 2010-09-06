@@ -112,17 +112,15 @@ class AssetsController < ApplicationController
       SASS
     end
 
-    # TODO Add settings for admin to select experimental support
-    # variable reference
     # http://compass-style.org/docs/index/variables/
     # http://compass-users.googlegroups.com/web/_skeleton.css.sass
     final_sass = <<-SASS
 @charset 'utf-8'
-$experimental-support-for-khtml: false
-$experimental-support-for-microsoft: false
-$experimental-support-for-mozilla: false
-$experimental-support-for-opera: false
-$experimental-support-for-webkit: false
+$experimental-support-for-khtml: #{Setting['core.styles.experimental.khtml'].value_for(User.current).value}
+$experimental-support-for-microsoft: #{Setting['core.styles.experimental.microsoft'].value_for(User.current).value}
+$experimental-support-for-mozilla: #{Setting['core.styles.experimental.mozilla'].value_for(User.current).value}
+$experimental-support-for-opera: #{Setting['core.styles.experimental.opera'].value_for(User.current).value}
+$experimental-support-for-webkit: #{Setting['core.styles.experimental.webkit'].value_for(User.current).value}
     SASS
 
     @imports.each do |inc|

@@ -7,6 +7,11 @@ class ApplicationController < ActionController::Base
     @title = Setting['core.site.name'].value_for(User.current).value
   end
 
+  before_filter do
+    # TODO check authentication
+    # TODO check authorization
+  end
+
   after_filter do
     session[:current_user_id] = User.current.id
   end

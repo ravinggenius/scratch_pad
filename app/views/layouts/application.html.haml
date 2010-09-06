@@ -28,6 +28,10 @@
         -else
           %li= link_to 'User Profile', node_path(User.current)
 
+    %section#flash
+      - [ :error, :warning, :notice ].each do |level|
+        = partial 'shared/flash', :level => level, :messages => flash[level] if flash[level]
+
     %section#content
       = yield
 

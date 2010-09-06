@@ -12,12 +12,16 @@ class SessionsController < ApplicationController
     @user = User.first :username => params[:user][:username]
 
     respond_to do |format|
-      if @user && (@user.password == params[:user][:password])
+      if @user && !@user.is_locked? && (@user.password == params[:user][:password])
         User.current = @user
         format.html { redirect_to(root_url, :notice => 'You have successfully signed in.') }
         format.xml { render :xml => @user, :status => :created, :location => @user }
       else
-        message = 'You supplied an incorrect username or password.'
+        message = if @user && @user.is_locked?
+          'Your account has been locked. Please contact a site administrator for assistance.'
+        else
+          'You supplied an incorrect username or password.'
+        end
         format.html { render :action => 'new', :error => message }
         format.xml { render :xml => message, :status => :unprocessable_entity }
       end

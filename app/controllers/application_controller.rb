@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   end
 
   before_filter do
-    # TODO check authentication
+    User.current = User.find session[:current_user_id]
     # TODO check authorization
   end
 

@@ -18,33 +18,19 @@ class User
 
   validates_uniqueness_of :username
   validate :ensure_hashword_is_set
+  validate :ensure_password_is_secure
 
   def is_locked?
     groups.include? Group.locked
   end
 
   def password
-    @password ||= Password.new(hashword) rescue nil
+    @hash ||= Password.new(hashword) rescue nil
   end
 
   def password=(new_password)
-    #User.validates_confirmation_of :password # TODO find a home for this
-
-    temp = []
-
-    if new_password.blank?
-      temp << 'can\'t be empty'
-    else
-      # TODO add other requirements here
-      temp << 'is too short' unless new_password.length > 6
-    end
-
-    if temp.empty?
-      @password = Password.create(new_password)
-      self.hashword = @password
-    else
-      temp.each { |message| errors.add(:password, message) }
-    end
+    @new_password = new_password
+    self.hashword = @hash = Password.create(new_password)
   end
 
   def self.current
@@ -66,7 +52,32 @@ class User
   private
 
   def ensure_hashword_is_set
-    errors.add(:password, 'can\'t be empty') if hashword.blank?
+    errors[:password] << 'can\'t be empty' if hashword.blank?
+  end
+
+  def ensure_password_is_secure
+    #self.class.validates_confirmation_of :password # TODO find a home for this
+
+    if @new_password.blank?
+      errors[:password] << 'can\'t be empty'
+    else
+      min_length = begin
+        Setting['core.user.password.min_length'].value_for(User.current).value
+      rescue
+        8
+      end
+      requirements = {}
+      requirements[:length]     = /(?=.{#{min_length},})/
+      requirements[:upper_case] = /(?=.*[A-Z])/
+      requirements[:lower_case] = /(?=.*[a-z])/
+      requirements[:digits]     = /(?=.*[\d])/
+      requirements[:special]    = /(?=.*[\W])/
+      regex = /^.*#{requirements.values.join}.*$/
+      unless @new_password =~ regex
+        errors[:password] << 'is not complex enough'
+        errors[:password] << "must be at least #{min_length} characters long and contain at least one of each of the following: lower-case letter, upper-case letter, digit and symbol"
+      end
+    end
   end
 
   private :hashword, :hashword=

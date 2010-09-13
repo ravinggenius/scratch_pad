@@ -5,7 +5,27 @@ end
 
 namespace :sp do
   desc 'Sets up users, groups and default settings'
-  task :setup => [:environment, :users, :settings] do
+  task :setup => [:environment, :settings] do
+  end
+
+  desc 'Initialize settings'
+  task :settings => [:environment, :users] do
+    common = { :creator_id => User.anonymous.id, :updater_id => User.anonymous.id }
+
+    Value.first_or_create common.merge(:setting_id => Setting.first_or_create(:scope => 'core.templates.active', :name => 'Frontend Template').id, :value => 'default')
+    Value.first_or_create common.merge(:setting_id => Setting.first_or_create(:scope => 'core.templates.active.admin', :name => 'Backend Template').id, :value => 'default_admin')
+    Value.first_or_create common.merge(:setting_id => Setting.first_or_create(:scope => 'core.site.name', :name => 'Site Name').id, :value => 'ScratchPad')
+    Value.first_or_create common.merge(:setting_id => Setting.first_or_create(:scope => 'core.site.tagline', :name => 'Site Tagline').id, :value => '...')
+
+    Value.first_or_create common.merge(:setting_id => Setting.first_or_create(:scope => 'core.user.password.min_length', :name => 'Minimum Password Length').id, :value => 8)
+
+    Value.first_or_create common.merge(:setting_id => Setting.first_or_create(:scope => 'core.styles.experimental.khtml', :name => 'Experimental Support For KHTML').id, :value => false)
+    Value.first_or_create common.merge(:setting_id => Setting.first_or_create(:scope => 'core.styles.experimental.microsoft', :name => 'Experimental Support For Microsoft').id, :value => false)
+    Value.first_or_create common.merge(:setting_id => Setting.first_or_create(:scope => 'core.styles.experimental.mozilla', :name => 'Experimental Support For Mozilla').id, :value => false)
+    Value.first_or_create common.merge(:setting_id => Setting.first_or_create(:scope => 'core.styles.experimental.opera', :name => 'Experimental Support For Opera').id, :value => false)
+    Value.first_or_create common.merge(:setting_id => Setting.first_or_create(:scope => 'core.styles.experimental.webkit', :name => 'Experimental Support For WebKit').id, :value => false)
+
+    puts 'Default settings have been loaded'
   end
 
   desc 'Adds the required users'
@@ -31,24 +51,6 @@ namespace :sp do
     Group.first_or_create :access_code => 0, :code => :locked, :name => 'Locked Users'
     Group.first_or_create :access_code => 1, :code => :root, :name => 'SuperAdmins'
     puts 'Added groups'
-  end
-
-  desc 'Initialize settings'
-  task :settings => [:environment, :users] do
-    common = { :creator_id => User.anonymous.id, :updater_id => User.anonymous.id }
-
-    Value.first_or_create common.merge(:setting_id => Setting.first_or_create(:scope => 'core.templates.active', :name => 'Frontend Template').id, :value => 'default')
-    Value.first_or_create common.merge(:setting_id => Setting.first_or_create(:scope => 'core.templates.active.admin', :name => 'Backend Template').id, :value => 'default_admin')
-    Value.first_or_create common.merge(:setting_id => Setting.first_or_create(:scope => 'core.site.name', :name => 'Site Name').id, :value => 'ScratchPad')
-    Value.first_or_create common.merge(:setting_id => Setting.first_or_create(:scope => 'core.site.tagline', :name => 'Site Tagline').id, :value => '...')
-
-    Value.first_or_create common.merge(:setting_id => Setting.first_or_create(:scope => 'core.styles.experimental.khtml', :name => 'Experimental Support For KHTML').id, :value => false)
-    Value.first_or_create common.merge(:setting_id => Setting.first_or_create(:scope => 'core.styles.experimental.microsoft', :name => 'Experimental Support For Microsoft').id, :value => false)
-    Value.first_or_create common.merge(:setting_id => Setting.first_or_create(:scope => 'core.styles.experimental.mozilla', :name => 'Experimental Support For Mozilla').id, :value => false)
-    Value.first_or_create common.merge(:setting_id => Setting.first_or_create(:scope => 'core.styles.experimental.opera', :name => 'Experimental Support For Opera').id, :value => false)
-    Value.first_or_create common.merge(:setting_id => Setting.first_or_create(:scope => 'core.styles.experimental.webkit', :name => 'Experimental Support For WebKit').id, :value => false)
-
-    puts 'Default settings have been loaded'
   end
 
   desc 'Load the seed data from db/seeds.rb'

@@ -2,6 +2,10 @@ class Admin::ApplicationController < ApplicationController
   layout 'admin'
 
   before_filter do
+    authorize!
+  end
+
+  before_filter do
     @main_menu_items = [
       { :name => 'Dashboard', :href => admin_root_path },
       { :name => 'Content', :href => admin_nodes_path, :children => [

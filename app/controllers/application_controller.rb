@@ -9,10 +9,27 @@ class ApplicationController < ActionController::Base
 
   before_filter do
     User.current = User.find session[:current_user_id]
-    # TODO check authorization
   end
 
   after_filter do
     session[:current_user_id] = User.current.id
+  end
+
+  protected
+
+  def authorize(*allowed_groups)
+    # root user is always allowed access to everything
+    return true if User.current == User.root
+
+    # root group does not have to be specified, it is always allowed
+    (allowed_groups << Group.root).each { |group| return true if User.current.groups.include? group }
+
+    false
+  end
+
+  def authorize!(*allowed_groups)
+    unless authorize allowed_groups
+      flash[:error] = 'You do not have permission to do that.'
+    end
   end
 end

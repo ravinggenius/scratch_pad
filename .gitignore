@@ -20,6 +20,7 @@ nbproject/**/*
 .project
 public/stylesheets/*.css
 .rake_tasks~
+.rspec
 .sass-cache
 .sass-cache/*
 .sass-cache/**/*

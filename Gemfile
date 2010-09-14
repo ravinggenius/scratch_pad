@@ -20,3 +20,11 @@ end
 group :production do
   gem 'thin'
 end
+
+group :development, :test do
+  gem 'rspec',               '~> 2.0.0.beta.22'
+  gem 'rspec-core'
+  gem 'rspec-expectations'
+  gem 'rspec-mocks'
+  gem 'rspec-rails',         '~> 2.0.0.beta.22'
+end

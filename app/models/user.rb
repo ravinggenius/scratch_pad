@@ -33,20 +33,22 @@ class User
     self.hashword = @hash = Password.create(new_password)
   end
 
+  # TODO ensure that User.current is thread-safe!
   def self.current
     @current || anonymous
   end
 
+  # TODO ensure that User.current= is thread-safe!
   def self.current=(user)
     @current = user
   end
 
   def self.anonymous
-    @anon ||= first :username => 'anon'
+    @anon ||= first :username => :anon
   end
 
   def self.root
-    @root ||= first :username => 'root'
+    @root ||= first :username => :root
   end
 
   private

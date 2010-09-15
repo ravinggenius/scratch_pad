@@ -116,12 +116,15 @@ class AssetsController < ApplicationController
     # http://compass-users.googlegroups.com/web/_skeleton.css.sass
     final_sass = <<-SASS
 @charset 'utf-8'
-$experimental-support-for-khtml: #{Setting['core.styles.experimental.khtml'].user_value}
-$experimental-support-for-microsoft: #{Setting['core.styles.experimental.microsoft'].user_value}
-$experimental-support-for-mozilla: #{Setting['core.styles.experimental.mozilla'].user_value}
-$experimental-support-for-opera: #{Setting['core.styles.experimental.opera'].user_value}
-$experimental-support-for-webkit: #{Setting['core.styles.experimental.webkit'].user_value}
     SASS
+
+    Setting.all(:scope => /core.styles.experimental/).each do |setting|
+      browser = setting.scope.gsub 'core.styles.experimental.', ''
+      value = Setting["core.styles.experimental.#{browser}"].user_value
+      final_sass << <<-SASS
+$experimental-support-for-#{browser}: #{value ? 'true' : 'false'}
+      SASS
+    end
 
     @imports.each do |inc|
       final_sass << <<-SASS

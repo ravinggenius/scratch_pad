@@ -6,12 +6,10 @@
     %meta{ 'http-equiv' => 'Content-Type', 'content' => 'application/xhtml+xml; charset=utf-8' }/
     = csrf_meta_tag
 
-    - # %link{ :rel => 'shortcut icon', :href => '/images/favicon.ico' }/
+    /%link{ :rel => 'shortcut icon', :href => '/images/favicon.ico' }/
 
-    = stylesheet_link_tag assets_styles_path(:template => 'default_admin'), :media => 'all'
-
-    = javascript_include_tag assets_scripts_path(:template => 'default_admin')
-
+    / TODO stop hard-coding template name
+    = template_tags 'default_admin' # setting('core.templates.active.admin')
   %body{ :id => page_id, :class => page_classes }
     %header#branding
       %span.h= link_to setting('core.site.name'), root_path

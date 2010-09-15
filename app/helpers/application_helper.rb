@@ -49,4 +49,11 @@ module ApplicationHelper
   def setting(scope)
     Setting[scope].user_value rescue nil
   end
+
+  def template_tags(template)
+    reply = ''
+    reply << stylesheet_link_tag(assets_styles_path(:template => template), :media => 'all')
+    reply << javascript_include_tag(assets_scripts_path(:template => template))
+    reply.html_safe
+  end
 end

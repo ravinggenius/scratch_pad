@@ -64,7 +64,7 @@ class User
       errors[:password] << 'can\'t be empty'
     else
       min_length = begin
-        Setting['core.user.password.min_length'].value_for(User.current).value
+        Setting['core.user.password.min_length'].user_value
       rescue
         8
       end

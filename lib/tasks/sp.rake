@@ -63,8 +63,8 @@ namespace :sp do
   namespace :scions do
     desc 'List Templates with status'
     task :templates => :environment do
-      active_template = Setting['core.templates.active'].value_for(User.anonymous).value
-      active_admin_template = Setting['core.templates.active.admin'].value_for(User.anonymous).value
+      active_template = Setting['core.templates.active'].user_value
+      active_admin_template = Setting['core.templates.active.admin'].user_value
       Template.all.each do |template|
         puts "#{template.title} is #{template.name == active_template ? 'active' : 'inactive'}"
       end

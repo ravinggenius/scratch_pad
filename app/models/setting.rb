@@ -7,12 +7,12 @@ class Setting
   many :options
   many :values
 
-  def value_for(user)
+  def user_value
     begin
-      values.first :creator_id => user.id
+      values.first :creator_id => User.current.id
     rescue
       values.first :creator_id => User.anonymous.id
-    end
+    end.value
   end
 
   def self.[](code)

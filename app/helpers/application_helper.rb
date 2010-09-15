@@ -47,6 +47,6 @@ module ApplicationHelper
   # setting('node_extension.<name>.<...>') #=> 'alternate'
   # TODO this method likely will require modification
   def setting(scope)
-    Setting[scope].value_for(User.current).value
+    Setting[scope].user_value rescue nil
   end
 end

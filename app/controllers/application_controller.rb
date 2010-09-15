@@ -4,11 +4,11 @@ class ApplicationController < ActionController::Base
   append_view_path NodeExtension.path
 
   before_filter do
-    @title = Setting['core.site.name'].value_for(User.current).value
+    User.current = User.find session[:current_user_id]
   end
 
   before_filter do
-    User.current = User.find session[:current_user_id]
+    @title = Setting['core.site.name'].user_value
   end
 
   after_filter do

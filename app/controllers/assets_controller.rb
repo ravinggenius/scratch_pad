@@ -167,7 +167,6 @@ $experimental-support-for-#{browser}: #{value.blank? ? 'false' : value}
   end
 
   def template
-    # TODO dynamically assign a template (template should be selectable, at least by root)
     @template ||= Template.new params[:template]
   end
 end

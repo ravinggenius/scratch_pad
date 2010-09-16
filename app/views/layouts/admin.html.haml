@@ -8,8 +8,7 @@
 
     /%link{ :rel => 'shortcut icon', :href => '/images/favicon.ico' }/
 
-    / TODO stop hard-coding template name
-    = template_tags 'default_admin' # setting('core.templates.active.admin')
+    = template_tags setting('core.templates.active.admin')
   %body{ :id => page_id, :class => page_classes }
     %header#branding
       %span.h= link_to setting('core.site.name'), root_path

@@ -22,12 +22,13 @@ namespace :sp do
       { :scope => 'core.styles.experimental.opera',     :name => 'Experimental Support For Opera',     :value => false },
       { :scope => 'core.styles.experimental.webkit',    :name => 'Experimental Support For WebKit',    :value => false }
     ].each do |setting|
-      Value.first_or_create({
+      v = Value.first_or_new({
         :creator_id => User.anonymous.id,
         :updater_id => User.anonymous.id,
-        :setting_id => Setting.first_or_create(:scope => setting[:scope], :name => setting[:name]).id,
         :value => setting[:value]
       })
+      v.setting = Setting.first_or_create(:scope => setting[:scope], :name => setting[:name])
+      v.save
     end
 
     puts 'Default settings have been loaded'

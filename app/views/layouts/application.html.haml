@@ -9,8 +9,7 @@
     - # %link{ :rel => 'shortcut icon', :href => '/images/favicon.ico' }/
     = auto_discovery_link_tag
 
-    / TODO stop hard-coding template name
-    = template_tags 'default' # setting('core.templates.active')
+    = template_tags setting('core.templates.active')
 
     / TODO implement as a scion
     = render 'shared/tracking_google', :google_analytics_tracking_code => '123456789.00' if @show_tracking_google

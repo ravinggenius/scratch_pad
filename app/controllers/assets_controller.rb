@@ -122,7 +122,7 @@ class AssetsController < ApplicationController
       browser = setting.scope.gsub 'core.styles.experimental.', ''
       value = Setting["core.styles.experimental.#{browser}"].user_value
       final_sass << <<-SASS
-$experimental-support-for-#{browser}: #{value ? 'true' : 'false'}
+$experimental-support-for-#{browser}: #{value.blank? ? 'false' : value}
       SASS
     end
 

@@ -41,7 +41,7 @@ module ScratchPad
     config.generators do |g|
       g.orm = :mongo_mapper
       g.template_engine = :haml
-      #g.test_framework = :shoulda, :fixtures => true
+      g.test_framework :rspec, :fixtures => true
     end
 
     # JavaScript files you want as :defaults (application.js is always included).

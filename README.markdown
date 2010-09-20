@@ -53,10 +53,10 @@ To run tests for custom extensions, use `RAILS_ENV=test rake test:custom`. Curre
 * find a way to make non-content nodes (small scripts or styles) work
   * an admin may wish to include some extra styles or scripts into the document
   * these should allowed to be specified (optionally) these to be injected at the bottom of <head> or <body>
-    * when injected they should not be wrapped with the normal <article> or <section> (naked)
+    * when injected they should not be wrap\ped with the normal <article> or <section> (naked)
 * 100% test code coverage
 * multiple different layouts à la http://www.primarycss.com/, but without presentations classes in the markup
-	* templates could specify which layout(s) they support in their manifest
+  * templates could specify which layout(s) they support in their manifest
 
 ## Wish List
 
@@ -65,7 +65,7 @@ To run tests for custom extensions, use `RAILS_ENV=test rake test:custom`. Curre
 ## Inspiration
 
 * administration
-	* http://codex.wordpress.org/Administration_Panels
-	* http://docs.harmonyapp.com/managing-content/
+  * http://codex.wordpress.org/Administration_Panels
+  * http://docs.harmonyapp.com/managing-content/
 * nodes and taxonomy
-	* http://drupal.org/getting-started/before/terminology
+  * http://drupal.org/getting-started/before/terminology

@@ -1,4 +1,4 @@
-ScratchPad::Application.routes.draw do |map|
+ScratchPad::Application.routes.draw do
   resources :nodes, :only => [:index, :show]
   resources :sessions, :only => [:new, :create, :destroy]
 

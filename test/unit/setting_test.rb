@@ -7,7 +7,7 @@ class SettingTest < ActiveSupport::TestCase
 
   test 'expected api' do
     assert_class_api Setting, :[]
-    assert_instance_api Setting, :code, :code=, :name, :name=, :scope, :scope=
+    assert_instance_api Setting, :name, :name=, :scope, :scope=
   end
 
   test 'static methods' do

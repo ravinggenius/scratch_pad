@@ -6,7 +6,7 @@ class Node
   include Relationship
 
   key :filter_group_id, BSON::ObjectID, :required => true
-  key :children_ids, Array, :typecast => 'ObjectID' # TODO move heirarchy to separate model
+  key :children_ids, Array, :typecast => 'BSON::ObjectID' # TODO move heirarchy to separate model
   key :is_published, Boolean, :default => false
   key :title, String, :required => true
   key :position, Integer, :default => 0

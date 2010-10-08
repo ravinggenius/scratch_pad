@@ -1,3 +1,5 @@
+require Rails.root + 'lib' + 'http_statuses'
+
 class ApplicationController < ActionController::Base
   protect_from_forgery
   layout 'application'
@@ -30,6 +32,7 @@ class ApplicationController < ActionController::Base
   def authorize!(*allowed_groups)
     unless authorize allowed_groups
       flash[:error] = 'You do not have permission to do that.'
+      raise HTTPStatuses::Unauthorized
     end
   end
 end

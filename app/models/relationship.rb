@@ -24,7 +24,7 @@ module Relationship
         model_a => model_b,
         model_b => model_a
       }.each do |this_model, that_model|
-        key Private.id_key(this_model), BSON::ObjectID, :required => true
+        key Private.id_key(this_model), BSON::ObjectId, :required => true
 
         define_method this_model do
           Private.klass(this_model).find(self.send(Private.id_key(this_model)))

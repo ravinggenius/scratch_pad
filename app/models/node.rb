@@ -5,7 +5,7 @@ class Node
   include MongoMapper::Document
   include Relationship
 
-  key :filter_group_id, BSON::ObjectID, :required => true
+  key :filter_group_id, BSON::ObjectId, :required => true
   key :children_ids, Array, :typecast => 'BSON::ObjectID' # TODO move heirarchy to separate model
   key :is_published, Boolean, :default => false
   key :title, String, :required => true

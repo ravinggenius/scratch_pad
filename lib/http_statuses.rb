@@ -111,7 +111,7 @@ module HTTPStatuses
     klass.cattr_accessor(:status)
     klass.status = status_symbol
     const_set(const, klass)
-    return const_get(const)
+    const_get(const)
   end
 
   # The default handler for raised HTTP status exceptions. It will render a

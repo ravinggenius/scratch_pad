@@ -149,7 +149,3 @@ module HTTPStatuses
     head(exception.status)
   end
 end
-
-# Include the HTTPStatuses module into <tt>ActionController::Base</tt> to enable
-# the <tt>http_status_exception</tt> exception handler.
-ActionController::Base.send(:include, HTTPStatuses)

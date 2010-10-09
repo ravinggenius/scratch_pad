@@ -1,6 +1,8 @@
 require Rails.root + 'lib' + 'http_statuses'
 
 class ApplicationController < ActionController::Base
+  include HTTPStatuses
+
   protect_from_forgery
   layout 'application'
   append_view_path NodeExtension.path

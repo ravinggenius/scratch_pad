@@ -106,7 +106,7 @@ module HTTPStatuses
   # class should be generated.
   def self.const_missing(const)
     status_symbol = const.to_s.underscore.to_sym
-    raise 'Unrecognized HTTP Status name!' unless Rack::Utils::SYMBOL_TO_STATUS_CODE.has_key?(status_symbol)
+    raise "Unrecognized HTTP status name: [#{const}]" unless Rack::Utils::SYMBOL_TO_STATUS_CODE.has_key?(status_symbol)
     klass = Class.new(HTTPStatuses::Base)
     klass.cattr_accessor(:status)
     klass.status = status_symbol

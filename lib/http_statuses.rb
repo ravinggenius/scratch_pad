@@ -13,24 +13,6 @@
 # HTTPStatuses. When no suitable template is found to render the exception with,
 # it will simply respond with an empty HTTP status code.
 module HTTPStatuses
-  #class Base < StandarError
-  #end
-
-  #class Informational < Base
-  #end
-
-  #class Success < Base
-  #end
-
-  #class Redirection < Base
-  #end
-
-  #class ClientError < Base
-  #end
-
-  #class ServerError < Base
-  #end
-
   # The Base HTTP status exception class is used as superclass for every
   # exception class that is constructed. It implements some shared
   # functionality for finding the status code and determining the template

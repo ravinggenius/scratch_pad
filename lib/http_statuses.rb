@@ -128,6 +128,11 @@ module HTTPStatuses
     render_options[:layout] = exception.template_layout if exception.template_layout
     render(render_options)
   rescue ActionView::MissingTemplate
-    head(exception.status)
+    begin
+      render_options[:template] = "#{exception.template_path}/base"
+      render(render_options)
+    rescue ActionView::MissingTemplate
+      head(exception.status)
+    end
   end
 end

@@ -114,14 +114,14 @@ module HTTPStatuses
     const_get(const)
   end
 
-  # The default handler for raised HTTP status exceptions. It will render a
+  # The default handler for raised HTTPStatuses exceptions. It will render a
   # template if available, or respond with an empty response with the HTTP
   # status corresponding to the exception.
   #
   # You can override this method in your <tt>ApplicationController</tt> to
   # handle the exceptions yourself.
   #
-  # <tt>exception</tt>:: The HTTP status exception to handle.
+  # <tt>exception</tt>:: The HTTPStatuses exception to handle.
   def http_status_exception(exception)
     @exception = exception
     render_options = {:template => exception.template, :status => exception.status}

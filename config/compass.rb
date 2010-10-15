@@ -1,7 +1,6 @@
 require 'susy'
 
 project_type = :rails
-project_path = Rails.root
 environment = Compass::AppIntegration::Rails.env
 output_style = :compact
 relative_assets = false

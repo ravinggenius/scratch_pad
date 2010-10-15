@@ -1,5 +1,4 @@
 require 'compass'
+require 'compass/app_integration/rails'
 
-Compass.add_project_configuration(Rails.root + 'config' + 'compass.rb')
-Compass.configure_sass_plugin!
-Compass.handle_configuration_change!
+Compass::AppIntegration::Rails.initialize!

@@ -5,11 +5,11 @@ end
 
 namespace :sp do
   desc 'Sets up users, groups and default settings'
-  task :setup do
-    Rake::Task['sp:setup:settings'].invoke
+  task :install do
+    Rake::Task['sp:install:settings'].invoke
   end
 
-  namespace :setup do
+  namespace :install do
     desc 'Initialize settings'
     task :settings => [:environment, :users] do
       [

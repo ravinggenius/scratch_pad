@@ -4,13 +4,13 @@ def password(length = 12)
 end
 
 namespace :sp do
-  desc 'Sets up users, groups and default settings'
+  desc 'Sets up users, groups and settings required for ScratchPad to operate'
   task :install do
     Rake::Task['sp:install:settings'].invoke
   end
 
   namespace :install do
-    desc 'Initialize settings'
+    desc 'Adds the required settings'
     task :settings => [:environment, :users] do
       [
         { :scope => 'core.templates.active',              :name => 'Frontend Template',                  :value => 'default' },
@@ -62,22 +62,24 @@ namespace :sp do
     end
   end
 
-  desc 'Load the seed data from db/seeds.rb'
+  desc 'Load the example content from db/seeds.rb. Should be used for Template screenshots'
   task :seed => [:environment, :users] do
     seed_file = File.join(Rails.root, 'db', 'seeds.rb')
     load seed_file if File.exist? seed_file
     puts 'Database has been seeded'
   end
 
-  desc 'List all Scions, grouped by type'
+  desc 'List all Scions, grouped by type and status'
   task :scions do
-    Rake::Task['sp:scions:filters'].invoke
-    Rake::Task['sp:scions:node_extensions'].invoke
-    Rake::Task['sp:scions:templates'].invoke
+    [
+      :filters,
+      :node_extensions,
+      :templates
+    ].each { |scion| Rake::Task["sp:scions:#{scion}"].invoke }
   end
 
   namespace :scions do
-    desc 'List Filters with along with the FilterGroups they belong to'
+    desc 'List Filters with the FilterGroups they belong to'
     task :filters => :environment do
       Filter.all.each do |filter|
         puts filter.title
@@ -91,7 +93,7 @@ namespace :sp do
       end
     end
 
-    desc 'List Templates with status'
+    desc 'List Templates with status grouped by frontend/backend'
     task :templates => :environment do
       active_template = Setting['core.templates.active'].user_value
       active_admin_template = Setting['core.templates.active.admin'].user_value
@@ -103,7 +105,7 @@ namespace :sp do
     end
 
     namespace :templates do
-      desc 'Set a Template as active. Useful for emergency resetting a Template'
+      desc 'Set a Template as active. Useful for emergency recovery from a broken Template'
       task :activate => :environment do
       end
     end

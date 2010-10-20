@@ -1,0 +1,2 @@
+class NodeExtension < AddonBase
+end

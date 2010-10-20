@@ -1,4 +1,4 @@
-class Template < ScionBase
+class Template < AddonBase
   def admin?
     name.end_with? '_admin'
   end

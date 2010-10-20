@@ -1,2 +1,0 @@
-class NodeExtension < ScionBase
-end

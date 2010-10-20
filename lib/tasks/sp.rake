@@ -69,16 +69,16 @@ namespace :sp do
     puts 'Database has been seeded'
   end
 
-  desc 'List all Scions, grouped by type and status'
-  task :scions do
+  desc 'List all Addons, grouped by type and status'
+  task :addons do
     [
       :filters,
       :node_extensions,
       :templates
-    ].each { |scion| Rake::Task["sp:scions:#{scion}"].invoke }
+    ].each { |addon| Rake::Task["sp:addons:#{addon}"].invoke }
   end
 
-  namespace :scions do
+  namespace :addons do
     desc 'List Filters with the FilterGroups they belong to'
     task :filters => :environment do
       Filter.all.each do |filter|

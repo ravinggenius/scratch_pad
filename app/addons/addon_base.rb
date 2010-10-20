@@ -1,4 +1,4 @@
-class ScionBase
+class AddonBase
   attr_accessor :name
 
   def initialize(name)
@@ -56,6 +56,6 @@ class ScionBase
   end
 
   def self.path
-    Rails.root + 'vendor' + 'scions' + self.name.underscore.pluralize
+    Rails.root + 'vendor' + 'addons' + self.name.underscore.pluralize
   end
 end

@@ -1,4 +1,4 @@
-class Filter < ScionBase
+class Filter < AddonBase
   def name
     super.gsub /\.rb/, ''
   end

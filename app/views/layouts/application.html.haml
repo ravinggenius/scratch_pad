@@ -11,7 +11,7 @@
 
     = template_tags setting('core.templates.active')
 
-    / TODO implement as a scion
+    / TODO implement as a addon
     = render 'shared/tracking_google', :google_analytics_tracking_code => '123456789.00' if @show_tracking_google
 
   %body{ :id => page_id, :class => page_classes }
@@ -36,7 +36,7 @@
     %footer#credits
       %p= raw "&copy; #{setting('core.site.name')}"
 
-    / TODO implement as a scion
+    / TODO implement as a addon
     = render 'shared/unobtrusive' if @show_unobtrusive_badge
-    / TODO implement as a scion
+    / TODO implement as a addon
     = render 'shared/tracking_woopra' if @show_tracking_woopra

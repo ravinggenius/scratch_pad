@@ -7,6 +7,11 @@ def puts_loud(phrase)
   puts "!IMPORTANT: #{phrase}"
 end
 
+def puts_table(data, fields, caption = nil)
+  puts "#{caption}\n" unless caption.nil?
+  puts Hirb::Helpers::AutoTable.render(data, :fields => fields, :header_filter => :capitalize)
+end
+
 namespace :sp do
   desc 'Sets up users, groups and settings required for ScratchPad to operate'
   task :install do
@@ -85,27 +90,22 @@ namespace :sp do
   namespace :addons do
     desc 'List Filters with the FilterGroups they belong to'
     task :filters => :environment do
-      Filter.all.each do |filter|
-        puts filter.title
-      end
+      puts_table Filter.all, [:name, :title], 'Filters'
+      puts
     end
 
     desc 'List NodeExtensions with a usage count'
     task :node_extensions => :environment do
-      NodeExtension.all.each do |extension|
-        puts extension.title
-      end
+      puts_table NodeExtension.all, [:name, :title], 'Node Extensions'
+      puts
     end
 
     desc 'List Themes with status grouped by frontend/backend'
     task :themes => :environment do
-      active_theme = Setting['core.themes.active'].user_value
-      active_admin_theme = Setting['core.themes.active.admin'].user_value
-      # TODO Theme.frontend.each do |theme|
-      # TODO Theme.backend.each do |theme|
-      Theme.all.each do |theme|
-        puts "#{theme.title} is #{theme.name == active_theme ? 'active' : 'inactive'}"
-      end
+      puts_table Theme.frontend, [:name, :title], 'Frontend Themes'
+      puts
+      puts_table Theme.backend, [:name, :title], 'Backend Themes'
+      puts
     end
 
     namespace :themes do

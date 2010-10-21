@@ -16,8 +16,8 @@ ScratchPad::Application.routes.draw do
 
   namespace :assets do
     get '/routes', :to => :routes, :as => :routes
-    get '/:theme/scripts.:format', :to => :scripts, :as => :scripts, :defaults => { :format => :js }
-    get '/:theme/styles.:format', :to => :styles, :as => :styles, :defaults => { :format => :css }
+    get '/:theme/scripts(.:format)', :to => :scripts, :as => :scripts, :defaults => { :format => :js }
+    get '/:theme/styles(.:format)', :to => :styles, :as => :styles, :defaults => { :format => :css }
   end
 
   root :to => 'nodes#index'

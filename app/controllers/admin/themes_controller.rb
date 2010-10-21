@@ -1,7 +1,7 @@
 class Admin::ThemesController < Admin::ApplicationController
   def index
-    @themes = Theme.regular
-    @admin_themes = Theme.admin
+    @themes = Theme.frontend
+    @admin_themes = Theme.backend
 
     respond_to do |format|
       format.html

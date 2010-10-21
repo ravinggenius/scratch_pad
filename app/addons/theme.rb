@@ -3,11 +3,11 @@ class Theme < AddonBase
     name.end_with? '_admin'
   end
 
-  def self.admin
-    all.select { |theme| theme.admin? }
+  def self.frontend
+    all.reject { |theme| theme.admin? }
   end
 
-  def self.regular
+  def self.backend
     all.select { |theme| theme.admin? }
   end
 end

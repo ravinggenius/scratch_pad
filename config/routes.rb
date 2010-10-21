@@ -5,7 +5,7 @@ ScratchPad::Application.routes.draw do
   namespace :admin do
     resources :filter_groups
     resources :nodes, :except => :show
-    resources :templates
+    resources :themes
     resources :users
     resources :vocabularies do
       resources :terms
@@ -16,8 +16,8 @@ ScratchPad::Application.routes.draw do
 
   namespace :assets do
     get '/routes', :to => :routes, :as => :routes
-    get '/:template/scripts.:format', :to => :scripts, :as => :scripts, :defaults => { :format => :js }
-    get '/:template/styles.:format', :to => :styles, :as => :styles, :defaults => { :format => :css }
+    get '/:theme/scripts.:format', :to => :scripts, :as => :scripts, :defaults => { :format => :js }
+    get '/:theme/styles.:format', :to => :styles, :as => :styles, :defaults => { :format => :css }
   end
 
   root :to => 'nodes#index'

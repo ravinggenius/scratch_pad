@@ -39,20 +39,20 @@ module ApplicationHelper
   end
 
   # Usage:
-  # setting('core.templates.active')       #=> 'default'
-  # setting('core.templates.active.admin') #=> 'default_admin'
+  # setting('core.themes.active')       #=> 'default'
+  # setting('core.themes.active.admin') #=> 'default_admin'
   # setting('core.site.name')              #=> 'ScratchPad'
   # setting('core.site.tagline')           #=> '...'
-  # setting('template.<name>.<some_setting>') #=> 3
+  # setting('themes.<name>.<some_setting>') #=> 3
   # setting('node_extension.<name>.<...>') #=> 'alternate'
   def setting(scope)
     Setting[scope].user_value rescue nil
   end
 
-  def template_tags(template)
+  def theme_tags(theme)
     reply = ''
-    reply << stylesheet_link_tag(assets_styles_path(:template => template), :media => 'all')
-    reply << javascript_include_tag(assets_scripts_path(:template => template))
+    reply << stylesheet_link_tag(assets_styles_path(:theme => theme), :media => 'all')
+    reply << javascript_include_tag(assets_scripts_path(:theme => theme))
     reply.html_safe
   end
 end

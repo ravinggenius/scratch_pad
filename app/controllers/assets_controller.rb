@@ -40,7 +40,7 @@ class AssetsController < ApplicationController
   end
 
   def gather_scripts!
-    cache_key = "core::styles::#{template.name}.js"
+    cache_key = "core::styles::#{theme.name}.js"
 
     if Rails.env.to_sym == :production
       return Cache[cache_key].value unless Cache[cache_key].expired?
@@ -54,7 +54,7 @@ class AssetsController < ApplicationController
     script_files << Rails.root + 'public/javascripts/application.js'
 
     script_files << NodeExtension.all.map { |ne| ne.glob 'views/scripts/*.js' }
-    script_files << template.glob('scripts/*.js')
+    script_files << theme.glob('scripts/*.js')
 
     reply = script_files.flatten.map do |filename|
       <<-JS
@@ -76,7 +76,7 @@ class AssetsController < ApplicationController
   end
 
   def gather_styles!(format = :css)
-    cache_key = "core::styles::#{template.name}.#{format}"
+    cache_key = "core::styles::#{theme.name}.#{format}"
 
     if Rails.env.to_sym == :production
       return Cache[cache_key].value unless Cache[cache_key].expired?
@@ -103,12 +103,12 @@ class AssetsController < ApplicationController
       end
     end
 
-    template_styles = extract_media_names template.glob('styles/*')
-    template_styles.each do |media|
+    theme_styles = extract_media_names theme.glob('styles/*')
+    theme_styles.each do |media|
       @medias[media] ||= ''
-      @imports << "templates/#{template.name}/styles/#{media}"
+      @imports << "themes/#{theme.name}/styles/#{media}"
       @medias[media] << <<-SASS
-  @include template_#{template.name}_#{media}
+  @include theme_#{theme.name}_#{media}
       SASS
     end
 
@@ -166,7 +166,7 @@ $experimental-support-for-#{browser}: #{value.blank? ? 'false' : value}
     SASS
   end
 
-  def template
-    @template ||= Template.new params[:template]
+  def theme
+    @theme ||= Theme.new params[:theme]
   end
 end

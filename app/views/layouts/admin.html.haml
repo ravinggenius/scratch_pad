@@ -8,7 +8,7 @@
 
     /%link{ :rel => 'shortcut icon', :href => '/images/favicon.ico' }/
 
-    = template_tags setting('core.templates.active.admin')
+    = theme_tags setting('core.themes.active.admin')
   %body{ :id => page_id, :class => page_classes }
     %header#branding
       %span.h= link_to setting('core.site.name'), root_path

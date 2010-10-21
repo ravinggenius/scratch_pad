@@ -13,8 +13,8 @@ namespace :sp do
     desc 'Adds the required settings'
     task :settings => [:environment, :users] do
       [
-        { :scope => 'core.templates.active',              :name => 'Frontend Template',                  :value => 'default' },
-        { :scope => 'core.templates.active.admin',        :name => 'Backend Template',                   :value => 'default_admin' },
+        { :scope => 'core.themes.active',                 :name => 'Frontend Theme',                     :value => 'default' },
+        { :scope => 'core.themes.active.admin',           :name => 'Backend Theme',                      :value => 'default_admin' },
         { :scope => 'core.site.name',                     :name => 'Site Name',                          :value => 'ScratchPad' },
         { :scope => 'core.site.tagline',                  :name => 'Site Tagline',                       :value => '...' },
         { :scope => 'core.user.password.min_length',      :name => 'Minimum Password Length',            :value => 8 },
@@ -62,7 +62,7 @@ namespace :sp do
     end
   end
 
-  desc 'Load the example content from db/seeds.rb. Should be used for Template screenshots'
+  desc 'Load the example content from db/seeds.rb. Should be used for Theme screenshots'
   task :seed => [:environment, :users] do
     seed_file = File.join(Rails.root, 'db', 'seeds.rb')
     load seed_file if File.exist? seed_file
@@ -74,7 +74,7 @@ namespace :sp do
     [
       :filters,
       :node_extensions,
-      :templates
+      :themes
     ].each { |addon| Rake::Task["sp:addons:#{addon}"].invoke }
   end
 
@@ -93,19 +93,19 @@ namespace :sp do
       end
     end
 
-    desc 'List Templates with status grouped by frontend/backend'
-    task :templates => :environment do
-      active_template = Setting['core.templates.active'].user_value
-      active_admin_template = Setting['core.templates.active.admin'].user_value
-      # TODO Template.frontend.each do |template|
-      # TODO Template.backend.each do |template|
-      Template.all.each do |template|
-        puts "#{template.title} is #{template.name == active_template ? 'active' : 'inactive'}"
+    desc 'List Themes with status grouped by frontend/backend'
+    task :themes => :environment do
+      active_theme = Setting['core.themes.active'].user_value
+      active_admin_theme = Setting['core.themes.active.admin'].user_value
+      # TODO Theme.frontend.each do |theme|
+      # TODO Theme.backend.each do |theme|
+      Theme.all.each do |theme|
+        puts "#{theme.title} is #{theme.name == active_theme ? 'active' : 'inactive'}"
       end
     end
 
-    namespace :templates do
-      desc 'Set a Template as active. Useful for emergency recovery from a broken Template'
+    namespace :themes do
+      desc 'Set a Theme as active. Useful for emergency recovery from a broken Theme'
       task :activate => :environment do
       end
     end

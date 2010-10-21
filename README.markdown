@@ -60,7 +60,6 @@ To run tests for custom extensions, use `RAILS_ENV=test rake test:custom`. Curre
 
 ## Wish List
 
-* move styles and themes into the database to facilitate online editing by a website administrator
 * content versioning
 * access control list for everything
 * accessability (wai)

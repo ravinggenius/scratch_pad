@@ -26,10 +26,7 @@ end
 
 group :test do
   gem 'autotest'
-  gem 'rspec',               '~> 2.0'
-  gem 'rspec-core'
-  gem 'rspec-expectations'
-  gem 'rspec-mocks'
+  gem 'rcov'
 end
 
 group :development, :test do

@@ -16,6 +16,7 @@ group :development do
   gem 'awesome_print'
   gem 'hirb'
   gem 'interactive_editor'
+  gem 'nifty-generators'
   gem 'ruby-debug'
   gem 'wirble'
 end

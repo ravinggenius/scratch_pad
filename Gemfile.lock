@@ -73,6 +73,7 @@ GEM
       activesupport (>= 2.3.4)
       jnunemaker-validatable (~> 1.8.4)
       plucky (~> 0.3.6)
+    nifty-generators (0.4.2)
     plucky (0.3.6)
       mongo (~> 1.1)
     polyglot (0.3.1)
@@ -143,6 +144,7 @@ DEPENDENCIES
   maruku (~> 0.6)
   mongo (~> 1.1)
   mongo_mapper (~> 0.8)
+  nifty-generators
   rails (~> 3.0)
   rcov
   rspec-rails (~> 2.0)

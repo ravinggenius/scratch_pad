@@ -24,7 +24,6 @@ public/stylesheets/*.css
 .sass-cache
 .sass-cache/*
 .sass-cache/**/*
-schema/schema.rb
 src/*
 .svn/*
 *.sw?

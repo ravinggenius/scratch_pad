@@ -17,7 +17,7 @@ group :development do
   gem 'hirb'
   gem 'interactive_editor'
   gem 'nifty-generators'
-  gem 'ruby-debug'
+  gem 'ruby-debug19'
   gem 'wirble'
 end
 

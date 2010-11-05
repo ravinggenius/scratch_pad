@@ -20,11 +20,7 @@
       %span= setting('core.site.tagline')
 
     %nav#main_menu
-      %ul
-        - if User.current == User.anonymous
-          %li= link_to 'Sign In', new_session_path
-        -else
-          %li= link_to 'User Profile', node_path(User.current)
+      = partial 'shared/menu', :items => @main_menu_items
 
     %section#flash
       - [ :error, :warning, :notice ].each do |level|

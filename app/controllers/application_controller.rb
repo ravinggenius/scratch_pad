@@ -13,6 +13,12 @@ class ApplicationController < ActionController::Base
 
   before_filter do
     @title = Setting['core.site.name'].user_value
+    @main_menu_items = []
+    @main_menu_items << if User.current == User.anonymous
+      { :name => 'Sign In', :href => new_session_path }
+    else
+      { :name => 'Profile', :href => node_path(User.current) }
+    end
   end
 
   after_filter do

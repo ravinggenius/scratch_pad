@@ -50,6 +50,7 @@ class AssetsController < ApplicationController
 
     script_files << Rails.root + 'app/vendor/modernizr.js'
     script_files << Rails.root + 'app/vendor/jquery.js'
+    script_files << Rails.root + 'app/vendor/rails.js'
 
     script_files << Rails.root + 'public/javascripts/application.js'
 

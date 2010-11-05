@@ -83,7 +83,8 @@ namespace :sp do
     [
       :filters,
       :node_extensions,
-      :themes
+      :themes,
+      :widgets
     ].each { |addon| Rake::Task["sp:addons:#{addon}"].invoke }
   end
 
@@ -97,6 +98,12 @@ namespace :sp do
     desc 'List NodeExtensions with a usage count'
     task :node_extensions => :environment do
       puts_table NodeExtension.all, [:name, :title], 'Node Extensions'
+      puts
+    end
+
+    desc 'List Widgets'
+    task :widgets => :environment do
+      puts_table Widget.all, [:name, :title], 'Widgets'
       puts
     end
 

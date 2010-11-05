@@ -1,0 +1,2 @@
+class Widget < AddonBase
+end

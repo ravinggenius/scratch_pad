@@ -48,8 +48,8 @@ class AssetsController < ApplicationController
 
     script_files = []
 
-    script_files << Rails.root + 'app/vendor/modernizr/1.1/modernizr.min.js'
-    script_files << Rails.root + 'app/vendor/jquery/1.4/jquery.min.js'
+    script_files << Rails.root + 'app/vendor/modernizr.js'
+    script_files << Rails.root + 'app/vendor/jquery.js'
 
     script_files << Rails.root + 'public/javascripts/application.js'
 

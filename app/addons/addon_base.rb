@@ -37,7 +37,7 @@ class AddonBase
   end
 
   def self.[](name)
-    new name
+    new name.to_s
   end
 
   def self.all

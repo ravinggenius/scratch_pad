@@ -38,17 +38,6 @@ module ApplicationHelper
     partial path, locals.merge(:node => node)
   end
 
-  # Usage:
-  # setting('core.themes.active')       #=> 'default'
-  # setting('core.themes.active.admin') #=> 'default_admin'
-  # setting('core.site.name')              #=> 'ScratchPad'
-  # setting('core.site.tagline')           #=> '...'
-  # setting('themes.<name>.<some_setting>') #=> 3
-  # setting('node_extension.<name>.<...>') #=> 'alternate'
-  def setting(scope)
-    Setting[scope].user_value rescue nil
-  end
-
   def theme_tags(theme)
     reply = ''
     reply << stylesheet_link_tag(assets_styles_path(:theme => theme), :media => 'all')

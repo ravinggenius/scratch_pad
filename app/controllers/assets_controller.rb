@@ -119,9 +119,10 @@ class AssetsController < ApplicationController
 @charset 'utf-8'
     SASS
 
-    Setting.all(:scope => /core.styles.experimental/).each do |setting|
-      browser = setting.scope.gsub 'core.styles.experimental.', ''
-      value = Setting["core.styles.experimental.#{browser}"].user_value
+    scope = 'addon.theme.support'
+    Setting.all(:scope => /#{scope}/).each do |setting|
+      browser = setting.scope.gsub "#{scope}.", ''
+      value = Setting["#{scope}.#{browser}"]
       final_sass << <<-SASS
 $experimental-support-for-#{browser}: #{value.blank? ? 'false' : value}
       SASS

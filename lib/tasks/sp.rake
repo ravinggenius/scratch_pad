@@ -1,3 +1,12 @@
+def addon_types
+  [
+    Filter,
+    NodeExtension,
+    Theme,
+    Widget
+  ]
+end
+
 def password(length = 12)
   alphanumerics = [('0'..'9'), ('A'..'Z'), ('a'..'z')].map { |range| range.to_a }.flatten
   (0...length).map { alphanumerics[Kernel.rand(alphanumerics.size)] }.join
@@ -21,25 +30,15 @@ namespace :sp do
   namespace :install do
     desc 'Adds the required settings'
     task :settings => [:environment, :users] do
-      [
-        { :scope => 'core.themes.active',                 :name => 'Frontend Theme',                     :value => 'default' },
-        { :scope => 'core.themes.active.admin',           :name => 'Backend Theme',                      :value => 'default_admin' },
-        { :scope => 'core.site.name',                     :name => 'Site Name',                          :value => 'ScratchPad' },
-        { :scope => 'core.site.tagline',                  :name => 'Site Tagline',                       :value => '...' },
-        { :scope => 'core.user.password.min_length',      :name => 'Minimum Password Length',            :value => 8 },
-        { :scope => 'core.styles.experimental.khtml',     :name => 'Experimental Support For KHTML',     :value => false },
-        { :scope => 'core.styles.experimental.microsoft', :name => 'Experimental Support For Microsoft', :value => false },
-        { :scope => 'core.styles.experimental.mozilla',   :name => 'Experimental Support For Mozilla',   :value => false },
-        { :scope => 'core.styles.experimental.opera',     :name => 'Experimental Support For Opera',     :value => false },
-        { :scope => 'core.styles.experimental.webkit',    :name => 'Experimental Support For WebKit',    :value => false }
-      ].each do |setting|
-        v = Value.first_or_new({
-          :creator_id => User.anonymous.id,
-          :updater_id => User.anonymous.id,
-          :value => setting[:value]
-        })
-        v.setting = Setting.first_or_create(:scope => setting[:scope], :name => setting[:name])
-        v.save
+      setting_hashes = [
+        { :scope => 'sp.site.name',                :name => 'Site Name',               :value => 'ScratchPad' },
+        { :scope => 'sp.site.tagline',             :name => 'Site Tagline',            :value => '...' },
+        { :scope => 'sp.user.password.min_length', :name => 'Minimum Password Length', :value => 8 }
+      ] + addon_types.map { |type| type.install }
+
+      setting_hashes.flatten.each do |hash|
+        setting = Setting.first_or_create :scope => hash[:scope]
+        setting.update_attributes hash if setting.new?
       end
 
       puts 'Default settings have been loaded'

@@ -36,6 +36,10 @@ class AddonBase
     !name.nil? && File.exists?(path)
   end
 
+  def install
+    []
+  end
+
   def self.[](name)
     new name.to_s
   end
@@ -57,5 +61,9 @@ class AddonBase
 
   def self.path
     Rails.root + 'vendor' + 'addons' + self.name.underscore.pluralize
+  end
+
+  def self.install
+    []
   end
 end

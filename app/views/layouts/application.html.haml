@@ -9,30 +9,17 @@
     - # %link{ :rel => 'shortcut icon', :href => '/images/favicon.ico' }/
     = auto_discovery_link_tag
 
-    = theme_tags setting('core.themes.active')
-
-    / TODO implement as a addon
-    = render 'shared/tracking_google', :google_analytics_tracking_code => '123456789.00' if @show_tracking_google
+    = theme_tags Setting[:addon, :theme, :frontend]
 
   %body{ :id => page_id, :class => page_classes }
     %header#branding
-      %span.h= link_to setting('core.site.name'), root_path
-      %span= setting('core.site.tagline')
 
     %nav#main_menu
       = partial 'shared/menu', :items => @main_menu_items
 
     %section#flash
-      - [ :error, :warning, :notice ].each do |level|
-        = partial 'shared/flash', :level => level, :messages => flash[level] if flash[level]
 
     %section#content
       = yield
 
     %footer#credits
-      %p= raw "&copy; #{setting('core.site.name')}"
-
-    / TODO implement as a addon
-    = render 'shared/unobtrusive' if @show_unobtrusive_badge
-    / TODO implement as a addon
-    = render 'shared/tracking_woopra' if @show_tracking_woopra

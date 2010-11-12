@@ -38,6 +38,16 @@ module ApplicationHelper
     partial path, locals.merge(:node => node)
   end
 
+  def show_widget(widget)
+    render :file => "vendor/addons/widgets/#{widget.name}/view"
+  end
+
+  def show_widgets(widgets)
+    reply = ''
+    widgets.each { |widget| reply << show_widget(widget) }
+    reply.html_safe
+  end
+
   def theme_tags(theme)
     reply = ''
     reply << stylesheet_link_tag(assets_styles_path(:theme => theme), :media => 'all')

@@ -21,6 +21,15 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  before_filter do
+    @widgets = {}
+    @widgets[:head] = [ Widget[:google_analytics] ]
+    @widgets[:branding] = [ Widget[:branding] ]
+    @widgets[:flash] = [ Widget[:flash] ]
+    @widgets[:credits] = [ Widget[:copyright], Widget[:unobtrusive] ]
+    @widgets[:tail] = [ Widget[:woopra] ]
+  end
+
   after_filter do
     session[:current_user_id] = User.current.id
   end

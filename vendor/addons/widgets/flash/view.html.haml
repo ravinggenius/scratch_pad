@@ -1,0 +1,7 @@
+- [ :error, :warning, :notice ].each do |level|
+  - if flash[level]
+    %ul{ :class => level }
+      - messages = flash[level]
+      - messages = [messages] if messages.is_a? String
+      - messages.each do |message|
+        %li= message

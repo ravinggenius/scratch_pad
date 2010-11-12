@@ -1,12 +1,8 @@
 module ApplicationHelper
-  def page_id
-    reply = "#{controller.controller_name}_#{controller.action_name}"
-    reply = "#{reply}_#{h params[:id]}" if params[:id]
-    reply
-  end
-
-  def page_classes
-    page_class
+  def body_attributes
+    page_id = "#{controller.controller_name}_#{controller.action_name}"
+    page_id = "#{reply}_#{h params[:id]}" if params[:id]
+    { :id => page_id, :class => page_class }
   end
 
   # http://www.leftrightdesigns.com/library/jquery/nospam/nospam.phps

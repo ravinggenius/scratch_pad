@@ -11,7 +11,7 @@
     = theme_tags Setting[:addon, :theme, :backend]
 
     = show_widgets @widgets[:head]
-  %body{ :id => page_id, :class => page_classes }
+  %body{ body_attributes }
     %header#branding= show_widgets @widgets[:branding]
 
     %nav#main_menu

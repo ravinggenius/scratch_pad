@@ -33,7 +33,7 @@ class AddonBase
   end
 
   def is_valid?
-    !name.nil? && File.exists?(path)
+    !name.blank? && File.exists?(path)
   end
 
   def install

@@ -116,7 +116,9 @@ namespace :sp do
 
     namespace :themes do
       desc 'Set a Theme as active. Useful for emergency recovery from a broken Theme'
-      task :activate => :environment do
+      task :activate, :backend_or_frontend, :template, :needs => :environment do |t, args|
+        s = Setting.first_in_scope :addon, :theme, args[:backend_or_frontend]
+        s.update_attributes :value => args[:template]
       end
     end
   end

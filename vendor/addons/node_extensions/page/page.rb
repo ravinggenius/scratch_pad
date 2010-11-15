@@ -1,0 +1,2 @@
+module NodeExtension::Page
+end

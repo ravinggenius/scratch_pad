@@ -1,0 +1,2 @@
+module Widget::Branding
+end

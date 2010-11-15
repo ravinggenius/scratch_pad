@@ -1,0 +1,2 @@
+module NodeExtension::Post
+end

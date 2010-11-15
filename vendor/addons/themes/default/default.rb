@@ -1,0 +1,2 @@
+module Theme::Default
+end

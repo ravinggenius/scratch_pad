@@ -35,7 +35,7 @@ module ApplicationHelper
   end
 
   def show_widget(widget)
-    render :file => "vendor/addons/widgets/#{widget.name}/view"
+    render :file => "vendor/addons/widgets/#{widget.name}/views/_show"
   end
 
   def show_widgets(widgets)

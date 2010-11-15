@@ -54,7 +54,7 @@ class AssetsController < ApplicationController
 
     script_files << Rails.root + 'public/javascripts/application.js'
 
-    script_files << NodeExtension.all.map { |ne| ne.glob 'views/scripts/*.js' }
+    script_files << (NodeExtension.all + Widget.all).map { |addon| addon.glob 'scripts/*.js' }
     script_files << theme.glob('scripts/*.js')
 
     reply = script_files.flatten.map do |filename|
@@ -86,9 +86,28 @@ class AssetsController < ApplicationController
     @imports = [ 'reset' ]
     @medias = {}
 
+    # TODO combine the next two blocks
+    enabled_widget_styles = {}
+    Widget.all.each do |w|
+      extract_media_names(w.glob 'styles/*').each do |style|
+        enabled_widget_styles[style] = enabled_widget_styles[style] || []
+        enabled_widget_styles[style] << File.basename(w.path)
+      end
+    end
+    enabled_widget_styles.each do |media, widget_styles|
+      @medias[media] ||= ''
+      widget_styles.each do |widget|
+        @imports << "widgets/#{widget}/styles/#{media}"
+        @medias[media] << <<-SASS
+  .#{widget}
+    @include widget_#{widget}_#{media}
+        SASS
+      end
+    end
+
     enabled_extension_styles = {}
     NodeExtension.all.each do |ne|
-      extract_media_names(ne.glob 'views/styles/*').each do |style|
+      extract_media_names(ne.glob 'styles/*').each do |style|
         enabled_extension_styles[style] = enabled_extension_styles[style] || []
         enabled_extension_styles[style] << File.basename(ne.path)
       end
@@ -96,7 +115,7 @@ class AssetsController < ApplicationController
     enabled_extension_styles.each do |media, extension_styles|
       @medias[media] ||= ''
       extension_styles.each do |extension|
-        @imports << "node_extensions/#{extension}/views/styles/#{media}"
+        @imports << "node_extensions/#{extension}/styles/#{media}"
         @medias[media] << <<-SASS
   .#{extension}
     @include extension_#{extension}_#{media}

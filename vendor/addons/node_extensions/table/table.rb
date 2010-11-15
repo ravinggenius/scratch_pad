@@ -1,0 +1,2 @@
+module NodeExtension::Table
+end

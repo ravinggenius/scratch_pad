@@ -1,0 +1,2 @@
+module Theme::DefaultAdmin
+end

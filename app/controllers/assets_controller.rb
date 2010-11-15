@@ -106,10 +106,10 @@ class AssetsController < ApplicationController
 
     scope = 'addon.theme.support'
     Setting.all(:scope => /#{scope}/).each do |setting|
-      browser = setting.scope.gsub "#{scope}.", ''
-      value = Setting["#{scope}.#{browser}"]
+      vendor = setting.scope.gsub "#{scope}.", ''
+      value = Setting["#{scope}.#{vendor}"]
       final_sass << <<-SASS
-$experimental-support-for-#{browser}: #{value.blank? ? 'false' : value}
+$experimental-support-for-#{vendor}: #{value.blank? ? 'false' : value}
       SASS
     end
 

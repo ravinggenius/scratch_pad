@@ -19,6 +19,7 @@ class Theme < AddonBase
       { :scope => 'addon.theme.support.microsoft', :name => 'Experimental Support For Microsoft', :value => false },
       { :scope => 'addon.theme.support.mozilla',   :name => 'Experimental Support For Mozilla',   :value => false },
       { :scope => 'addon.theme.support.opera',     :name => 'Experimental Support For Opera',     :value => false },
+      { :scope => 'addon.theme.support.svg',       :name => 'Experimental Support For SVG',       :value => true },
       { :scope => 'addon.theme.support.webkit',    :name => 'Experimental Support For WebKit',    :value => false }
     ]
   end

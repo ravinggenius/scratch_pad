@@ -86,42 +86,8 @@ class AssetsController < ApplicationController
     @imports = [ 'reset' ]
     @medias = {}
 
-    # TODO combine the next two blocks
-    enabled_widget_styles = {}
-    Widget.all.each do |w|
-      extract_media_names(w.glob 'styles/*').each do |style|
-        enabled_widget_styles[style] = enabled_widget_styles[style] || []
-        enabled_widget_styles[style] << File.basename(w.path)
-      end
-    end
-    enabled_widget_styles.each do |media, widget_styles|
-      @medias[media] ||= ''
-      widget_styles.each do |widget|
-        @imports << "widgets/#{widget}/styles/#{media}"
-        @medias[media] << <<-SASS
-  .#{widget}
-    @include widget_#{widget}_#{media}
-        SASS
-      end
-    end
-
-    enabled_extension_styles = {}
-    NodeExtension.all.each do |ne|
-      extract_media_names(ne.glob 'styles/*').each do |style|
-        enabled_extension_styles[style] = enabled_extension_styles[style] || []
-        enabled_extension_styles[style] << File.basename(ne.path)
-      end
-    end
-    enabled_extension_styles.each do |media, extension_styles|
-      @medias[media] ||= ''
-      extension_styles.each do |extension|
-        @imports << "node_extensions/#{extension}/styles/#{media}"
-        @medias[media] << <<-SASS
-  .#{extension}
-    @include extension_#{extension}_#{media}
-        SASS
-      end
-    end
+    include_enabled_styles_for Widget
+    include_enabled_styles_for NodeExtension
 
     theme_styles = extract_media_names theme.glob('styles/*')
     theme_styles.each do |media|
@@ -185,6 +151,30 @@ $experimental-support-for-#{browser}: #{value.blank? ? 'false' : value}
 @media #{media.to_s.gsub /_/, ', '}
 #{sass}
     SASS
+  end
+
+  def include_enabled_styles_for(addon_type)
+    addon_name = addon_type.name.underscore
+
+    enabled_styles = {}
+
+    addon_type.all.each do |addon|
+      extract_media_names(addon.glob 'styles/*').each do |style|
+        enabled_styles[style] = enabled_styles[style] || []
+        enabled_styles[style] << File.basename(addon.path)
+      end
+    end
+
+    enabled_styles.each do |media, addon_styles|
+      @medias[media] ||= ''
+      addon_styles.each do |addon|
+        @imports << "#{addon_name.pluralize}/#{addon}/styles/#{media}"
+        @medias[media] << <<-SASS
+  .#{addon}
+    @include #{addon_name}_#{addon}_#{media}
+        SASS
+      end
+    end
   end
 
   def theme

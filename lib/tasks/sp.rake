@@ -30,16 +30,16 @@ namespace :sp do
   namespace :install do
     desc 'Adds the required settings'
     task :settings => [:environment, :users] do
-      setting_hashes = [
+      [
         { :scope => 'sp.site.name',                :name => 'Site Name',               :value => 'ScratchPad' },
         { :scope => 'sp.site.tagline',             :name => 'Site Tagline',            :value => '...' },
         { :scope => 'sp.user.password.min_length', :name => 'Minimum Password Length', :value => 8 }
-      ] + addon_types.map { |type| type.install }
-
-      setting_hashes.flatten.each do |hash|
+      ].each do |hash|
         setting = Setting.first_or_create :scope => hash[:scope]
         setting.update_attributes hash if setting.new?
       end
+
+      addon_types.each &:install
 
       puts 'Default settings have been loaded'
     end

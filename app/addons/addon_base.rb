@@ -64,6 +64,10 @@ class AddonBase
   end
 
   def self.install
-    []
+  end
+
+  def self.register_setting(scope, name, default_value)
+    setting = Setting.first_or_create :scope => scope
+    setting.update_attributes :name => name, :value => default_value if setting.new?
   end
 end

@@ -12,15 +12,13 @@ class Theme < AddonBase
   end
 
   def self.install
-    [
-      { :scope => 'addon.theme.frontend',          :name => 'Frontend Theme',                     :value => :default },
-      { :scope => 'addon.theme.backend',           :name => 'Backend Theme',                      :value => :default_admin },
-      { :scope => 'addon.theme.support.khtml',     :name => 'Experimental Support For KHTML',     :value => false },
-      { :scope => 'addon.theme.support.microsoft', :name => 'Experimental Support For Microsoft', :value => false },
-      { :scope => 'addon.theme.support.mozilla',   :name => 'Experimental Support For Mozilla',   :value => false },
-      { :scope => 'addon.theme.support.opera',     :name => 'Experimental Support For Opera',     :value => false },
-      { :scope => 'addon.theme.support.svg',       :name => 'Experimental Support For SVG',       :value => true },
-      { :scope => 'addon.theme.support.webkit',    :name => 'Experimental Support For WebKit',    :value => false }
-    ]
+    register_setting 'addon.theme.frontend',          'Frontend Theme',                     :default
+    register_setting 'addon.theme.backend',           'Backend Theme',                      :default_admin
+    register_setting 'addon.theme.support.khtml',     'Experimental Support For KHTML',     false
+    register_setting 'addon.theme.support.microsoft', 'Experimental Support For Microsoft', false
+    register_setting 'addon.theme.support.mozilla',   'Experimental Support For Mozilla',   false
+    register_setting 'addon.theme.support.opera',     'Experimental Support For Opera',     false
+    register_setting 'addon.theme.support.svg',       'Experimental Support For SVG',       true
+    register_setting 'addon.theme.support.webkit',    'Experimental Support For WebKit',    false
   end
 end

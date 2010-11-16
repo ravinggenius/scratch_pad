@@ -1,2 +1,2 @@
-module Widget::GoogleAnalytics
+class GoogleAnalytics < Widget
 end

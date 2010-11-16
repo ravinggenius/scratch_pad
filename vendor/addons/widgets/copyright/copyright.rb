@@ -1,2 +1,2 @@
-module Widget::Copyright
+class Copyright < Widget
 end

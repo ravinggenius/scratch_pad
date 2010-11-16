@@ -1,2 +1,2 @@
-module Widget::Branding
+class Branding < Widget
 end

@@ -1,2 +1,2 @@
-module NodeExtension::Page
+class Page < NodeExtension
 end

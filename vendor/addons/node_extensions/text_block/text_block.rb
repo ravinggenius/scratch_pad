@@ -1,2 +1,2 @@
-module NodeExtension::TextBlock
+class TextBlock < NodeExtension
 end

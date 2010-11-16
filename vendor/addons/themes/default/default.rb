@@ -1,2 +1,2 @@
-module Theme::Default
+class Default < Theme
 end

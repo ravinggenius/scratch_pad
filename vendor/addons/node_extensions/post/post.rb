@@ -1,2 +1,2 @@
-module NodeExtension::Post
+class Post < NodeExtension
 end

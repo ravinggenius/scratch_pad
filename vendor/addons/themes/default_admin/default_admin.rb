@@ -1,2 +1,2 @@
-module Theme::DefaultAdmin
+class DefaultAdmin < Theme
 end

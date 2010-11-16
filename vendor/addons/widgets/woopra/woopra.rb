@@ -1,2 +1,2 @@
-module Widget::Woopra
+class Woopra < Widget
 end

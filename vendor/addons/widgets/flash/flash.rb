@@ -1,2 +1,2 @@
-module Widget::Flash
+class Flash < Widget
 end

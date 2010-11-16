@@ -1,2 +1,2 @@
-module NodeExtension::Table
+class Table < NodeExtension
 end

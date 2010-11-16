@@ -1,2 +1,2 @@
-module Widget::Unobtrusive
+class Unobtrusive < Widget
 end

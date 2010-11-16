@@ -1,2 +1,2 @@
-module NodeExtension::List
+class List < NodeExtension
 end

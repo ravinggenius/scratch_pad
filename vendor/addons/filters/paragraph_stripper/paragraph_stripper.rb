@@ -1,4 +1,4 @@
-module Filter::ParagraphStripper
+class ParagraphStripper < Filter
   def self.process(string)
     string.gsub! /<p>/, ''
     string.gsub! /<\/p>/, ''

@@ -156,6 +156,3 @@ DEPENDENCIES
   ruby-prof
   thin
   wirble
-
-METADATA
-  version: 1.0.6

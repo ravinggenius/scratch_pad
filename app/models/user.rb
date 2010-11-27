@@ -16,6 +16,7 @@ class User
 
   habtm :users, :groups
 
+  validates_confirmation_of :password
   validates_uniqueness_of :username
   validate :ensure_hashword_is_set
   validate :ensure_password_is_secure
@@ -56,10 +57,8 @@ class User
   end
 
   def ensure_password_is_secure
-    #self.class.validates_confirmation_of :password # TODO find a home for this
-
     if @new_password.blank?
-      errors[:password] << 'can\'t be empty'
+      errors.add :password, 'can\'t be empty'
     else
       min_length = Setting[:sp, :user, :password, :min_length] || 8
       requirements = {}
@@ -70,8 +69,8 @@ class User
       requirements[:special]    = /(?=.*[\W])/
       regex = /^.*#{requirements.values.join}.*$/
       unless @new_password =~ regex
-        errors[:password] << 'is not complex enough'
-        errors[:password] << "must be at least #{min_length} characters long and contain at least one of each of the following: lower-case letter, upper-case letter, digit and symbol"
+        errors.add :password, 'is not complex enough'
+        errors.add :password, "must be at least #{min_length} characters long and contain at least one of each of the following: lower-case letter, upper-case letter, digit and symbol"
       end
     end
   end

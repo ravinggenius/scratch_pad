@@ -36,7 +36,7 @@ class AssetsController < ApplicationController
   end
 
   def gather_scripts!
-    cache_key = "core::styles::#{theme.machine_name}.js"
+    cache_key = [:core, :styles, theme.machine_name, :js]
 
     if Rails.env.to_sym == :production
       return Cache[cache_key].value unless Cache[cache_key].expired?
@@ -73,7 +73,7 @@ class AssetsController < ApplicationController
   end
 
   def gather_styles!(format = :css)
-    cache_key = "core::styles::#{theme.machine_name}.#{format}"
+    cache_key = [:core, :styles, theme.machine_name, format]
 
     if Rails.env.to_sym == :production
       return Cache[cache_key].value unless Cache[cache_key].expired?

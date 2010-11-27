@@ -1,4 +1,4 @@
 = fields_for :node, node do |form|
-  %fieldset.node{ :class => node.machine_name }
-    %legend= node.class.name
-    = show_node node, :fieldset, :form => form
+  %fieldset.node{ :class => node.class.machine_name }
+    %legend= node.class.machine_name.titleize
+    = show_node node, :form, :form => form

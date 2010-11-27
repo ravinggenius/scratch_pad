@@ -79,8 +79,8 @@ class Admin::NodesController < Admin::ApplicationController
   def node_type
     @n ||= begin
       ne = NodeExtension[params[:node_type]]
-      raise 'Invalid Node Extension' unless ne.is_valid?
-      ne.name.camelize.constantize
+      raise 'Invalid Node Extension' unless NodeExtension.enabled.include? ne
+      ne::Model
     rescue
       Node
     end
@@ -88,9 +88,11 @@ class Admin::NodesController < Admin::ApplicationController
 
   def set_fieldset_ivars
     if @node.new?
-      @node_types = NodeExtension.enabled.map { |extension| [extension.title, extension.name] }.insert 0, ['Node', 'node']
+      @node_types = NodeExtension.enabled.map do |extension|
+        [extension.name.titleize, extension.machine_name]
+      end.insert 0, ['Node', 'node']
       ne = NodeExtension[params[:node_type]]
-      @selected_node_type = ne.is_valid? ? ne.name : @node.machine_name
+      @selected_node_type = NodeExtension.enabled.include?(ne) ? ne.machine_name : @node.class.machine_name
     end
     @filter_groups = FilterGroup.all.sort_by &:name
   end

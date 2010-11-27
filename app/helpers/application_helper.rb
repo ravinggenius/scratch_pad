@@ -24,23 +24,22 @@ module ApplicationHelper
     Filter.process_all(text.to_s, filter_group).html_safe
   end
 
+  # TODO factor this method out
   def partial(name, locals = {}, options = {})
     render options.merge(:partial => name.to_s, :locals => locals)
   end
 
-  def show_node(node, part, locals = {})
-    path = "#{node.machine_name}/views/#{part}"
-    path = "nodes/#{part}" unless template_exists? path, nil, true
-    partial path, locals.merge(:node => node)
+  def show_addon(addon, view = :show, locals = {})
+    render :file => addon.views + view.to_s, :locals => locals
   end
 
-  def show_widget(widget)
-    render :file => "vendor/addons/widgets/#{widget.name}/views/_show"
+  def show_node(node, part, locals = {})
+    show_addon NodeExtension[node.class.machine_name], part, locals.merge(:node => node)
   end
 
   def show_widgets(widgets)
     reply = ''
-    widgets.each { |widget| reply << show_widget(widget) }
+    widgets.each { |widget| reply << show_addon(widget) }
     reply.html_safe
   end
 

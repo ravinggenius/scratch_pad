@@ -1,54 +1,34 @@
 class AddonBase
-  attr_accessor :name
-
-  def initialize(name)
-    @name = name
-  end
-
-  def <=>(other)
-    name <=> other.name
-  end
-
-  def enable
-  end
-
-  def disable
-  end
-
-  def title
-    name.titleize
-  end
-
-  def purge
-    disable
-    # then clear configuration options
-  end
-
-  def path
-    self.class.path + name
-  end
-
-  def glob(snip)
-    Dir[path + snip]
-  end
-
-  def is_valid?
-    !name.blank? && File.exists?(path)
-  end
-
   def install
-    []
   end
 
   def self.[](name)
-    new name.to_s
+    name.to_s.camelize.constantize
+  end
+
+  def self.<=>(other)
+    name <=> other.name
+  end
+
+  def self.root
+    Rails.root + 'vendor' + 'addons' + self.superclass.name.pluralize.underscore + self.name.underscore
+  end
+
+  def self.scripts
+    Dir[root + 'scripts' + '*.js'].entries.map { |s| Pathname.new s }
+  end
+
+  def self.styles
+    Dir[root + 'styles' + '*'].entries.map { |s| Pathname.new s }
+  end
+
+  def self.views
+    root + 'views'
   end
 
   def self.all
-    reply = Dir.entries(path)
-    reply.reject! { |entry| entry =~ /^\./ }
-    reply.map! { |entry| new entry }
-    reply.sort
+    path = Rails.root + 'vendor' + 'addons' + self.name.pluralize.underscore
+    path.entries.reject { |entry| entry.to_s =~ /^\./ }.sort.map { |name| self[name] }
   end
 
   def self.enabled
@@ -59,15 +39,19 @@ class AddonBase
     []
   end
 
-  def self.path
-    Rails.root + 'vendor' + 'addons' + self.name.underscore.pluralize
-  end
-
   def self.install
   end
 
   def self.register_setting(scope, name, default_value)
     setting = Setting.first_or_create :scope => scope
     setting.update_attributes :name => name, :value => default_value if setting.new?
+  end
+
+  def self.title
+    self.name.titleize
+  end
+
+  def self.machine_name
+    self.name.underscore
   end
 end

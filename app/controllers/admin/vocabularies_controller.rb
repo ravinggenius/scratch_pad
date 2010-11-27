@@ -82,9 +82,9 @@ class Admin::VocabulariesController < Admin::ApplicationController
   private
 
   def set_fieldset_ivars
-    @node_extensions_optional = NodeExtension.all.map { |ne| [ne.title, ne.name] }
+    @node_extensions_optional = NodeExtension.all.map { |ne| [ne.title, ne.machine_name] }
     @node_extensions_optional_selected = []
-    @node_extensions_required = NodeExtension.all.map { |ne| [ne.title, ne.name] }
+    @node_extensions_required = NodeExtension.all.map { |ne| [ne.title, ne.machine_name] }
     @node_extensions_required_selected = []
   end
 end

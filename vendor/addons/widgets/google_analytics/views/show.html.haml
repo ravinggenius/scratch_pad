@@ -1,6 +1,6 @@
 :javascript
   var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', '#{Setting[]}']);
+  _gaq.push(['_setAccount', '#{Setting[:app, :widget, :google_analytics, :account_code]}']);
   _gaq.push(['_trackPageview']);
 
   (function () {

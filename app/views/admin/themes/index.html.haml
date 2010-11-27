@@ -2,8 +2,4 @@
 
 %ul
   - @themes.each do |theme|
-    %li #{theme.name}
-
-%ul
-  - @admin_themes.each do |theme|
-    %li #{theme.name}
+    %li #{theme.name.titleize}

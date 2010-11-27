@@ -40,7 +40,7 @@ class AssetsController < ApplicationController
   end
 
   def gather_scripts!
-    cache_key = "core::styles::#{theme.name}.js"
+    cache_key = "core::styles::#{theme.machine_name}.js"
 
     if Rails.env.to_sym == :production
       return Cache[cache_key].value unless Cache[cache_key].expired?
@@ -54,8 +54,8 @@ class AssetsController < ApplicationController
 
     script_files << Rails.root + 'public/javascripts/application.js'
 
-    script_files << (NodeExtension.all + Widget.all).map { |addon| addon.glob 'scripts/*.js' }
-    script_files << theme.glob('scripts/*.js')
+    script_files << (NodeExtension.all + Widget.all).map { |addon| addon.scripts }
+    script_files << theme.scripts
 
     reply = script_files.flatten.map do |filename|
       <<-JS
@@ -77,7 +77,7 @@ class AssetsController < ApplicationController
   end
 
   def gather_styles!(format = :css)
-    cache_key = "core::styles::#{theme.name}.#{format}"
+    cache_key = "core::styles::#{theme.machine_name}.#{format}"
 
     if Rails.env.to_sym == :production
       return Cache[cache_key].value unless Cache[cache_key].expired?
@@ -89,12 +89,12 @@ class AssetsController < ApplicationController
     include_enabled_styles_for Widget
     include_enabled_styles_for NodeExtension
 
-    theme_styles = extract_media_names theme.glob('styles/*')
+    theme_styles = extract_media_names theme.styles
     theme_styles.each do |media|
       @medias[media] ||= ''
-      @imports << "themes/#{theme.name}/styles/#{media}"
+      @imports << "themes/#{theme.machine_name}/styles/#{media}"
       @medias[media] << <<-SASS
-  @include theme_#{theme.name}_#{media}
+  @include theme_#{theme.machine_name}_#{media}
       SASS
     end
 
@@ -159,7 +159,7 @@ $experimental-support-for-#{vendor}: #{value.blank? ? 'false' : value}
     enabled_styles = {}
 
     addon_type.all.each do |addon|
-      extract_media_names(addon.glob 'styles/*').each do |style|
+      extract_media_names(addon.styles).each do |style|
         enabled_styles[style] = enabled_styles[style] || []
         enabled_styles[style] << File.basename(addon.path)
       end
@@ -178,6 +178,6 @@ $experimental-support-for-#{vendor}: #{value.blank? ? 'false' : value}
   end
 
   def theme
-    @theme ||= Theme.new params[:theme]
+    @theme ||= Theme[params[:theme]]
   end
 end

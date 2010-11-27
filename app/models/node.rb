@@ -6,7 +6,7 @@ class Node
   include Relationship
 
   key :filter_group_id, BSON::ObjectId, :required => true
-  key :children_ids, Array, :typecast => 'BSON::ObjectId' # TODO move heirarchy to separate model
+  key :children_ids, Array, :typecast => 'BSON::ObjectId'
   key :is_published, Boolean, :default => false
   key :title, String, :required => true
   key :position, Integer, :default => 0 # TODO this is probably not needed anymore
@@ -24,16 +24,13 @@ class Node
     @children ||= self.children_ids.map { |child_id| Node.find(child_id) }
   end
 
-  def extension
-    NodeExtension[machine_name]
-  end
-
-  def machine_name
-    self.class.name.underscore
-  end
-
   def vocabularies
     terms.map { |term| term.vocabulary }.uniq
+  end
+
+  def self.machine_name
+    self.name.scan /^(.*)::Model$/
+    $1 ? $1.underscore : 'node'
   end
 
   def self.model_name

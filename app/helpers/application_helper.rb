@@ -24,11 +24,6 @@ module ApplicationHelper
     Filter.process_all(text.to_s, filter_group).html_safe
   end
 
-  # TODO factor this method out
-  def partial(name, locals = {}, options = {})
-    render options.merge(:partial => name.to_s, :locals => locals)
-  end
-
   def show_addon(addon, view = :show, locals = {})
     render :file => addon.views + view.to_s, :locals => locals
   end

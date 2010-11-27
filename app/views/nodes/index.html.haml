@@ -2,7 +2,7 @@
   %span.h Listing nodes
 
 - @featured.each do |node|
-  = partial :article, :node => node, :is_featured => true
+  = render :partial => 'article', :locals => { :node => node, :is_featured => true }
 
 - @nodes.each do |node|
-  = partial :article, :node => node
+  = render :partial => 'article', :locals => { :node => node }

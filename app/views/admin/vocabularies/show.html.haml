@@ -1,6 +1,6 @@
 = @vocabulary.name
 
-= partial :terms, :vocabulary => @vocabulary
+= render :partial => 'terms', :locals => { :vocabulary => @vocabulary }
 
 = link_to 'Edit', edit_admin_vocabulary_path(@vocabulary)
 \|

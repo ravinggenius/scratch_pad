@@ -8,4 +8,4 @@
         - else
           = link
         - if item[:children]
-          = partial 'shared/menu', :items => item[:children]
+          = render :partial => 'shared/menu', :locals => { :items => item[:children] }

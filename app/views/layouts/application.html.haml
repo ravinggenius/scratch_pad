@@ -16,7 +16,7 @@
     %header#branding= show_widgets @widgets[:branding]
 
     %nav#main_menu
-      = partial 'shared/menu', :items => @main_menu_items
+      = render :partial => 'shared/menu', :locals => { :items => @main_menu_items }
 
     %section#flash= show_widgets @widgets[:flash]
 

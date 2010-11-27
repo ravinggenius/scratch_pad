@@ -16,7 +16,7 @@
           = select_tag :node_type, options_for_select(@node_types, @selected_node_type)
     %div#node_extension_fields
       - unless @node.class.machine_name == 'node'
-        = partial :node_extension_fieldset, :node => @node
+        = render :partial => 'node_extension_fieldset', :locals => { :node => @node }
     %ul
       %li= submit_tag 'Commit'
       %li= link_to 'Cancel', admin_nodes_path

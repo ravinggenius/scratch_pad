@@ -112,10 +112,11 @@ namespace :sp do
     end
 
     namespace :themes do
+      # invoke with rake sp:addons:themes:activate[frontend,default]
       desc 'Set a Theme as active. Useful for emergency recovery from a broken Theme'
       task :activate, :backend_or_frontend, :template, :needs => :environment do |t, args|
         s = Setting.first_in_scope :addon, :theme, args[:backend_or_frontend]
-        s.update_attributes :value => args[:template]
+        s.update_attributes :value => args[:template] if s
       end
     end
   end

@@ -1,7 +1,7 @@
 module ApplicationHelper
   def body_attributes
     page_id = "#{controller.controller_name}_#{controller.action_name}"
-    page_id = "#{reply}_#{h params[:id]}" if params[:id]
+    page_id = "#{page_id}_#{h params[:id]}" if params[:id]
     { :id => page_id, :class => page_class }
   end
 

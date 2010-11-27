@@ -2,6 +2,8 @@
 # http://railstips.org/blog/archives/2010/06/16/mongomapper-08-goodies-galore/
 
 class Node
+  attr_writer :children
+
   include MongoMapper::Document
   include Relationship
 

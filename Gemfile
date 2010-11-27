@@ -11,6 +11,7 @@ gem 'maruku',                '~> 0.6'
 gem 'mongo',                 '~> 1.1'
 gem 'mongo_mapper',          '~> 0.8'
 gem 'rails',                 '~> 3.0'
+gem 'rspec-rails',           '~> 2.1'
 gem 'ruby-prof'
 
 group :development do
@@ -28,8 +29,4 @@ end
 group :test do
   gem 'autotest'
   gem 'rcov'
-end
-
-group :development, :test do
-  gem 'rspec-rails',         '~> 2.1'
 end

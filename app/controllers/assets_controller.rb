@@ -32,11 +32,7 @@ class AssetsController < ApplicationController
   private
 
   def format(default_format)
-    begin
-      params[:format].to_sym
-    rescue
-      default_format
-    end
+    params[:format] ? params[:format].to_sym : default_format
   end
 
   def gather_scripts!

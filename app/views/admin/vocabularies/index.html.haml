@@ -3,4 +3,4 @@
     %li
       = link_to vocabulary.name, [:admin, vocabulary]
       = link_to 'Edit', edit_admin_vocabulary_path(vocabulary)
-      = :render :partial => 'terms', :locals => { :vocabulary => vocabulary }
+      = render :partial => 'terms', :locals => { :vocabulary => vocabulary }

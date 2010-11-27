@@ -1,5 +1,3 @@
 %header
   %span.h= node.title
-  %span= node.author.name
-%section
-  = render :partial => 'nodes/article', :collection => node.children, :as => :node, :locals => { :showing_part => :full }
+%section= dump_children node

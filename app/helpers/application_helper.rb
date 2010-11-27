@@ -24,6 +24,10 @@ module ApplicationHelper
     Filter.process_all(text.to_s, filter_group).html_safe
   end
 
+  def dump_children(node)
+    render :partial => 'nodes/article', :collection => node.children, :as => :node, :locals => { :showing_part => :full }
+  end
+
   def show_addon(addon, view = :show, locals = {})
     render :file => addon.views + view.to_s, :locals => locals
   end

@@ -1,12 +1,3 @@
-def addon_types
-  [
-    Filter,
-    NodeExtension,
-    Theme,
-    Widget
-  ]
-end
-
 def password(length = 12)
   alphanumerics = [('0'..'9'), ('A'..'Z'), ('a'..'z')].map { |range| range.to_a }.flatten
   (0...length).map { alphanumerics[Kernel.rand(alphanumerics.size)] }.join
@@ -39,7 +30,12 @@ namespace :sp do
         setting.update_attributes hash if setting.new?
       end
 
-      addon_types.each &:install
+      [
+        Filter,
+        NodeExtension,
+        Theme,
+        Widget
+      ].each &:install
 
       puts 'Default settings have been loaded'
     end
@@ -71,7 +67,8 @@ namespace :sp do
   end
 
   desc 'Load the example content from db/seeds.rb. Should be used for Theme screenshots'
-  task :seed => [:environment, :users] do
+  task :seed => :environment do
+    Rake::Task['sp:install:users'].invoke
     seed_file = File.join(Rails.root, 'db', 'seeds.rb')
     load seed_file if File.exist? seed_file
     puts 'Database has been seeded'

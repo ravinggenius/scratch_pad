@@ -1,6 +1,7 @@
 %header
   %span.h= node.title
 %section
-  %ul
-    - node.items.each do |item|
-      %li= item
+  -if node.items.count > 0
+    %ul
+      - node.items.each do |item|
+        %li= item

@@ -1,8 +1,4 @@
 class Filter < AddonBase
-  def name
-    super.gsub /\.rb/, ''
-  end
-
   def filter
     @filter ||= name.camelize.constantize
   end

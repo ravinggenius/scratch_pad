@@ -48,11 +48,11 @@ class AssetsController < ApplicationController
 
     script_files = []
 
-    script_files << Rails.root + 'app/vendor/modernizr.js'
-    script_files << Rails.root + 'app/vendor/jquery.js'
-    script_files << Rails.root + 'app/vendor/rails.js'
+    script_files << Rails.root + 'app' + 'vendor' + 'modernizr.js'
+    script_files << Rails.root + 'app' + 'vendor' + 'jquery.js'
+    script_files << Rails.root + 'app' + 'vendor' + 'rails.js'
 
-    script_files << Rails.root + 'public/javascripts/application.js'
+    script_files << Rails.root + 'public' + 'javascripts' + 'application.js'
 
     script_files << (NodeExtension.all + Widget.all).map { |addon| addon.scripts }
     script_files << theme.scripts

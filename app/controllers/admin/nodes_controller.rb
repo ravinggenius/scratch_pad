@@ -29,7 +29,7 @@ class Admin::NodesController < Admin::ApplicationController
 
     respond_to do |format|
       if @node.save
-        format.html { redirect_to(admin_nodes_url, :notice => "#{node_type.name} was successfully created.") }
+        format.html { redirect_to(admin_nodes_url, :notice => "#{node_type.name.titleize} was successfully created.") }
         format.xml { render :xml => @node, :status => :created, :location => node_url(@node) }
       else
         set_fieldset_ivars
@@ -47,7 +47,7 @@ class Admin::NodesController < Admin::ApplicationController
 
     respond_to do |format|
       if @node.update_attributes(params[:node])
-        format.html { redirect_to(admin_nodes_url, :notice => "#{node_type.name} was successfully updated.") }
+        format.html { redirect_to(admin_nodes_url, :notice => "#{node_type.name.titleize} was successfully updated.") }
         format.xml { head :ok }
       else
         set_fieldset_ivars

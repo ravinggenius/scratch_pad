@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
     @main_menu_items << if User.current == User.anonymous
       { :name => 'Sign In', :href => new_session_path }
     else
-      { :name => 'Profile', :href => node_path(User.current) }
+      { :name => 'Profile', :href => User.current }
     end
   end
 

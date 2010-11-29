@@ -1,6 +1,7 @@
 ScratchPad::Application.routes.draw do
   resources :nodes, :only => [:index, :show]
   resources :sessions, :only => [:new, :create, :destroy]
+  resources :users, :only => [:index, :show]
 
   namespace :admin do
     resources :filter_groups

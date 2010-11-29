@@ -19,6 +19,7 @@ class Admin::FilterGroupsController < Admin::ApplicationController
 
   def new
     @filter_group = FilterGroup.new
+    @filters = Filter.enabled
 
     respond_to do |format|
       format.html { render 'shared/edit_new' }
@@ -28,6 +29,7 @@ class Admin::FilterGroupsController < Admin::ApplicationController
 
   def edit
     @filter_group = FilterGroup.find(params[:id])
+    @filters = Filter.enabled
     render 'shared/edit_new'
   end
 

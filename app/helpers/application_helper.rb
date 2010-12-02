@@ -20,6 +20,18 @@ module ApplicationHelper
     email.html_safe
   end
 
+  def options_from_collection_for_select(collection, value_method, text_method, options = {})
+    include_blank = options[:include_blank] || false
+    selected = options[:selected] || nil
+    reply = ''
+    if include_blank
+      blank_text = include_blank.is_a?(String) ? include_blank : ''
+      reply << "<option>#{blank_text}</option>"
+    end
+    reply << super(collection, value_method, text_method, selected)
+    reply.html_safe
+  end
+
   def filter(text, filter_group)
     Filter.process_all(text.to_s, filter_group).html_safe
   end

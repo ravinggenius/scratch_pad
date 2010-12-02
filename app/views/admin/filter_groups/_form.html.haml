@@ -1,3 +1,20 @@
-= form_for [:admin, @filter_group] do |f|
-  .actions
-    = f.submit 'Save'
+= form_for [:admin, @filter_group] do |form|
+  %fieldset.filter-group
+    %legend Common
+    %ul
+      %li
+        = form.label :name, 'Name'
+        = form.text_field :name
+      - @filter_group.filters.each_with_index do |filter, count|
+        %li
+          = label_tag "filter_group_filters_#{count}", "#{(count + 1).ordinalize} filter"
+          %select{ :id => "filter_group_filters_#{count}", :name => "filter_group[filters][]" }
+            = options_from_collection_for_select @filters, :machine_name, :title, :include_blank => true, :selected => filter.machine_name
+      - @filter_group.filters.count.upto(@filters.count - 1) do |count|
+        %li
+          = label_tag "filter_group_filters_#{count}", "#{(count + 1).ordinalize} filter"
+          %select{ :id => "filter_group_filters_#{count}", :name => "filter_group[filters][]" }
+            = options_from_collection_for_select @filters, :machine_name, :title, :include_blank => true
+    %ul
+      %li= submit_tag 'Commit'
+      %li= link_to 'Cancel', admin_filter_groups_path

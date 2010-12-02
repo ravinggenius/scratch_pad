@@ -1,4 +1,8 @@
 class Admin::FilterGroupsController < Admin::ApplicationController
+  before_filter :only => [:create, :update] do
+    params[:filter_group][:filters].reject! { |filter_name| filter_name.blank? }
+  end
+
   def index
     @filter_groups = FilterGroup.all
 
@@ -34,7 +38,7 @@ class Admin::FilterGroupsController < Admin::ApplicationController
   end
 
   def create
-    @filter_group = FilterGroup.new(params[:admin_filter])
+    @filter_group = FilterGroup.new(params[:filter_group])
 
     respond_to do |format|
       if @filter_group.save
@@ -54,7 +58,7 @@ class Admin::FilterGroupsController < Admin::ApplicationController
     @filter_group = FilterGroup.find(params[:id])
 
     respond_to do |format|
-      if @filter_group.update_attributes(params[:admin_filter])
+      if @filter_group.update_attributes(params[:filter_group])
         format.html { redirect_to([:admin, @filter_group], :notice => 'FilterGroup was successfully updated.') }
         format.xml { head :ok }
       else

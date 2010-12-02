@@ -1,6 +1,4 @@
-class Admin::SettingsController < ApplicationController
-  # GET /admin/settings
-  # GET /admin/settings.xml
+class Admin::SettingsController < Admin::ApplicationController
   def index
     @settings = Setting.all
 
@@ -10,8 +8,6 @@ class Admin::SettingsController < ApplicationController
     end
   end
 
-  # GET /admin/settings/1
-  # GET /admin/settings/1.xml
   def show
     @setting = Setting.find(params[:id])
 
@@ -21,8 +17,6 @@ class Admin::SettingsController < ApplicationController
     end
   end
 
-  # GET /admin/settings/new
-  # GET /admin/settings/new.xml
   def new
     @setting = Setting.new
 
@@ -32,13 +26,10 @@ class Admin::SettingsController < ApplicationController
     end
   end
 
-  # GET /admin/settings/1/edit
   def edit
     @setting = Setting.find(params[:id])
   end
 
-  # POST /admin/settings
-  # POST /admin/settings.xml
   def create
     @setting = Setting.new(params[:setting])
 
@@ -53,8 +44,6 @@ class Admin::SettingsController < ApplicationController
     end
   end
 
-  # PUT /admin/settings/1
-  # PUT /admin/settings/1.xml
   def update
     @setting = Setting.find(params[:id])
 
@@ -69,8 +58,6 @@ class Admin::SettingsController < ApplicationController
     end
   end
 
-  # DELETE /admin/settings/1
-  # DELETE /admin/settings/1.xml
   def destroy
     @setting = Setting.find(params[:id])
     @setting.destroy

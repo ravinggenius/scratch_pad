@@ -6,6 +6,7 @@ ScratchPad::Application.routes.draw do
   namespace :admin do
     resources :filter_groups
     resources :nodes, :except => :show
+    resources :settings
     resources :themes
     resources :users
     resources :vocabularies do

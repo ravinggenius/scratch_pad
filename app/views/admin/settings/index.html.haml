@@ -1,0 +1,17 @@
+%h1 Listing settings
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @settings.each do |setting|
+    %tr
+      %td= link_to 'Show', [:admin, setting]
+      %td= link_to 'Edit', edit_admin_setting_path(setting)
+      %td= link_to 'Destroy', [:admin, setting], :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Setting', new_admin_setting_path

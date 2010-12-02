@@ -2,7 +2,7 @@ class Admin::ApplicationController < ApplicationController
   layout 'admin'
 
   before_filter do
-    #authorize!
+    authorize!
   end
 
   before_filter do

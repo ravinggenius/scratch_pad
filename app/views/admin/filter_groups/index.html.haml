@@ -4,6 +4,7 @@
   - @filter_groups.each do |filter_group|
     %li
       = filter_group.name
+      = link_to 'Edit', edit_admin_filter_group_path(filter_group)
       %ul
         - filter_group.filters.each do |filter|
-          %li= filter.machine_name
+          %li= filter.title

@@ -1,11 +1,7 @@
 class Filter < AddonBase
-  def filter
-    @filter ||= name.camelize.constantize
-  end
-
   def self.process_all(input, filter_group)
-    filter_group.filters.each do |f|
-      input = f.filter.process input
+    filter_group.filters.each do |filter|
+      input = filter.process input
     end
     input
   end

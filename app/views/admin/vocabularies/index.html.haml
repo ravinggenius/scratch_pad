@@ -1,6 +1,44 @@
-%ul
-  - @vocabularies.each do |vocabulary|
-    %li
-      = link_to vocabulary.name, [:admin, vocabulary]
-      = link_to 'Edit', edit_admin_vocabulary_path(vocabulary)
-      = render :partial => 'terms', :locals => { :vocabulary => vocabulary }
+%header
+  %span.h Listing vocabularies
+
+%section
+  %table#content_overview
+    %col.actions
+    %col.vocabulary-name
+    %col.vocabulary-freetaggable
+    %col.vocabulary-multiselect
+    %col.vocabulary-nodes-optional
+    %col.vocabulary-nodes-required
+    %thead
+      %tr
+        %th Actions
+        %th Name
+        %th Freetaggable
+        %th Multi-Selectable
+        %th Optional Node Types
+        %th Required Node Types
+    %tfoot
+      %tr
+        %td
+        %td
+        %td
+        %td
+        %td
+        %td
+    %tbody
+      - @vocabularies.each do |vocabulary|
+        %tr
+          %td
+            %span.view= link_to 'View', [:admin, vocabulary]
+            %span.edit= link_to 'Edit', edit_admin_vocabulary_path(vocabulary)
+            %span.destroy= link_to 'Delete', [:admin, vocabulary], :confirm => 'Are you sure?', :method => :delete # FIXME clicking this simply GETs the resource
+          %td= vocabulary.name
+          %td= vocabulary.is_freetaggable
+          %td= vocabulary.is_multiselectable
+          - [:node_types_optional, :node_types_required].each do |message|
+            %td
+              - nes = vocabulary.send message
+              - unless nes.blank?
+                %ul
+                  - nes.each do |ne|
+                    %li= ne.title

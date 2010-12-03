@@ -1,4 +1,4 @@
-class FilterArray < Array
+class AddonArray < Array
   def self.to_mongo(values)
     values ||= []
     values.map { |v| v.respond_to?(:machine_name) ? v.machine_name : v }
@@ -6,6 +6,6 @@ class FilterArray < Array
 
   def self.from_mongo(values)
     values ||= []
-    values.map { |v| v.respond_to?(:machine_name) ? v : Filter[v] }
+    values.map { |v| v.respond_to?(:machine_name) ? v : AddonBase[v] }
   end
 end

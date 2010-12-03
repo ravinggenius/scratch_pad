@@ -27,7 +27,8 @@ class Admin::ApplicationController < ApplicationController
       ]},
       { :name => 'Groups' },
       { :name => 'Permissions' },
-      { :name => 'Settings', :href => admin_settings_path }
+      { :name => 'Settings', :href => admin_settings_path },
+      { :name => 'Addons', :href => admin_addons_path }
     ]
   end
 end

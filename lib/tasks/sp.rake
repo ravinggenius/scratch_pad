@@ -1,8 +1,3 @@
-def password(length = 12)
-  alphanumerics = [('0'..'9'), ('A'..'Z'), ('a'..'z')].map { |range| range.to_a }.flatten
-  (0...length).map { alphanumerics[Kernel.rand(alphanumerics.size)] }.join
-end
-
 def puts_loud(phrase)
   puts "!IMPORTANT: #{phrase}"
 end
@@ -43,13 +38,13 @@ namespace :sp do
     desc 'Adds the required users'
     task :users => [:environment, :groups] do
       anon = User.first_or_new :username => 'anon', :name => 'Anonymous', :email => 'anonymous@example.com'
-      anon.password = anon.password_confirmation = password(24)
+      anon.password = anon.password_confirmation = User.new_password(24)
       anon.groups << Group.first(:code => :locked)
       anon.save
 
       root = User.first_or_new :username => 'root', :name => 'Administrator', :email => 'root@example.com'
       if root.new?
-        root.password = root.password_confirmation = root_password = password
+        root.password = root.password_confirmation = root_password = User.new_password
         puts_loud "The root password was set to #{root_password}. There is no way to recover this, so be sure to store it securely."
       end
       root.groups << Group.first(:code => :root)

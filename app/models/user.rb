@@ -34,6 +34,19 @@ class User
     self.hashword = @hash = Password.create(new_password)
   end
 
+  def self.new_password(length = 12)
+    pool = []
+
+    pool << %w[ ` ~ ! @ # $ % ^ & * ( ) - _ + = ? / \ | { } < > , . ]
+    pool << ('0'..'9').to_a
+    pool << ('A'..'Z').to_a
+    pool << ('a'..'z').to_a
+
+    pool.map! { |range| range.to_a }.flatten!
+
+    (0...length).map { pool[Kernel.rand(pool.size)] }.join
+  end
+
   def self.current
     @current || anonymous
   end

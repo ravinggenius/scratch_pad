@@ -27,7 +27,7 @@ class Admin::SettingsController < Admin::ApplicationController
 
     respond_to do |format|
       if @setting.update_attributes(params[:setting])
-        format.html { redirect_to(admin_settings, :notice => 'Setting was successfully updated.') }
+        format.html { redirect_to(admin_settings_url, :notice => 'Setting was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

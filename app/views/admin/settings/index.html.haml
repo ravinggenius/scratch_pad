@@ -27,7 +27,6 @@
         %tr
           %td
             %span.edit= link_to 'Edit', edit_admin_setting_path(setting)
-            %span.destroy= link_to 'Delete', [:admin, setting], :confirm => 'Are you sure?', :method => :delete # FIXME clicking this simply GETs the resource
           %td= # setting.type
           %td= setting.scope
           %td= setting.name

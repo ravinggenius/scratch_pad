@@ -1,0 +1,17 @@
+%h1 Listing addons
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @addons.each do |addon|
+    %tr
+      %td= link_to 'Show', [:admin, addon]
+      %td= link_to 'Edit', edit_admin_addon_path(addon)
+      %td= link_to 'Destroy', [:admin, addon], :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Addon', new_admin_addon_path

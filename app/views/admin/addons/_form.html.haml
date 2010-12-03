@@ -1,0 +1,10 @@
+= form_for @addon do |f|
+  -if @addon.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@addon.errors.count, "error")} prohibited this addon from being saved:"
+      %ul
+        - @addon.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save'

@@ -1,6 +1,7 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    ZenTest (4.4.1)
     abstract (1.0.0)
     actionmailer (3.0.3)
       actionpack (= 3.0.3)
@@ -30,7 +31,8 @@ GEM
     activesupport (3.0.3)
     archive-tar-minitar (0.5.2)
     arel (2.0.6)
-    autotest (4.4.5)
+    autotest (4.4.6)
+      ZenTest (>= 4.4.1)
     awesome_print (0.3.1)
     bcrypt-ruby (2.1.2)
     bson (1.1.4)

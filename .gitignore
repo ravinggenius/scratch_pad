@@ -13,6 +13,7 @@ doc/guides
 .DS_Store
 gems/gems/*
 gems/specifications/*
+.idea
 log/*.log
 nbproject
 nbproject/*

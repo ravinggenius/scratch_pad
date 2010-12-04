@@ -9,7 +9,7 @@ class Admin::ApplicationController < ApplicationController
     @main_menu_items = [
       { :name => 'Dashboard', :href => admin_root_path },
       { :name => 'Content', :href => admin_nodes_path, :children => [
-        { :name => 'New', :href => new_admin_node_path, :children => NodeExtension.enabled.map { |extension| { :name => extension.name.titleize, :href => new_admin_node_path(:node_type => extension.machine_name) } } }
+        { :name => 'New', :href => new_admin_node_path, :children => NodeExtension.enabled.map { |extension| { :name => extension.name, :href => new_admin_node_path(:node_type => extension.machine_name) } } }
       ]},
       { :name => 'Taxonomy', :href => admin_vocabularies_path, :children => [
         { :name => 'New', :href => new_admin_vocabulary_path }

@@ -29,7 +29,7 @@ class Admin::NodesController < Admin::ApplicationController
 
     respond_to do |format|
       if @node.save
-        format.html { redirect_to(admin_nodes_url, :notice => "#{node_type.name.titleize} was successfully created.") }
+        format.html { redirect_to(admin_nodes_url, :notice => "#{node_type.name} was successfully created.") }
         format.xml { render :xml => @node, :status => :created, :location => node_url(@node) }
       else
         set_fieldset_ivars
@@ -47,7 +47,7 @@ class Admin::NodesController < Admin::ApplicationController
 
     respond_to do |format|
       if @node.update_attributes(params[:node])
-        format.html { redirect_to(admin_nodes_url, :notice => "#{node_type.name.titleize} was successfully updated.") }
+        format.html { redirect_to(admin_nodes_url, :notice => "#{node_type.name} was successfully updated.") }
         format.xml { head :ok }
       else
         set_fieldset_ivars
@@ -89,7 +89,7 @@ class Admin::NodesController < Admin::ApplicationController
   def set_fieldset_ivars
     if @node.new?
       @node_types = NodeExtension.enabled.map do |extension|
-        [extension.name.titleize, extension.machine_name]
+        [extension.name, extension.machine_name]
       end.insert 0, ['Node', 'node']
       ne = NodeExtension[params[:node_type]]
       @selected_node_type = NodeExtension.enabled.include?(ne) ? ne.machine_name : @node.class.machine_name

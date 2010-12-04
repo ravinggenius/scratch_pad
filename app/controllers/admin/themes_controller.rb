@@ -1,6 +1,6 @@
 class Admin::ThemesController < Admin::ApplicationController
   def index
-    scope = params[:scope].to_sym
+    scope = params[:scope].to_s.to_sym
     scope = [:frontend, :backend].include?(scope) ? scope : :all
 
     @themes = Theme.send scope

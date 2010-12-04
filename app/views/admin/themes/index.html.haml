@@ -1,5 +1,25 @@
-%h1 Listing themes
+%header
+  %span.h Listing themes
 
-%ul
-  - @themes.each do |theme|
-    %li #{theme.name}
+%section
+  %table#content_overview
+    %col.actions
+    %col.theme-name
+    %col.theme-scope
+    %thead
+      %tr
+        %th Actions
+        %th Name
+        %th Scope
+    %tfoot
+      %tr
+        %td
+        %td
+        %td
+    %tbody
+      - @themes.each do |theme|
+        %tr
+          %td
+            %span.view= # link_to 'View', [:admin, theme]
+          %td= theme.name
+          %td= theme.frontend? ? 'Frontend' : 'Backend'

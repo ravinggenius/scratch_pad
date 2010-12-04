@@ -1,6 +1,6 @@
 class Admin::SettingsController < Admin::ApplicationController
   def index
-    @settings = Setting.all
+    @settings = Setting.sort :scope
 
     respond_to do |format|
       format.html # index.html.erb

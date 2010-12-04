@@ -93,27 +93,27 @@ namespace :sp do
   namespace :addons do
     desc 'List Filters with the FilterGroups they belong to'
     task :filters => :environment do
-      puts_table Filter.all, [:name, :title], 'Filters'
+      puts_table Filter.all, [:name, :machine_name], 'Filters'
       puts
     end
 
     desc 'List NodeExtensions with a usage count'
     task :node_extensions => :environment do
-      puts_table NodeExtension.all, [:name, :title], 'Node Extensions'
+      puts_table NodeExtension.all, [:name, :machine_name], 'Node Extensions'
       puts
     end
 
     desc 'List Widgets'
     task :widgets => :environment do
-      puts_table Widget.all, [:name, :title], 'Widgets'
+      puts_table Widget.all, [:name, :machine_name], 'Widgets'
       puts
     end
 
     desc 'List Themes with status grouped by frontend/backend'
     task :themes => :environment do
-      puts_table Theme.frontend, [:name, :title], 'Frontend Themes'
+      puts_table Theme.frontend, [:name, :machine_name], 'Frontend Themes'
       puts
-      puts_table Theme.backend, [:name, :title], 'Backend Themes'
+      puts_table Theme.backend, [:name, :machine_name], 'Backend Themes'
       puts
     end
 
@@ -122,7 +122,11 @@ namespace :sp do
       desc 'Set a Theme as active. Useful for emergency recovery from a broken Theme'
       task :activate, :backend_or_frontend, :template, :needs => :environment do |t, args|
         s = Setting.first_in_scope :addon, :theme, args[:backend_or_frontend]
-        s.update_attributes :value => args[:template] if s
+        if s
+          theme = Theme[args[:template]]
+          theme.enable
+          s.update_attributes :value => theme.name
+        end
       end
     end
   end

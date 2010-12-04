@@ -4,7 +4,7 @@ end
 
 def puts_table(data, fields, caption = nil)
   puts "#{caption}\n" unless caption.nil?
-  puts Hirb::Helpers::AutoTable.render(data, :fields => fields, :header_filter => :capitalize)
+  puts Hirb::Helpers::AutoTable.render(data, :fields => fields, :header_filter => :titleize)
 end
 
 namespace :sp do

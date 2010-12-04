@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   layout 'application'
 
+  MenuItem = Struct.new :name, :href, :children
+
   before_filter do
     User.current = User.find session[:current_user_id]
   end
@@ -15,9 +17,9 @@ class ApplicationController < ActionController::Base
     @selected_theme = pick_theme Setting[:theme, :frontend]
     @main_menu_items = []
     @main_menu_items << if User.current == User.anonymous
-      { :name => 'Sign In', :href => new_session_path }
+      MenuItem.new('Sign In', new_session_path)
     else
-      { :name => 'Profile', :href => User.current }
+      MenuItem.new('Profile', User.current)
     end
   end
 

@@ -11,28 +11,30 @@ class Admin::ApplicationController < ApplicationController
 
   before_filter do
     @main_menu_items = [
-      { :name => 'Dashboard', :href => admin_root_path },
-      { :name => 'Content', :href => admin_nodes_path, :children => [
-        { :name => 'New', :href => new_admin_node_path, :children => NodeExtension.enabled.map { |extension| { :name => extension.name, :href => new_admin_node_path(:node_type => extension.machine_name) } } }
-      ]},
-      { :name => 'Taxonomy', :href => admin_vocabularies_path, :children => [
-        { :name => 'New', :href => new_admin_vocabulary_path }
-      ]},
-      { :name => 'Widgets' },
-      { :name => 'Themes', :href => admin_themes_path, :children => [
-        { :name => 'Frontend', :href => admin_themes_path(:scope => :frontend) },
-        { :name => 'Backend', :href => admin_themes_path(:scope => :backend) }
-      ]},
-      { :name => 'Filters', :href=> admin_filter_groups_path, :children => [
-        { :name => 'New', :href => new_admin_filter_group_path }
-      ]},
-      { :name => 'Users', :href => admin_users_path, :children => [
-        { :name => 'New', :href => new_admin_user_path }
-      ]},
-      { :name => 'Groups' },
-      { :name => 'Permissions' },
-      { :name => 'Settings', :href => admin_settings_path },
-      { :name => 'Addons', :href => admin_addons_path }
+      MenuItem.new('Dashboard', admin_root_path),
+      MenuItem.new('Content', admin_nodes_path, [
+        MenuItem.new('New', new_admin_node_path, NodeExtension.enabled.map { |extension|
+          MenuItem.new(extension.name, new_admin_node_path(:node_type => extension.machine_name))
+        })
+      ]),
+      MenuItem.new('Taxonomy', admin_vocabularies_path, [
+        MenuItem.new('New', new_admin_vocabulary_path)
+      ]),
+      MenuItem.new('Widgets'),
+      MenuItem.new('Themes', admin_themes_path, [
+        MenuItem.new('Frontend', admin_themes_path(:scope => :frontend)),
+        MenuItem.new('Backend', admin_themes_path(:scope => :backend))
+      ]),
+      MenuItem.new('Filters', admin_filter_groups_path, [
+        MenuItem.new('New', new_admin_filter_group_path)
+      ]),
+      MenuItem.new('Users', admin_users_path, [
+        MenuItem.new('New', new_admin_user_path)
+      ]),
+      MenuItem.new('Groups'),
+      MenuItem.new('Permissions'),
+      MenuItem.new('Settings', admin_settings_path),
+      MenuItem.new('Addons', admin_addons_path)
     ]
   end
 end

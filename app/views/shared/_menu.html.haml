@@ -2,10 +2,10 @@
   %ul<>
     - items.each do |item|
       %li<>
-        - link = link_to_if item[:href], item[:name], item[:href]
-        - if item[:children]
+        - link = link_to_if item.href, item.name, item.href
+        - if item.children
           %label<>= link
         - else
           = link
-        - if item[:children]
-          = render :partial => 'shared/menu', :locals => { :items => item[:children] }
+        - if item.children
+          = render :partial => 'shared/menu', :locals => { :items => item.children }

@@ -8,7 +8,7 @@
 
     /%link{ :rel => 'shortcut icon', :href => '/images/favicon.ico' }/
 
-    = theme_tags Setting[:addon, :theme, :backend]
+    = theme_tags Setting[:theme, :backend]
 
     = show_widgets @widgets[:head]
   %body{ body_attributes }

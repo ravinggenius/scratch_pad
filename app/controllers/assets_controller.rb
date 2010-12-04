@@ -100,7 +100,7 @@ class AssetsController < ApplicationController
 @charset 'utf-8'
     SASS
 
-    scope = 'addon.theme.support'
+    scope = 'theme.support'
     Setting.all(:scope => /#{scope}/).each do |setting|
       vendor = setting.scope.gsub "#{scope}.", ''
       value = Setting["#{scope}.#{vendor}"]

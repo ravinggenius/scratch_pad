@@ -18,9 +18,9 @@ namespace :sp do
     desc 'Adds the required settings'
     task :settings => [:environment, :users] do
       [
-        { :scope => 'sp.site.name',                :name => 'Site Name',               :value => 'ScratchPad' },
-        { :scope => 'sp.site.tagline',             :name => 'Site Tagline',            :value => '...' },
-        { :scope => 'sp.user.password.min_length', :name => 'Minimum Password Length', :value => 8 }
+        { :scope => 'site.name',                :name => 'Site Name',               :value => 'ScratchPad' },
+        { :scope => 'site.tagline',             :name => 'Site Tagline',            :value => '...' },
+        { :scope => 'user.password.min_length', :name => 'Minimum Password Length', :value => 8 }
       ].each do |hash|
         setting = Setting.first_or_create :scope => hash[:scope]
         setting.update_attributes hash if setting.new?

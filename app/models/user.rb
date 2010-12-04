@@ -73,7 +73,7 @@ class User
     if @new_password.blank?
       errors.add :password, 'can\'t be empty'
     else
-      min_length = Setting[:sp, :user, :password, :min_length] || 8
+      min_length = Setting[:user, :password, :min_length] || 8
       requirements = {}
       requirements[:length]     = /(?=.{#{min_length},})/
       requirements[:upper_case] = /(?=.*[A-Z])/

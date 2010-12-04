@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   end
 
   before_filter do
-    @title = Setting[:sp, :site, :name]
+    @title = Setting[:site, :name]
     @main_menu_items = []
     @main_menu_items << if User.current == User.anonymous
       { :name => 'Sign In', :href => new_session_path }

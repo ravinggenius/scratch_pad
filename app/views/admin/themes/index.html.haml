@@ -20,6 +20,7 @@
       - @themes.each do |theme|
         %tr
           %td
-            %span.view= # link_to 'View', [:admin, theme]
+            %span.preview= link_to 'Preview', :force_theme => theme.machine_name
+            %span.use= link_to 'Use'
           %td= theme.name
           %td= theme.frontend? ? 'Frontend' : 'Backend'

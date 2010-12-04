@@ -6,6 +6,10 @@ class Admin::ApplicationController < ApplicationController
   end
 
   before_filter do
+    @selected_theme = pick_theme Setting[:theme, :backend]
+  end
+
+  before_filter do
     @main_menu_items = [
       { :name => 'Dashboard', :href => admin_root_path },
       { :name => 'Content', :href => admin_nodes_path, :children => [

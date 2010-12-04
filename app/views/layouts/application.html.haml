@@ -9,7 +9,7 @@
     - # %link{ :rel => 'shortcut icon', :href => '/images/favicon.ico' }/
     = auto_discovery_link_tag
 
-    = theme_tags Setting[:theme, :frontend]
+    = theme_tags @selected_theme
 
     = show_widgets @widgets[:head]
   %body{ body_attributes }

@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
 
   before_filter do
     @title = Setting[:site, :name]
+    @selected_theme = pick_theme Setting[:theme, :frontend]
     @main_menu_items = []
     @main_menu_items << if User.current == User.anonymous
       { :name => 'Sign In', :href => new_session_path }
@@ -50,5 +51,11 @@ class ApplicationController < ActionController::Base
       flash[:error] = 'You do not have permission to do that.'
       raise HTTPStatuses::Unauthorized
     end
+  end
+
+  def pick_theme(default)
+    reply = default
+    reply = params[:force_theme] if authorize && params[:force_theme]
+    reply
   end
 end

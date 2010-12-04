@@ -15,7 +15,7 @@ class Admin::ApplicationController < ApplicationController
         { :name => 'New', :href => new_admin_vocabulary_path }
       ]},
       { :name => 'Widgets' },
-      { :name => 'Themes', :children => [
+      { :name => 'Themes', :href => admin_themes_path, :children => [
         { :name => 'Frontend', :href => admin_themes_path(:scope => :frontend) },
         { :name => 'Backend', :href => admin_themes_path(:scope => :backend) }
       ]},

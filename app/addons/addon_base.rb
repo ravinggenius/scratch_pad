@@ -1,7 +1,4 @@
 class AddonBase
-  def install
-  end
-
   def self.[](name)
     name.to_s.camelize.constantize
   end

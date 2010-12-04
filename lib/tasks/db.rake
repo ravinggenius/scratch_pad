@@ -2,6 +2,7 @@ namespace :db do
   desc 'Clear all collections'
   task :clear => :environment do
     [
+      Addon,
       Cache,
       FilterGroup,
       Group,
@@ -12,7 +13,7 @@ namespace :db do
       Term,
       User,
       Vocabulary
-    ].each { |model| model.delete_all }
+    ].each &:delete_all
     puts 'Database truncated'
   end
 end

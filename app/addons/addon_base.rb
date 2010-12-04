@@ -32,11 +32,11 @@ class AddonBase
   end
 
   def self.enabled
-    all
+    Addon.all.map { |addon| self[addon.name] }
   end
 
   def self.disabled
-    []
+    all - enabled
   end
 
   def self.install

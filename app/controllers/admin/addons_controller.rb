@@ -16,6 +16,7 @@ class Admin::AddonsController < Admin::ApplicationController
     end
   end
 
+  # TODO :disable needs to be called instead of Addon.delete_all
   def update
     Addon.delete_all
 
@@ -25,9 +26,7 @@ class Admin::AddonsController < Admin::ApplicationController
       :theme,
       :widget
     ].each do |addon_type|
-      params[addon_type].each do |addon, is_enabled|
-        Addon.first_or_create :name => AddonBase[addon].name
-      end
+      params[addon_type].each { |addon_name, one| AddonBase[addon_name].enable }
     end
 
     respond_to do |format|

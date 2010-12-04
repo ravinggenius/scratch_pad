@@ -36,6 +36,15 @@ class AddonBase
     all - enabled
   end
 
+  def self.enable
+    Addon.first_or_create :name => self.name
+  end
+
+  def self.disable
+    addon = Addon.first :name => self.name
+    addon.delete
+  end
+
   def self.initialize_settings
   end
 

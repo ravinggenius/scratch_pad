@@ -93,27 +93,27 @@ namespace :sp do
   namespace :addons do
     desc 'List Filters with the FilterGroups they belong to'
     task :filters => :environment do
-      puts_table Filter.all, [:name, :machine_name], 'Filters'
+      puts_table Filter.all, [:name, :machine_name, :enabled?], 'Filters'
       puts
     end
 
     desc 'List NodeExtensions with a usage count'
     task :node_extensions => :environment do
-      puts_table NodeExtension.all, [:name, :machine_name], 'Node Extensions'
+      puts_table NodeExtension.all, [:name, :machine_name, :enabled?], 'Node Extensions'
       puts
     end
 
     desc 'List Widgets'
     task :widgets => :environment do
-      puts_table Widget.all, [:name, :machine_name], 'Widgets'
+      puts_table Widget.all, [:name, :machine_name, :enabled?], 'Widgets'
       puts
     end
 
     desc 'List Themes with status grouped by frontend/backend'
     task :themes => :environment do
-      puts_table Theme.frontend, [:name, :machine_name], 'Frontend Themes'
+      puts_table Theme.frontend, [:name, :machine_name, :enabled?], 'Frontend Themes'
       puts
-      puts_table Theme.backend, [:name, :machine_name], 'Backend Themes'
+      puts_table Theme.backend, [:name, :machine_name, :enabled?], 'Backend Themes'
       puts
     end
 

@@ -28,6 +28,14 @@ class AddonBase
     path.entries.reject { |entry| entry.to_s =~ /^\./ }.sort.map { |name| self[name] }
   end
 
+  def self.enabled?
+    enabled.include? self
+  end
+
+  def self.disabled?
+    disabled.include? self
+  end
+
   def self.enabled
     reply = Addon.all.map { |addon| self[addon.name] }
     reply.select! { |addon| addon.ancestors.include? self }

@@ -11,6 +11,14 @@ class Theme < AddonBase
     all.select { |theme| theme.admin? }
   end
 
+  def self.frontend?
+    Theme.frontend.include? self
+  end
+
+  def self.backend?
+    Theme.backend.include? self
+  end
+
   def self.initialize_settings
     register_setting 'addon.theme.frontend',          'Frontend Theme',                     :default
     register_setting 'addon.theme.backend',           'Backend Theme',                      :default_admin

@@ -47,10 +47,6 @@ class AddonBase
     setting.update_attributes :name => name, :value => default_value if setting.new?
   end
 
-  def self.title
-    self.name.titleize
-  end
-
   def self.machine_name
     self.name.underscore
   end

@@ -1,17 +1,15 @@
-%h1 Listing addons
+%header
+  %span.h Listing addons
 
-%table
-  %tr
-    %th
-    %th
-    %th
-
-  - @addons.each do |addon|
-    %tr
-      %td= link_to 'Show', [:admin, addon]
-      %td= link_to 'Edit', edit_admin_addon_path(addon)
-      %td= link_to 'Destroy', [:admin, addon], :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New Addon', new_admin_addon_path
+%section
+  - form_tag :action => :update do
+    - @addons.each do |addon_type, addons|
+      %fieldset.addon
+        %legend= addon_type.name.pluralize
+        %ul
+          - addons.each do |addon|
+            %li
+              = check_box_tag "#{addon_type.machine_name}[#{addon.machine_name}]", 1, addon_type.enabled.include?(addon)
+              = label_tag addon.machine_name, "#{addon.name} - addon.description"
+    %ul
+      %li= submit_tag 'Commit'

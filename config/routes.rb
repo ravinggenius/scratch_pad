@@ -4,7 +4,7 @@ ScratchPad::Application.routes.draw do
   resources :users, :only => [:index, :show]
 
   namespace :admin do
-    resources :addons
+    resources :addons, :only => :index
     resources :filter_groups
     resources :nodes, :except => :show
     resources :settings
@@ -13,6 +13,7 @@ ScratchPad::Application.routes.draw do
     resources :vocabularies do
       resources :terms
     end
+    post '/addons', :to => 'addons#update'
     get '/nodes/new_node_type', :to => 'nodes#new_node_type'
     root :to => 'dashboard#index'
   end

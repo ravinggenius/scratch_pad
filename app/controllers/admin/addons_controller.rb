@@ -1,6 +1,14 @@
-class Admin::AddonsController < ApplicationController
+class Admin::AddonsController < Admin::ApplicationController
   def index
-    @addons = Addon.all
+    @addons = {}
+    [
+      Filter,
+      NodeExtension,
+      Theme,
+      Widget
+    ].each do |addon|
+      @addons[addon] = addon.all
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -8,62 +16,22 @@ class Admin::AddonsController < ApplicationController
     end
   end
 
-  def show
-    @addon = Addon.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @addon }
-    end
-  end
-
-  def new
-    @addon = Addon.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @addon }
-    end
-  end
-
-  def edit
-    @addon = Addon.find(params[:id])
-  end
-
-  def create
-    @addon = Addon.new(params[:addon])
-
-    respond_to do |format|
-      if @addon.save
-        format.html { redirect_to(@addon, :notice => 'Addon was successfully created.') }
-        format.xml  { render :xml => @addon, :status => :created, :location => @addon }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @addon.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
   def update
-    @addon = Addon.find(params[:id])
+    Addon.delete_all
 
-    respond_to do |format|
-      if @addon.update_attributes(params[:addon])
-        format.html { redirect_to(@addon, :notice => 'Addon was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @addon.errors, :status => :unprocessable_entity }
+    [
+      :filter,
+      :node_extension,
+      :theme,
+      :widget
+    ].each do |addon_type|
+      params[addon_type].each do |addon, is_enabled|
+        Addon.first_or_create :name => AddonBase[addon].name
       end
     end
-  end
-
-  def destroy
-    @addon = Addon.find(params[:id])
-    @addon.destroy
 
     respond_to do |format|
-      format.html { redirect_to(admin_addons_url) }
+      format.html { redirect_to(admin_addons_url, :notice => 'Addons were successfully updated.') }
       format.xml  { head :ok }
     end
   end

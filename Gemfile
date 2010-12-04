@@ -19,6 +19,7 @@ group :development do
   gem 'interactive_editor'
   gem 'nifty-generators'
   gem 'ruby-debug19'
+  gem 'ruby-debug-ide19'
   gem 'wirble'
 end
 

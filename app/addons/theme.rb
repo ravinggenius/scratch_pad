@@ -4,11 +4,11 @@ class Theme < AddonBase
   end
 
   def self.frontend
-    all.reject { |theme| theme.admin? }
+    enabled.reject { |theme| theme.admin? }
   end
 
   def self.backend
-    all.select { |theme| theme.admin? }
+    enabled.select { |theme| theme.admin? }
   end
 
   def self.frontend?

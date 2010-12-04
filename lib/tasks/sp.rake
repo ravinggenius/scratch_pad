@@ -30,7 +30,7 @@ namespace :sp do
         NodeExtension,
         Theme,
         Widget
-      ].each &:install
+      ].each &:initialize_settings
 
       puts 'Default settings have been loaded'
     end

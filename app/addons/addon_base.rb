@@ -36,7 +36,7 @@ class AddonBase
     all - enabled
   end
 
-  def self.install
+  def self.initialize_settings
   end
 
   def self.register_setting(scope, name, default_value)

@@ -11,7 +11,7 @@ class Theme < AddonBase
     all.select { |theme| theme.admin? }
   end
 
-  def self.install
+  def self.initialize_settings
     register_setting 'addon.theme.frontend',          'Frontend Theme',                     :default
     register_setting 'addon.theme.backend',           'Backend Theme',                      :default_admin
     register_setting 'addon.theme.support.khtml',     'Experimental Support For KHTML',     false

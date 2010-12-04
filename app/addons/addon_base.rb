@@ -29,7 +29,9 @@ class AddonBase
   end
 
   def self.enabled
-    Addon.all.map { |addon| self[addon.name] }
+    reply = Addon.all.map { |addon| self[addon.name] }
+    reply.select! { |addon| addon.ancestors.include? self }
+    reply
   end
 
   def self.disabled

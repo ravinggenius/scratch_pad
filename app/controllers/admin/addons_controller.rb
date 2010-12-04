@@ -26,7 +26,7 @@ class Admin::AddonsController < Admin::ApplicationController
       :theme,
       :widget
     ].each do |addon_type|
-      params[addon_type].each { |addon_name, one| AddonBase[addon_name].enable }
+      (params[addon_type] || {}).each { |addon_name, one| AddonBase[addon_name].enable }
     end
 
     respond_to do |format|

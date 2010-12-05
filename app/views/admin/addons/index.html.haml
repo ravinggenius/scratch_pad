@@ -2,7 +2,7 @@
   %span.h Listing addons
 
 %section
-  - form_tag :action => :update do
+  = form_tag :action => :update do
     - @addons.each do |addon_type, addons|
       %fieldset.addon
         %legend= addon_type.name.pluralize

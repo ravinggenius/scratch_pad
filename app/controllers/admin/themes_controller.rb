@@ -3,7 +3,12 @@ class Admin::ThemesController < Admin::ApplicationController
     scope = params[:scope].to_s.to_sym
     scope = [:frontend, :backend].include?(scope) ? scope : :enabled
 
-    @themes = Theme.send scope
+    @themes = {}
+    @current_theme = {}
+    [:frontend, :backend].each do |s|
+      @themes[s] = Theme.send s if [s, :enabled].include?(scope)
+      @current_theme[s] = Theme[Setting[:theme, s]]
+    end
 
     respond_to do |format|
       format.html
@@ -11,70 +16,19 @@ class Admin::ThemesController < Admin::ApplicationController
     end
   end
 
-  def show
-    @theme = Theme.find(params[:id])
-
-    respond_to do |format|
-      format.html
-      format.xml { render :xml => @theme }
-    end
-  end
-
-  def new
-    @theme = Theme.new
-
-    respond_to do |format|
-      format.html { render 'shared/edit_new' }
-      format.xml { render :xml => @theme }
-    end
-  end
-
-  def edit
-    @theme = Theme.find(params[:id])
-    render 'shared/edit_new'
-  end
-
-  def create
-    @theme = Theme.new(params[:admin_theme])
-
-    respond_to do |format|
-      if @theme.save
-        format.html { redirect_to([:admin, @theme], :notice => 'Theme was successfully created.') }
-        format.xml { render :xml => @theme, :status => :created, :location => [:admin, @theme] }
-      else
-        format.html do
-          flash[:error] = @theme.errors.full_messages
-          render 'shared/edit_new'
-        end
-        format.xml { render :xml => @theme.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
   def update
-    @theme = Theme.find(params[:id])
+    theme = Theme[params[:frontend] || params[:backend]]
+
+    setting = Setting.first_in_scope :theme, params[:scope]
 
     respond_to do |format|
-      if @theme.update_attributes(params[:theme])
-        format.html { redirect_to([:admin, @theme], :notice => 'Theme was successfully updated.') }
-        format.xml { head :ok }
+      if setting.update_attributes :value => theme.machine_name
+        format.html { redirect_to(admin_themes_url, :notice => "#{theme.name} was set as #{params[:scope]} theme.") }
+        format.xml  { head :ok }
       else
-        format.html do
-          flash[:error] = @theme.errors.full_messages
-          render 'shared/edit_new'
-        end
-        format.xml { render :xml => @theme.errors, :status => :unprocessable_entity }
+        format.html { redirect_to(admin_themes_url, :error => setting.errors.full_messages) }
+        format.xml { render :xml => setting.errors, :status => :unprocessable_entity }
       end
-    end
-  end
-
-  def destroy
-    @theme = Theme.find(params[:id])
-    @theme.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(admin_themes_url) }
-      format.xml { head :ok }
     end
   end
 end

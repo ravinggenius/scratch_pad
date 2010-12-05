@@ -8,12 +8,14 @@ ScratchPad::Application.routes.draw do
     resources :filter_groups
     resources :nodes, :except => :show
     resources :settings
-    resources :themes
+    resources :themes, :only => :index
     resources :users
     resources :vocabularies do
       resources :terms
     end
-    post '/addons', :to => 'addons#update'
+    [:addons, :themes].each do |controller|
+      post "/#{controller}", :to => "#{controller}#update"
+    end
     get '/nodes/new_node_type', :to => 'nodes#new_node_type'
     root :to => 'dashboard#index'
   end

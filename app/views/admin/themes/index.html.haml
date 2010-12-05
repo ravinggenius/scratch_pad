@@ -2,25 +2,15 @@
   %span.h Listing themes
 
 %section
-  %table#content_overview
-    %col.actions
-    %col.theme-name
-    %col.theme-scope
-    %thead
-      %tr
-        %th Actions
-        %th Name
-        %th Scope
-    %tfoot
-      %tr
-        %td
-        %td
-        %td
-    %tbody
-      - @themes.each do |theme|
-        %tr
-          %td
-            %span.preview= link_to 'Preview', :force_theme => theme.machine_name
-            %span.use= link_to 'Use'
-          %td= theme.name
-          %td= theme.frontend? ? 'Frontend' : 'Backend'
+  - @themes.each do |scope, themes|
+    = form_tag :action => :update, :scope => scope do
+      %fieldset.addon
+        %legend= scope.to_s.titleize
+        %ul
+          - themes.each do |theme|
+            %li
+              = radio_button_tag scope, theme.machine_name, (@current_theme[scope] == theme)
+              = label_tag "#{scope}_#{theme.machine_name}", "#{theme.name} - theme.description"
+              %span.preview= link_to 'Preview', :force_theme => theme.machine_name
+      %ul
+        %li= submit_tag 'Commit'

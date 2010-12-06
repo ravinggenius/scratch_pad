@@ -67,9 +67,25 @@ class AddonBase
     end
   end
 
+  def self.describe(phrase)
+    @descriptions ||= {}
+    @descriptions[message_scope] = phrase
+  end
+
+  def self.description
+    (@descriptions || {})[message_scope]
+  end
+
   def self.register_setting(scope, name, default_value)
     scope = scope.join Setting::SCOPE_GLUE
     @settings ||= {}
     @settings[scope] = { :scope => scope, :name => name, :value => default_value }
+  end
+
+  private
+
+  def self.message_scope
+    ancestors = self.ancestors
+    ancestors[0..(ancestors.find_index(AddonBase) - 1)].map { |ancestor| ancestor.name.underscore }.reverse.join Setting::SCOPE_GLUE
   end
 end

@@ -51,20 +51,23 @@ class AddonBase
   end
 
   def self.enable
+    ms = message_scope
     Addon.first_or_create :name => self.name
-    (@settings || {}).each do |scope, setting|
-      # TODO only create Settings for the addon being enabled
-      s = Setting.first_or_create :scope => scope
-      s.update_attributes setting if s.new?
+    @settings ||= {}
+    (@settings[ms] || []).each do |setting|
+      Setting.first_or_create setting.merge(:scope => [ms, setting[:scope]].join(Setting::SCOPE_GLUE))
     end
+    ms
   end
 
   def self.disable
-    addon = Addon.first :name => self.name
-    addon.delete if addon.present?
-    (@settings || {}).each do |scope, setting|
-      # TODO only remove Settings for the addon being disabled
+    ms = message_scope
+    Addon.first(:name => self.name).try :delete
+    @settings ||= {}
+    (@settings[ms] || []).each do |setting|
+      Setting.first(:scope => [ms, setting[:scope]].join(Setting::SCOPE_GLUE)).try :delete
     end
+    ms
   end
 
   def self.describe(phrase)
@@ -77,9 +80,10 @@ class AddonBase
   end
 
   def self.register_setting(scope, name, default_value)
-    scope = scope.join Setting::SCOPE_GLUE
+    ms = message_scope
     @settings ||= {}
-    @settings[scope] = { :scope => scope, :name => name, :value => default_value }
+    @settings[ms] ||= []
+    @settings[ms] << { :scope => scope, :name => name, :value => default_value }
   end
 
   private

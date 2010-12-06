@@ -48,19 +48,25 @@ class AddonBase
 
   def self.enable
     Addon.first_or_create :name => self.name
+    (@settings || {}).each do |scope, setting|
+      # TODO only create Settings for the addon being enabled
+      s = Setting.first_or_create :scope => scope
+      s.update_attributes setting if s.new?
+    end
   end
 
   def self.disable
     addon = Addon.first :name => self.name
-    addon.delete
-  end
-
-  def self.initialize_settings
+    addon.delete if addon.present?
+    (@settings || {}).each do |scope, setting|
+      # TODO only remove Settings for the addon being disabled
+    end
   end
 
   def self.register_setting(scope, name, default_value)
-    setting = Setting.first_or_create :scope => scope
-    setting.update_attributes :name => name, :value => default_value if setting.new?
+    scope = scope.join Setting::SCOPE_GLUE
+    @settings ||= {}
+    @settings[scope] = { :scope => scope, :name => name, :value => default_value }
   end
 
   def self.machine_name

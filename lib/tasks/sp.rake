@@ -10,28 +10,32 @@ end
 namespace :sp do
   desc 'Sets up users, groups and settings required for ScratchPad to operate'
   task :install do
-    Rake::Task['sp:install:settings'].invoke
     Rake::Task['sp:install:enable_minimum_addons'].invoke
+    Rake::Task['sp:install:settings'].invoke
   end
 
   namespace :install do
     desc 'Adds the required settings'
     task :settings => [:environment, :users] do
-      [
-        { :scope => 'site.name',                :name => 'Site Name',               :value => 'ScratchPad' },
-        { :scope => 'site.tagline',             :name => 'Site Tagline',            :value => '...' },
-        { :scope => 'user.password.min_length', :name => 'Minimum Password Length', :value => 8 }
-      ].each do |hash|
-        setting = Setting.first_or_create :scope => hash[:scope]
-        setting.update_attributes hash if setting.new?
-      end
+      S = Struct.new :scope, :name, :value
 
       [
-        Filter,
-        NodeExtension,
-        Theme,
-        Widget
-      ].each &:initialize_settings
+        S.new([:site, :name],                  'Site Name',                          'ScratchPad'),
+        S.new([:site, :tagline],               'Site Tagline',                       '...'),
+        S.new([:user, :password, :min_length], 'Minimum Password Length',            8),
+        S.new([:theme, :frontend],             'Frontend Theme',                     :default),
+        S.new([:theme, :backend],              'Backend Theme',                      :default_admin),
+        S.new([:theme, :support, :khtml],      'Experimental Support For KHTML',     false),
+        S.new([:theme, :support, :microsoft],  'Experimental Support For Microsoft', false),
+        S.new([:theme, :support, :mozilla],    'Experimental Support For Mozilla',   false),
+        S.new([:theme, :support, :opera],      'Experimental Support For Opera',     false),
+        S.new([:theme, :support, :svg],        'Experimental Support For SVG',       true),
+        S.new([:theme, :support, :webkit],     'Experimental Support For WebKit',    false)
+      ].each do |s|
+        s.scope = s.scope.join Setting::SCOPE_GLUE
+        setting = Setting.first_or_create :scope => s.scope
+        setting.update_attributes :name => s.name, :value => s.value if setting.new?
+      end
 
       puts 'Default settings have been loaded'
     end

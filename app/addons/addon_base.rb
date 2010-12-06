@@ -23,6 +23,10 @@ class AddonBase
     root + 'views'
   end
 
+  def self.machine_name
+    self.name.underscore
+  end
+
   def self.all
     path = Rails.root + 'vendor' + 'addons' + self.name.pluralize.underscore
     path.entries.reject { |entry| entry.to_s =~ /^\./ }.sort.map { |name| self[name] }
@@ -67,9 +71,5 @@ class AddonBase
     scope = scope.join Setting::SCOPE_GLUE
     @settings ||= {}
     @settings[scope] = { :scope => scope, :name => name, :value => default_value }
-  end
-
-  def self.machine_name
-    self.name.underscore
   end
 end

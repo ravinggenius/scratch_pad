@@ -8,7 +8,7 @@ class Setting
   key :value, String, :required => true
 
   def self.[](*scope)
-    load_scope(scope).value rescue nil
+    load_scope(scope).try :value
   end
 
   def self.first_in_scope(*scope)
@@ -18,8 +18,6 @@ class Setting
   private
 
   def self.load_scope(*scope)
-    scope = scope.join SCOPE_GLUE
-    @scopes ||= {}
-    @scopes[scope] ||= Setting.first(:scope => scope)
+    Setting.first(:scope => scope.join(SCOPE_GLUE))
   end
 end

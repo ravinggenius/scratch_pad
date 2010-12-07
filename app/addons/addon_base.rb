@@ -86,6 +86,14 @@ class AddonBase
     @settings[ms] << { :scope => scope, :name => name, :value => default_value }
   end
 
+  def self.setting(scope)
+    Setting[message_scope, scope]
+  end
+
+  def self.settings
+    Setting.all_in_scope message_scope
+  end
+
   private
 
   def self.message_scope

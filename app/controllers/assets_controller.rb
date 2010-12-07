@@ -101,11 +101,10 @@ class AssetsController < ApplicationController
     SASS
 
     scope = [:theme, :support].join Setting::SCOPE_GLUE
-    Setting.all(:scope => /#{scope}/).each do |setting|
-      vendor = setting.scope.gsub "#{scope}.", ''
-      value = Setting[[scope, vendor].join Setting::SCOPE_GLUE]
+    Setting.all_in_scope(scope).each do |setting|
+      vendor = setting.scope.gsub "#{scope}#{Setting::SCOPE_GLUE}", ''
       final_sass << <<-SASS
-$experimental-support-for-#{vendor}: #{value.blank? ? 'false' : value}
+$experimental-support-for-#{vendor}: #{setting.value.blank? ? 'false' : setting.value}
       SASS
     end
 

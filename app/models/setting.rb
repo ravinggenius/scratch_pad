@@ -15,6 +15,10 @@ class Setting
     load_scope scope
   end
 
+  def self.all_in_scope(*scope)
+    all :scope => /^#{scope.join SCOPE_GLUE}/
+  end
+
   private
 
   def self.load_scope(*scope)

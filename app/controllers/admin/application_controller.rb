@@ -1,12 +1,17 @@
 class Admin::ApplicationController < ApplicationController
-  layout 'admin'
-
   before_filter do
     authorize!
   end
 
   before_filter do
     @selected_theme = pick_theme Setting[:theme, :backend]
+    @selected_layout = nil
+    @selected_widgets = {}
+    @selected_widgets[:head] = []
+    @selected_widgets[:branding] = [ Widget[:branding] ]
+    @selected_widgets[:flash] = [ Widget[:flash] ]
+    @selected_widgets[:credits] = []
+    @selected_widgets[:tail] = []
   end
 
   before_filter do
@@ -41,14 +46,5 @@ class Admin::ApplicationController < ApplicationController
         MenuItem.new('Widgets', admin_addons_path(:addon => :widget))
       ])
     ]
-  end
-
-  before_filter do
-    @backend_widgets = {}
-    @backend_widgets[:head] = [ Widget[:google_analytics] ]
-    @backend_widgets[:branding] = [ Widget[:branding] ]
-    @backend_widgets[:flash] = [ Widget[:flash] ]
-    @backend_widgets[:credits] = [ Widget[:copyright], Widget[:unobtrusive] ]
-    @backend_widgets[:tail] = [ Widget[:woopra] ]
   end
 end

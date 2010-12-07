@@ -14,22 +14,26 @@ class ApplicationController < ActionController::Base
 
   before_filter do
     @title = Setting[:site, :name]
+  end
+
+  before_filter do
     @selected_theme = pick_theme Setting[:theme, :frontend]
+    @selected_layout = nil
+    @selected_widgets = {}
+    @selected_widgets[:head] = [ Widget[:google_analytics] ]
+    @selected_widgets[:branding] = [ Widget[:branding] ]
+    @selected_widgets[:flash] = [ Widget[:flash] ]
+    @selected_widgets[:credits] = [ Widget[:copyright], Widget[:unobtrusive] ]
+    @selected_widgets[:tail] = [ Widget[:woopra] ]
+  end
+
+  before_filter do
     @main_menu_items = []
     @main_menu_items << if User.current == User.anonymous
       MenuItem.new('Sign In', new_session_path)
     else
       MenuItem.new('Profile', User.current)
     end
-  end
-
-  before_filter do
-    @frontend_widgets = {}
-    @frontend_widgets[:head] = [ Widget[:google_analytics] ]
-    @frontend_widgets[:branding] = [ Widget[:branding] ]
-    @frontend_widgets[:flash] = [ Widget[:flash] ]
-    @frontend_widgets[:credits] = [ Widget[:copyright], Widget[:unobtrusive] ]
-    @frontend_widgets[:tail] = [ Widget[:woopra] ]
   end
 
   after_filter do

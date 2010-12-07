@@ -6,22 +6,22 @@
     %meta{ 'http-equiv' => 'Content-Type', 'content' => 'application/xhtml+xml; charset=utf-8' }/
     = csrf_meta_tag
 
-    - # %link{ :rel => 'shortcut icon', :href => '/images/favicon.ico' }/
+    /%link{ :rel => 'shortcut icon', :href => '/images/favicon.ico' }/
     = auto_discovery_link_tag
 
     = theme_tags @selected_theme
 
-    = show_widgets @frontend_widgets[:head]
-  %body{ body_attributes }
-    %header#branding= show_widgets @frontend_widgets[:branding]
+    = show_widgets @selected_widgets[:head]
+  %body{ body_attributes, :class => @selected_layout }
+    %header#branding= show_widgets @selected_widgets[:branding]
 
     %nav#main_menu
       = render :partial => 'shared/menu', :locals => { :items => @main_menu_items }
 
-    %section#flash= show_widgets @frontend_widgets[:flash]
+    %section#flash= show_widgets @selected_widgets[:flash]
 
     %section#content= yield
 
-    %footer#credits= show_widgets @frontend_widgets[:credits]
+    %footer#credits= show_widgets @selected_widgets[:credits]
 
-    = show_widgets @frontend_widgets[:tail]
+    = show_widgets @selected_widgets[:tail]

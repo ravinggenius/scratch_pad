@@ -55,7 +55,7 @@ namespace :sp do
       anon = User.first_or_new :username => 'anon', :name => 'Anonymous', :email => 'anonymous@example.com'
       anon.password = anon.password_confirmation = User.new_password(24)
       anon.groups << Group.first(:code => :locked)
-      anon.save
+      anon.save :validate => false
 
       root = User.first_or_new :username => 'root', :name => 'Administrator', :email => 'root@example.com'
       if root.new?
@@ -63,7 +63,7 @@ namespace :sp do
         puts_loud "The root password was set to #{root_password}. There is no way to recover this, so be sure to store it securely."
       end
       root.groups << Group.first(:code => :root)
-      root.save
+      root.save :validate => false
 
       puts 'Added users and groups'
     end

@@ -13,7 +13,8 @@ ScratchPad::Application.routes.draw do
     resources :vocabularies do
       resources :terms
     end
-    [:addons, :themes].each do |controller|
+    resources :widgets, :only => :index
+    [:addons, :themes, :widgets].each do |controller|
       post "/#{controller}", :to => "#{controller}#update"
     end
     get '/nodes/new_node_type', :to => 'nodes#new_node_type'

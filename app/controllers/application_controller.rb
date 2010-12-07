@@ -24,12 +24,12 @@ class ApplicationController < ActionController::Base
   end
 
   before_filter do
-    @widgets = {}
-    @widgets[:head] = [ Widget[:google_analytics] ]
-    @widgets[:branding] = [ Widget[:branding] ]
-    @widgets[:flash] = [ Widget[:flash] ]
-    @widgets[:credits] = [ Widget[:copyright], Widget[:unobtrusive] ]
-    @widgets[:tail] = [ Widget[:woopra] ]
+    @frontend_widgets = {}
+    @frontend_widgets[:head] = [ Widget[:google_analytics] ]
+    @frontend_widgets[:branding] = [ Widget[:branding] ]
+    @frontend_widgets[:flash] = [ Widget[:flash] ]
+    @frontend_widgets[:credits] = [ Widget[:copyright], Widget[:unobtrusive] ]
+    @frontend_widgets[:tail] = [ Widget[:woopra] ]
   end
 
   after_filter do

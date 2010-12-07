@@ -20,7 +20,7 @@ class Admin::ApplicationController < ApplicationController
       MenuItem.new('Taxonomy', admin_vocabularies_path, [
         MenuItem.new('New', new_admin_vocabulary_path)
       ]),
-      MenuItem.new('Widgets'),
+      MenuItem.new('Widgets', admin_widgets_path),
       MenuItem.new('Themes', admin_themes_path, [
         MenuItem.new('Frontend', admin_themes_path(:scope => :frontend)),
         MenuItem.new('Backend', admin_themes_path(:scope => :backend))
@@ -41,5 +41,14 @@ class Admin::ApplicationController < ApplicationController
         MenuItem.new('Widgets', admin_addons_path(:addon => :widget))
       ])
     ]
+  end
+
+  before_filter do
+    @backend_widgets = {}
+    @backend_widgets[:head] = [ Widget[:google_analytics] ]
+    @backend_widgets[:branding] = [ Widget[:branding] ]
+    @backend_widgets[:flash] = [ Widget[:flash] ]
+    @backend_widgets[:credits] = [ Widget[:copyright], Widget[:unobtrusive] ]
+    @backend_widgets[:tail] = [ Widget[:woopra] ]
   end
 end

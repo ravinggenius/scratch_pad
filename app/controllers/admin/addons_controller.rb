@@ -1,13 +1,21 @@
 class Admin::AddonsController < Admin::ApplicationController
   def index
+    addon = params[:addon].to_s.to_sym
+    addon = [
+      :filter,
+      :node_extension,
+      :theme,
+      :widget
+    ].include?(addon) ? AddonBase[addon] : AddonBase
+
     @addons = {}
     [
       Filter,
       NodeExtension,
       Theme,
       Widget
-    ].each do |addon|
-      @addons[addon] = addon.all
+    ].each do |addon_type|
+      @addons[addon_type] = addon_type.all if addon_type.ancestors.include? addon
     end
 
     respond_to do |format|

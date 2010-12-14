@@ -62,11 +62,11 @@ class AddonBase
 
   def self.disable
     ms = message_scope
-    Addon.first(:name => self.name).try :delete
     @settings ||= {}
     (@settings[ms] || []).each do |setting|
       Setting.first(:scope => [ms, setting[:scope]].join(Setting::SCOPE_GLUE)).try :delete
     end
+    Addon.first(:name => self.name).try :delete
     ms
   end
 
@@ -94,7 +94,7 @@ class AddonBase
     Setting.all_in_scope message_scope
   end
 
-  private
+  protected
 
   def self.message_scope
     ancestors = self.ancestors

@@ -1,7 +1,13 @@
 class Admin::WidgetsController < Admin::ApplicationController
   def index
     @widgets = Widget.enabled
-    @themes = Theme.enabled
+
+    if params[:theme]
+      @themes = [ Theme[params[:theme]] ]
+      @layout = Theme[params[:theme]].layout(params[:layout]) if params[:layout]
+    else
+      @themes = Theme.enabled
+    end
 
     respond_to do |format|
       format.html

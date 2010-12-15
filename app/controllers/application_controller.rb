@@ -16,15 +16,12 @@ class ApplicationController < ActionController::Base
     @title = Setting[:site, :name]
   end
 
+  # TODO remove duplication from Admin::ApplicationController
   before_filter do
     @selected_theme = pick_theme Setting[:theme, :frontend]
-    @selected_layout = nil
-    @selected_widgets = {}
-    @selected_widgets[:head] = [ Widget[:google_analytics] ]
-    @selected_widgets[:branding] = [ Widget[:branding] ]
-    @selected_widgets[:flash] = [ Widget[:flash] ]
-    @selected_widgets[:credits] = [ Widget[:copyright], Widget[:unobtrusive] ]
-    @selected_widgets[:tail] = [ Widget[:woopra] ]
+    # TODO actually select a layout based on what page or node is being viewed
+    @selected_layout = nil # nil selects the default layout
+    @selected_widgets = Theme[@selected_theme].layout(@selected_layout).regions_hash
   end
 
   before_filter do

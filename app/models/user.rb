@@ -37,14 +37,15 @@ class User
   def self.new_password(length = 12)
     pool = []
 
-    pool << %w[ ` ~ ! @ # $ % ^ & * ( ) - _ + = ? / \ | { } < > , . ]
+    pool << '` ~ ! @ # $ % ^ & * ( ) - _ + = ? / \ | { } < > , .'.split
     pool << ('0'..'9').to_a
     pool << ('A'..'Z').to_a
     pool << ('a'..'z').to_a
 
-    pool.map! { |range| range.to_a }.flatten!
+    pool.flatten!
+    size = pool.size
 
-    (0...length).map { pool[Kernel.rand(pool.size)] }.join
+    (0...length).map { pool[Kernel.rand(size)] }.join
   end
 
   def self.current

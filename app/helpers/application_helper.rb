@@ -55,9 +55,10 @@ module ApplicationHelper
   end
 
   def theme_tags(theme)
+    theme_name = theme.respond_to?(:machine_name) ? theme.machine_name : theme
     reply = ''
-    reply << stylesheet_link_tag(assets_styles_path(:theme => theme), :media => 'all')
-    reply << javascript_include_tag(assets_scripts_path(:theme => theme))
+    reply << stylesheet_link_tag(assets_styles_path(:theme => theme_name), :media => 'all')
+    reply << javascript_include_tag(assets_scripts_path(:theme => theme_name))
     reply.html_safe
   end
 end

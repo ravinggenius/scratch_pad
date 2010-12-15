@@ -16,12 +16,8 @@ class ApplicationController < ActionController::Base
     @title = Setting[:site, :name]
   end
 
-  # TODO remove duplication from Admin::ApplicationController
   before_filter do
-    @selected_theme = pick_theme Setting[:theme, :frontend]
-    # TODO actually select a layout based on what page or node is being viewed
-    @selected_layout = nil # nil selects the default layout
-    @selected_widgets = Theme[@selected_theme].layout(@selected_layout).regions_hash
+    set_theme_ivars :frontend
   end
 
   before_filter do
@@ -56,9 +52,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def pick_theme(default)
-    reply = default
-    reply = params[:force_theme] if authorize && params[:force_theme]
-    reply
+  def set_theme_ivars(frontend_backend)
+    theme_name = Setting[:theme, frontend_backend]
+    theme_name = params[:force_theme] if authorize && params[:force_theme]
+    @selected_theme = Theme[theme_name]
+    # TODO actually select a layout based on what page or node is being viewed
+    @selected_layout_name = nil # nil selects the default layout
+    @selected_widgets = @selected_theme.layout(@selected_layout_name).regions_hash
   end
 end

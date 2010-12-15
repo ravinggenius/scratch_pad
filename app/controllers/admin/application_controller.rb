@@ -3,12 +3,8 @@ class Admin::ApplicationController < ApplicationController
     authorize!
   end
 
-  # TODO remove duplication from ApplicationController
   before_filter do
-    @selected_theme = pick_theme Setting[:theme, :backend]
-    # TODO actually select a layout based on what page or node is being viewed
-    @selected_layout = nil # nil selects the default layout
-    @selected_widgets = Theme[@selected_theme].layout(@selected_layout).regions_hash
+    set_theme_ivars :backend
   end
 
   before_filter do

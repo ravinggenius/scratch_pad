@@ -2,5 +2,28 @@
   %span.h Listing widgets
 
 %section
-  - @widgets.each do |widget|
-    = widget
+  - @themes.each do |theme|
+    - theme.layouts.each do |layout|
+      = form_tag :action => :update, :theme => theme.machine_name do |form|
+        %fieldset
+          %legend= "#{theme.name} - #{layout.name} layout"
+          - layout.regions.each do |region|
+            %fieldset
+              %legend= "#{region.name} region"
+              %ul
+                - region.widgets.each_with_index do |widget, count|
+                  %li
+                    - id = [theme.machine_name, layout.name.underscore, region.name, count]
+                    = label_tag id.join('_'), "#{(count + 1).ordinalize} widget"
+                    %select{ :id => id, :name => "#{theme.machine_name}[#{layout.name}][#{region.name}][]" }
+                      = options_from_collection_for_select @widgets, :machine_name, :name, :include_blank => true, :selected => widget.machine_name
+
+                - region.widgets.count.upto(@widgets.count - 1) do |count|
+                  %li
+                    - id = [theme.machine_name, layout.name.underscore, region.name, count]
+                    = label_tag id.join('_'), "#{(count + 1).ordinalize} widget"
+                    %select{ :id => id, :name => "#{theme.machine_name}[#{layout.name}][#{region.name}][]" }
+                      = options_from_collection_for_select @widgets, :machine_name, :name, :include_blank => true
+        %ul
+          %li= submit_tag 'Commit'
+          %li= link_to 'Cancel', admin_widgets_path

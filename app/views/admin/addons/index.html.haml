@@ -9,7 +9,7 @@
         %ul
           - addons.each do |addon|
             %li
-              = check_box_tag "#{addon_type.machine_name}[#{addon.machine_name}]", 1, addon_type.enabled.include?(addon)
-              = label_tag addon.machine_name, "#{addon.name} - addon.description"
+              = check_box_tag "#{addon_type.machine_name}[#{addon.machine_name}]", 1, addon.enabled?
+              = label_tag "#{addon_type.machine_name}_#{addon.machine_name}", "#{addon.name} - addon.description"
     %ul
       %li= submit_tag 'Commit'

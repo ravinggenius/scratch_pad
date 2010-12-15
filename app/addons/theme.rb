@@ -19,6 +19,10 @@ class Theme < AddonBase
     Theme.backend.include? self
   end
 
+  def self.layouts
+    Layout.all :scope => message_scope
+  end
+
   def self.register_layout(name, *regions)
     ms = message_scope
     @layouts ||= {}

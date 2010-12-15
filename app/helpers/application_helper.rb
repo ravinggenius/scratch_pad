@@ -50,7 +50,7 @@ module ApplicationHelper
 
   def show_widgets(widgets)
     reply = ''
-    widgets.each { |widget| reply << show_addon(widget) }
+    (widgets || []).each { |widget| reply << show_addon(widget) }
     reply.html_safe
   end
 

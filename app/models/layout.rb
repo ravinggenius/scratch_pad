@@ -4,5 +4,5 @@ class Layout
   key :scope, String, :required => true
   key :name, String, :required => true
 
-  many :layout_regions
+  many :regions, :class_name => 'LayoutRegion'
 end

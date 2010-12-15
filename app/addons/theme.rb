@@ -24,15 +24,15 @@ class Theme < AddonBase
     @layouts ||= {}
     @layouts[ms] ||= []
     regions << :head << :tail
-    @layouts[ms] << { :name => name, :layout_regions => regions.each(&:to_s).uniq }
+    @layouts[ms] << { :name => name, :regions => regions.each(&:to_s).uniq }
   end
 
   def self.enable
     ms = super
     @layouts ||= {}
     (@layouts[ms] || []).each do |layout|
-      regions = layout.delete(:layout_regions).map { |region_name| { :name => region_name } }
-      Layout.first_or_new(layout.merge(:scope => ms)).update_attributes(:layout_regions => regions)
+      regions = layout.delete(:regions).map { |region_name| { :name => region_name } }
+      Layout.first_or_new(layout.merge(:scope => ms)).update_attributes(:regions => regions)
     end
     ms
   end

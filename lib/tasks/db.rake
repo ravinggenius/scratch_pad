@@ -7,6 +7,7 @@ namespace :db do
       FilterGroup,
       Group,
       GroupUser,
+      Layout,
       Node,
       Setting,
       Tagging,

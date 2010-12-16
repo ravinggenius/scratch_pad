@@ -28,8 +28,23 @@ class AddonBase
   end
 
   def self.all
-    path = Rails.root + 'vendor' + 'addons' + self.name.pluralize.underscore
-    path.entries.reject { |entry| entry.to_s =~ /^\./ }.sort.map { |name| self[name] }
+    all_by_type.values.flatten
+  end
+
+  def self.all_by_type
+    reply = {}
+
+    addon_types.each do |addon_type|
+      reply[addon_type] = []
+
+      (Rails.root + 'vendor' + 'addons' + addon_type.machine_name.pluralize).children.each do |child|
+        name = child.basename.to_s
+        next if name =~ /^\./
+        reply[addon_type] << addon_type[name]
+      end
+    end
+
+    reply
   end
 
   def self.enabled?
@@ -41,7 +56,7 @@ class AddonBase
   end
 
   def self.enabled
-    reply = Addon.all.map { |addon| self[addon.name] }
+    reply = Addon.all.map { |addon| AddonBase[addon.name] }
     reply.select! { |addon| addon.ancestors.include? self }
     reply
   end
@@ -92,6 +107,17 @@ class AddonBase
 
   def self.settings
     Setting.all_in_scope message_scope
+  end
+
+  def self.addon_types
+    reply = [
+      Filter,
+      NodeExtension,
+      Theme,
+      Widget
+    ]
+    reply = [self] if reply.include? self
+    reply
   end
 
   protected

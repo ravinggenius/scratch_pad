@@ -7,7 +7,7 @@
       %fieldset.addon
         %legend= scope.to_s.titleize
         %ul
-          - themes.each do |theme|
+          - themes.sort.each do |theme|
             %li
               = radio_button_tag scope, theme.machine_name, (@current_theme[scope] == theme)
               = label_tag "#{scope}_#{theme.machine_name}", "#{theme.name} - theme.description"

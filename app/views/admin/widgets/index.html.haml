@@ -3,11 +3,11 @@
 
 %section
   %ul
-    - @themes.each do |theme|
+    - @themes.sort.each do |theme|
       %li
         = link_to theme.name, admin_widgets_path(:theme => theme.machine_name)
         %ul
-          - theme.layouts.each do |layout|
+          - theme.layouts.sort { |a, b| a.name <=> b.name }.each do |layout|
             %li= link_to layout.name, admin_widgets_path(:theme => theme.machine_name, :layout => layout.name)
 
   - if @layout
@@ -15,7 +15,7 @@
     = form_tag :action => :update, :theme => theme.machine_name do |form|
       %fieldset
         %legend= "#{theme.name} - #{@layout.name} layout"
-        - @layout.regions.each do |region|
+        - @layout.regions.sort { |a, b| a.name <=> b.name }.each do |region|
           %fieldset
             %legend= "#{region.name} region"
             %ul
@@ -24,14 +24,14 @@
                   - id = [theme.machine_name, @layout.name.underscore, region.name, count]
                   = label_tag id.join('_'), "#{(count + 1).ordinalize} widget"
                   %select{ :id => id, :name => "#{theme.machine_name}[#{@layout.name}][#{region.name}][]" }
-                    = options_from_collection_for_select @widgets, :machine_name, :name, :include_blank => true, :selected => widget.machine_name
+                    = options_from_collection_for_select @widgets.sort, :machine_name, :name, :include_blank => true, :selected => widget.machine_name
 
               - region.widgets.count.upto(@widgets.count - 1) do |count|
                 %li
                   - id = [theme.machine_name, @layout.name.underscore, region.name, count]
                   = label_tag id.join('_'), "#{(count + 1).ordinalize} widget"
                   %select{ :id => id, :name => "#{theme.machine_name}[#{@layout.name}][#{region.name}][]" }
-                    = options_from_collection_for_select @widgets, :machine_name, :name, :include_blank => true
+                    = options_from_collection_for_select @widgets.sort, :machine_name, :name, :include_blank => true
         %ul
           %li= submit_tag 'Commit'
           %li= link_to 'Cancel', admin_widgets_path

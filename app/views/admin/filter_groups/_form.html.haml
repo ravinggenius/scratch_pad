@@ -9,12 +9,12 @@
         %li
           = label_tag "filter_group_filters_#{count}", "#{(count + 1).ordinalize} filter"
           %select{ :id => "filter_group_filters_#{count}", :name => "filter_group[filters][]" }
-            = options_from_collection_for_select @filters, :machine_name, :name, :include_blank => true, :selected => filter.machine_name
+            = options_from_collection_for_select @filters.sort { |a, b| a.name <=> b.name }, :machine_name, :name, :include_blank => true, :selected => filter.machine_name
       - @filter_group.filters.count.upto(@filters.count - 1) do |count|
         %li
           = label_tag "filter_group_filters_#{count}", "#{(count + 1).ordinalize} filter"
           %select{ :id => "filter_group_filters_#{count}", :name => "filter_group[filters][]" }
-            = options_from_collection_for_select @filters, :machine_name, :name, :include_blank => true
+            = options_from_collection_for_select @filters.sort { |a, b| a.name <=> b.name }, :machine_name, :name, :include_blank => true
     %ul
       %li= submit_tag 'Commit'
       %li= link_to 'Cancel', admin_filter_groups_path

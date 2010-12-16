@@ -90,7 +90,7 @@ class Admin::NodesController < Admin::ApplicationController
     if @node.new?
       @node_types = NodeExtension.enabled.map do |extension|
         [extension.name, extension.machine_name]
-      end.insert 0, ['Node', 'node']
+      end.sort.insert 0, ['Node', 'node']
       ne = NodeExtension[params[:node_type]]
       @selected_node_type = NodeExtension.enabled.include?(ne) ? ne.machine_name : @node.class.machine_name
     end

@@ -11,7 +11,7 @@ class Admin::ApplicationController < ApplicationController
     @main_menu_items = [
       MenuItem.new('Dashboard', admin_root_path),
       MenuItem.new('Content', admin_nodes_path, [
-        MenuItem.new('New', new_admin_node_path, NodeExtension.enabled.map { |extension|
+        MenuItem.new('New', new_admin_node_path, NodeExtension.enabled.sort.map { |extension|
           MenuItem.new(extension.name, new_admin_node_path(:node_type => extension.machine_name))
         })
       ]),

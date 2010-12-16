@@ -13,10 +13,10 @@
         = f.check_box :is_multiselectable
       %li
         = f.label :node_types_optional, 'Optional Node Extensions'
-        = f.select :node_types_optional, options_for_select(@node_extensions_optional, @node_extensions_optional_selected), {}, :multiple => true, :size => 5
+        = f.select :node_types_optional, options_for_select(@node_extensions_optional.sort, @node_extensions_optional_selected), {}, :multiple => true, :size => 5
       %li
         = f.label :node_types_required, 'Required Node Extensions'
-        = f.select :node_types_required, options_for_select(@node_extensions_required, @node_extensions_required_selected), {}, :multiple => true, :size => 5
+        = f.select :node_types_required, options_for_select(@node_extensions_required.sort, @node_extensions_required_selected), {}, :multiple => true, :size => 5
     %ul
       %li= submit_tag 'Commit'
       %li= link_to 'Cancel', admin_vocabularies_path

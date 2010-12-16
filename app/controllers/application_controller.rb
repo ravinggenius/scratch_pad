@@ -6,10 +6,12 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   layout 'application'
 
+  helper_method :current_user
+
   MenuItem = Struct.new :name, :href, :children
 
   before_filter do
-    User.current = User.find session[:current_user_id]
+    self.current_user = User.find session[:current_user_id]
   end
 
   before_filter do
@@ -22,25 +24,33 @@ class ApplicationController < ActionController::Base
 
   before_filter do
     @main_menu_items = []
-    @main_menu_items << if User.current == User.anonymous
+    @main_menu_items << if current_user == User.anonymous
       MenuItem.new('Sign In', new_session_path)
     else
-      MenuItem.new('Profile', User.current)
+      MenuItem.new('Profile', current_user)
     end
   end
 
   after_filter do
-    session[:current_user_id] = User.current.id
+    session[:current_user_id] = current_user.id
+  end
+
+  def current_user
+    @current_user ||= User.anonymous
   end
 
   protected
 
+  def current_user=(user)
+    @current_user = user
+  end
+
   def authorize(*allowed_groups)
     # root user is always allowed access to everything
-    return true if User.current == User.root
+    return true if current_user == User.root
 
     # root group does not have to be specified, it is always allowed
-    (allowed_groups << Group.root).each { |group| return true if User.current.groups.include? group }
+    (allowed_groups << Group.root).each { |group| return true if current_user.groups.include? group }
 
     false
   end

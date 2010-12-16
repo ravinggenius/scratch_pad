@@ -48,20 +48,12 @@ class User
     (0...length).map { pool[Kernel.rand(size)] }.join
   end
 
-  def self.current
-    @current || anonymous
-  end
-
-  def self.current=(user)
-    @current = user
-  end
-
   def self.anonymous
-    @anon ||= first :username => :anon
+    first :username => :anon
   end
 
   def self.root
-    @root ||= first :username => :root
+    first :username => :root
   end
 
   private

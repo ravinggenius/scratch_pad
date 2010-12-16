@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
 
     respond_to do |format|
       if @user && !@user.is_locked? && (@user.password == params[:user][:password])
-        User.current = @user
+        self.current_user = @user
         format.html { redirect_to(root_url, :notice => 'You have successfully signed in.') }
         format.xml { render :xml => @user, :status => :created, :location => @user }
       else
@@ -29,7 +29,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    User.current = User.anonymous
+    self.current_user = User.anonymous
 
     respond_to do |format|
       format.html { redirect_to(root_url) }

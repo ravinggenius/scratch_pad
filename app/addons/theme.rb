@@ -20,7 +20,7 @@ class Theme < AddonBase
   end
 
   def self.default_layout
-    Layout.first :theme => machine_name # , :is_default = true
+    Layout.first(:theme => machine_name, :is_default => true) or Layout.first(:theme => machine_name)
   end
 
   def self.layout(name = nil)

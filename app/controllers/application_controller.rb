@@ -67,7 +67,8 @@ class ApplicationController < ActionController::Base
     theme_name = params[:force_theme] if authorize && params[:force_theme]
     @selected_theme = Theme[theme_name]
     # TODO actually select a layout based on what page or node is being viewed
-    @selected_layout_name = nil # nil selects the default layout
-    @selected_widgets = @selected_theme.layout(@selected_layout_name).regions_hash
+    layout_name = nil # nil selects the default layout
+    @selected_layout = @selected_theme.layout layout_name
+    @selected_widgets = @selected_layout.regions_hash
   end
 end

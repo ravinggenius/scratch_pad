@@ -12,7 +12,7 @@
     = theme_tags @selected_theme
 
     = show_widgets @selected_widgets[:head]
-  %body{ body_attributes, :class => @selected_layout_name }
+  %body{ body_attributes, :class => @selected_layout.name }
     %header#branding= show_widgets @selected_widgets[:branding]
 
     %nav#main_menu

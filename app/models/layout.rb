@@ -3,6 +3,7 @@ class Layout
 
   key :theme, String, :required => true
   key :name, String, :required => true
+  key :is_default, Boolean, :required => true, :default => false
 
   many :regions, :class_name => 'LayoutRegion'
 

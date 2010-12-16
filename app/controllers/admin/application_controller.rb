@@ -33,10 +33,10 @@ class Admin::ApplicationController < ApplicationController
       MenuItem.new('Permissions'),
       MenuItem.new('Settings', admin_settings_path),
       MenuItem.new('Addons', admin_addons_path, [
-        MenuItem.new('Filters', admin_addons_path(:addon => :filter)),
-        MenuItem.new('NodeExtensions', admin_addons_path(:addon => :node_extension)),
-        MenuItem.new('Themes', admin_addons_path(:addon => :theme)),
-        MenuItem.new('Widgets', admin_addons_path(:addon => :widget))
+        MenuItem.new('Filters', admin_addons_path(:addon_type => :filter)),
+        MenuItem.new('NodeExtensions', admin_addons_path(:addon_type => :node_extension)),
+        MenuItem.new('Themes', admin_addons_path(:addon_type => :theme)),
+        MenuItem.new('Widgets', admin_addons_path(:addon_type => :widget))
       ])
     ]
   end

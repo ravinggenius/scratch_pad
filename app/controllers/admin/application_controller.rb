@@ -18,26 +18,23 @@ class Admin::ApplicationController < ApplicationController
       MenuItem.new('Taxonomy', admin_vocabularies_path, [
         MenuItem.new('New', new_admin_vocabulary_path)
       ]),
-      MenuItem.new('Widgets', admin_widgets_path),
+      MenuItem.new('Filters', admin_filter_groups_path, [
+        MenuItem.new('New', new_admin_filter_group_path)
+      ]),
       MenuItem.new('Themes', admin_themes_path, [
         MenuItem.new('Frontend', admin_themes_path(:scope => :frontend)),
         MenuItem.new('Backend', admin_themes_path(:scope => :backend))
       ]),
-      MenuItem.new('Filters', admin_filter_groups_path, [
-        MenuItem.new('New', new_admin_filter_group_path)
-      ]),
+      MenuItem.new('Widgets', admin_widgets_path),
       MenuItem.new('Users', admin_users_path, [
         MenuItem.new('New', new_admin_user_path)
       ]),
       MenuItem.new('Groups'),
       MenuItem.new('Permissions'),
       MenuItem.new('Settings', admin_settings_path),
-      MenuItem.new('Addons', admin_addons_path, [
-        MenuItem.new('Filters', admin_addons_path(:addon_type => :filter)),
-        MenuItem.new('NodeExtensions', admin_addons_path(:addon_type => :node_extension)),
-        MenuItem.new('Themes', admin_addons_path(:addon_type => :theme)),
-        MenuItem.new('Widgets', admin_addons_path(:addon_type => :widget))
-      ])
+      MenuItem.new('Addons', admin_addons_path, AddonBase.addon_types.map { |addon_type|
+        MenuItem.new(addon_type.name.pluralize, admin_addons_path(:addon_type => addon_type.machine_name))
+      })
     ]
   end
 end

@@ -11,6 +11,7 @@
             %li
               = radio_button_tag scope, theme.machine_name, (@current_theme[scope] == theme)
               = label_tag "#{scope}_#{theme.machine_name}", "#{theme.name} - theme.description"
-              %span.preview= link_to 'Preview', :force_theme => theme.machine_name
+              - scope_url = "#{scope == :frontend ? :root : :admin_root}_url"
+              %span.preview= link_to 'Preview', self.send(scope_url, :force_theme => theme.machine_name)
       %ul
         %li= submit_tag 'Commit'

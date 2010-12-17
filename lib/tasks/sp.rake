@@ -44,7 +44,11 @@ namespace :sp do
     task :enable_minimum_addons => :environment do
       [
         :default,
-        :default_admin
+        :default_admin,
+        :branding,
+        :copyright,
+        :flash,
+        :yielder
       ].each { |addon| AddonBase[addon].enable }
 
       puts 'Minimum Addons have been enabled. You may disable these later if you have a suitable replacement'

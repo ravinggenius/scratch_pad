@@ -1,0 +1,2 @@
+class Yielder < Widget
+end

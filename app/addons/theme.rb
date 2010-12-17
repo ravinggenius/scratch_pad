@@ -55,7 +55,6 @@ class Theme < AddonBase
     @layouts[ms] << { :theme => machine_name, :name => name, :regions => regions }
   end
 
-  private
 
   def self.default_regions
     %w[ head_start head_end body_start body_end ]

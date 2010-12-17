@@ -35,8 +35,8 @@ class Theme < AddonBase
     ms = message_scope
     @layouts ||= {}
     @layouts[ms] ||= []
-    regions << :head << :tail
-    @layouts[ms] << { :theme => machine_name, :name => name, :regions => regions.each(&:to_s).uniq }
+    (regions + default_regions).each(&:to_s).uniq!
+    @layouts[ms] << { :theme => machine_name, :name => name, :regions => regions }
   end
 
   def self.enable
@@ -53,5 +53,11 @@ class Theme < AddonBase
     ms = message_scope
     Layout.all(:scope => ms).each &:delete
     super
+  end
+
+  private
+
+  def self.default_regions
+    %w[ head_start head_end body_start body_end ]
   end
 end

@@ -1,6 +1,8 @@
 !!! 5
 %html{ :lang => 'en', :xmlns => 'http://www.w3.org/1999/xhtml', 'xml:lang' => 'en'}
   %head
+    = show_widgets @selected_widgets[:head_start]
+
     %title= @title
 
     %meta{ 'http-equiv' => 'Content-Type', 'content' => 'application/xhtml+xml; charset=utf-8' }/
@@ -11,8 +13,10 @@
 
     = theme_tags @selected_theme
 
-    = show_widgets @selected_widgets[:head]
+    = show_widgets @selected_widgets[:head_end]
   %body{ body_attributes, :class => @selected_layout.name }
+    = show_widgets @selected_widgets[:body_start]
+
     %header#branding= show_widgets @selected_widgets[:branding]
 
     %nav#main_menu
@@ -24,4 +28,4 @@
 
     %footer#credits= show_widgets @selected_widgets[:credits]
 
-    = show_widgets @selected_widgets[:tail]
+    = show_widgets @selected_widgets[:body_end]

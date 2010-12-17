@@ -43,7 +43,7 @@ class Theme < AddonBase
     ms = super
     @layouts ||= {}
     (@layouts[ms] || []).each do |layout|
-      regions = layout.delete(:regions).map { |region_name| { :name => region_name } }
+      regions = layout.delete(:regions).map { |region_name| LayoutRegion.new(:name => region_name) }
       Layout.first_or_new(layout).update_attributes(:regions => regions)
     end
     ms

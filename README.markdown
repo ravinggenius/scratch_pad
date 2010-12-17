@@ -52,6 +52,7 @@ To run tests for custom extensions, use `RAILS_ENV=test rake test:custom`. Curre
 
 ## To Do
 
+* allow admin to specify layouts per node type OR controller#action
 * make users and groups easily swappable for another user system, in part or in whole
 * access control list for everything
 * default themes should look better

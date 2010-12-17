@@ -14,7 +14,7 @@
     = theme_tags @selected_theme
 
     = show_widgets @selected_widgets[:head_end]
-  %body{ body_attributes, :class => @selected_layout.name }
+  %body{ body_attributes, :class => @selected_layout.name.dasherize }
     = show_widgets @selected_widgets[:body_start]
 
     %header#branding= show_widgets @selected_widgets[:branding]

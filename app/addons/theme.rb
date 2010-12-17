@@ -36,7 +36,7 @@ class Theme < AddonBase
     @layouts ||= {}
     (@layouts[ms] || []).each do |layout|
       regions = layout.delete(:regions).map { |region| LayoutRegion.new region }
-      Layout.first_or_new(layout).update_attributes(:regions => regions)
+      Layout.first_or_new(:theme => layout[:theme], :name => layout[:name]).update_attributes(layout.merge(:regions => regions))
     end
     ms
   end

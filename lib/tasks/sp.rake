@@ -51,6 +51,19 @@ namespace :sp do
         :yielder
       ].each { |addon| AddonBase[addon].enable }
 
+      l = Theme[:default].default_layout
+      l.region(:branding).widgets << Widget[:branding]
+      l.region(:flash).widgets << Widget[:flash]
+      l.region(:content).widgets << Widget[:yielder]
+      l.region(:credits).widgets << Widget[:copyright]
+      l.save
+
+      l = Theme[:default_admin].default_layout
+      l.region(:branding).widgets << Widget[:branding]
+      l.region(:flash).widgets << Widget[:flash]
+      l.region(:content).widgets << Widget[:yielder]
+      l.save
+
       puts 'Minimum Addons have been enabled. You may disable these later if you have a suitable replacement'
     end
 

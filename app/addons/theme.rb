@@ -35,7 +35,7 @@ class Theme < AddonBase
     ms = super
     @layouts ||= {}
     (@layouts[ms] || []).each do |layout|
-      regions = layout.delete(:regions).map { |region_name| LayoutRegion.new(:name => region_name) }
+      regions = layout.delete(:regions).map { |region| LayoutRegion.new region }
       Layout.first_or_new(layout).update_attributes(:regions => regions)
     end
     ms
@@ -47,14 +47,25 @@ class Theme < AddonBase
     super
   end
 
-  def self.register_layout(name, *regions)
+  def self.register_layout(name, options = {}, &regions_block)
     ms = message_scope
     @layouts ||= {}
     @layouts[ms] ||= []
-    (regions + default_regions).each(&:to_s).uniq!
-    @layouts[ms] << { :theme => machine_name, :name => name, :regions => regions }
+
+    regions = []
+    default_regions.each { |region_name| regions << register_region(region_name) }
+    regions_block.call regions
+
+    @layouts[ms] << options.merge({
+      :theme => machine_name,
+      :name => name,
+      :regions => regions
+    })
   end
 
+  def self.register_region(name, wrapper = nil)
+    { :name => name, :wrapper => wrapper }
+  end
 
   def self.default_regions
     %w[ head_start head_end body_start body_end ]

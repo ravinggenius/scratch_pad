@@ -8,7 +8,7 @@
         = link_to theme.name, admin_widgets_path(:theme => theme.machine_name)
         %ul
           - theme.layouts.sort { |a, b| a.name <=> b.name }.each do |layout|
-            %li= link_to layout.name, admin_widgets_path(:theme => theme.machine_name, :layout => layout.name)
+            %li= link_to layout.name.titleize, admin_widgets_path(:theme => theme.machine_name, :layout => layout.name)
 
   - if @layout
     - theme = Theme[@layout.theme]

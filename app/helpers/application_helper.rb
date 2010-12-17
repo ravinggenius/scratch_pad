@@ -48,9 +48,27 @@ module ApplicationHelper
     show_addon NodeExtension[node.class.machine_name], part, locals.merge(:node => node)
   end
 
-  def show_widgets(widgets)
+  def show_region(region)
     reply = ''
-    (widgets || []).each { |widget| reply << show_addon(widget) }
+
+    if region
+      name = region.name.underscore
+
+      if region.wrapper
+        region_start = "<#{region.wrapper} id=\"#{name}\">"
+        region_end = "</#{region.wrapper}><!-- ##{name} -->"
+      else
+        region_start = "<!-- #{name} start -->"
+        region_end = "<!-- #{name} end -->"
+      end
+
+      reply = [
+        region_start,
+        region.widgets.map { |widget| show_addon(widget).strip }.join("\n").strip,
+        region_end
+      ].map { |snip| snip.present? ? snip : nil }.compact.join "\n"
+    end
+
     reply.html_safe
   end
 

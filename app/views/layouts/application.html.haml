@@ -1,7 +1,7 @@
 !!! 5
 %html{ :lang => 'en', :xmlns => 'http://www.w3.org/1999/xhtml', 'xml:lang' => 'en'}
   %head
-    = show_widgets @selected_widgets[:head_start]
+    = show_region @selected_layout.region(:head_start)
 
     %title= @title
 
@@ -13,19 +13,15 @@
 
     = theme_tags @selected_theme
 
-    = show_widgets @selected_widgets[:head_end]
+    = show_region @selected_layout.region(:head_end)
   %body{ body_attributes, :class => @selected_layout.name.dasherize }
-    = show_widgets @selected_widgets[:body_start]
+    = show_region @selected_layout.region(:body_start)
 
-    %header#branding= show_widgets @selected_widgets[:branding]
-
+    / TODO move to a widget
     %nav#main_menu
       = render :partial => 'shared/menu', :locals => { :items => @main_menu_items }
 
-    %section#flash= show_widgets @selected_widgets[:flash]
+    - @selected_layout.custom_regions.each do |region|
+      = show_region region
 
-    %section#content= yield
-
-    %footer#credits= show_widgets @selected_widgets[:credits]
-
-    = show_widgets @selected_widgets[:body_end]
+    = show_region @selected_layout.region(:body_end)

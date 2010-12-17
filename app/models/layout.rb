@@ -14,4 +14,13 @@ class Layout
     end
     reply
   end
+
+  def region(region_name)
+    # FIXME find a better way to do this
+    regions.select { |r| r.name.to_sym == region_name }.first
+  end
+
+  def custom_regions
+    regions.reject { |r| Theme.default_regions.include? r.name }
+  end
 end

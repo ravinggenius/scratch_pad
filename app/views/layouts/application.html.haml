@@ -1,23 +1,23 @@
 !!! 5
-%html{ :lang => 'en', :xmlns => 'http://www.w3.org/1999/xhtml', 'xml:lang' => 'en'}
+%html.no-js{ :lang => :en }
   %head
     = show_region @selected_layout.region(:head_start)
 
+    -# TODO these move to widgets
     %title= @title
-
-    %meta{ 'http-equiv' => 'Content-Type', 'content' => 'application/xhtml+xml; charset=utf-8' }/
-    = csrf_meta_tag
-
-    /%link{ :rel => 'shortcut icon', :href => '/images/favicon.ico' }/
+    -# %link{ :rel => 'shortcut icon', :href => '/images/favicon.ico' }/
     = auto_discovery_link_tag
 
+    %meta{ :charset => 'utf-8' }/
+
+    = csrf_meta_tag
     = theme_tags @selected_theme
 
     = show_region @selected_layout.region(:head_end)
   %body{ body_attributes, :class => @selected_layout.name.dasherize }
     = show_region @selected_layout.region(:body_start)
 
-    / TODO move to a widget
+    -# TODO move to a widget
     %nav#main_menu
       = render :partial => 'shared/menu', :locals => { :items => @main_menu_items }
 

@@ -10,8 +10,8 @@ end
 namespace :sp do
   desc 'Sets up users, groups and settings required for ScratchPad to operate'
   task :install do
-    Rake::Task['sp:install:enable_minimum_addons'].invoke
     Rake::Task['sp:install:settings'].invoke
+    Rake::Task['sp:install:enable_minimum_addons'].invoke
   end
 
   namespace :install do

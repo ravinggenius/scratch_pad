@@ -4,7 +4,8 @@
 * git
 * mongodb
   * optional bson_ext
-* ruby (works in 1.8.7, should work (not tested) in 1.9.*)
+* ruby (developed with 1.9.2)
+  * rvm (http://rvm.beginrescueend.com/) is the recommended way to install ruby
 
 ### RubyGems
 * rails 3 (technically you should not have to install this system-wide, but it will make things easier if you do: `[sudo] gem install rails`)
@@ -43,27 +44,27 @@ To run tests for custom extensions, use `RAILS_ENV=test rake test:custom`. Curre
 
 * every piece of content is a node. every node may have arbitrary sub-nodes
   * some nodes are meant to be child nodes, for instance table. others are meant to be a collection of nodes, for instance post
+  * nodes may be nested in many other nodes
+* multiple different layouts à la http://www.primarycss.com/, but without presentations classes in the markup
+  * themes should specify which layout(s) they support
+  * each layout may have an arbitrary number of main regions
+    * each region will be exposed to the site admin to populate with content (either widgets and nodes)
 
 ## To Do
 
-* determine if user preferences are necessary
 * make users and groups easily swappable for another user system, in part or in whole
+* access control list for everything
 * default themes should look better
-* addons should have a manifest.yml to specify their description, images and javascript dependencies and load order
-* find a way to make non-content nodes (small scripts or styles) work
-  * an admin may wish to include some extra styles or scripts into the document
-  * these should be allowed to be specified (optionally) that these are to be injected at the bottom of <head> or <body>
-    * when injected they should not be wrapped with the normal <article> or <section> (naked)
+* [?] addons should have a manifest.yml to specify their description, images and javascript dependencies and load order
+* allow nodes to be used as widgets
 * 100% test code coverage
-* addons should support inheritence
-* multiple different layouts à la http://www.primarycss.com/, but without presentations classes in the markup
-  * themes could specify which layout(s) they support in their manifest
+* addons should support inheritance in an intelligent way
+  * anything (styles, behavior et cetera) specified in the child would augment the parent. for instance a theme could specify a different color scheme
 
 ## Wish List
 
 * content versioning
-* access control list for everything
-* accessability (wai)
+* accessibility (wai-aria)
 * internationalization (i18n)
 
 ## Inspiration

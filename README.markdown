@@ -1,3 +1,22 @@
+## Features
+
+* every piece of content is a node. every node may have arbitrary sub-nodes
+  * nodes may be nested in other nodes
+  * some nodes are meant to be child nodes, for instance table. others are meant to be a collection of nodes, for instance post
+* multiple different layouts à la http://www.primarycss.com/, but without presentations classes in the markup
+  * themes should specify which layout(s) they support
+  * each layout may have an arbitrary number of main regions
+    * each region will be exposed to the site admin to populate with content (either widgets and nodes)
+
+## Inspiration
+
+* administration
+  * http://docs.harmonyapp.com/managing-content/
+  * http://www.amaxus.com/ - has some good ideas
+  * http://codex.wordpress.org/Administration_Panels
+* nodes and taxonomy
+  * http://drupal.org/getting-started/before/terminology
+
 ## Dependencies
 
 ### System
@@ -40,39 +59,3 @@ To run tests for custom extensions, use `RAILS_ENV=test rake test:custom`. Curre
 * ruby def statements should wrap arguments with parentheses
   * parentheses should be left off if no arguments are accepted
 
-## Features
-
-* every piece of content is a node. every node may have arbitrary sub-nodes
-  * some nodes are meant to be child nodes, for instance table. others are meant to be a collection of nodes, for instance post
-  * nodes may be nested in many other nodes
-* multiple different layouts à la http://www.primarycss.com/, but without presentations classes in the markup
-  * themes should specify which layout(s) they support
-  * each layout may have an arbitrary number of main regions
-    * each region will be exposed to the site admin to populate with content (either widgets and nodes)
-
-## To Do
-
-* allow admin to specify layouts per node type OR controller#action
-* make users and groups easily swappable for another user system, in part or in whole
-* access control list for everything
-* default themes should look better
-* [?] addons should have a manifest.yml to specify their description, images and javascript dependencies and load order
-* allow nodes to be used as widgets
-* 100% test code coverage
-* addons should support inheritance in an intelligent way
-  * anything (styles, behavior et cetera) specified in the child would augment the parent. for instance a theme could specify a different color scheme
-
-## Wish List
-
-* content versioning
-* accessibility (wai-aria)
-* internationalization (i18n)
-
-## Inspiration
-
-* administration
-  * http://docs.harmonyapp.com/managing-content/
-  * http://www.amaxus.com/ - has some good ideas
-  * http://codex.wordpress.org/Administration_Panels
-* nodes and taxonomy
-  * http://drupal.org/getting-started/before/terminology

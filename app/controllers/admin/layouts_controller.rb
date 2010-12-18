@@ -28,7 +28,7 @@ class Admin::LayoutsController < Admin::ApplicationController
         format.html { redirect_to(admin_themes_url, :notice => 'Layout was successfully updated.') }
         format.xml  { head :ok }
       else
-        format.html { render :action => admin_themes_url }
+        format.html { render :action => edit_admin_theme_layout_url(@theme.machine_name, @layout) }
         format.xml  { render :xml => [], :status => :unprocessable_entity }
       end
     end

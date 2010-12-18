@@ -16,19 +16,18 @@ class Admin::WidgetsController < Admin::ApplicationController
   end
 
   def update
-    theme = Theme[params[:theme]]
+    @theme = Theme[params[:theme]]
+    @layout = @theme.layout params[:layout]
 
-    params[theme.machine_name].each do |layout_name, regions|
-      layout = theme.layouts.first { |l| l.name == layout_name }
-      layout.regions = regions.map do |region_name, widgets|
-        widgets = widgets.reject { |name| name.blank? }.map { |widget_name| Widget[widget_name] }
-        { :name => region_name, :widgets => widgets }
+    params[:regions].each do |region_name, widget_names|
+      widget_names.each do |widget_name|
+        next if widget_name.blank?
+        @layout.region(region_name).widgets << Widget[widget_name]
       end
-      layout.save
     end
 
     respond_to do |format|
-      if true
+      if @layout.save
         format.html { redirect_to(admin_widgets_url, :notice => 'Layout was successfully updated.') }
         format.xml  { head :ok }
       else

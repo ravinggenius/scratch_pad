@@ -1,7 +1,7 @@
 !!! 5
 %html.no-js{ :lang => :en }
   %head
-    = show_region @selected_layout.region(:head_start)
+    = show_region @selected_layout.region(:head_alpha)
 
     -# TODO these move to widgets
     %title= @title
@@ -13,9 +13,9 @@
     = csrf_meta_tag
     = theme_tags @selected_theme
 
-    = show_region @selected_layout.region(:head_end)
+    = show_region @selected_layout.region(:head_omega)
   %body{ body_attributes, :class => @selected_layout.name.dasherize }
-    = show_region @selected_layout.region(:body_start)
+    = show_region @selected_layout.region(:body_alpha)
 
     -# TODO move to a widget
     %nav#main_menu
@@ -24,4 +24,4 @@
     - @selected_layout.custom_regions.each do |region|
       = show_region region
 
-    = show_region @selected_layout.region(:body_end)
+    = show_region @selected_layout.region(:body_omega)

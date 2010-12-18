@@ -68,6 +68,6 @@ class Theme < AddonBase
   end
 
   def self.default_regions
-    %w[ head_start head_end body_start body_end ]
+    %w[ head_alpha head_omega body_alpha body_omega ]
   end
 end

@@ -48,6 +48,7 @@ namespace :sp do
         :branding,
         :copyright,
         :flash,
+        :system_menu,
         :yielder
       ].each { |addon| AddonBase[addon].enable }
 

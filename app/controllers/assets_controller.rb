@@ -136,7 +136,7 @@ $experimental-support-for-#{vendor}: #{setting.value.blank? ? 'false' : setting.
 
   def extract_media_names(paths)
     paths.map do |path|
-      reply = File.basename(path).split('.').first
+      reply = path.basename.to_s.split('.').first
       reply.to_sym unless reply.starts_with? '_'
     end.compact
   end
@@ -156,7 +156,7 @@ $experimental-support-for-#{vendor}: #{setting.value.blank? ? 'false' : setting.
     addon_type.all.each do |addon|
       extract_media_names(addon.styles).each do |style|
         enabled_styles[style] = enabled_styles[style] || []
-        enabled_styles[style] << File.basename(addon.path)
+        enabled_styles[style] << addon.root.basename
       end
     end
 

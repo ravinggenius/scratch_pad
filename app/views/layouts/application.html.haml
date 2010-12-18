@@ -3,7 +3,7 @@
   %head
     = show_region @selected_layout.region(:head_alpha)
 
-    -# TODO these move to widgets
+    -# TODO these should move to widgets
     %title= @title
     -# %link{ :rel => 'shortcut icon', :href => '/images/favicon.ico' }/
     = auto_discovery_link_tag
@@ -16,10 +16,6 @@
     = show_region @selected_layout.region(:head_omega)
   %body{ body_attributes, :class => @selected_layout.name.dasherize }
     = show_region @selected_layout.region(:body_alpha)
-
-    -# TODO move to a widget
-    %nav#main_menu
-      = render :partial => 'shared/menu', :locals => { :items => @main_menu_items }
 
     - @selected_layout.custom_regions.each do |region|
       = show_region region

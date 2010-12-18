@@ -23,8 +23,8 @@ class ApplicationController < ActionController::Base
   end
 
   before_filter do
-    @main_menu_items = []
-    @main_menu_items << if current_user == User.anonymous
+    @system_menu = []
+    @system_menu << if current_user == User.anonymous
       MenuItem.new('Sign In', new_session_path)
     else
       MenuItem.new('Profile', current_user)

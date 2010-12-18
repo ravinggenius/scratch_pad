@@ -1,4 +1,4 @@
-- unless items.blank?
+- if items.present?
   %ul<>
     - items.each do |item|
       %li<>
@@ -8,4 +8,4 @@
         - else
           = link
         - if item.children
-          = render :partial => 'shared/menu', :locals => { :items => item.children }
+          = show_addon SystemMenu, '_tree', :items => item.children

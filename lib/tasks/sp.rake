@@ -53,6 +53,7 @@ namespace :sp do
 
       l = Theme[:default].default_layout
       l.region(:branding).widgets << Widget[:branding]
+      l.region(:main_menu).widgets << Widget[:system_menu]
       l.region(:flash).widgets << Widget[:flash]
       l.region(:content).widgets << Widget[:yielder]
       l.region(:credits).widgets << Widget[:copyright]
@@ -60,6 +61,7 @@ namespace :sp do
 
       l = Theme[:default_admin].default_layout
       l.region(:branding).widgets << Widget[:branding]
+      l.region(:main_menu).widgets << Widget[:system_menu]
       l.region(:flash).widgets << Widget[:flash]
       l.region(:content).widgets << Widget[:yielder]
       l.save

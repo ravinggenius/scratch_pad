@@ -8,7 +8,7 @@ class Admin::ApplicationController < ApplicationController
   end
 
   before_filter do
-    @main_menu_items = [
+    @system_menu = [
       MenuItem.new('Dashboard', admin_root_path),
       MenuItem.new('Content', admin_nodes_path, [
         MenuItem.new('New', new_admin_node_path, NodeExtension.enabled.sort.map { |extension|

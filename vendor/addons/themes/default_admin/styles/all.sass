@@ -146,50 +146,6 @@
   #branding
 
   #main_menu
-    // all menus
-    ul
-      @include no-bullets
-      background:
-        color: #EEEEEE
-      cursor: default
-      li
-        padding:
-          left: 0.25em
-          right: 0.25em
-        label
-          a
-        a
-          display: block
-          width: 100%
-        &:hover
-          > ul
-            display: block
-    // top-level menu
-    > ul
-      @include horizontal-list-container
-      > li
-        @include horizontal-list-item
-        > label
-          a
-        > a
-        &:hover
-          ul
-    // submenus
-    ul ul
-      display: none
-      margin: 0
-      position: absolute
-      li
-        position: relative
-        text:
-          align: left
-        label
-          a
-        a
-        &:hover
-          ul
-            left: 100%
-            top: 0
 
   #content
 

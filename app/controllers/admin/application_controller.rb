@@ -25,7 +25,6 @@ class Admin::ApplicationController < ApplicationController
         MenuItem.new('Frontend', admin_themes_path(:scope => :frontend)),
         MenuItem.new('Backend', admin_themes_path(:scope => :backend))
       ]),
-      MenuItem.new('Widgets', admin_widgets_path),
       MenuItem.new('Users', admin_users_path, [
         MenuItem.new('New', new_admin_user_path)
       ]),

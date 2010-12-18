@@ -13,6 +13,11 @@
               = label_tag "#{scope}_#{theme.machine_name}", "#{theme.name} - theme.description"
               - scope_url = "#{scope == :frontend ? :root : :admin_root}_url"
               = link_to 'Preview', self.send(scope_url, :force_theme => theme.machine_name), :class => :preview
-              = link_to 'Widgets', admin_widgets_url(:theme => theme.machine_name), :class => :widgets
+              %ul
+                - theme.layouts.each do |layout|
+                  %li
+                    = layout.name
+                    = link_to 'Edit Widgets', edit_admin_theme_layout_url(theme.machine_name, layout)
+
       %ul
         %li= submit_tag 'Commit'

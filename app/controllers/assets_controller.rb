@@ -165,7 +165,7 @@ $experimental-support-for-#{vendor}: #{setting.value.blank? ? 'false' : setting.
       addon_styles.each do |addon|
         @imports << "#{addon_name.pluralize}/#{addon}/styles/#{media}"
         @medias[media] << <<-SASS
-  .#{addon}
+  .#{addon.to_s.dasherize}
     @include #{addon_name}_#{addon}_#{media}
         SASS
       end

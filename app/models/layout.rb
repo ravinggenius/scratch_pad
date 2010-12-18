@@ -16,6 +16,7 @@ class Layout
   end
 
   def region(region_name)
+    region_name = region_name.to_sym
     # FIXME find a better way to do this
     regions.select { |r| r.name.to_sym == region_name }.first
   end

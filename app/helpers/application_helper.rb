@@ -79,4 +79,18 @@ module ApplicationHelper
     reply << javascript_include_tag(assets_scripts_path(:theme => theme_name))
     reply.html_safe
   end
+
+  # TODO find a way to make this work
+  def classy_html_tags(options = {})
+    html_options = ''
+    options.each { |attribute, value| html_options << " #{attribute}=\"#{value}\"" }
+    html_open = <<-HTML
+<!--[if lt IE 7]>              <html#{html_options} class="no-js ie ie6 lte9 lte8 lte7 lte6"> <![endif]-->
+<!--[if IE 7]>                 <html#{html_options} class="no-js ie ie7 lte9 lte8 lte7">      <![endif]-->
+<!--[if IE 8]>                 <html#{html_options} class="no-js ie ie8 lte9 lte8">           <![endif]-->
+<!--[if IE 9]>                 <html#{html_options} class="no-js ie ie9 lte9">                <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html#{html_options} class="no-js">                        <!--<![endif]-->
+    HTML
+    html_close = '</html>'
+  end
 end

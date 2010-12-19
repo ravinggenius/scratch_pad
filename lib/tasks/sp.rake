@@ -12,6 +12,12 @@ namespace :sp do
   task :install do
     Rake::Task['sp:install:settings'].invoke
     Rake::Task['sp:install:enable_minimum_addons'].invoke
+    Rake::Task['sp:clear_cache'].invoke
+  end
+
+  desc 'Wipe out asset cache and force a rebuild'
+  task :clear_cache => :environment do
+    Cache.expire_all
   end
 
   namespace :install do

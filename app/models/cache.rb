@@ -17,4 +17,9 @@ class Cache
     @loaded ||= {}
     @loaded[key] ||= Cache.first_or_new(:key => key)
   end
+
+  def self.expire_all
+    delete_all
+    @loaded = {}
+  end
 end

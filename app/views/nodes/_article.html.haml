@@ -2,5 +2,5 @@
 - is_single ||= false
 - showing_part ||= (is_featured || is_single) ? :full : :preview
 
-%article.node{ :id => "node_#{node.id}", :class => [node.class.machine_name, showing_part, ('featured' if is_featured)] }
+%article.node{ :id => "node_#{node.id}", :class => [node.class.machine_name.dasherize, showing_part, ('featured' if is_featured)] }
   = show_node node, showing_part

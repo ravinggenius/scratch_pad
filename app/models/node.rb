@@ -29,9 +29,14 @@ class Node
     terms.map { |term| term.vocabulary }.uniq
   end
 
+  def self.name
+    reply = super
+    reply.scan /^(.*)::Model$/
+    $1 ? $1 : reply
+  end
+
   def self.machine_name
-    self.name.scan /^(.*)::Model$/
-    $1 ? $1.underscore : 'node'
+    name.underscore
   end
 
   def self.model_name

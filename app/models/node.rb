@@ -9,7 +9,7 @@ class Node
 
   key :filter_group_id, BSON::ObjectId, :required => true
   key :children_ids, Array, :typecast => 'BSON::ObjectId'
-  key :is_published, Boolean, :default => false
+  key :is_published, Boolean, :default => false # TODO change to :state (or similar) and set workflow permissions via access control list
   key :title, String, :required => true
 
   timestamps!
@@ -21,8 +21,7 @@ class Node
   before_save :set_children_ids
 
   def children
-    self.children_ids ||= []
-    @children ||= self.children_ids.map { |child_id| Node.find(child_id) }
+    @children ||= (self.children_ids || []).map { |child_id| Node.find child_id }
   end
 
   def vocabularies
@@ -62,9 +61,9 @@ class Node
 
   private
 
+  # TODO move to before_save &block
   def set_children_ids
-    @children ||= []
-    self.children_ids = @children.map { |child| child.id }
+    self.children_ids = (@children || []).map &:id
   end
 
   protected :children_ids, :children_ids=

@@ -10,10 +10,10 @@
         = f.email_field :email
       %li
         = f.label :password, 'Password'
-        = f.password_field :password
+        = f.password_field :password, :value => nil
       %li
         = f.label :password_confirmation, 'Password Confirmation'
-        = f.password_field :password_confirmation
+        = f.password_field :password_confirmation, :value => nil
   %ul.actions
     %li= f.submit 'Save'
     %li= link_to 'Cancel', admin_users_path

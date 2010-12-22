@@ -80,7 +80,7 @@ module ApplicationHelper
     reply.html_safe
   end
 
-  def classy_html_tags(attributes = {}, &content)
+  def classy_html_tags(attributes = {}, should_compress = :production, &content)
     html_attributes = attributes.map { |attribute, value| "#{attribute}=\"#{value}\"" }.join ' '
     html_open = <<-HTML
 <!--[if lt IE 7]>              <html #{html_attributes} class="no-js ie ie6 lte9 lte8 lte7 lte6"> <![endif]-->
@@ -89,6 +89,9 @@ module ApplicationHelper
 <!--[if IE 9]>                 <html #{html_attributes} class="no-js ie ie9 lte9">                <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html #{html_attributes} class="no-js">                        <!--<![endif]-->
     HTML
+    if should_compress
+      html_open.gsub! /\s+/, ' ' unless should_compress.is_a?(Symbol) && (should_compress != Rails.env.to_sym)
+    end
     surround html_open, '</html>', &content
   end
 end

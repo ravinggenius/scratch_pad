@@ -30,6 +30,7 @@
         %tr
           %td
             %span.edit= link_to 'Edit', edit_admin_vocabulary_path(vocabulary)
+            %span.sub-resources= link_to 'Terms', admin_vocabulary_terms_path(vocabulary)
             %span.destroy= link_to 'Delete', [:admin, vocabulary], :confirm => 'Are you sure?', :method => :delete # FIXME clicking this simply GETs the resource
           %td= vocabulary.name
           %td= vocabulary.is_freetaggable

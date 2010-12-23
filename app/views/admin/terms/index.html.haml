@@ -16,7 +16,6 @@
       - @terms.each do |term|
         %tr
           %td
-            %span.view= link_to 'View', [:admin, @vocabulary, term]
             %span.edit= link_to 'Edit', edit_admin_vocabulary_term_path(@vocabulary, term)
             %span.destroy= link_to 'Destroy', [:admin, @vocabulary, term], :confirm => 'Are you sure?', :method => :delete
           %td= term.name

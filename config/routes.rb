@@ -12,8 +12,8 @@ ScratchPad::Application.routes.draw do
       resources :layouts, :only => [:edit, :update]
     end
     resources :users
-    resources :vocabularies do
-      resources :terms
+    resources :vocabularies, :except => :show do
+      resources :terms, :except => :show
     end
     [:addons, :themes].each do |controller|
       post "/#{controller}", :to => "#{controller}#update"

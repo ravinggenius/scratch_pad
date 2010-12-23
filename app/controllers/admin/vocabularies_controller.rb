@@ -8,15 +8,6 @@ class Admin::VocabulariesController < Admin::ApplicationController
     end
   end
 
-  def show
-    @vocabulary = Vocabulary.find(params[:id])
-
-    respond_to do |format|
-      format.html
-      format.xml { render :xml => @vocabulary }
-    end
-  end
-
   def new
     @vocabulary = Vocabulary.new
     set_fieldset_ivars
@@ -38,7 +29,7 @@ class Admin::VocabulariesController < Admin::ApplicationController
 
     respond_to do |format|
       if @vocabulary.save
-        format.html { redirect_to([:admin, @vocabulary], :notice => 'vocabulary was successfully created.') }
+        format.html { redirect_to(admin_vocabulary_url, :notice => 'vocabulary was successfully created.') }
         format.xml { render :xml => @vocabulary, :status => :created, :location => [:admin, @vocabulary] }
       else
         set_fieldset_ivars
@@ -56,7 +47,7 @@ class Admin::VocabulariesController < Admin::ApplicationController
 
     respond_to do |format|
       if @vocabulary.update_attributes(params[:vocabulary])
-        format.html { redirect_to([:admin, @vocabulary], :notice => 'vocabulary was successfully updated.') }
+        format.html { redirect_to(admin_vocabulary_url, :notice => 'vocabulary was successfully updated.') }
         format.xml { head :ok }
       else
         set_fieldset_ivars

@@ -11,6 +11,8 @@ class Admin::NodesController < Admin::ApplicationController
   def new
     @node = node_type.new
     set_fieldset_ivars
+    ne = NodeExtension[params[:node_type]]
+    @selected_node_type = NodeExtension.enabled.include?(ne) ? ne.machine_name : @node.class.machine_name
 
     respond_to do |format|
       format.html { render 'shared/edit_new' }
@@ -91,8 +93,6 @@ class Admin::NodesController < Admin::ApplicationController
       @node_types = NodeExtension.enabled.map do |extension|
         [extension.name, extension.machine_name]
       end.sort.insert 0, ['Node', 'node']
-      ne = NodeExtension[params[:node_type]]
-      @selected_node_type = NodeExtension.enabled.include?(ne) ? ne.machine_name : @node.class.machine_name
     end
     @filter_groups = FilterGroup.all.sort_by &:name
   end

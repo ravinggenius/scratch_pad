@@ -1,17 +1,23 @@
-%h1 Listing terms
+%header
+  %span.h Listing terms
 
-%table
-  %tr
-    %th
-    %th
-    %th
-
-  - @terms.each do |term|
-    %tr
-      %td= link_to 'Show', [:admin, @vocabulary, term]
-      %td= link_to 'Edit', edit_admin_vocabulary_term_path(@vocabulary, term)
-      %td= link_to 'Destroy', [:admin, @vocabulary, term], :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New Term', new_admin_vocabulary_term_path
+%section
+  %table#content_overview
+    %col.actions
+    %col.term-name
+    %thead
+      %tr
+        %th Actions
+        %th Name
+    %tfoot
+      %tr
+        %td
+        %td
+    %tbody
+      - @terms.each do |term|
+        %tr
+          %td
+            %span.view= link_to 'View', [:admin, @vocabulary, term]
+            %span.edit= link_to 'Edit', edit_admin_vocabulary_term_path(@vocabulary, term)
+            %span.destroy= link_to 'Destroy', [:admin, @vocabulary, term], :confirm => 'Are you sure?', :method => :delete
+            %td= term.name

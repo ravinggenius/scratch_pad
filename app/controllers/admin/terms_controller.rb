@@ -36,7 +36,7 @@ class Admin::TermsController < Admin::ApplicationController
   end
 
   def create
-    @term = Term.new(params[:term])
+    @term = Term.new(params[:term].merge(:vocabulary => @vocabulary))
 
     respond_to do |format|
       if @term.save

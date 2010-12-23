@@ -1,6 +1,6 @@
 = form_for [:admin, @vocabulary, @term] do |f|
   %fieldset.terms
-    %legend Terms
+    %legend Terms for #{@vocabulary.name}
     %ul
       %li
         = f.label :name, 'Name'

@@ -40,7 +40,7 @@ class Admin::TermsController < Admin::ApplicationController
 
     respond_to do |format|
       if @term.save
-        format.html { redirect_to([:admin, @vocabulary, @term], :notice => 'Term was successfully created.') }
+        format.html { redirect_to(admin_vocabulary_terms_url(@vocabulary), :notice => 'Term was successfully created.') }
         format.xml  { render :xml => @term, :status => :created, :location => [:admin, @vocabulary, @term] }
       else
         format.html { render :action => 'shared/edit_new', :error => @term.errors.full_messages }
@@ -54,7 +54,7 @@ class Admin::TermsController < Admin::ApplicationController
 
     respond_to do |format|
       if @term.update_attributes(params[:term])
-        format.html { redirect_to([:admin, @vocabulary, @term], :notice => 'Term was successfully updated.') }
+        format.html { redirect_to(admin_vocabulary_terms_url(@vocabulary), :notice => 'Term was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => 'shared/edit_new', :error => @term.errors.full_messages }

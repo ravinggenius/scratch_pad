@@ -11,8 +11,7 @@
         %th Name
     %tfoot
       %tr
-        %td
-        %td
+        %td{ :colspan => 2 }= link_to 'Add', new_admin_vocabulary_term_path(@vocabulary)
     %tbody
       - @terms.each do |term|
         %tr

@@ -6,6 +6,7 @@
     %col.actions
     %col.vocabulary-name
     %col.vocabulary-freetaggable
+    %col.vocabulary-hierarchical
     %col.vocabulary-multiselect
     %col.vocabulary-nodes-optional
     %col.vocabulary-nodes-required
@@ -14,11 +15,13 @@
         %th Actions
         %th Name
         %th Freetaggable
+        %th Hierarchical
         %th Multi-Selectable
         %th Optional Node Types
         %th Required Node Types
     %tfoot
       %tr
+        %td
         %td
         %td
         %td
@@ -34,6 +37,7 @@
             %span.destroy= link_to 'Delete', [:admin, vocabulary], :confirm => 'Are you sure?', :method => :delete # FIXME clicking this simply GETs the resource
           %td= vocabulary.name
           %td= vocabulary.is_freetaggable
+          %td= vocabulary.is_hierarchical
           %td= vocabulary.is_multiselectable
           - [:node_types_optional, :node_types_required].each do |message|
             %td

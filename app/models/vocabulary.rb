@@ -9,4 +9,8 @@ class Vocabulary
   key :node_types_required, AddonArray, :required => true
 
   many :terms
+
+  before_save do |vocabulary|
+    vocabulary.node_types_optional = vocabulary.node_types_optional - vocabulary.node_types_required
+  end
 end

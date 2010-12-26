@@ -12,8 +12,7 @@ module Relationship
       save_callback = "save_#{Private.plural(glue_model)}"
 
       define_method save_callback do
-        @those_models ||= []
-        @those_models.each { |om| Private.klass(glue_model).first_or_create(Private.id_key(this_model) => self.id, Private.id_key(that_model) => om.id) }
+        (@those_models || []).each { |om| Private.klass(glue_model).first_or_create(Private.id_key(this_model) => self.id, Private.id_key(that_model) => om.id) }
       end
 
       self.after_save save_callback

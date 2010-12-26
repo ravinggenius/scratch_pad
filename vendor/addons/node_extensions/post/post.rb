@@ -1,4 +1,4 @@
 class Post < NodeExtension
-  class Model < Node
+  class Model < NodeExtension::Model
   end
 end

@@ -149,7 +149,7 @@ $experimental-support-for-#{vendor}: #{setting.value.blank? ? 'false' : setting.
   end
 
   def include_enabled_styles_for(addon_type)
-    addon_name = addon_type.name.underscore
+    addon_name = addon_type.title.underscore
 
     enabled_styles = {}
 

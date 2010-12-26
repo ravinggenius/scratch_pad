@@ -1,5 +1,5 @@
 class TextBlock < NodeExtension
-  class Model < Node
+  class Model < NodeExtension::Model
     key :data, String, :required => true
   end
 end

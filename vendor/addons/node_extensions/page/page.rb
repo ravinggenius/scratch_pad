@@ -1,5 +1,5 @@
 class Page < NodeExtension
-  class Model < Node
+  class Model < NodeExtension::Model
     key :slug, String
   end
 end

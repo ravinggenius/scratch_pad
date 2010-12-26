@@ -8,7 +8,7 @@ class AddonBase
   end
 
   def self.root
-    Rails.root + 'vendor' + 'addons' + self.superclass.name.pluralize.underscore + self.name.underscore
+    Rails.root + 'vendor' + 'addons' + self.superclass.title.pluralize.underscore + self.title.underscore
   end
 
   def self.scripts
@@ -23,8 +23,12 @@ class AddonBase
     root + 'views'
   end
 
+  def self.title
+    name
+  end
+
   def self.machine_name
-    self.name.underscore
+    title.underscore
   end
 
   def self.all
@@ -67,7 +71,7 @@ class AddonBase
 
   def self.enable
     ms = message_scope
-    Addon.first_or_create :name => self.name
+    Addon.first_or_create :name => self.title
     @settings ||= {}
     (@settings[ms] || []).each do |setting|
       Setting.first_or_create setting.merge(:scope => [ms, setting[:scope]].join(Setting::SCOPE_GLUE))
@@ -81,7 +85,7 @@ class AddonBase
     (@settings[ms] || []).each do |setting|
       Setting.first(:scope => [ms, setting[:scope]].join(Setting::SCOPE_GLUE)).try :delete
     end
-    Addon.first(:name => self.name).try :delete
+    Addon.first(:name => self.title).try :delete
     ms
   end
 

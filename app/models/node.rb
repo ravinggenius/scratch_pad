@@ -24,18 +24,24 @@ class Node
     @children ||= (self.children_ids || []).map { |child_id| Node.find child_id }
   end
 
+  def parse_terms(vocabularies)
+    terms = []
+    vocabularies.each do |vocabulary, term_ids|
+      terms << term_ids.map { |term_id| Term.find term_id }
+    end
+    self.terms = terms.flatten
+  end
+
   def vocabularies
     terms.map { |term| term.vocabulary }.uniq
   end
 
-  def self.name
-    reply = super
-    reply.scan /^(.*)::Model$/
-    $1 ? $1 : reply
+  def self.title
+    name
   end
 
   def self.machine_name
-    name.underscore
+    title.underscore
   end
 
   def self.model_name

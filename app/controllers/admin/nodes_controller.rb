@@ -27,7 +27,10 @@ class Admin::NodesController < Admin::ApplicationController
   end
 
   def create
+    terms = params[:node].delete :terms
     @node = node_type.new params[:node]
+
+    @node.parse_terms terms
 
     respond_to do |format|
       if @node.save
@@ -45,7 +48,10 @@ class Admin::NodesController < Admin::ApplicationController
   end
 
   def update
+    terms = params[:node].delete :terms
     @node = node_type.find params[:id]
+
+    @node.parse_terms terms
 
     respond_to do |format|
       if @node.update_attributes(params[:node])
@@ -94,6 +100,11 @@ class Admin::NodesController < Admin::ApplicationController
         [extension.name, extension.machine_name]
       end.sort.insert 0, ['Node', 'node']
     end
+
     @filter_groups = FilterGroup.all.sort_by &:name
+
+    vocabularies = Vocabulary.all
+    @required_vocabularies = vocabularies.select { |v| v.node_types_required.include? NodeExtension[@node.class.title] }
+    @optional_vocabularies = vocabularies.select { |v| v.node_types_optional.include? NodeExtension[@node.class.title] } - @required_vocabularies
   end
 end

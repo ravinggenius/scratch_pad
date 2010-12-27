@@ -8,12 +8,12 @@
       %li
         = form.label :filter_group_id, 'Filter Group'
         = form.collection_select :filter_group_id, @filter_groups, :id, :name, :selected => @node.filter_group.id
-      %li
-        TODO list required and optional vocabularies and allow terms to be associated
       - if @node.new?
         %li
           = label_tag :node_type, 'Node Type'
           = select_tag :node_type, options_for_select(@node_types, @selected_node_type)
+      %li= render 'terms', :node => @node, :vocabularies => @required_vocabularies, :optional_required => :required
+      %li= render 'terms', :node => @node, :vocabularies => @optional_vocabularies, :optional_required => :optional
     %div#node_extension_fields
       - unless @node.class.machine_name == 'node'
         = render :partial => 'node_extension_fieldset', :locals => { :node => @node }

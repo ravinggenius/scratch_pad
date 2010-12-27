@@ -1,10 +1,27 @@
-%h1 Listing filter groups
+%header
+  %span.h Listing filter groups
 
-%ul
-  - @filter_groups.each do |filter_group|
-    %li
-      = filter_group.name
-      = link_to 'Edit', edit_admin_filter_group_path(filter_group)
-      %ul
-        - filter_group.filters.each do |filter|
-          %li= filter.name
+%section
+  %table#users_overview
+    %col.actions
+    %col.name
+    %col.addons.filter
+    %thead
+      %tr
+        %th Actions
+        %th Groups
+        %th Username
+    %tfoot
+      %tr
+        %td{ :colspan => 3 }= link_to 'Add', new_admin_filter_group_path
+    %tbody
+      - @filter_groups.each do |filter_group|
+        %tr
+          %td
+            %span.edit= link_to 'Edit', edit_admin_filter_group_path(filter_group)
+            %span.destroy= link_to 'Delete', [:admin, filter_group], :confirm => 'Are you sure?', :method => :delete # FIXME clicking this simply GETs the resource
+          %td= filter_group.name
+          %td
+            %ul
+              - filter_group.filters.each do |filter|
+                %li= filter.title

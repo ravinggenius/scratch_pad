@@ -5,7 +5,7 @@ ScratchPad::Application.routes.draw do
 
   namespace :admin do
     resources :addons, :only => :index
-    resources :filter_groups
+    resources :filter_groups, :except => :show
     resources :nodes, :except => :show
     resources :settings
     resources :themes, :only => :index do

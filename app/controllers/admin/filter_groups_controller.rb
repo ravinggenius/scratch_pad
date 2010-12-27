@@ -12,15 +12,6 @@ class Admin::FilterGroupsController < Admin::ApplicationController
     end
   end
 
-  def show
-    @filter_group = FilterGroup.find(params[:id])
-
-    respond_to do |format|
-      format.html
-      format.xml { render :xml => @filter_group }
-    end
-  end
-
   def new
     @filter_group = FilterGroup.new
     @filters = Filter.enabled

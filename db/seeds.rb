@@ -1,21 +1,20 @@
-def owner
-  @o ||= User.first(:username => 'root') or @o ||= User.first(:username => 'anon')
-end
+owner = User.anonymous
+filter = FilterGroup.create :name => 'Blank', :filters => [DoNothing]
 
-n = List.new :title => 'Check out this mighty List!'
+n = List::Model.new :title => 'Check out this mighty List!', :filter_group => filter
 n.items << 'Make this work'
 n.creator = owner
 n.save
 
-n = List.new :title => 'Another List!', :items => [ 'Line one', 'Line two' ]
+n = List::Model.new :title => 'Another List!', :filter_group => filter, :items => [ 'Line one', 'Line two' ]
 n.creator = owner
 n.save
 
-n = TextBlock.new :title => 'Welcome', :data => 'Welcome to your new ScratchPad!'
+n = TextBlock::Model.new :title => 'Welcome', :filter_group => filter, :data => 'Welcome to your new ScratchPad!'
 n.creator = owner
 n.save
 
-n = Table.new :title => 'Even better dataset', :caption => 'That\'s what *she* said', :data => [
+n = Table::Model.new :title => 'Even better dataset', :filter_group => filter, :caption => 'That\'s what *she* said', :data => [
   [ 'a', 'b', 'c' ],
   [ '1', '2', '3' ],
   [ '4', '5', '6' ]
@@ -23,35 +22,25 @@ n = Table.new :title => 'Even better dataset', :caption => 'That\'s what *she* s
 n.creator = owner
 n.save
 
-n = TextBlock.new :title => 'Stub', :data => 'Static pages with human-friendly URLs are very cool.'
+n = TextBlock::Model.new :title => 'Stub', :filter_group => filter, :data => 'Static pages with human-friendly URLs are very cool.'
 n.creator = owner
 n.save
 
-n = Post.new :title => 'Blog Post', :is_published => true
-n.children << TextBlock.all.last
-n.children << TextBlock.first
-n.children << Table.first
+n = Post::Model.new :title => 'Blog Post', :filter_group => filter, :is_published => true
+n.children << TextBlock::Model.all.last
+n.children << TextBlock::Model.first
+n.children << Table::Model.first
 n.creator = owner
 n.save
 
-n = Post.new :title => 'Not About Us', :is_published => true
-n.children << TextBlock.first
-n.children << Table.first
+n = Post::Model.new :title => 'Not About Us', :filter_group => filter, :is_published => true
+n.children << TextBlock::Model.first
+n.children << Table::Model.first
 n.creator = owner
 n.save
 
-n = Page.new :title => 'About Us', :is_published => true, :slug => 'about'
-n.children << TextBlock.first
-n.children << List.first
+n = Page::Model.new :title => 'About Us', :filter_group => filter, :is_published => true, :slug => 'about'
+n.children << TextBlock::Model.first
+n.children << List::Model.first
 n.creator = owner
 n.save
-
-=begin
-
-n = Comment.new :title => 'My Awesome Comment'
-n.children << TextBlock.first
-n.children << Table.first
-n.creator = owner
-n.save
-
-=end

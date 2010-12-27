@@ -32,7 +32,7 @@
             %span.view= link_to 'View', node
             %span.edit= link_to 'Edit', edit_admin_node_path(node)
             %span.destroy= link_to 'Delete', [:admin, node], :confirm => 'Are you sure?', :method => :delete # FIXME clicking this simply GETs the resource
-          %td= node.class.name
+          %td= node.class.title
           %td= node.filter_group.name
           %td= node.vocabularies.map { |vocabulary| vocabulary.name }.sort.join ', '
           %td.ancestors-0= node.title

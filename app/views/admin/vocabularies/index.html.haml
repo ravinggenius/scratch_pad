@@ -21,13 +21,7 @@
         %th Required Node Types
     %tfoot
       %tr
-        %td
-        %td
-        %td
-        %td
-        %td
-        %td
-        %td
+        %td{ :colspan => 7 }= link_to 'Add', new_admin_vocabulary_path
     %tbody
       - @vocabularies.sort { |a, b| a.name <=> b.name }.each do |vocabulary|
         %tr

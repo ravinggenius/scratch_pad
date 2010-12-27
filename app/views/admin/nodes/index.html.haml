@@ -19,12 +19,7 @@
         %th Status
     %tfoot
       %tr
-        %td
-        %td
-        %td
-        %td
-        %td
-        %td
+        %td{ :colspan => 6 }= link_to 'Add', new_admin_node_path
     %tbody
       - @nodes.each do |node|
         %tr

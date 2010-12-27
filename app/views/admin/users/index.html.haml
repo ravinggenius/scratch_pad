@@ -15,10 +15,7 @@
         %th Email
     %tfoot
       %tr
-        %td
-        %td
-        %td
-        %td
+        %td{ :colspan => 4 }= link_to 'Add', new_admin_user_path
     %tbody
       - @users.each do |user|
         %tr

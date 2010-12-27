@@ -9,6 +9,10 @@ module Relationship
         @those_models ||= Private.klass(glue_model).send("#{Private.plural(that_model)}_for", self.id)
       end
 
+      define_method "#{Private.plural(that_model)}=" do |array|
+        @those_models = array
+      end
+
       save_callback = "save_#{Private.plural(glue_model)}"
 
       define_method save_callback do

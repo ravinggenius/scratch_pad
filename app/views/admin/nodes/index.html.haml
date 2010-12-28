@@ -8,7 +8,7 @@
     %col.filter-group
     %col.vocabularies
     %col.node-title
-    %col.node-status
+    %col.state
     %thead
       %tr
         %th Actions
@@ -31,4 +31,4 @@
           %td= node.filter_group.name
           %td= node.vocabularies.map { |vocabulary| vocabulary.name }.sort.join ', '
           %td.ancestors-0= node.title
-          %td= node.is_published? ? 'Published' : 'Draft'
+          %td= node.state

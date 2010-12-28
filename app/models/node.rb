@@ -9,7 +9,7 @@ class Node
 
   key :filter_group_id, BSON::ObjectId, :required => true
   key :children_ids, Array, :typecast => 'BSON::ObjectId'
-  key :is_published, Boolean, :default => false # TODO change to :state (or similar) and set workflow permissions via access control list
+  key :state, String, :required => true, :default => :draft # TODO formalize states
   key :title, String, :required => true
 
   timestamps!
@@ -54,8 +54,8 @@ class Node
     return name
   end
 
-  def self.published(published = true)
-    all :is_published => published
+  def self.published
+    all :state => :published
   end
 
   alias :name :title

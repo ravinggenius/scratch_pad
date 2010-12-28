@@ -26,20 +26,20 @@ n = TextBlock::Model.new :title => 'Stub', :filter_group => filter, :data => 'St
 n.creator = owner
 n.save
 
-n = Post::Model.new :title => 'Blog Post', :filter_group => filter, :is_published => true
+n = Post::Model.new :title => 'Blog Post', :filter_group => filter, :state => :published
 n.children << TextBlock::Model.all.last
 n.children << TextBlock::Model.first
 n.children << Table::Model.first
 n.creator = owner
 n.save
 
-n = Post::Model.new :title => 'Not About Us', :filter_group => filter, :is_published => true
+n = Post::Model.new :title => 'Not About Us', :filter_group => filter, :state => :published
 n.children << TextBlock::Model.first
 n.children << Table::Model.first
 n.creator = owner
 n.save
 
-n = Page::Model.new :title => 'About Us', :filter_group => filter, :is_published => true, :slug => 'about'
+n = Page::Model.new :title => 'About Us', :filter_group => filter, :state => :published, :slug => 'about'
 n.children << TextBlock::Model.first
 n.children << List::Model.first
 n.creator = owner

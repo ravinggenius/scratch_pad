@@ -1,46 +1,49 @@
-owner = User.anonymous
-filter = FilterGroup.create :name => 'Blank', :filters => [DoNothing]
+filter_group = FilterGroup.first_or_new :name => 'Blank'
+if filter_group.new?
+  filter_group.filters << DoNothing
+  filter_group.save
+end
 
-n = List::Model.new :title => 'Check out this mighty List!', :filter_group => filter
+common = {
+  :creator_id => User.anonymous.id,
+  :filter_group_id => filter_group.id
+}
+
+n = List::Model.first_or_new common.merge(:title => 'Check out this mighty List!')
 n.items << 'Make this work'
-n.creator = owner
-n.save
+n.save if n.new?
 
-n = List::Model.new :title => 'Another List!', :filter_group => filter, :items => [ 'Line one', 'Line two' ]
-n.creator = owner
-n.save
+n = List::Model.first_or_new common.merge(:title => 'Another List!', :items => [ 'Line one', 'Line two' ])
+n.save if n.new?
 
-n = TextBlock::Model.new :title => 'Welcome', :filter_group => filter, :data => 'Welcome to your new ScratchPad!'
-n.creator = owner
-n.save
+n = TextBlock::Model.first_or_new common.merge(:title => 'Welcome', :data => 'Welcome to your new ScratchPad!')
+n.save if n.new?
 
-n = Table::Model.new :title => 'Even better dataset', :filter_group => filter, :caption => 'That\'s what *she* said', :data => [
-  [ 'a', 'b', 'c' ],
-  [ '1', '2', '3' ],
-  [ '4', '5', '6' ]
-]
-n.creator = owner
-n.save
+n = Table::Model.first_or_new common.merge(:title => 'Even better dataset')
+if n.new?
+  n.data = [
+    [ 'a', 'b', 'c' ],
+    [ '1', '2', '3' ],
+    [ '4', '5', '6' ]
+  ]
+  n.save
+end
 
-n = TextBlock::Model.new :title => 'Stub', :filter_group => filter, :data => 'Static pages with human-friendly URLs are very cool.'
-n.creator = owner
-n.save
+n = TextBlock::Model.first_or_new common.merge(:title => 'Stub', :data => 'Static pages with human-friendly URLs are very cool.')
+n.save if n.new?
 
-n = Post::Model.new :title => 'Blog Post', :filter_group => filter, :state => :published
+n = Post::Model.first_or_new common.merge(:title => 'Blog Post', :state => :published)
 n.children << TextBlock::Model.all.last
 n.children << TextBlock::Model.first
 n.children << Table::Model.first
-n.creator = owner
-n.save
+n.save if n.new?
 
-n = Post::Model.new :title => 'Not About Us', :filter_group => filter, :state => :published
+n = Post::Model.first_or_new common.merge(:title => 'Not About Us', :state => :published)
 n.children << TextBlock::Model.first
 n.children << Table::Model.first
-n.creator = owner
-n.save
+n.save if n.new?
 
-n = Page::Model.new :title => 'About Us', :filter_group => filter, :state => :published, :slug => 'about'
+n = Page::Model.first_or_new common.merge(:title => 'About Us', :state => :published, :slug => 'about')
 n.children << TextBlock::Model.first
 n.children << List::Model.first
-n.creator = owner
-n.save
+n.save if n.new?

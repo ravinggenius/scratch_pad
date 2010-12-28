@@ -69,6 +69,5 @@ class ApplicationController < ActionController::Base
     # TODO actually select a layout based on what page or node is being viewed
     layout_name = nil # nil selects the default layout
     @selected_layout = @selected_theme.layout layout_name
-    @selected_widgets = @selected_layout.regions_hash
   end
 end

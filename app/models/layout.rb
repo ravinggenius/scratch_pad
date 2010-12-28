@@ -7,14 +7,6 @@ class Layout
 
   many :regions, :class_name => 'LayoutRegion'
 
-  def regions_hash
-    reply = Hash.new []
-    regions.each do |region|
-      reply[region.name.to_sym] = region.widgets if region.widgets.any?
-    end
-    reply
-  end
-
   def region(region_name)
     region_name = region_name.to_sym
     # FIXME find a better way to do this

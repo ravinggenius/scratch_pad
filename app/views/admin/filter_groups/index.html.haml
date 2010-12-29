@@ -5,12 +5,12 @@
   %table#users_overview
     %col.actions
     %col.name
-    %col.addons.filter
+    %col.addons.filters
     %thead
       %tr
         %th Actions
-        %th Groups
-        %th Username
+        %th Name
+        %th Filters
     %tfoot
       %tr
         %td{ :colspan => 3 }= link_to 'Add', new_admin_filter_group_path

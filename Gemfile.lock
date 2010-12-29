@@ -76,7 +76,7 @@ GEM
       activesupport (>= 2.3.4)
       jnunemaker-validatable (~> 1.8.4)
       plucky (~> 0.3.6)
-    nifty-generators (0.4.2)
+    nifty-generators (0.4.3)
     plucky (0.3.6)
       mongo (~> 1.1)
     polyglot (0.3.1)

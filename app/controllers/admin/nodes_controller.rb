@@ -27,10 +27,10 @@ class Admin::NodesController < Admin::ApplicationController
   end
 
   def create
-    terms = params[:node].delete :terms
+    vocabularies = params[:node].delete(:vocabularies) || {}
     @node = node_type.new params[:node]
 
-    @node.parse_terms terms
+    @node.parse_terms vocabularies
 
     respond_to do |format|
       if @node.save
@@ -48,10 +48,10 @@ class Admin::NodesController < Admin::ApplicationController
   end
 
   def update
-    terms = params[:node].delete :terms
+    vocabularies = params[:node].delete(:vocabularies) || {}
     @node = node_type.find params[:id]
 
-    @node.parse_terms terms
+    @node.parse_terms vocabularies
 
     respond_to do |format|
       if @node.update_attributes(params[:node])

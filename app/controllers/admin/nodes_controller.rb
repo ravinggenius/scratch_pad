@@ -87,6 +87,7 @@ class Admin::NodesController < Admin::ApplicationController
   def node_type
     @n ||= begin
       ne = NodeExtension[params[:node_type]]
+      # FIXME raises exception when selecting Node
       raise 'Invalid Node Extension' unless NodeExtension.enabled.include? ne
       ne::Model
     rescue

@@ -7,6 +7,7 @@
     %col.node-type
     %col.filter-group
     %col.vocabularies
+    %col.node-children
     %col.node-title
     %col.state
     %thead
@@ -15,11 +16,12 @@
         %th Type
         %th Filter Group
         %th Vocabularies
+        %th Children
         %th Title
         %th Status
     %tfoot
       %tr
-        %td{ :colspan => 6 }= link_to 'Add', new_admin_node_path
+        %td{ :colspan => 7 }= link_to 'Add', new_admin_node_path(:parent_id => @parent.try(:id))
     %tbody
       - @nodes.each do |node|
         %tr
@@ -30,5 +32,6 @@
           %td= node.class.title
           %td= node.filter_group.name
           %td= node.vocabularies.map { |vocabulary| vocabulary.name }.sort.join ', '
+          %td= link_to node.children.count, admin_nodes_path(:node_type => node.class.machine_name, :parent_id => node.id)
           %td.ancestors-0= node.title
           %td= node.state

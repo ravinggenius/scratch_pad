@@ -1,4 +1,5 @@
 = form_for [:admin, @node] do |form|
+  = hidden_field_tag :parent_id, @parent.try(:id)
   %fieldset.node
     %legend Common
     %ul

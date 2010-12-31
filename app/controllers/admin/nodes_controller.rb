@@ -1,6 +1,10 @@
 class Admin::NodesController < Admin::ApplicationController
+  before_filter do
+    @parent = Node.find params[:parent_id]
+  end
+
   def index
-    @nodes = Node.sort(:created_at).all
+    @nodes = @parent ? @parent.children : Node.sort(:created_at).all
 
     respond_to do |format|
       format.html
@@ -34,6 +38,10 @@ class Admin::NodesController < Admin::ApplicationController
 
     respond_to do |format|
       if @node.save
+        if @parent
+          @parent.children << @node
+          @parent.save
+        end
         format.html { redirect_to(admin_nodes_url, :notice => "#{node_type.name} was successfully created.") }
         format.xml { render :xml => @node, :status => :created, :location => node_url(@node) }
       else
@@ -55,6 +63,10 @@ class Admin::NodesController < Admin::ApplicationController
 
     respond_to do |format|
       if @node.update_attributes(params[:node])
+        if @parent
+          @parent.children << @node
+          @parent.save
+        end
         format.html { redirect_to(admin_nodes_url, :notice => "#{node_type.name} was successfully updated.") }
         format.xml { head :ok }
       else

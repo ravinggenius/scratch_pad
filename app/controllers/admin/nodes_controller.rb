@@ -90,7 +90,8 @@ class Admin::NodesController < Admin::ApplicationController
   end
 
   def new_node_type
-    render :partial => 'node_extension_fieldset', :locals => { :node => node_type.new }
+    set_vocabulary_ivars
+    render :partial => 'node_extension_fieldsets', :locals => { :node => node_type.new }
   end
 
   private
@@ -112,8 +113,12 @@ class Admin::NodesController < Admin::ApplicationController
 
     @filter_groups = FilterGroup.all.sort_by &:name
 
+    set_vocabulary_ivars
+  end
+
+  def set_vocabulary_ivars
     vocabularies = Vocabulary.all
-    @required_vocabularies = vocabularies.select { |v| v.node_types_required.include? NodeExtension[@node.class.title] }
-    @optional_vocabularies = vocabularies.select { |v| v.node_types_optional.include? NodeExtension[@node.class.title] } - @required_vocabularies
+    @required_vocabularies = vocabularies.select { |v| v.node_types_required.include? NodeExtension[node_type.title] }
+    @optional_vocabularies = vocabularies.select { |v| v.node_types_optional.include? NodeExtension[node_type.title] } - @required_vocabularies
   end
 end

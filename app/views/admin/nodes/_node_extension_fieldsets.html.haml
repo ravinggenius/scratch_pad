@@ -1,0 +1,8 @@
+= render 'terms', :node => node, :vocabularies => @required_vocabularies, :optional_required => :required
+= render 'terms', :node => node, :vocabularies => @optional_vocabularies, :optional_required => :optional
+
+- unless node.class.machine_name == 'node'
+  = fields_for :node, node do |form|
+    %fieldset.node{ :class => node.class.machine_name }
+      %legend= node.class.title
+      = show_node node, :form, :form => form

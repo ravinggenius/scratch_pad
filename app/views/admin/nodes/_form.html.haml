@@ -12,10 +12,6 @@
       %div.field
         = label_tag :node_type, 'Node Type'
         = select_tag :node_type, options_for_select(@node_types, @selected_node_type)
-    = render 'terms', :node => @node, :vocabularies => @required_vocabularies, :optional_required => :required
-    = render 'terms', :node => @node, :vocabularies => @optional_vocabularies, :optional_required => :optional
-    %div#node_extension_fields
-      - unless @node.class.machine_name == 'node'
-        = render :partial => 'node_extension_fieldset', :locals => { :node => @node }
+    %fieldset#node_extension_fields.node= render 'node_extension_fieldsets', :node => @node
 
   %div.field= submit_tag 'Commit'

@@ -1,10 +1,8 @@
-= form_for [:admin, @setting] do |f|
+= form_for [:admin, @setting] do |form|
   %fieldset.setting
     %legend= @setting.name
-    %ul
-      %li
-        = f.label :value
-        = f.text_field :value
-    %ul
-      %li= f.submit 'Commit'
-      %li= link_to 'Cancel', admin_settings_path
+    %div.field
+      = form.label :value
+      = form.text_field :value
+
+  %div.field= submit_tag 'Commit'

@@ -2,12 +2,11 @@
   - #fields_for :node, [:admin, node] do |form|
   %fieldset
     %legend #{optional_required.to_s.titleize} Vocabularies
-    %ul
-      - vocabularies.each do |vocabulary|
-        %li
-          - id = [:node, :vocabularies, optional_required, vocabulary.name.underscore]
-          = label_tag id.join('_'), vocabulary.name
-          %select{ :id => id, :name => "node[vocabularies][#{vocabulary.name.underscore}][]", :multiple => vocabulary.is_multiselectable }
-            - options = vocabulary.terms.map { |term| [term.name, term.id] }
-            - selected = node.terms.map &:id
-            = options_for_select options, selected
+    - vocabularies.each do |vocabulary|
+      %div.field
+        - id = [:node, :vocabularies, optional_required, vocabulary.name.underscore]
+        = label_tag id.join('_'), vocabulary.name
+        %select{ :id => id, :name => "node[vocabularies][#{vocabulary.name.underscore}][]", :multiple => vocabulary.is_multiselectable }
+          - options = vocabulary.terms.map { |term| [term.name, term.id] }
+          - selected = node.terms.map &:id
+          = options_for_select options, selected

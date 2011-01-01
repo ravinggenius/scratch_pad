@@ -6,10 +6,9 @@
     - @addons.each do |addon_type, addons|
       %fieldset.addon
         %legend= addon_type.name.pluralize
-        %ul
-          - addons.sort.each do |addon|
-            %li
-              = check_box_tag "#{addon_type.machine_name}[#{addon.machine_name}]", 1, addon.enabled?
-              = label_tag "#{addon_type.machine_name}_#{addon.machine_name}", "#{addon.name} - addon.description"
-    %ul
-      %li= submit_tag 'Commit'
+        - addons.sort.each do |addon|
+          %div.field
+            = check_box_tag "#{addon_type.machine_name}[#{addon.machine_name}]", 1, addon.enabled?
+            = label_tag "#{addon_type.machine_name}_#{addon.machine_name}", "#{addon.name} - addon.description"
+
+    %div.field= submit_tag 'Commit'

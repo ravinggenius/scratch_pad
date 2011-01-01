@@ -1,19 +1,17 @@
-= form_for [:admin, @user] do |f|
+= form_for [:admin, @user] do |form|
   %fieldset.user
     %legend User
-    %ul
-      %li
-        = f.label :username, 'Username'
-        = f.text_field :username
-      %li
-        = f.label :email, 'Email'
-        = f.email_field :email
-      %li
-        = f.label :password, 'Password'
-        = f.password_field :password, :value => nil
-      %li
-        = f.label :password_confirmation, 'Password Confirmation'
-        = f.password_field :password_confirmation, :value => nil
-  %ul.actions
-    %li= f.submit 'Save'
-    %li= link_to 'Cancel', admin_users_path
+    %div.field
+      = form.label :username, 'Username'
+      = form.text_field :username
+    %div.field
+      = form.label :email, 'Email'
+      = form.email_field :email
+    %div.field
+      = form.label :password, 'Password'
+      = form.password_field :password, :value => nil
+    %div.field
+      = form.label :password_confirmation, 'Password Confirmation'
+      = form.password_field :password_confirmation, :value => nil
+
+  %div.field= submit_tag 'Save'

@@ -1,7 +1,6 @@
-%ul
-  %li
-    = form.check_box :has_header_row
-    = form.label :has_header_row, 'The first row is headers'
-  %li
-    = form.label :data, 'Cells'
-    = form.text_area :data
+%div.field
+  = form.check_box :has_header_row
+  = form.label :has_header_row, 'The first row is headers'
+%div.field
+  = form.label :data, 'Cells'
+  = form.text_area :data

@@ -6,20 +6,18 @@
     - @layout.regions.each do |region|
       %fieldset
         %legend= "#{region.name} region"
-        %ul
-          - region.widgets.each_with_index do |widget, count|
-            %li
-              - id = [:regions, region.name, count]
-              = label_tag id.join('_'), "#{(count + 1).ordinalize} widget"
-              %select{ :id => id, :name => "regions[#{region.name}][]" }
-                = options_from_collection_for_select @widgets, :machine_name, :name, :include_blank => true, :selected => widget.machine_name
+        - region.widgets.each_with_index do |widget, count|
+          %div.field
+            - id = [:regions, region.name, count]
+            = label_tag id.join('_'), "#{(count + 1).ordinalize} widget"
+            %select{ :id => id, :name => "regions[#{region.name}][]" }
+              = options_from_collection_for_select @widgets, :machine_name, :name, :include_blank => true, :selected => widget.machine_name
 
-          - region.widgets.count.upto(@widgets.count - 1) do |count|
-            %li
-              - id = [:regions, region.name, count]
-              = label_tag id.join('_'), "#{(count + 1).ordinalize} widget"
-              %select{ :id => id, :name => "regions[#{region.name}][]" }
-                = options_from_collection_for_select @widgets, :machine_name, :name, :include_blank => true
-    %ul
-      %li= submit_tag 'Commit'
-      %li= link_to 'Cancel', admin_themes_path
+        - region.widgets.count.upto(@widgets.count - 1) do |count|
+          %div.field
+            - id = [:regions, region.name, count]
+            = label_tag id.join('_'), "#{(count + 1).ordinalize} widget"
+            %select{ :id => id, :name => "regions[#{region.name}][]" }
+              = options_from_collection_for_select @widgets, :machine_name, :name, :include_blank => true
+
+    %div.field= submit_tag 'Commit'

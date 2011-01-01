@@ -2,22 +2,20 @@
   = hidden_field_tag :parent_id, @parent.try(:id)
   %fieldset.node
     %legend Common
-    %ul
-      %li
-        = form.label :title, 'Title'
-        = form.text_field :title
-      %li
-        = form.label :filter_group_id, 'Filter Group'
-        = form.collection_select :filter_group_id, @filter_groups, :id, :name, :selected => @node.filter_group.id
-      - if @node.new?
-        %li
-          = label_tag :node_type, 'Node Type'
-          = select_tag :node_type, options_for_select(@node_types, @selected_node_type)
-      %li= render 'terms', :node => @node, :vocabularies => @required_vocabularies, :optional_required => :required
-      %li= render 'terms', :node => @node, :vocabularies => @optional_vocabularies, :optional_required => :optional
+    %div.field
+      = form.label :title, 'Title'
+      = form.text_field :title
+    %div.field
+      = form.label :filter_group_id, 'Filter Group'
+      = form.collection_select :filter_group_id, @filter_groups, :id, :name, :selected => @node.filter_group.id
+    - if @node.new?
+      %div.field
+        = label_tag :node_type, 'Node Type'
+        = select_tag :node_type, options_for_select(@node_types, @selected_node_type)
+    = render 'terms', :node => @node, :vocabularies => @required_vocabularies, :optional_required => :required
+    = render 'terms', :node => @node, :vocabularies => @optional_vocabularies, :optional_required => :optional
     %div#node_extension_fields
       - unless @node.class.machine_name == 'node'
         = render :partial => 'node_extension_fieldset', :locals => { :node => @node }
-    %ul
-      %li= submit_tag 'Commit'
-      %li= link_to 'Cancel', admin_nodes_path
+
+  %div.field= submit_tag 'Commit'

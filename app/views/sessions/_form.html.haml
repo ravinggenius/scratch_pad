@@ -1,12 +1,11 @@
-= form_for @user, :as => :user, :url => {:controller => 'sessions', :action => 'create'} do |f|
+= form_for @user, :as => :user, :url => {:controller => 'sessions', :action => 'create'} do |form|
+  %fieldset.sessions
+    %legend Sign In
+    %div.field
+      = form.label :username, 'Username'
+      = form.text_field :username
+    %div.field
+      = form.label :password, 'Password'
+      = form.password_field :password, :value => nil
 
-  %ul
-    %li
-      = f.label :username, 'Username'
-      = f.text_field :username
-    %li
-      = f.label :password, 'Password'
-      = f.password_field :password, :value => nil
-
-  .actions
-    = f.submit 'sign in'
+  %div.field= submit_tag 'Submit'

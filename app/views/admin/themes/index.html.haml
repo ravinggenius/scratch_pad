@@ -6,18 +6,15 @@
     = form_tag :action => :update, :scope => scope do
       %fieldset.addon
         %legend= scope.to_s.titleize
-        %ul
-          - themes.sort.each do |theme|
-            %li
-              = radio_button_tag scope, theme.machine_name, (@current_theme[scope] == theme)
-              = label_tag "#{scope}_#{theme.machine_name}", "#{theme.name} - theme.description"
-              - scope_url = "#{scope == :frontend ? :root : :admin_root}_url"
-              = link_to 'Preview', self.send(scope_url, :force_theme => theme.machine_name), :class => :preview
-              %ul
-                - theme.layouts.each do |layout|
-                  %li
-                    = layout.name
-                    = link_to 'Edit Widgets', edit_admin_theme_layout_url(theme.machine_name, layout)
+        - themes.sort.each do |theme|
+          %div.field
+            = radio_button_tag scope, theme.machine_name, (@current_theme[scope] == theme)
+            = label_tag "#{scope}_#{theme.machine_name}", "#{theme.name} - theme.description"
+            - scope_url = "#{scope == :frontend ? :root : :admin_root}_url"
+            = link_to 'Preview', self.send(scope_url, :force_theme => theme.machine_name), :class => :preview
+            - theme.layouts.each do |layout|
+              %div.field
+                = layout.name
+                = link_to 'Edit Widgets', edit_admin_theme_layout_url(theme.machine_name, layout)
 
-      %ul
-        %li= submit_tag 'Commit'
+      %div.field= submit_tag 'Commit'

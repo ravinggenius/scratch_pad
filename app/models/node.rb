@@ -69,7 +69,7 @@ class Node
 
   # TODO move to before_save &block
   def set_children_ids
-    self.children_ids = (@children || []).map &:id
+    self.children_ids = children.map &:id
   end
 
   protected :children_ids, :children_ids=

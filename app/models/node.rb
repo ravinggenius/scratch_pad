@@ -20,6 +20,8 @@ class Node
 
   before_save :set_children_ids
 
+  validate :ensure_not_ancestor_of_self
+
   def children
     @children ||= (self.children_ids || []).map { |child_id| Node.find child_id }
   end
@@ -70,6 +72,15 @@ class Node
   alias :editor= :updater=
 
   private
+
+  # TODO factor out exception handling
+  def ensure_not_ancestor_of_self
+    begin
+      descendants
+    rescue SystemStackError => e
+      errors.add :parent, 'may not be its own descendant'
+    end
+  end
 
   # TODO move to before_save &block
   def set_children_ids

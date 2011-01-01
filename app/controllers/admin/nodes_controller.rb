@@ -14,9 +14,8 @@ class Admin::NodesController < Admin::ApplicationController
 
   def new
     @node = node_type.new
+    @selected_node_type = node_type.machine_name
     set_fieldset_ivars
-    ne = NodeExtension[params[:node_type]]
-    @selected_node_type = NodeExtension.enabled.include?(ne) ? ne.machine_name : @node.class.machine_name
 
     respond_to do |format|
       format.html { render 'shared/edit_new' }
@@ -97,14 +96,11 @@ class Admin::NodesController < Admin::ApplicationController
   private
 
   def node_type
-    @n ||= begin
-      ne = NodeExtension[params[:node_type]]
-      # FIXME raises exception when selecting Node
-      raise 'Invalid Node Extension' unless NodeExtension.enabled.include? ne
-      ne::Model
-    rescue
-      Node
-    end
+    @nt ||= lambda do |selected|
+      return Node if selected == 'node'
+      NodeExtension.enabled.map(&:machine_name).include?(selected) ? NodeExtension[selected]::Model : Node
+    end.call params[:node_type]
+    @nt
   end
 
   def set_fieldset_ivars

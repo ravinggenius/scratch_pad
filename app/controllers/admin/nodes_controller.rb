@@ -30,10 +30,8 @@ class Admin::NodesController < Admin::ApplicationController
   end
 
   def create
-    vocabularies = params[:node].delete(:vocabularies) || {}
     @node = node_type.new params[:node]
-
-    @node.parse_terms vocabularies
+    @node.parse_terms (params[:vocabularies] || {})
 
     respond_to do |format|
       if @node.save
@@ -55,10 +53,8 @@ class Admin::NodesController < Admin::ApplicationController
   end
 
   def update
-    vocabularies = params[:node].delete(:vocabularies) || {}
     @node = node_type.find params[:id]
-
-    @node.parse_terms vocabularies
+    @node.parse_terms (params[:vocabularies] || {})
 
     respond_to do |format|
       if @node.update_attributes(params[:node])
@@ -118,7 +114,9 @@ class Admin::NodesController < Admin::ApplicationController
 
   def set_vocabulary_ivars
     vocabularies = Vocabulary.all
-    @required_vocabularies = vocabularies.select { |v| v.node_types_required.include? NodeExtension[node_type.title] }
-    @optional_vocabularies = vocabularies.select { |v| v.node_types_optional.include? NodeExtension[node_type.title] } - @required_vocabularies
+
+    @grouped_vocabularies = {}
+    @grouped_vocabularies[:required] = vocabularies.select { |v| v.node_types_required.include? NodeExtension[node_type.title] }
+    @grouped_vocabularies[:optional] = vocabularies.select { |v| v.node_types_optional.include? NodeExtension[node_type.title] } - @grouped_vocabularies[:required]
   end
 end

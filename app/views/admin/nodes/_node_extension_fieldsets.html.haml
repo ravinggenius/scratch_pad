@@ -1,5 +1,15 @@
-= render 'terms', :node => node, :vocabularies => @required_vocabularies, :optional_required => :required
-= render 'terms', :node => node, :vocabularies => @optional_vocabularies, :optional_required => :optional
+- @grouped_vocabularies.each do |optional_required, vocabularies|
+  - unless vocabularies.blank?
+    %fieldset
+      %legend #{optional_required.to_s.titleize} Vocabularies
+      - vocabularies.each do |vocabulary|
+        %div.field
+          - id = [:vocabularies, vocabulary.name.underscore]
+          = label_tag id.join('_'), vocabulary.name
+          %select{ :id => id, :name => "vocabularies[#{vocabulary.name.underscore}][]", :multiple => vocabulary.is_multiselectable }
+            - options = vocabulary.terms.map { |term| [term.name, term.id] }
+            - selected = node.terms.map &:id
+            = options_for_select options, selected
 
 - unless node.class.machine_name == 'node'
   = fields_for :node, node do |form|

@@ -3,6 +3,7 @@
     %fieldset
       %legend #{optional_required.to_s.titleize} Vocabularies
       - vocabularies.each do |vocabulary|
+        - # TODO display each vocabulary according to options
         %div.field
           - id = [:vocabularies, vocabulary.name.underscore]
           = label_tag id.join('_'), vocabulary.name

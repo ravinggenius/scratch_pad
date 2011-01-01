@@ -98,11 +98,10 @@ $(document).ready(function () {
         node_type: $(this).find('option:selected').val()
       }),
       success: function (data, textStatus, XMLHttpRequest) {
-        $('div#node_extension_fields').html(data);
+        $('#node_extension_fields').html(data);
       },
       error: function (XMLHttpRequest, textStatus, errorThrown) {
         scratchPad.helpers.flash.warning.add('Invalid node type selected.');
-        $('div#node_extension_fields').html('');
       }
     });
   });

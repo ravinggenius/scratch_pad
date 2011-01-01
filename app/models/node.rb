@@ -24,6 +24,10 @@ class Node
     @children ||= (self.children_ids || []).map { |child_id| Node.find child_id }
   end
 
+  def descendants
+    (children + children.map(&:descendants)).reject &:blank?
+  end
+
   def parse_terms(vocabularies)
     terms = []
     vocabularies.each do |vocabulary, term_ids|

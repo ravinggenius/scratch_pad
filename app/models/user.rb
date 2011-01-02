@@ -9,7 +9,7 @@ class User
 
   attr_writer :password_confirmation
 
-  key :email, String, :required => true
+  key :email, String, :required => true, :unique => true
   key :name, String, :required => true
   key :username, String, :required => true, :unique => true
   key :hashword, String

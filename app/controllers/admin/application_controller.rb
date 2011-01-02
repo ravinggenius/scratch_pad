@@ -7,6 +7,7 @@ class Admin::ApplicationController < ApplicationController
     set_theme_ivars :backend
   end
 
+  # TODO merge with super
   before_filter do
     @system_menu = [
       MenuItem.new('Dashboard', admin_root_path),

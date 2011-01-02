@@ -22,6 +22,7 @@ class ApplicationController < ActionController::Base
     set_theme_ivars :frontend
   end
 
+  # TODO add permissions for each item
   before_filter do
     @system_menu = []
     @system_menu << if current_user == User.anonymous

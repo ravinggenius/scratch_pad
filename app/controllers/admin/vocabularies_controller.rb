@@ -19,7 +19,7 @@ class Admin::VocabulariesController < Admin::ApplicationController
   end
 
   def edit
-    @vocabulary = Vocabulary.find(params[:id])
+    @vocabulary = Vocabulary.from_param(params[:id])
     set_fieldset_ivars
     render 'shared/edit_new'
   end
@@ -43,7 +43,7 @@ class Admin::VocabulariesController < Admin::ApplicationController
   end
 
   def update
-    @vocabulary = Vocabulary.find(params[:id])
+    @vocabulary = Vocabulary.from_param(params[:id])
 
     respond_to do |format|
       if @vocabulary.update_attributes(params[:vocabulary])
@@ -61,7 +61,7 @@ class Admin::VocabulariesController < Admin::ApplicationController
   end
 
   def destroy
-    @vocabulary = Vocabulary.find(params[:id])
+    @vocabulary = Vocabulary.from_param(params[:id])
     @vocabulary.destroy
 
     respond_to do |format|

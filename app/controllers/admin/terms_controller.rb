@@ -1,6 +1,6 @@
 class Admin::TermsController < Admin::ApplicationController
   before_filter do
-    @vocabulary = Vocabulary.find params[:vocabulary_id]
+    @vocabulary = Vocabulary.from_param params[:vocabulary_id]
   end
 
   def index

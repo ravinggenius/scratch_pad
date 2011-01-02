@@ -11,13 +11,12 @@ class User
 
   key :email, String, :required => true
   key :name, String, :required => true
-  key :username, String, :required => true
+  key :username, String, :required => true, :unique => true
   key :hashword, String
 
   habtm :users, :groups
 
   validates_confirmation_of :password
-  validates_uniqueness_of :username
   validate :ensure_hashword_is_set
   validate :ensure_password_is_secure
 

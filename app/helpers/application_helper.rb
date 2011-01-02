@@ -41,7 +41,13 @@ module ApplicationHelper
   end
 
   def show_node(node, part, locals = {})
-    show_addon NodeExtension[node.class.machine_name], part, locals.merge(:node => node)
+    locals.merge! :node => node
+
+    if node.class.machine_name == 'node'
+      render :file => "nodes/#{part}", :locals => locals
+    else
+      show_addon NodeExtension[node.class.machine_name], part, locals
+    end
   end
 
   def show_node_children(children)

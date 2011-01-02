@@ -61,7 +61,40 @@ module ApplicationHelper
   end
 
   def show_node_children(children)
-    render :partial => 'nodes/article', :collection => children, :as => :node, :locals => { :showing_part => :full }
+    reply = ''
+    children.each do |child|
+      reply << wrap_node(child, :showing_part => :full)
+    end
+    reply.html_safe
+  end
+
+  def wrap_node(node, wrapper = :article, options = {})
+    if wrapper.is_a? Hash
+      options = wrapper
+      wrapper = options[:wrapper] || :article
+    end
+
+    is_featured = options[:is_featured] || false
+    is_single = options[:is_single] || false
+    showing_part = options[:showing_part] || ((is_featured || is_single) ? :full : :preview)
+
+    wrapper_classes = [
+      :node,
+      node.class.machine_name,
+      showing_part,
+      (:featured if is_featured)
+    ].compact.map(&:to_s).map(&:dasherize)
+
+    attrs = {
+      :id => "node_#{node.id}",
+      :class => wrapper_classes
+    }
+
+    [
+      "<#{wrapper} #{hash_to_attrs(attrs)}>",
+      show_node(node, showing_part),
+      "</#{wrapper}>"
+    ].map { |snip| snip.present? ? snip : nil }.compact.join "\n"
   end
 
   def show_region(region)

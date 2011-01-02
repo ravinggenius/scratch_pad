@@ -2,13 +2,11 @@ class Group
   include MongoMapper::Document
   include Relationship
 
-  key :access_code, Integer, :required => true
+  key :access_code, Integer, :required => true, :unique => true
   key :code, String, :required => true
-  key :name, String, :required => true
+  key :name, String, :required => true, :unique => true
 
   habtm :groups, :users
-
-  validates_uniqueness_of :access_code
 
   before_save :validate_access_code
 

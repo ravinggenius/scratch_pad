@@ -5,6 +5,16 @@ module ApplicationHelper
     { :id => page_id, :class => page_class }
   end
 
+  def hash_to_attrs(hash)
+    #Haml::Compiler.build_attributes false, '"', :once, hash
+
+    spaced_out = [:class]
+    hash.map do |attribute, value|
+      value = value.join ' ' if spaced_out.include?(attribute) && value.is_a?(Array)
+      "#{attribute}=\"#{value}\""
+    end.join ' '
+  end
+
   # http://www.leftrightdesigns.com/library/jquery/nospam/nospam.phps
   # contact//example/com
   #
@@ -61,7 +71,7 @@ module ApplicationHelper
       name = region.name.underscore
 
       if region.wrapper
-        region_start = "<#{region.wrapper} id=\"#{name}\">"
+        region_start = "<#{region.wrapper} #{hash_to_attrs(:id => name)}>"
         region_end = "</#{region.wrapper}><!-- ##{name} -->"
       else
         region_start = "<!-- #{name} start -->"
@@ -87,13 +97,12 @@ module ApplicationHelper
   end
 
   def classy_html_tags(attributes = {}, should_compress = :production, &content)
-    html_attributes = attributes.map { |attribute, value| "#{attribute}=\"#{value}\"" }.join ' '
     html_open = <<-HTML
-<!--[if lt IE 7]>              <html #{html_attributes} class="no-js ie ie6 lte9 lte8 lte7 lte6"> <![endif]-->
-<!--[if IE 7]>                 <html #{html_attributes} class="no-js ie ie7 lte9 lte8 lte7">      <![endif]-->
-<!--[if IE 8]>                 <html #{html_attributes} class="no-js ie ie8 lte9 lte8">           <![endif]-->
-<!--[if IE 9]>                 <html #{html_attributes} class="no-js ie ie9 lte9">                <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html #{html_attributes} class="no-js">                        <!--<![endif]-->
+<!--[if lt IE 7]>              <html #{hash_to_attrs attributes.merge(:class => %w[no-js ie ie6 lte9 lte8 lte7 lte6])}> <![endif]-->
+<!--[if IE 7]>                 <html #{hash_to_attrs attributes.merge(:class => %w[no-js ie ie7 lte9 lte8 lte7])}>      <![endif]-->
+<!--[if IE 8]>                 <html #{hash_to_attrs attributes.merge(:class => %w[no-js ie ie8 lte9 lte8])}>           <![endif]-->
+<!--[if IE 9]>                 <html #{hash_to_attrs attributes.merge(:class => %w[no-js ie ie9 lte9])}>                <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html #{hash_to_attrs attributes.merge(:class => %w[no-js])}>                        <!--<![endif]-->
     HTML
     if should_compress
       html_open.gsub! /\s+/, ' ' unless should_compress.is_a?(Symbol) && (should_compress != Rails.env.to_sym)

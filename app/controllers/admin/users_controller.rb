@@ -9,7 +9,7 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.from_param(params[:id])
 
     respond_to do |format|
       format.html
@@ -27,7 +27,7 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+    @user = User.from_param(params[:id])
     render 'shared/edit_new'
   end
 
@@ -49,7 +49,7 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
+    @user = User.from_param(params[:id])
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
@@ -66,7 +66,7 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id])
+    @user = User.from_param(params[:id])
     @user.destroy
 
     respond_to do |format|

@@ -33,6 +33,14 @@ class User
     self.hashword = @hash = Password.create(new_password)
   end
 
+  def to_param
+    username
+  end
+
+  def self.from_param(username)
+    first :username => username
+  end
+
   def self.new_password(length = 12)
     pool = []
 

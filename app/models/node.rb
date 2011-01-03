@@ -53,7 +53,7 @@ class Node
   def self.from_path(path)
     return nil if path.blank?
     reply = first :path => path
-    reply = find path unless reply.present?
+    reply = find path rescue nil unless reply.present?
     reply
   end
 

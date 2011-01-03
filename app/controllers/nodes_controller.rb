@@ -13,6 +13,8 @@ class NodesController < ApplicationController
   def show
     @node = Node.from_path(params[:path])
 
+    # TODO handle 404 gracefully
+
     if @node && @node.path.present? && (request.path != "/#{@node.path}")
       return redirect_to node_url(@node.to_path), :status => :moved_permanently
     end

@@ -7,6 +7,7 @@ class Node
   include MongoMapper::Document
   include Relationship
 
+  key :path, String, :unique => true
   key :filter_group_id, BSON::ObjectId, :required => true
   key :children_ids, Array, :typecast => 'BSON::ObjectId'
   key :state, String, :required => true, :default => :draft # TODO formalize states
@@ -38,8 +39,22 @@ class Node
     self.terms = terms.flatten
   end
 
+  # rails router dsl uses to_param to generate urls
+  # overriding to_param would not allow slashes in path
+  # therefore, to_param is left alone
+  def to_path
+    path.to_s.blank? ? _id.to_s : path
+  end
+
   def vocabularies
     terms.map { |term| term.vocabulary }.uniq
+  end
+
+  def self.from_path(path)
+    return nil if path.nil? || path.blank?
+    reply = first :path => path
+    reply = find path unless reply.present?
+    reply
   end
 
   def self.title

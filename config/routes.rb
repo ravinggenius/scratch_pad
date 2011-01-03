@@ -1,5 +1,5 @@
 ScratchPad::Application.routes.draw do
-  resources :nodes, :only => [:index, :show]
+  resources :nodes, :only => :index
   resources :sessions, :only => [:new, :create, :destroy]
   resources :users, :only => [:index, :show]
 
@@ -27,6 +27,8 @@ ScratchPad::Application.routes.draw do
     get '/:theme/scripts(.:format)', :to => :scripts, :as => :scripts, :defaults => { :format => :js }
     get '/:theme/styles(.:format)', :to => :styles, :as => :styles, :defaults => { :format => :css }
   end
+
+  get '/*path', :to => 'nodes#show', :as => :node
 
   root :to => 'nodes#index'
 end

@@ -11,7 +11,7 @@ class NodesController < ApplicationController
   end
 
   def show
-    @node = Node.find(params[:id])
+    @node = Node.from_path(params[:path])
 
     respond_to do |format|
       format.html

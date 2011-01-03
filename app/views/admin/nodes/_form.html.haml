@@ -6,6 +6,9 @@
       = form.label :title, 'Title'
       = form.text_field :title
     %div.field
+      = form.label :path, 'Path'
+      = form.text_field :path
+    %div.field
       = form.label :filter_group_id, 'Filter Group'
       = form.collection_select :filter_group_id, @filter_groups, :id, :name, :selected => @node.filter_group.id
     - if @node.new?

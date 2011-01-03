@@ -1,7 +1,7 @@
 class Admin::LayoutsController < Admin::ApplicationController
   def edit
     @theme = Theme[params[:theme_id]]
-    @layout = @theme.layout params[:layout]
+    @layout = @theme.layout params[:id]
     @widgets = Widget.enabled.sort
 
     respond_to do |format|
@@ -12,7 +12,7 @@ class Admin::LayoutsController < Admin::ApplicationController
 
   def update
     @theme = Theme[params[:theme_id]]
-    @layout = @theme.layout params[:layout]
+    @layout = @theme.layout params[:id]
 
     params[:regions].each do |region_name, widget_names|
       region = @layout.region region_name

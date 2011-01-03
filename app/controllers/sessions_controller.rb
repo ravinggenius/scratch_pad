@@ -10,6 +10,7 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.first :username => params[:user][:username]
+    @user = User.first :email => params[:user][:username] if @user.blank?
 
     respond_to do |format|
       if @user && !@user.is_locked? && (@user.password == params[:user][:password])

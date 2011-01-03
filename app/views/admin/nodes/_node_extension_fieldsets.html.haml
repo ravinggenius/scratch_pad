@@ -13,7 +13,6 @@
             = options_for_select options, selected
 
 - unless node.class.machine_name == 'node'
-  = fields_for :node, node do |form|
-    %fieldset.node{ :class => node.class.machine_name }
-      %legend= node.class.title
-      = show_node node, :form, :form => form
+  %fieldset.node{ :class => node.class.machine_name }
+    %legend= node.class.title
+    = show_node node, :form, :form => form

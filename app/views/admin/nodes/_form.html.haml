@@ -12,6 +12,6 @@
       %div.field
         = label_tag :node_type, 'Node Type'
         = select_tag :node_type, options_for_select(@node_types, @selected_node_type)
-    %fieldset#node_extension_fields.node= render 'node_extension_fieldsets', :node => @node
+    %fieldset#node_extension_fields.node= render 'node_extension_fieldsets', :form => form, :node => @node
 
   %div.field= submit_tag 'Commit'

@@ -32,6 +32,8 @@
           %td= node.class.title
           %td= node.filter_group.name
           %td= node.vocabularies.map { |vocabulary| vocabulary.name }.sort.join ', '
-          %td= link_to node.children.count, admin_nodes_path(:node_type => node.class.machine_name, :parent_id => node.id)
+          %td
+            = link_to node.children.count, admin_nodes_path(:node_type => node.class.machine_name, :parent_id => node.id)
+            = link_to 'Add', new_admin_node_path(:parent_id => node.id)
           %td= node.title
           %td= node.state

@@ -7,7 +7,7 @@ class Node
   include MongoMapper::Document
   include Relationship
 
-  key :path, String, :unique => true
+  key :path, String, :unique => true # FIXME requires unique path when none is given
   key :filter_group_id, BSON::ObjectId, :required => true
   key :children_ids, Array, :typecast => 'BSON::ObjectId'
   key :state, String, :required => true, :default => :draft # TODO formalize states

@@ -22,7 +22,7 @@
           %td
             %span.view= link_to 'View', [:admin, user]
             %span.edit= link_to 'Edit', edit_admin_user_path(user)
-            %span.destroy= link_to 'Delete', [:admin, user], :confirm => 'Are you sure?', :method => :delete # FIXME clicking this simply GETs the resource
+            %span.destroy= link_to 'Delete', [:admin, user], :confirm => 'Are you sure?', :method => :delete
           %td= user.groups.map { |group| group.name }.sort.join ', '
           %td= user.username
           %td= mail_to user.email

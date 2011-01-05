@@ -28,7 +28,7 @@
           %td
             %span.view= link_to 'View', human_node_path(node.to_path)
             %span.edit= link_to 'Edit', edit_admin_node_path(node)
-            %span.destroy= link_to 'Delete', [:admin, node], :confirm => 'Are you sure?', :method => :delete # FIXME clicking this simply GETs the resource
+            %span.destroy= link_to 'Delete', [:admin, node], :confirm => 'Are you sure?', :method => :delete
           %td= node.class.title
           %td= node.filter_group.name
           %td= node.vocabularies.map { |vocabulary| vocabulary.name }.sort.join ', '

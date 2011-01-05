@@ -19,7 +19,7 @@
         %tr
           %td
             %span.edit= link_to 'Edit', edit_admin_filter_group_path(filter_group)
-            %span.destroy= link_to 'Delete', [:admin, filter_group], :confirm => 'Are you sure?', :method => :delete # FIXME clicking this simply GETs the resource
+            %span.destroy= link_to 'Delete', [:admin, filter_group], :confirm => 'Are you sure?', :method => :delete
           %td= filter_group.name
           %td
             %ul

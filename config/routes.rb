@@ -1,6 +1,8 @@
 ScratchPad::Application.routes.draw do
+  get '/login', :to => 'sessions#new', :as => :new_session
+
   resources :nodes, :only => [:index, :show]
-  resources :sessions, :only => [:new, :create, :destroy]
+  resources :sessions, :only => [:create, :destroy]
   resources :users, :only => [:index, :show]
 
   namespace :admin do

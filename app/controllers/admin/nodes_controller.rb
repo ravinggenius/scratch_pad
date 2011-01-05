@@ -1,4 +1,6 @@
 class Admin::NodesController < Admin::ApplicationController
+  respond_to :html, :json
+
   before_filter do
     @parent = Node.find params[:parent_id]
   end
@@ -6,10 +8,7 @@ class Admin::NodesController < Admin::ApplicationController
   def index
     @nodes = @parent ? @parent.children : Node.sort(:created_at).all
 
-    respond_to do |format|
-      format.html
-      format.xml { render :xml => @nodes }
-    end
+    respond_with @nodes
   end
 
   def new
@@ -17,9 +16,8 @@ class Admin::NodesController < Admin::ApplicationController
     @selected_node_type = node_type.machine_name
     set_fieldset_ivars
 
-    respond_to do |format|
+    respond_with do |format|
       format.html { render 'shared/edit_new' }
-      format.xml { render :xml => @node }
     end
   end
 
@@ -79,9 +77,8 @@ class Admin::NodesController < Admin::ApplicationController
     @node = Node.find params[:id]
     @node.destroy
 
-    respond_to do |format|
+    respond_with @node do |format|
       format.html { redirect_to admin_nodes_url }
-      format.xml { head :ok }
     end
   end
 

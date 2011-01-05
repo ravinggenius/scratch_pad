@@ -4,8 +4,8 @@
   * nodes may be nested in other nodes
   * some nodes are meant to be child nodes, for instance table. others are meant to be a collection of nodes, for instance post
 * multiple different layouts à la http://www.primarycss.com/, but without presentations classes in the markup
-  * themes should specify which layout(s) they support
-  * each layout may have an arbitrary number of main regions
+  * themes specify arbitray layouts
+  * each layout has an arbitrary number of (top-level) regions
     * each region will be exposed to the site admin to populate with content (either widgets and nodes)
 
 ## Inspiration

@@ -9,7 +9,7 @@ ScratchPad::Application.routes.draw do
     resources :addons, :only => :index
     resources :filter_groups, :except => :show
     resources :nodes, :except => :show
-    resources :settings
+    resources :settings, :except => [:new, :create, :destroy]
     resources :themes, :only => :index do
       resources :layouts, :only => [:edit, :update]
     end

@@ -1,3 +1,5 @@
+require 'sass_builder'
+
 class AssetsController < ApplicationController
   layout nil
 
@@ -26,13 +28,27 @@ class AssetsController < ApplicationController
   # @reference http://groups.google.com/group/haml/browse_thread/thread/e459fbdfa5a6d467/f9ab5f5df3fe77de
   def styles
     format = format(:css)
-    render :content_type => (format == :css ? 'text/css' : 'text/plain'), :text => gather_styles!(format)
+    cache_key = [:core, :styles, theme.machine_name, format]
+
+    if Rails.env.to_sym == :production
+      return Cache[cache_key].value unless Cache[cache_key].expired?
+    end
+
+    body = SASSBuilder.new(theme).send(format == :sass ? :to_sass : :to_css)
+
+    Cache[cache_key].update_attributes! :value => body
+
+    render :content_type => (format == :css ? 'text/css' : 'text/plain'), :text => body
   end
 
   private
 
   def format(default_format)
     params[:format] ? params[:format].to_sym : default_format
+  end
+
+  def theme
+    @theme ||= Theme[params[:theme]]
   end
 
   def gather_scripts!
@@ -70,109 +86,5 @@ class AssetsController < ApplicationController
     Cache[cache_key].update_attributes! :value => reply
 
     reply
-  end
-
-  def gather_styles!(format = :css)
-    cache_key = [:core, :styles, theme.machine_name, format]
-
-    if Rails.env.to_sym == :production
-      return Cache[cache_key].value unless Cache[cache_key].expired?
-    end
-
-    @imports = [ 'reset' ]
-    @medias = {}
-
-    include_enabled_styles_for Widget
-    include_enabled_styles_for NodeExtension
-
-    theme_styles = extract_media_names theme.styles
-    theme_styles.each do |media|
-      @medias[media] ||= ''
-      @imports << "themes/#{theme.machine_name}/styles/#{media}"
-      @medias[media] << <<-SASS
-  @include theme_#{theme.machine_name}_#{media}
-      SASS
-    end
-
-    # http://compass-style.org/docs/index/variables/
-    # http://compass-users.googlegroups.com/web/_skeleton.css.sass
-    final_sass = <<-SASS
-@charset 'utf-8'
-    SASS
-
-    scope = [:theme, :support].join Setting::SCOPE_GLUE
-    Setting.all_in_scope(scope).each do |setting|
-      vendor = setting.scope.gsub "#{scope}#{Setting::SCOPE_GLUE}", ''
-      final_sass << <<-SASS
-$experimental-support-for-#{vendor}: #{setting.value.blank? ? 'false' : setting.value}
-      SASS
-    end
-
-    @imports.each do |inc|
-      final_sass << <<-SASS
-@import '#{inc}'
-      SASS
-    end
-
-    if @medias.key? :all
-      final_sass << extract_styles_for_media(:all, @medias[:all])
-      @medias.delete :all
-    end
-
-    media_keys = @medias.keys.sort do |a, b|
-      a, b = a.to_s, b.to_s
-      reply = b.count('_') <=> a.count('_')
-      reply = a <=> b if reply == 0
-      reply
-    end
-    media_keys.each { |key| final_sass << extract_styles_for_media(key, @medias[key]) }
-
-    body = format == :sass ? final_sass : Sass::Engine.new(final_sass, Compass.sass_engine_options).render
-
-    Cache[cache_key].update_attributes! :value => body
-
-    body
-  end
-
-  def extract_media_names(paths)
-    paths.map do |path|
-      reply = path.basename.to_s.split('.').first
-      reply.to_sym unless reply.starts_with? '_'
-    end.compact
-  end
-
-  def extract_styles_for_media(media, sass)
-    <<-SASS
-@media #{media.to_s.gsub /_/, ', '}
-#{sass}
-    SASS
-  end
-
-  def include_enabled_styles_for(addon_type)
-    addon_name = addon_type.title.underscore
-
-    enabled_styles = {}
-
-    addon_type.all.each do |addon|
-      extract_media_names(addon.styles).each do |style|
-        enabled_styles[style] = enabled_styles[style] || []
-        enabled_styles[style] << addon.root.basename
-      end
-    end
-
-    enabled_styles.each do |media, addon_styles|
-      @medias[media] ||= ''
-      addon_styles.each do |addon|
-        @imports << "#{addon_name.pluralize}/#{addon}/styles/#{media}"
-        @medias[media] << <<-SASS
-  .#{addon.to_s.dasherize}
-    @include #{addon_name}_#{addon}_#{media}
-        SASS
-      end
-    end
-  end
-
-  def theme
-    @theme ||= Theme[params[:theme]]
   end
 end

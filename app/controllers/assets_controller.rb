@@ -1,6 +1,17 @@
 class AssetsController < ApplicationController
   layout nil
 
+  def font
+    theme = Theme[params[:theme]]
+    font_path = (theme.fonts_path + params[:font_name]).expand_path
+
+    if File.exists?(font_path) && font_path.to_path.starts_with?(theme.fonts_path.to_path)
+      send_file font_path
+    else
+      raise HTTPStatuses::NotFound
+    end
+  end
+
   def routes
     render :text => begin
       if params[:named_route]

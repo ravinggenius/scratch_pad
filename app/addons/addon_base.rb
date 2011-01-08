@@ -7,8 +7,10 @@ class AddonBase
     name <=> other.name
   end
 
-  def self.root
-    Rails.root + 'vendor' + 'addons' + self.superclass.title.pluralize.underscore + self.title.underscore
+  def self.root(relative = false)
+    reply = Pathname.new(self.superclass.title.pluralize.underscore) + self.title.underscore
+    reply = Rails.root + 'vendor' + 'addons' + reply unless relative
+    reply
   end
 
   def self.scripts
@@ -17,6 +19,10 @@ class AddonBase
 
   def self.styles
     Dir[root + 'styles' + '*'].entries.map { |s| Pathname.new s }
+  end
+
+  def self.stylesheets
+    styles.map { |style| style unless style.basename.to_s.split('.').first.starts_with?('_') }.compact
   end
 
   def self.views

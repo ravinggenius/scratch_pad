@@ -17,6 +17,14 @@ class AddonBase
     root(relative) + 'fonts'
   end
 
+  def self.scripts_path(relative = false)
+    root(relative) + 'styles'
+  end
+
+  def self.styles_path(relative = false)
+    root(relative) + 'styles'
+  end
+
   def self.scripts
     Dir[root + 'scripts' + '*.js'].entries.map { |s| Pathname.new s }
   end

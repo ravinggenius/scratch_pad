@@ -3,11 +3,12 @@
 
 class SASSBuilder
   FONT_TYPES = {
+    :woff => 'woff',
     :otf => 'opentype',
-    :svg => 'svg',
+    :opentype => 'opentype',
     :ttf => 'truetype',
     :truetype => 'truetype',
-    :woff => 'woff'
+    :svg => 'svg'
   }
 
   include Rails.application.routes.url_helpers
@@ -110,8 +111,9 @@ $experimental-support-for-#{vendor}: #{setting.value.blank? ? 'false' : setting.
   def font_paths(fonts)
     reply = ''
     eot = fonts.delete :eot
-    # TODO prioritize sort
-    others = fonts.sort.map { |type, path| "\"#{assets_font_path(theme.machine_name, path)}\", #{FONT_TYPES[type]}" }.join ', '
+    others = FONT_TYPES.keys.map do |type|
+      "\"#{assets_font_path(theme.machine_name, fonts[type])}\", #{FONT_TYPES[type]}" if fonts.has_key? type
+    end.compact.join ', '
     reply = "font-files(#{others})" unless others.blank?
     reply = [reply, "\"#{assets_font_path(theme.machine_name, eot)}\", eot"].join ', ' unless eot.nil?
     reply

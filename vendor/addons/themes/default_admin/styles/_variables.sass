@@ -39,10 +39,6 @@
 // $base_font_size_px: 16
 // $base_line_height_px: 24
 
-// SUSY
-// (don't move this @import above the GRID and FONT-SIZE overrides)
-@import susy/susy
-
 // COLORS
 // set any colors you will need later
 $font_color: #444444
@@ -54,23 +50,3 @@ $visited_color: #990099
 $hover_color: $link_color - #333333
 $focus_color: $hover_color
 $active_color: $hover_color
-
-// FONTS
-// Give yourself some font stacks to work with
-@mixin sans-family
-  font-family: Helvetica, Arial, sans-serif
-
-@mixin serif-family
-  font-family: Baskerville, Palatino, serif
-
-@mixin list-default($ol: false)
-  @if $ol
-    list-style: decimal
-  @else
-    list-style: disc
-  margin: 0 1.5em 1.5em 1.5em
-
-@mixin no-style-list
-  @include no-bullets
-  margin: 0
-  padding: 0

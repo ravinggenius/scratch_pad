@@ -97,6 +97,13 @@ class SASSBuilder
 $experimental-support-for-#{vendor}: #{setting.value.blank? ? 'false' : setting.value}
       SASS
     end
+    (@addons + [@theme]).each do |addon|
+      if File.exist? addon.styles_path + '_variables.sass'
+        reply << <<-SASS
+@import '#{addon.styles_path(true) + 'variables'}'
+        SASS
+      end
+    end
     reply
   end
 

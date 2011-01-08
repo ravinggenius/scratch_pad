@@ -1,5 +1,3 @@
-require 'sass_builder'
-
 class AssetsController < ApplicationController
   layout nil
 

@@ -1,5 +1,3 @@
-require Rails.root + 'lib' + 'http_statuses'
-
 class ApplicationController < ActionController::Base
   include HTTPStatuses
 

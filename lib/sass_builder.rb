@@ -15,8 +15,8 @@ class SASSBuilder
   attr_accessor :fonts, :imports, :variables
   attr_reader :charset, :theme
 
-  def initialize(theme, charset = 'utf-8')
-    @theme, @charset = theme, charset
+  def initialize(theme, addons, charset = 'utf-8')
+    @theme, @addons, @charset = theme, addons, charset
     @fonts = theme.fonts
   end
 

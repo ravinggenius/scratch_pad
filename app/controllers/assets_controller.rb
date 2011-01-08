@@ -34,7 +34,7 @@ class AssetsController < ApplicationController
       return Cache[cache_key].value unless Cache[cache_key].expired?
     end
 
-    body = SASSBuilder.new(theme).send(format == :sass ? :to_sass : :to_css)
+    body = SASSBuilder.new(theme, Widget.enabled + NodeExtension.enabled).send(format == :sass ? :to_sass : :to_css)
 
     Cache[cache_key].update_attributes! :value => body
 

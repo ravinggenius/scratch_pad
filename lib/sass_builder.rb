@@ -2,6 +2,8 @@
 # http://compass-users.googlegroups.com/web/_skeleton.css.sass
 
 class SASSBuilder
+  # DO NOT REORDER
+  # #font_paths orders its generated paths by looping over these keys
   FONT_TYPES = {
     :woff => 'woff',
     :otf => 'opentype',

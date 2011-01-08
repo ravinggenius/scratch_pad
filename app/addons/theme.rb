@@ -19,6 +19,18 @@ class Theme < AddonBase
     Theme.backend.include? self
   end
 
+  def self.fonts
+    reply = {}
+    @fonts ||= {}
+    (@fonts[message_scope] || {}).each do |font_name, font_files|
+      reply[font_name] = {}
+      font_files.each do |ext, file_name|
+        reply[font_name][ext] = Pathname.new file_name
+      end
+    end
+    reply
+  end
+
   def self.default_layout
     Layout.first(:theme => machine_name, :is_default => true) or Layout.first(:theme => machine_name)
   end
@@ -45,6 +57,13 @@ class Theme < AddonBase
     ms = message_scope
     Layout.all(:scope => ms).each &:delete
     super
+  end
+
+  def self.register_font(use_name, font_files = {})
+    ms = message_scope
+    @fonts ||= {}
+    @fonts[ms] ||= {}
+    @fonts[ms][use_name] = font_files
   end
 
   def self.register_layout(name, options = {}, &regions_block)

@@ -75,7 +75,7 @@ class AssetsController < ApplicationController
 
     script_files << Rails.root + 'public' + 'javascripts' + 'application.js'
 
-    script_files << (NodeExtension.all + Widget.all).map { |addon| addon.scripts }
+    script_files << (NodeExtension.enabled + Widget.enabled).map { |addon| addon.scripts }
     script_files << theme.scripts
 
     reply = script_files.flatten.map do |filename|

@@ -28,7 +28,7 @@ class SASSBuilder
 
   def to_sass
     reply = <<-SASS
-@charset 'utf-8'
+@charset '#{@charset}'
     SASS
     reply << sass_for_variables
     reply << sass_for_imports([ 'compass/reset/utilities', 'compass/css3/font-face' ])

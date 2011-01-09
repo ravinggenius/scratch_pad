@@ -87,6 +87,7 @@ class SASSBuilder
     end
     media_keys.each { |key| reply << sass_for_media(key, medias[key]) }
 
+    reply.force_encoding @charset
     reply
   end
 

@@ -31,7 +31,11 @@ class SASSBuilder
 @charset '#{@charset}'
     SASS
     reply << sass_for_variables
-    reply << sass_for_imports([ 'compass/reset/utilities', 'compass/css3/font-face' ])
+    reply << sass_for_imports([
+      'compass/css3/font-face',
+      'compass/reset/utilities',
+      'compass/utilities/lists'
+    ])
     reply << sass_for_fonts
 
     medias = {

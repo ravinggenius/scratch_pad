@@ -1,22 +1,23 @@
 class Theme < AddonBase
   def self.admin?
-    machine_name.end_with? '_admin'
+    deprication_warning :admin?, :backend?
+    backend?
   end
 
   def self.frontend
-    enabled.reject { |theme| theme.admin? }
+    enabled.select { |theme| theme.frontend? }
   end
 
   def self.backend
-    enabled.select { |theme| theme.admin? }
+    enabled.select { |theme| theme.backend? }
   end
 
   def self.frontend?
-    Theme.frontend.include? self
+    !backend?
   end
 
   def self.backend?
-    Theme.backend.include? self
+    %w[ _admin _backend ].any? { |stub| machine_name.end_with? stub }
   end
 
   def self.fonts_path(relative = false)

@@ -1,5 +1,7 @@
 require 'spec_helper'
 
 describe Filter do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '.[]' do
+    it 'loads the addon whose name is sent to it'
+  end
 end

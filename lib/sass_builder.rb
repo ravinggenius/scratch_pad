@@ -15,11 +15,8 @@ class SASSBuilder
 
   include Rails.application.routes.url_helpers
 
-  attr_reader :charset, :theme
-
   def initialize(theme, addons, charset = 'utf-8')
     @theme, @addons, @charset = theme, addons, charset
-    @fonts = theme.fonts
   end
 
   def to_css
@@ -122,14 +119,13 @@ $experimental-support-for-#{vendor}: #{setting.value.blank? ? 'false' : setting.
     reply
   end
 
-  def font_paths(fonts)
-    reply = ''
-    eot = fonts.delete :eot
+  def font_paths(font_files)
     others = FONT_TYPES.keys.map do |type|
-      "\"#{assets_font_path(theme.machine_name, fonts[type])}\", #{FONT_TYPES[type]}" if fonts.has_key? type
+      "'#{assets_font_path(@theme.machine_name, font_files[type])}', #{FONT_TYPES[type]}" if font_files.has_key? type
     end.compact.join ', '
-    reply = "font-files(#{others})" unless others.blank?
-    reply = [reply, "\"#{assets_font_path(theme.machine_name, eot)}\", eot"].join ', ' unless eot.nil?
+
+    reply = others.blank? ? '' : "font-files(#{others})"
+    reply = [reply, "'#{assets_font_path(@theme.machine_name, font_files[:eot])}', eot"].join ', ' if font_files.key? :eot
     reply
   end
 

@@ -13,10 +13,6 @@ class AddonBase
     reply
   end
 
-  def self.fonts_path(relative = false)
-    root(relative) + 'fonts'
-  end
-
   def self.scripts_path(relative = false)
     root(relative) + 'styles'
   end

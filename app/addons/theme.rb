@@ -19,6 +19,10 @@ class Theme < AddonBase
     Theme.backend.include? self
   end
 
+  def self.fonts_path(relative = false)
+    root(relative) + 'fonts'
+  end
+
   def self.fonts
     reply = {}
     @fonts ||= {}

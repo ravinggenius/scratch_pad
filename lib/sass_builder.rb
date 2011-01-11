@@ -15,7 +15,7 @@ class SASSBuilder
 
   include Rails.application.routes.url_helpers
 
-  def initialize(theme, addons, charset = 'utf-8')
+  def initialize(theme, addons, charset = ScratchPad::Application.config.encoding)
     @theme, @addons, @charset = theme, addons, charset
   end
 

@@ -21,8 +21,13 @@ class AddonBase
     root(relative) + 'styles'
   end
 
+  def self.views_path(relative = false)
+    root(relative) + 'views'
+  end
+
   def self.views
-    root + 'views'
+    deprication_warning :views, :views_path
+    views_path
   end
 
   def self.scripts

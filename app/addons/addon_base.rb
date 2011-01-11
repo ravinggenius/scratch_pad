@@ -144,6 +144,10 @@ class AddonBase
 
   protected
 
+  def self.deprication_warning(old_method, new_method)
+    Rails.logger.info "#{name}.#{old_method} has been depricated. Please use #{name}.#{new_method} instead."
+  end
+
   def self.message_scope
     ancestors = self.ancestors
     ancestors[0..(ancestors.find_index(AddonBase) - 1)].map { |ancestor| ancestor.name.underscore }.reverse.join Setting::SCOPE_GLUE

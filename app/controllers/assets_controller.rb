@@ -1,6 +1,17 @@
 class AssetsController < ApplicationController
   layout nil
 
+  def image
+    addon = AddonBase[params[:addon]]
+    image_path = (addon.images_path + params[:image_name]).expand_path
+
+    if File.exists?(image_path) && image_path.to_path.starts_with?(addon.images_path.to_path)
+      send_file image_path, :disposition => 'inline'
+    else
+      raise HTTPStatuses::NotFound
+    end
+  end
+
   def font
     theme = Theme[params[:theme]]
     font_path = (theme.fonts_path + params[:font_name]).expand_path

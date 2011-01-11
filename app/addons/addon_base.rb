@@ -13,6 +13,10 @@ class AddonBase
     reply
   end
 
+  def self.images_path(relative = false)
+    root(relative) + 'images'
+  end
+
   def self.scripts_path(relative = false)
     root(relative) + 'styles'
   end
@@ -28,6 +32,10 @@ class AddonBase
   def self.views
     deprication_warning :views, :views_path
     views_path
+  end
+
+  def self.images
+    Dir[root + 'images' + '*'].entries.map { |i| Pathname.new i }
   end
 
   def self.scripts

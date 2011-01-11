@@ -26,6 +26,7 @@ ScratchPad::Application.routes.draw do
 
   namespace :assets do
     get '/routes', :to => :routes, :as => :routes
+    get '/:addon/images/*image_name', :to => :image, :as => :image
     get '/:theme/fonts/*font_name', :to => :font, :as => :font
     get '/:theme/scripts(.:format)', :to => :scripts, :as => :scripts, :defaults => { :format => :js }
     get '/:theme/styles(.:format)', :to => :styles, :as => :styles, :defaults => { :format => :css }

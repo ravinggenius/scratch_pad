@@ -21,6 +21,10 @@ class AddonBase
     root(relative) + 'styles'
   end
 
+  def self.views
+    root + 'views'
+  end
+
   def self.scripts
     Dir[root + 'scripts' + '*.js'].entries.map { |s| Pathname.new s }
   end
@@ -31,10 +35,6 @@ class AddonBase
 
   def self.stylesheets
     styles.map { |style| style unless style.basename.to_s.split('.').first.starts_with?('_') }.compact
-  end
-
-  def self.views
-    root + 'views'
   end
 
   def self.title

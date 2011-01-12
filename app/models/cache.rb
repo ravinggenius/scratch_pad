@@ -8,12 +8,9 @@ class Cache
 
   timestamps!
 
+  # NOTE MongoMapper implements #valid?
   def expired?
-    !valid?
-  end
-
-  def valid?
-    value.present? && ((updated_at + 1.day) > Time.now)
+    value.nil? || ((updated_at + 1.day) < Time.now)
   end
 
   def self.[](*key)

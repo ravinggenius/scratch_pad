@@ -50,7 +50,7 @@ class AssetsController < ApplicationController
     format = format(:css)
     cache_key = [:core, :styles, theme.machine_name, format]
 
-    body = if (Rails.env.to_sym == :production) && Cache[cache_key].valid?
+    body = if (Rails.env.to_sym == :production) && !Cache[cache_key].expired?
       Rails.logger.info "CACHE[#{cache_key.join '.'}]"
       Cache[cache_key].value
     else

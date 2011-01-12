@@ -50,11 +50,13 @@ class AssetsController < ApplicationController
     format = format(:css)
     cache_key = [:core, :styles, theme.machine_name, format]
 
-    if Rails.env.to_sym == :production
-      return Cache[cache_key].value unless Cache[cache_key].expired?
+    body = if (Rails.env.to_sym == :production) && Cache[cache_key].valid?
+      Rails.logger.info "CACHE[#{cache_key.join '.'}]"
+      Cache[cache_key].value
+    else
+      Rails.logger.info "Rebuilding CACHE[#{cache_key.join '.'}]"
+      SASSBuilder.new(theme, Widget.enabled + NodeExtension.enabled).send(format == :css ? :to_css : :to_sass)
     end
-
-    body = SASSBuilder.new(theme, Widget.enabled + NodeExtension.enabled).send(format == :sass ? :to_sass : :to_css)
 
     Cache[cache_key].update_attributes! :value => body
 

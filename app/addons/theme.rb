@@ -20,6 +20,10 @@ class Theme < AddonBase
     %w[ _admin _backend ].any? { |stub| machine_name.end_with? stub }
   end
 
+  def self.static_asset_types
+    super << 'fonts'
+  end
+
   def self.fonts_path(relative = false)
     root(relative) + 'fonts'
   end

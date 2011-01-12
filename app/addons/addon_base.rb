@@ -7,6 +7,10 @@ class AddonBase
     name <=> other.name
   end
 
+  def self.static_asset_types
+    %w[images]
+  end
+
   def self.root(relative = false)
     reply = Pathname.new(self.superclass.title.pluralize.underscore) + self.title.underscore
     reply = Rails.root + 'vendor' + 'addons' + reply unless relative

@@ -1,23 +1,13 @@
 class AssetsController < ApplicationController
   layout nil
 
-  def image
+  def static
     addon = AddonBase[params[:addon]]
-    image_path = (addon.images_path + params[:image_name]).expand_path
+    asset_type_path = (addon.root + params[:asset_type]).expand_path
+    asset_path = (asset_type_path + params[:asset_name]).expand_path
 
-    if File.exists?(image_path) && image_path.to_path.starts_with?(addon.images_path.to_path)
-      send_file image_path, :disposition => 'inline', :content_type => Rack::Mime.mime_type(image_path.extname)
-    else
-      raise HTTPStatuses::NotFound
-    end
-  end
-
-  def font
-    theme = Theme[params[:theme]]
-    font_path = (theme.fonts_path + params[:font_name]).expand_path
-
-    if File.exists?(font_path) && font_path.to_path.starts_with?(theme.fonts_path.to_path)
-      send_file font_path, :content_type => Rack::Mime.mime_type(font_path.extname)
+    if File.exists?(asset_path) && addon.static_asset_types.include?(params[:asset_type]) && asset_path.to_path.starts_with?(asset_type_path.to_path)
+      send_file asset_path, :disposition => 'inline', :content_type => Rack::Mime.mime_type(asset_path.extname)
     else
       raise HTTPStatuses::NotFound
     end

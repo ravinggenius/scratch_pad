@@ -6,7 +6,7 @@ class AssetsController < ApplicationController
     image_path = (addon.images_path + params[:image_name]).expand_path
 
     if File.exists?(image_path) && image_path.to_path.starts_with?(addon.images_path.to_path)
-      send_file image_path, :disposition => 'inline'
+      send_file image_path, :disposition => 'inline', :content_type => Rack::Mime.mime_type(image_path.extname)
     else
       raise HTTPStatuses::NotFound
     end
@@ -17,7 +17,7 @@ class AssetsController < ApplicationController
     font_path = (theme.fonts_path + params[:font_name]).expand_path
 
     if File.exists?(font_path) && font_path.to_path.starts_with?(theme.fonts_path.to_path)
-      send_file font_path
+      send_file font_path, :content_type => Rack::Mime.mime_type(font_path.extname)
     else
       raise HTTPStatuses::NotFound
     end

@@ -142,4 +142,8 @@ module ApplicationHelper
     end
     surround html_open, '</html>', &content
   end
+
+  def assets_image_path(addon, path)
+    assets_static_path addon.machine_name, :images, path
+  end
 end

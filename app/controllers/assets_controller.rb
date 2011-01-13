@@ -7,7 +7,8 @@ class AssetsController < ApplicationController
     asset_path = (asset_type_path + params[:asset_name]).expand_path
 
     if File.exists?(asset_path) && addon.static_asset_types.include?(params[:asset_type]) && asset_path.to_path.starts_with?(asset_type_path.to_path)
-      send_file asset_path, :disposition => 'inline', :content_type => Rack::Mime.mime_type(asset_path.extname)
+      # https://groups.google.com/group/heroku/browse_thread/thread/e36fd2acc6ba4840
+      send_data asset_path.read, :disposition => 'inline', :content_type => Rack::Mime.mime_type(asset_path.extname)
     else
       raise HTTPStatuses::NotFound
     end

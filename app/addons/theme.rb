@@ -1,6 +1,6 @@
 class Theme < AddonBase
   def self.admin?
-    deprication_warning :admin?, :backend?
+    deprecate! :admin?, :backend?
     backend?
   end
 

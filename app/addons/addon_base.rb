@@ -34,7 +34,7 @@ class AddonBase
   end
 
   def self.views
-    deprication_warning :views, :views_path
+    deprecate! :views, :views_path
     views_path
   end
 
@@ -157,8 +157,8 @@ class AddonBase
 
   protected
 
-  def self.deprication_warning(old_method, new_method)
-    Rails.logger.info "#{name}.#{old_method} has been depricated. Please use #{name}.#{new_method} instead."
+  def self.deprecate!(old_method, new_method)
+    ActiveSupport::Deprecation.warn "#{name}.#{old_method} has been depricated. Please use #{name}.#{new_method} instead.", caller
   end
 
   def self.message_scope

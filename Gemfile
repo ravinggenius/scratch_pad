@@ -13,6 +13,7 @@ gem 'mongo_mapper',          '~> 0.8'
 gem 'rails',                 '~> 3.0'
 gem 'rspec-rails',           '~> 2.1'
 gem 'ruby-prof'
+gem 'thin'
 
 group :development do
   gem 'awesome_print'
@@ -21,10 +22,6 @@ group :development do
   gem 'ruby-debug19'
   gem 'ruby-debug-ide19'
   gem 'wirble'
-end
-
-group :production do
-  gem 'thin'
 end
 
 group :test do

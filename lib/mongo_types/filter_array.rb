@@ -1,0 +1,2 @@
+class FilterArray < AddonArray
+end

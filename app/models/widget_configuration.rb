@@ -1,0 +1,2 @@
+class WidgetConfiguration < AddonConfiguration
+end

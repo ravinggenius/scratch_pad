@@ -1,0 +1,2 @@
+class WidgetArray < AddonArray
+end

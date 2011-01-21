@@ -1,7 +1,9 @@
-class List < NodeExtension
-  class Model < NodeExtension::Model
-    key :items, Array
+module NodeExtensions
+  class List < ScratchPad::Addon::NodeExtension
+    class Model < ScratchPad::Addon::NodeExtension::ModelBase
+      key :items, Array
 
-    validates_presence_of :items
+      validates_presence_of :items
+    end
   end
 end

@@ -37,7 +37,7 @@ class Admin::NodesController < Admin::ApplicationController
           @parent.children << @node
           @parent.save
         end
-        format.html { redirect_to(admin_nodes_url, :notice => "#{node_type.name} was successfully created.") }
+        format.html { redirect_to(admin_nodes_url, :notice => "#{@node.class.title} was successfully created.") }
         format.xml { render :xml => @node, :status => :created, :location => node_url(@node) }
       else
         set_fieldset_ivars
@@ -60,7 +60,7 @@ class Admin::NodesController < Admin::ApplicationController
           @parent.children << @node
           @parent.save
         end
-        format.html { redirect_to(admin_nodes_url, :notice => "#{node_type.name} was successfully updated.") }
+        format.html { redirect_to(admin_nodes_url, :notice => "#{@node.class.title} was successfully updated.") }
         format.xml { head :ok }
       else
         set_fieldset_ivars
@@ -92,15 +92,15 @@ class Admin::NodesController < Admin::ApplicationController
   def node_type
     @nt ||= lambda do |selected|
       return Node if selected == 'node'
-      NodeExtension.enabled.map(&:machine_name).include?(selected) ? NodeExtension[selected]::Model : Node
+      ScratchPad::Addon::NodeExtension.enabled.map(&:machine_name).include?(selected) ? ScratchPad::Addon::NodeExtension[selected]::Model : Node
     end.call params[:node_type]
     @nt
   end
 
   def set_fieldset_ivars
     if @node.new?
-      @node_types = NodeExtension.enabled.map do |extension|
-        [extension.name, extension.machine_name]
+      @node_types = ScratchPad::Addon::NodeExtension.enabled.map do |extension|
+        [extension.title, extension.machine_name]
       end.sort.insert 0, ['Node', 'node']
     end
 
@@ -111,9 +111,11 @@ class Admin::NodesController < Admin::ApplicationController
 
   def set_vocabulary_ivars
     vocabularies = Vocabulary.all
+    node_is_plain = node_type.machine_name == 'node'
 
+    # TODO allow plain Nodes to use taxonomy
     @grouped_vocabularies = {}
-    @grouped_vocabularies[:required] = vocabularies.select { |v| v.node_types_required.include? NodeExtension[node_type.title] }
-    @grouped_vocabularies[:optional] = vocabularies.select { |v| v.node_types_optional.include? NodeExtension[node_type.title] } - @grouped_vocabularies[:required]
+    @grouped_vocabularies[:required] = vocabularies.select { |v| v.node_types_required.include? ScratchPad::Addon::NodeExtension[node_type.title] unless node_is_plain }
+    @grouped_vocabularies[:optional] = vocabularies.select { |v| v.node_types_optional.include? ScratchPad::Addon::NodeExtension[node_type.title] unless node_is_plain } - @grouped_vocabularies[:required]
   end
 end

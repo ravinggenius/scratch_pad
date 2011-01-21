@@ -33,8 +33,8 @@ class ApplicationController < ActionController::Base
     @system_menu += [
       MenuItem.new('Dashboard', admin_root_path),
       MenuItem.new('Content', admin_nodes_path, [
-        MenuItem.new('New', new_admin_node_path, NodeExtension.enabled.sort.map { |extension|
-          MenuItem.new(extension.name, new_admin_node_path(:node_type => extension.machine_name))
+        MenuItem.new('New', new_admin_node_path, ScratchPad::Addon::NodeExtension.enabled.sort.map { |extension|
+          MenuItem.new(extension.title, new_admin_node_path(:node_type => extension.machine_name))
         })
       ]),
       MenuItem.new('Taxonomy', admin_vocabularies_path, [
@@ -53,8 +53,8 @@ class ApplicationController < ActionController::Base
       MenuItem.new('Groups'),
       MenuItem.new('Permissions'),
       MenuItem.new('Settings', admin_settings_path),
-      MenuItem.new('Addons', admin_addons_path, AddonBase.addon_types.map { |addon_type|
-        MenuItem.new(addon_type.name.pluralize, admin_addons_path(:addon_type => addon_type.machine_name))
+      MenuItem.new('Addon Configuration', admin_addon_configurations_path, ScratchPad::Addon::Base.addon_types.map { |addon_type|
+        MenuItem.new(addon_type.title.pluralize, admin_addon_configurations_path(addon_type.machine_name))
       })
     ] if authorize
   end
@@ -93,7 +93,7 @@ class ApplicationController < ActionController::Base
   def set_theme_ivars(frontend_backend)
     theme_name = Setting[:theme, frontend_backend]
     theme_name = params[:force_theme] if authorize && params[:force_theme]
-    @selected_theme = Theme[theme_name]
+    @selected_theme = ScratchPad::Addon::Theme[theme_name]
     # TODO actually select a layout based on what page or node is being viewed
     layout_name = nil # nil selects the default layout
     @selected_layout = @selected_theme.layout layout_name

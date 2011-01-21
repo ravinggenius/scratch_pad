@@ -5,10 +5,10 @@
   = form_tag :action => :update do
     - @addons.each do |addon_type, addons|
       %fieldset.addon
-        %legend= addon_type.name.pluralize
+        %legend= addon_type.title.pluralize
         - addons.sort.each do |addon|
           %div.field
             = check_box_tag "#{addon_type.machine_name}[#{addon.machine_name}]", 1, addon.enabled?
-            = label_tag "#{addon_type.machine_name}_#{addon.machine_name}", "#{addon.name} - addon.description"
+            = label_tag "#{addon_type.machine_name}_#{addon.machine_name}", "#{addon.title} - addon.description"
 
     %div.field= submit_tag 'Commit'

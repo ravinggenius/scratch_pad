@@ -1,5 +1,7 @@
-class TextBlock < NodeExtension
-  class Model < NodeExtension::Model
-    key :data, String, :required => true
+module NodeExtensions
+  class TextBlock < ScratchPad::Addon::NodeExtension
+    class Model < ScratchPad::Addon::NodeExtension::ModelBase
+      key :data, String, :required => true
+    end
   end
 end

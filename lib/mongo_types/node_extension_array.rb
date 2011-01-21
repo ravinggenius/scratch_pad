@@ -1,0 +1,2 @@
+class NodeExtensionArray < AddonArray
+end

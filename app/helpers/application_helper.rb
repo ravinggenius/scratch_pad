@@ -43,11 +43,11 @@ module ApplicationHelper
   end
 
   def filter(text, filter_group)
-    Filter.process_all(text.to_s, filter_group).html_safe
+    ScratchPad::Addon::Filter.process_all(text.to_s, filter_group).html_safe
   end
 
   def show_addon(addon, view = :show, locals = {})
-    render :file => addon.views + view.to_s, :locals => locals
+    render :file => addon.views_path + view.to_s, :locals => locals
   end
 
   def show_node(node, part, locals = {})
@@ -56,7 +56,7 @@ module ApplicationHelper
     if node.class.machine_name == 'node'
       render :file => "nodes/#{part}", :locals => locals
     else
-      show_addon NodeExtension[node.class.machine_name], part, locals
+      show_addon ScratchPad::Addon::NodeExtension[node.class.machine_name], part, locals
     end
   end
 
@@ -144,6 +144,6 @@ module ApplicationHelper
   end
 
   def assets_image_path(addon, path)
-    assets_static_path addon.machine_name, :images, path
+    assets_static_path addon.addon_type.machine_name, addon.machine_name, :images, path
   end
 end

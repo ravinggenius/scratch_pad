@@ -2,7 +2,7 @@ namespace :db do
   desc 'Clear all collections'
   task :clear => :environment do
     [
-      Addon,
+      AddonConfiguration,
       Cache,
       FilterGroup,
       Group,

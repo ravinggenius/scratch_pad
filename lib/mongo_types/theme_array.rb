@@ -1,0 +1,2 @@
+class ThemeArray < AddonArray
+end

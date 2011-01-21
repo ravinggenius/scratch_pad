@@ -1,2 +1,4 @@
-class Branding < Widget
+module Widgets
+  class Branding < ScratchPad::Addon::Widget
+  end
 end

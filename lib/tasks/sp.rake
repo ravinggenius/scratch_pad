@@ -51,26 +51,29 @@ namespace :sp do
       [
         :default,
         :default_admin,
+      ].each { |theme| ScratchPad::Addon::Theme[theme].enable }
+
+      [
         :branding,
         :copyright,
         :flash,
         :system_menu,
         :yielder
-      ].each { |addon| AddonBase[addon].enable }
+      ].each { |widget| ScratchPad::Addon::Widget[widget].enable }
 
-      l = Theme[:default].default_layout
-      l.region(:branding).widgets << Widget[:branding]
-      l.region(:main_menu).widgets << Widget[:system_menu]
-      l.region(:flash).widgets << Widget[:flash]
-      l.region(:content).widgets << Widget[:yielder]
-      l.region(:credits).widgets << Widget[:copyright]
+      l = ScratchPad::Addon::Theme[:default].default_layout
+      l.region(:branding).widgets << ScratchPad::Addon::Widget[:branding]
+      l.region(:main_menu).widgets << ScratchPad::Addon::Widget[:system_menu]
+      l.region(:flash).widgets << ScratchPad::Addon::Widget[:flash]
+      l.region(:content).widgets << ScratchPad::Addon::Widget[:yielder]
+      l.region(:credits).widgets << ScratchPad::Addon::Widget[:copyright]
       l.save
 
-      l = Theme[:default_admin].default_layout
-      l.region(:branding).widgets << Widget[:branding]
-      l.region(:main_menu).widgets << Widget[:system_menu]
-      l.region(:flash).widgets << Widget[:flash]
-      l.region(:content).widgets << Widget[:yielder]
+      l = ScratchPad::Addon::Theme[:default_admin].default_layout
+      l.region(:branding).widgets << ScratchPad::Addon::Widget[:branding]
+      l.region(:main_menu).widgets << ScratchPad::Addon::Widget[:system_menu]
+      l.region(:flash).widgets << ScratchPad::Addon::Widget[:flash]
+      l.region(:content).widgets << ScratchPad::Addon::Widget[:yielder]
       l.save
 
       puts 'Minimum Addons have been enabled. You may disable these later if you have a suitable replacement'
@@ -123,27 +126,27 @@ namespace :sp do
   namespace :addons do
     desc 'List Filters with the FilterGroups they belong to'
     task :filters => :environment do
-      puts_table Filter.all, [:name, :machine_name, :enabled?], 'Filters'
+      puts_table ScratchPad::Addon::Filter.all, [:name, :machine_name, :enabled?], 'Filters'
       puts
     end
 
     desc 'List NodeExtensions with a usage count'
     task :node_extensions => :environment do
-      puts_table NodeExtension.all, [:name, :machine_name, :enabled?], 'Node Extensions'
+      puts_table ScratchPad::Addon::NodeExtension.all, [:name, :machine_name, :enabled?], 'Node Extensions'
       puts
     end
 
     desc 'List Widgets'
     task :widgets => :environment do
-      puts_table Widget.all, [:name, :machine_name, :enabled?], 'Widgets'
+      puts_table ScratchPad::Addon::Widget.all, [:name, :machine_name, :enabled?], 'Widgets'
       puts
     end
 
     desc 'List Themes with status grouped by frontend/backend'
     task :themes => :environment do
-      puts_table Theme.frontend, [:name, :machine_name, :enabled?], 'Frontend Themes'
+      puts_table ScratchPad::Addon::Theme.frontend, [:name, :machine_name, :enabled?], 'Frontend Themes'
       puts
-      puts_table Theme.backend, [:name, :machine_name, :enabled?], 'Backend Themes'
+      puts_table ScratchPad::Addon::Theme.backend, [:name, :machine_name, :enabled?], 'Backend Themes'
       puts
     end
 
@@ -153,7 +156,7 @@ namespace :sp do
       task :activate, :backend_or_frontend, :theme, :needs => :environment do |t, args|
         setting = Setting.first_in_scope :theme, args[:backend_or_frontend]
         if setting
-          theme = Theme[args[:theme]]
+          theme = ScratchPad::Addon::Theme[args[:theme]]
           theme.enable
           setting.update_attributes :value => theme.machine_name
         end

@@ -6,8 +6,8 @@ class Admin::ThemesController < Admin::ApplicationController
     @themes = {}
     @current_theme = {}
     [:frontend, :backend].each do |s|
-      @themes[s] = Theme.send s if [s, :enabled].include?(scope)
-      @current_theme[s] = Theme[Setting[:theme, s]]
+      @themes[s] = ScratchPad::Addon::Theme.send s if [s, :enabled].include?(scope)
+      @current_theme[s] = ScratchPad::Addon::Theme[Setting[:theme, s]]
     end
 
     respond_to do |format|
@@ -17,7 +17,7 @@ class Admin::ThemesController < Admin::ApplicationController
   end
 
   def update
-    theme = Theme[params[:frontend] || params[:backend]]
+    theme = ScratchPad::Addon::Theme[params[:frontend] || params[:backend]]
 
     setting = Setting.first_in_scope :theme, params[:scope]
 

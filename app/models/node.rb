@@ -24,7 +24,7 @@ class Node
   validate :ensure_not_ancestor_of_self
 
   def children
-    @children ||= (self.children_ids || []).map { |child_id| Node.find child_id }
+    (self.children_ids || []).map { |child_id| Node.find child_id }.reject &:blank?
   end
 
   def descendants

@@ -1,0 +1,2 @@
+class NodeExtensionConfiguration < AddonConfiguration
+end

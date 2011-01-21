@@ -1,7 +1,7 @@
-class Admin::AddonsController < Admin::ApplicationController
+class Admin::AddonConfigurationsController < Admin::ApplicationController
   def index
     @addons = {}
-    AddonBase.addon_types.each do |addon_type|
+    ScratchPad::Addon::Base.addon_types.each do |addon_type|
       @addons[addon_type] = addon_type.all if addon_type.ancestors.include? addon_scope
     end
 
@@ -28,7 +28,8 @@ class Admin::AddonsController < Admin::ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to(admin_addons_url, :notice => 'Addons were successfully updated.') }
+      # TODO find out why :addon_type is never set
+      format.html { redirect_to(admin_addon_configurations_url(params[:addon_type]), :notice => 'Addons were successfully updated.') }
       format.xml  { head :ok }
     end
   end
@@ -36,7 +37,7 @@ class Admin::AddonsController < Admin::ApplicationController
   private
 
   def addon_scope
-    types = AddonBase.addon_types.map { |addon_type| addon_type.machine_name }
-    types.include?(params[:addon_type]) ? AddonBase[params[:addon_type]] : AddonBase
+    types = ScratchPad::Addon::Base.addon_types.map &:machine_name
+    types.include?(params[:addon_type]) ? ScratchPad::Addon::Base[params[:addon_type]] : ScratchPad::Addon::Base
   end
 end

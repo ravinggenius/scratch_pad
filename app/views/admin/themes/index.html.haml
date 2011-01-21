@@ -9,7 +9,7 @@
         - themes.sort.each do |theme|
           %div.field
             = radio_button_tag scope, theme.machine_name, (@current_theme[scope] == theme)
-            = label_tag "#{scope}_#{theme.machine_name}", "#{theme.name} - theme.description"
+            = label_tag "#{scope}_#{theme.machine_name}", "#{theme.title} - theme.description"
             - scope_url = "#{scope == :frontend ? :root : :admin_root}_url"
             = link_to 'Preview', self.send(scope_url, :force_theme => theme.machine_name), :class => :preview
             - theme.layouts.each do |layout|

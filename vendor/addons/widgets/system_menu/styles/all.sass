@@ -1,6 +1,7 @@
 @mixin system_menu_all
   // all menus
-  ul
+  menu
+    /* FINDME
     @include no-bullets
     background:
       color: #EEEEEE
@@ -15,20 +16,22 @@
         display: block
         width: 100%
       &:hover
-        > ul
+        > menu
           display: block
   // top-level menu
-  > ul
+  > menu
+    /* FINDME
     @include horizontal-list-container
     > li
+      /* FINDME
       @include horizontal-list-item
       > label
         a
       > a
       &:hover
-        ul
+        menu
   // submenus
-  ul ul
+  menu menu
     display: none
     margin: 0
     position: absolute
@@ -40,6 +43,6 @@
         a
       a
       &:hover
-        ul
+        menu
           left: 100%
           top: 0

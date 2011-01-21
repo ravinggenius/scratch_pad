@@ -1,0 +1,2 @@
+module ScratchPad
+end

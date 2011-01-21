@@ -1,2 +1,4 @@
-class SystemMenu < Widget
+module Widgets
+  class SystemMenu < ScratchPad::Addon::Widget
+  end
 end

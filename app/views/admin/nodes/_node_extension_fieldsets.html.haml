@@ -1,18 +1,19 @@
-- @grouped_vocabularies.each do |optional_required, vocabularies|
-  - unless vocabularies.blank?
-    %fieldset
-      %legend #{optional_required.to_s.titleize} Vocabularies
-      - vocabularies.each do |vocabulary|
-        - # TODO display each vocabulary according to options
-        %div.field
-          - id = [:vocabularies, vocabulary.name.underscore]
-          = label_tag id.join('_'), vocabulary.name
-          %select{ :id => id, :name => "vocabularies[#{vocabulary.name.underscore}][]", :multiple => vocabulary.is_multiselectable }
-            - options = vocabulary.terms.map { |term| [term.name, term.id] }
-            - selected = node.terms.map &:id
-            = options_for_select options, selected
+= fields_for :node, node do |form|
+  - @grouped_vocabularies.each do |optional_required, vocabularies|
+    - unless vocabularies.blank?
+      %fieldset
+        %legend #{optional_required.to_s.titleize} Vocabularies
+        - vocabularies.each do |vocabulary|
+          - # TODO display each vocabulary according to options
+          %div.field
+            - id = [:vocabularies, vocabulary.name.underscore]
+            = label_tag id.join('_'), vocabulary.name
+            %select{ :id => id, :name => "vocabularies[#{vocabulary.name.underscore}][]", :multiple => vocabulary.is_multiselectable }
+              - options = vocabulary.terms.map { |term| [term.name, term.id] }
+              - selected = node.terms.map &:id
+              = options_for_select options, selected
 
-- unless node.class.machine_name == 'node'
-  %fieldset.node{ :class => node.class.machine_name }
-    %legend= node.class.title
-    = show_node node, :form, :form => form
+  - unless node.class.machine_name == 'node'
+    %fieldset.node{ :class => node.class.machine_name }
+      %legend= node.class.title
+      = show_node node, :form, :form => form

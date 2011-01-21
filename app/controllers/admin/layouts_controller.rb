@@ -1,8 +1,8 @@
 class Admin::LayoutsController < Admin::ApplicationController
   def edit
-    @theme = Theme[params[:theme_id]]
+    @theme = ScratchPad::Addon::Theme[params[:theme_id]]
     @layout = @theme.layout params[:id]
-    @widgets = Widget.enabled.sort
+    @widgets = ScratchPad::Addon::Widget.enabled.sort
 
     respond_to do |format|
       format.html
@@ -11,7 +11,7 @@ class Admin::LayoutsController < Admin::ApplicationController
   end
 
   def update
-    @theme = Theme[params[:theme_id]]
+    @theme = ScratchPad::Addon::Theme[params[:theme_id]]
     @layout = @theme.layout params[:id]
 
     params[:regions].each do |region_name, widget_names|
@@ -19,7 +19,7 @@ class Admin::LayoutsController < Admin::ApplicationController
       region.widgets = []
       widget_names.each do |widget_name|
         next if widget_name.blank?
-        region.widgets << Widget[widget_name]
+        region.widgets << ScratchPad::Addon::Widget[widget_name]
       end
     end
 

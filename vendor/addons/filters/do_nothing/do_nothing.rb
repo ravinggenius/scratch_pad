@@ -1,5 +1,7 @@
-class DoNothing < Filter
-  def self.process(string)
-    string
+module Filters
+  class DoNothing < ScratchPad::Addon::Filter
+    def self.process(string)
+      string
+    end
   end
 end

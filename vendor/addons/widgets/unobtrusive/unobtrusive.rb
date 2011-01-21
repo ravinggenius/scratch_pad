@@ -1,2 +1,4 @@
-class Unobtrusive < Widget
+module Widgets
+  class Unobtrusive < ScratchPad::Addon::Widget
+  end
 end

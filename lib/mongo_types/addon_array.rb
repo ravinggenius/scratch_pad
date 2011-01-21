@@ -4,6 +4,9 @@ class AddonArray < Array
   end
 
   def self.from_mongo(values)
-    (values || []).map { |v| v.respond_to?(:machine_name) ? v : AddonBase[v] }
+    (values || []).map do |v|
+      klass = name.sub 'Array', ''
+      v.respond_to?(:machine_name) ? v : "ScratchPad::Addon::#{klass}".constantize[v]
+    end
   end
 end

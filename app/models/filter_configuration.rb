@@ -1,0 +1,2 @@
+class FilterConfiguration < AddonConfiguration
+end

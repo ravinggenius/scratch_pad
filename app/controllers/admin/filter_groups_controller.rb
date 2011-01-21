@@ -14,7 +14,7 @@ class Admin::FilterGroupsController < Admin::ApplicationController
 
   def new
     @filter_group = FilterGroup.new
-    @filters = Filter.enabled
+    @filters = ScratchPad::Addon::Filter.enabled
 
     respond_to do |format|
       format.html { render 'shared/edit_new' }
@@ -24,7 +24,7 @@ class Admin::FilterGroupsController < Admin::ApplicationController
 
   def edit
     @filter_group = FilterGroup.find(params[:id])
-    @filters = Filter.enabled
+    @filters = ScratchPad::Addon::Filter.enabled
     render 'shared/edit_new'
   end
 
@@ -33,7 +33,7 @@ class Admin::FilterGroupsController < Admin::ApplicationController
 
     respond_to do |format|
       if @filter_group.save
-        format.html { redirect_to([:admin, @filter_group], :notice => 'FilterGroup was successfully created.') }
+        format.html { redirect_to(admin_filter_groups_url, :notice => 'FilterGroup was successfully created.') }
         format.xml { render :xml => @filter_group, :status => :created, :location => [:admin, @filter_group] }
       else
         format.html do
@@ -50,7 +50,7 @@ class Admin::FilterGroupsController < Admin::ApplicationController
 
     respond_to do |format|
       if @filter_group.update_attributes(params[:filter_group])
-        format.html { redirect_to([:admin, @filter_group], :notice => 'FilterGroup was successfully updated.') }
+        format.html { redirect_to(admin_filter_groups_url, :notice => 'FilterGroup was successfully updated.') }
         format.xml { head :ok }
       else
         format.html do
@@ -67,7 +67,7 @@ class Admin::FilterGroupsController < Admin::ApplicationController
     @filter_group.destroy
 
     respond_to do |format|
-      format.html { redirect_to(admin_filters_url) }
+      format.html { redirect_to(admin_filter_groups_url) }
       format.xml { head :ok }
     end
   end

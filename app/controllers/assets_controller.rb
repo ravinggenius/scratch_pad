@@ -2,7 +2,8 @@ class AssetsController < ApplicationController
   layout nil
 
   def static
-    addon = AddonBase[params[:addon]]
+    addon_type = ScratchPad::Addon::Base[params[:addon_type]]
+    addon = addon_type[params[:addon]]
     asset_type_path = (addon.root + params[:asset_type]).expand_path
     asset_path = (asset_type_path + params[:asset_name]).expand_path
 
@@ -46,7 +47,7 @@ class AssetsController < ApplicationController
       Cache[cache_key].value
     else
       Rails.logger.info "Rebuilding CACHE[#{cache_key.join '.'}]"
-      SASSBuilder.new(theme, Widget.enabled + NodeExtension.enabled).send(format == :css ? :to_css : :to_sass)
+      SASSBuilder.new(theme, addons).send(format == :css ? :to_css : :to_sass)
     end
 
     Cache[cache_key].update_attributes! :value => body
@@ -56,12 +57,16 @@ class AssetsController < ApplicationController
 
   private
 
+  def addons
+    ScratchPad::Addon::Widget.enabled + ScratchPad::Addon::NodeExtension.enabled
+  end
+
   def format(default_format)
     params[:format] ? params[:format].to_sym : default_format
   end
 
   def theme
-    @theme ||= Theme[params[:theme]]
+    @theme ||= ScratchPad::Addon::Theme[params[:theme]]
   end
 
   def gather_scripts!
@@ -79,7 +84,7 @@ class AssetsController < ApplicationController
 
     script_files << Rails.root + 'public' + 'javascripts' + 'application.js'
 
-    script_files << (NodeExtension.enabled + Widget.enabled).map { |addon| addon.scripts }
+    script_files << addons.map { |addon| addon.scripts }
     script_files << theme.scripts
 
     reply = script_files.flatten.map do |filename|

@@ -73,9 +73,9 @@ class Admin::VocabulariesController < Admin::ApplicationController
   private
 
   def set_fieldset_ivars
-    @node_extensions_optional = NodeExtension.all.map { |ne| [ne.name, ne.machine_name] }
+    @node_extensions_optional = ScratchPad::Addon::NodeExtension.all.map { |ne| [ne.title, ne.machine_name] }
     @node_extensions_optional_selected = @vocabulary.node_types_optional.map { |ne| ne.machine_name }
-    @node_extensions_required = NodeExtension.all.map { |ne| [ne.name, ne.machine_name] }
+    @node_extensions_required = ScratchPad::Addon::NodeExtension.all.map { |ne| [ne.title, ne.machine_name] }
     @node_extensions_required_selected = @vocabulary.node_types_required.map { |ne| ne.machine_name }
   end
 end

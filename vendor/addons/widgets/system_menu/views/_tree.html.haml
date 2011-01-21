@@ -1,5 +1,5 @@
 - if items.present?
-  %ul<>
+  %menu<>
     - items.each do |item|
       %li<>
         - link = link_to_if item.href, item.name, item.href
@@ -8,4 +8,4 @@
         - else
           = link
         - if item.children
-          = show_addon SystemMenu, '_tree', :items => item.children
+          = show_addon Widgets::SystemMenu, '_tree', :items => item.children

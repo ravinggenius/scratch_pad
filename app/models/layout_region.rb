@@ -3,5 +3,5 @@ class LayoutRegion
 
   key :name, String, :required => true
   key :wrapper, String
-  key :widgets, AddonArray
+  key :widgets, WidgetArray
 end

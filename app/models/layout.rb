@@ -14,7 +14,7 @@ class Layout
   end
 
   def custom_regions
-    regions.reject { |r| Theme.default_regions.include? r.name }
+    regions.reject { |r| ScratchPad::Addon::Theme.default_regions.include? r.name }
   end
 
   def to_param

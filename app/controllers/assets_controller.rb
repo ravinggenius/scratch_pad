@@ -43,10 +43,8 @@ class AssetsController < ApplicationController
     cache_key = [:core, :styles, theme.machine_name, format]
 
     body = if (Rails.env.to_sym == :production) && !Cache[cache_key].expired?
-      Rails.logger.info "CACHE[#{cache_key.join '.'}]"
       Cache[cache_key].value
     else
-      Rails.logger.info "Rebuilding CACHE[#{cache_key.join '.'}]"
       SASSBuilder.new(theme, addons).send(format == :css ? :to_css : :to_sass)
     end
 

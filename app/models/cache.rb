@@ -8,6 +8,10 @@ class Cache
 
   timestamps!
 
+  before_save do |cache|
+    Rails.logger.info "Rebuilding CACHE[#{cache.key}]"
+  end
+
   # NOTE MongoMapper implements #valid?
   def expired?
     value.nil? || ((updated_at + 1.day) < Time.now)
@@ -15,6 +19,7 @@ class Cache
 
   def self.[](*key)
     key = key.join KEY_GLUE
+    Rails.logger.info "Reading from CACHE[#{key}]"
     @loaded ||= {}
     @loaded[key] ||= Cache.first_or_new(:key => key)
   end
@@ -22,5 +27,6 @@ class Cache
   def self.expire_all
     delete_all
     @loaded = {}
+    Rails.logger.info 'CACHE reset'
   end
 end

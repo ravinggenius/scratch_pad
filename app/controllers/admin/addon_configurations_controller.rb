@@ -19,10 +19,8 @@ class Admin::AddonConfigurationsController < Admin::ApplicationController
       addons.each do |addon|
         if addon.enabled? && !params[type_name][addon.machine_name]
           addon.disable
-          Rails.logger.info "#{addon} disabled"
         elsif addon.disabled? && params[type_name][addon.machine_name]
           addon.enable
-          Rails.logger.info "#{addon} enabled"
         end
       end
     end

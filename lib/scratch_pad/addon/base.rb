@@ -106,6 +106,7 @@ module ScratchPad::Addon
       (@settings[ms] || []).each do |setting|
         Setting.first_or_create setting.merge(:scope => [ms, setting[:scope]].join(Setting::SCOPE_GLUE))
       end
+      Rails.logger.info "#{self} enabled"
       ms
     end
 
@@ -116,6 +117,7 @@ module ScratchPad::Addon
         Setting.first(:scope => [ms, setting[:scope]].join(Setting::SCOPE_GLUE)).try :delete
       end
       configurator.first(:name => self.machine_name).try :delete
+      Rails.logger.info "#{self} disabled"
       ms
     end
 

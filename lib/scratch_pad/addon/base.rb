@@ -170,9 +170,12 @@ module ScratchPad::Addon
       ActiveSupport::Deprecation.warn "#{name}.#{old_method} has been depricated. Please use #{name}.#{new_method} instead.", caller
     end
 
+    # ScratchPad::Addon::Theme => 'theme'
+    # ScratchPad::Addon::Widget => 'widget'
+    # Themes::Branding => 'themes.branding'
+    # Widgets::GoogleAnalytics => 'widgets.google_analytics'
     def self.message_scope
-      ancestors = self.ancestors
-      ancestors[0..(ancestors.find_index(Base) - 1)].map { |ancestor| ancestor.name.underscore }.reverse.join Setting::SCOPE_GLUE
+      addon_types.include?(self) ? machine_name : [addon_type.machine_name.pluralize, machine_name].join(Setting::SCOPE_GLUE)
     end
   end
 end

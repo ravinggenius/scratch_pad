@@ -121,11 +121,11 @@ $experimental-support-for-#{vendor}: #{setting.value.blank? ? 'false' : setting.
 
   def font_paths(font_files)
     others = FONT_TYPES.keys.map do |type|
-      "'#{assets_static_path(@theme.machine_name, :fonts, font_files[type])}', #{FONT_TYPES[type]}" if font_files.has_key? type
+      "'#{assets_static_path(:theme, @theme.machine_name, :fonts, font_files[type])}', #{FONT_TYPES[type]}" if font_files.has_key? type
     end.compact.join ', '
 
     reply = others.blank? ? '' : "font-files(#{others})"
-    reply = [reply, "'#{assets_static_path(@theme.machine_name, :fonts, font_files[:eot])}', eot"].join ', ' if font_files.key? :eot
+    reply = [reply, "'#{assets_static_path(:theme, @theme.machine_name, :fonts, font_files[:eot])}', eot"].join ', ' if font_files.key? :eot
     reply
   end
 

@@ -23,7 +23,7 @@ class Admin::ThemesController < Admin::ApplicationController
 
     respond_to do |format|
       if setting.update_attributes :value => theme.machine_name
-        format.html { redirect_to(admin_themes_url, :notice => "#{theme.name} was set as #{params[:scope]} theme.") }
+        format.html { redirect_to(admin_themes_url, :notice => "#{theme.title} was set as #{params[:scope]} theme.") }
         format.xml  { head :ok }
       else
         format.html { redirect_to(admin_themes_url, :error => setting.errors.full_messages) }

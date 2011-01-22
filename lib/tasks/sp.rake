@@ -15,9 +15,9 @@ namespace :sp do
     Rake::Task['sp:clear_cache'].invoke
   end
 
-  desc 'Wipe out asset cache and force a rebuild'
+  desc 'Wipe out asset cache and force a rebuild. Requires a server restart'
   task :clear_cache => :environment do
-    Cache.expire_all
+    puts Cache.expire_all
   end
 
   namespace :install do

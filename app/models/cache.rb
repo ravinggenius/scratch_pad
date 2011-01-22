@@ -27,6 +27,6 @@ class Cache
   def self.expire_all
     delete_all
     @loaded = {}
-    Rails.logger.info 'CACHE reset'
+    Rails.logger.info 'CACHE reset: restart server for changes to take effect'
   end
 end

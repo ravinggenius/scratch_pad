@@ -30,15 +30,7 @@ module ScratchPad::Addon
     end
 
     def self.fonts
-      reply = {}
-      @fonts ||= {}
-      (@fonts[message_scope] || {}).each do |font_name, font_files|
-        reply[font_name] = {}
-        font_files.each do |ext, file_name|
-          reply[font_name][ext] = Pathname.new file_name
-        end
-      end
-      reply
+      @fonts[message_scope] || []
     end
 
     def self.default_layout
@@ -69,11 +61,11 @@ module ScratchPad::Addon
       super
     end
 
-    def self.register_font(use_name, font_files = {})
+    def self.register_font(use_name, base_path, license = nil, &block)
       ms = message_scope
       @fonts ||= {}
-      @fonts[ms] ||= {}
-      @fonts[ms][use_name] = font_files
+      @fonts[ms] ||= []
+      @fonts[ms] << ScratchPad::Font.new(use_name, base_path, license, &block)
     end
 
     def self.register_layout(name, options = {}, &regions_block)

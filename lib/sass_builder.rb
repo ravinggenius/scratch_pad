@@ -111,9 +111,14 @@ $experimental-support-for-#{vendor}: #{setting.value.blank? ? 'false' : setting.
 
   def sass_for_fonts
     reply = ''
-    @theme.fonts.each do |font_name, font_files|
+    @theme.fonts.each do |font|
+      license = if font.license
+        <<-SASS
+/* #{font.name} license: #{assets_static_path :theme, @theme.machine_name, :fonts, font.license}
+        SASS
+      end
       reply << <<-SASS
-@include font-face("#{font_name}", #{font_paths(font_files)})
+#{license || ''}@include font-face("#{font.name}", #{font_paths(font.files_by_extension)})
       SASS
     end
     reply

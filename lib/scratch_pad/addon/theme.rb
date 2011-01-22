@@ -30,7 +30,7 @@ module ScratchPad::Addon
     end
 
     def self.fonts
-      @fonts[message_scope] || []
+      (@fonts || {})[message_scope] || []
     end
 
     def self.default_layout

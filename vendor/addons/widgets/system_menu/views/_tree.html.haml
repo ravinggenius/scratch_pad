@@ -1,8 +1,8 @@
 - if items.present?
   %menu<>
     - items.each do |item|
-      %li<>
-        - link = link_to_if item.href, item.name, item.href
+      %li{ :class => item.href && current_page?(item.href) ? 'current' : nil }<>
+        - link = current_page?(item.href) ? item.name : link_to_if(item.href, item.name, item.href)
         - if item.children
           %label<>= link
         - else

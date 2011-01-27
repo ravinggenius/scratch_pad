@@ -113,7 +113,7 @@ class Node
 
   def ensure_valid_state
     states = self.class::STATES.map &:to_s
-    errors.add :state, "must be one of #{states.join ', '}" unless states.include state.to_s
+    errors.add :state, "must be one of #{states.join ', '}" unless states.include? state.to_s
   end
 
   # TODO move to before_save &block

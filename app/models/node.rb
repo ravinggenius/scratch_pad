@@ -7,7 +7,7 @@ class Node
   include MongoMapper::Document
   include Relationship
 
-  key :path, String, :unique => true, :allow_nil => true
+  key :path, String
   key :filter_group_id, BSON::ObjectId, :required => true
   key :children_ids, Array, :typecast => 'BSON::ObjectId'
   key :state, String, :required => true, :default => :draft # TODO formalize states
@@ -22,6 +22,7 @@ class Node
   before_save :set_children_ids
 
   validate :ensure_not_ancestor_of_self
+  validate :ensure_unique_path_if_present
 
   def children
     (self.children_ids || []).map { |child_id| Node.find child_id }.reject &:blank?
@@ -94,6 +95,13 @@ class Node
       descendants
     rescue SystemStackError => e
       errors.add :parent, 'may not be its own descendant'
+    end
+  end
+
+  def ensure_unique_path_if_present
+    if path.present?
+      paths = Node.all.reject { |n| n.id == id }.map(&:path).reject(&:blank?)
+      errors.add :path, 'must be unique or blank' if paths.include?(path)
     end
   end
 

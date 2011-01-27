@@ -11,6 +11,9 @@
     %div.field
       = form.label :filter_group_id, 'Filter Group'
       = form.collection_select :filter_group_id, @filter_groups, :id, :name, :selected => @node.filter_group.id
+    %div.field
+      = form.label :state, 'State'
+      = form.select :state, @node_states, :selected => @node.state
     - if @node.new?
       %div.field
         = label_tag :node_type, 'Node Type'

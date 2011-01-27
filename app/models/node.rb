@@ -2,6 +2,11 @@
 # http://railstips.org/blog/archives/2010/06/16/mongomapper-08-goodies-galore/
 
 class Node
+  STATES = [
+    :draft,
+    :published
+  ]
+
   attr_writer :children
 
   include MongoMapper::Document
@@ -10,7 +15,7 @@ class Node
   key :path, String
   key :filter_group_id, BSON::ObjectId, :required => true
   key :children_ids, Array, :typecast => 'BSON::ObjectId'
-  key :state, String, :required => true, :default => :draft # TODO formalize states
+  key :state, String, :required => true, :default => :draft
   key :title, String, :required => true
 
   timestamps!
@@ -23,6 +28,7 @@ class Node
 
   validate :ensure_not_ancestor_of_self
   validate :ensure_unique_path_if_present
+  validate :ensure_valid_state
 
   def children
     (self.children_ids || []).map { |child_id| Node.find child_id }.reject &:blank?
@@ -103,6 +109,11 @@ class Node
       paths = Node.all.reject { |n| n.id == id }.map(&:path).reject(&:blank?)
       errors.add :path, 'must be unique or blank' if paths.include?(path)
     end
+  end
+
+  def ensure_valid_state
+    states = self.class::STATES.map &:to_s
+    errors.add :state, "must be one of #{states.join ', '}" unless states.include state.to_s
   end
 
   # TODO move to before_save &block

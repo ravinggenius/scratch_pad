@@ -104,6 +104,8 @@ class Admin::NodesController < Admin::ApplicationController
       end.sort.insert 0, ['Node', 'node']
     end
 
+    @node_states = Node::STATES.map { |state| [state, state] }
+
     @filter_groups = FilterGroup.all.sort_by &:name
 
     set_vocabulary_ivars

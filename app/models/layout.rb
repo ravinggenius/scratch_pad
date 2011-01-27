@@ -9,8 +9,7 @@ class Layout
 
   def region(region_name)
     region_name = region_name.to_sym
-    # FIXME find a better way to do this
-    regions.select { |r| r.name.to_sym == region_name }.first
+    regions.detect { |r| r.name.to_sym == region_name }
   end
 
   def custom_regions

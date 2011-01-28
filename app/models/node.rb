@@ -26,8 +26,8 @@ class Node
 
   before_save :set_children_ids
 
+  validates_uniqueness_of :path, :allow_blank => true
   validate :ensure_not_ancestor_of_self
-  validate :ensure_unique_path_if_present
   validate :ensure_valid_state
 
   def children
@@ -101,13 +101,6 @@ class Node
       descendants
     rescue SystemStackError => e
       errors.add :parent, 'may not be its own descendant'
-    end
-  end
-
-  def ensure_unique_path_if_present
-    if path.present?
-      paths = Node.all.reject { |n| n.id == id }.map(&:path).reject(&:blank?)
-      errors.add :path, 'must be unique or blank' if paths.include?(path)
     end
   end
 

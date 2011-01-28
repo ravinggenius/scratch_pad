@@ -5,6 +5,7 @@ project_path = Compass::AppIntegration::Rails.root
 environment = Compass::AppIntegration::Rails.env
 
 output_style = :compact
+preferred_syntax = :sass
 relative_assets = false
 
 sass_dir = 'app/stylesheets'

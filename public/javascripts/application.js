@@ -1,6 +1,6 @@
 var scratchPad;
 
-$(document).ready(function () {
+jQuery(function ($) {
   var _sp = {
     helpers: {
       flash: {
@@ -91,7 +91,7 @@ $(document).ready(function () {
   };
 });
 
-$(document).ready(function () {
+jQuery(function ($) {
   $('select#node_type').change(function (eventObject) {
     $.ajax({
       url: scratchPad.helpers.urlFor('admin_nodes_new_node_type', {

@@ -1,25 +1,26 @@
 source :rubygems
 
-gem 'bcrypt-ruby',           '~> 2.1', :require => 'bcrypt'
-gem 'bson_ext',              '~> 1.1'
-gem 'compass',               '~> 0.10'
-gem 'compass-susy-plugin',   '~> 0.7'
-gem 'haml',                  '~> 3.0'
+gem 'bcrypt-ruby',           :require => 'bcrypt'
+gem 'bson_ext'
+gem 'compass'
+gem 'compass-susy-plugin'
+gem 'haml'
 gem 'haml-rails'
 gem 'hirb'
-gem 'maruku',                '~> 0.6'
-gem 'mongo',                 '~> 1.1'
-gem 'mongo_mapper',          '~> 0.8'
+gem 'maruku'
+gem 'mongo'
+gem 'mongo_mapper',          :branch => :rails3
 gem 'rails',                 '~> 3.0'
-gem 'rspec-rails',           '~> 2.1'
 gem 'ruby-prof'
 gem 'thin'
 
 group :development do
   gem 'awesome_print'
   gem 'interactive_editor'
+  gem 'jquery-rails'
   gem 'looksee'
   gem 'nifty-generators'
+  gem 'rails3-generators'
   gem 'ruby-debug19'
   gem 'ruby-debug-ide19'
   gem 'wirble'
@@ -27,5 +28,15 @@ end
 
 group :test do
   gem 'autotest'
+  gem 'capybara'
+  gem 'cucumber'
+  gem 'cucumber-rails'
+  gem 'factory_girl'
+  gem 'factory_girl_rails'
   gem 'rcov'
+end
+
+group :development, :test do
+  gem 'rspec'
+  gem 'rspec-rails'
 end

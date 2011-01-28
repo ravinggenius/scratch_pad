@@ -18,6 +18,7 @@ gem 'thin'
 group :development do
   gem 'awesome_print'
   gem 'interactive_editor'
+  gem 'looksee'
   gem 'nifty-generators'
   gem 'ruby-debug19'
   gem 'ruby-debug-ide19'

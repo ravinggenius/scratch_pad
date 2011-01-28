@@ -2,7 +2,7 @@ file_name = Rails.root + 'config' + 'database.yml'
 
 if File.exists? file_name
   y = YAML.load_file(file_name)[Rails.env]
-  mongo_url = "mongodb://#{y['host']}#{y['port'].nil? ? '' : ":#{y['port']}"}/#{y['database']}" # 'ongodb://localhost/scratch_pad
+  mongo_url = "mongodb://#{y['host']}#{y['port'].nil? ? '' : ":#{y['port']}"}/#{y['database']}"
 end
 
 MongoMapper.config = {

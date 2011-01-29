@@ -67,6 +67,7 @@ class AssetsController < ApplicationController
     @theme ||= ScratchPad::Addon::Theme[params[:theme]]
   end
 
+  # TODO look into using Jammit to concatenate JavaScript
   def gather_scripts!
     cache_key = [:core, :styles, theme.machine_name, :js]
 

@@ -69,17 +69,9 @@ module ScratchPad::Addon
 
     def self.all_by_type
       reply = {}
-
       addon_types.each do |addon_type|
-        reply[addon_type] = []
-
-        (Rails.root + 'vendor' + 'addons' + addon_type.machine_name.pluralize).children.each do |child|
-          name = child.basename.to_s
-          next if name =~ /^\./
-          reply[addon_type] << addon_type[name]
-        end
+        reply[addon_type] = addon_type.title.pluralize.constantize.constants.map { |constant| addon_type[constant] }
       end
-
       reply
     end
 

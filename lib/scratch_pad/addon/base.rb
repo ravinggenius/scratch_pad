@@ -2,11 +2,15 @@ module ScratchPad::Addon
   class Base
     def self.[](name)
       name = name.to_s.camelize
-      if addon_types.map(&:title).include? name
-        "ScratchPad::Addon::#{name}"
-      else
-        "#{title.pluralize}::#{name}"
-      end.constantize
+      klass = addon_types.map(&:title).include?(name) ? "ScratchPad::Addon::#{name}" : "#{title.pluralize}::#{name}"
+
+      begin
+        klass.constantize
+      rescue
+        warning = "Could not load #{klass}"
+        Rails.logger.error warning
+        raise warning
+      end
     end
 
     def self.<=>(other)

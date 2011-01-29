@@ -6,7 +6,7 @@ class AddonArray < Array
   def self.from_mongo(values)
     (values || []).map do |v|
       klass = name.sub 'Array', ''
-      v.respond_to?(:machine_name) ? v : "ScratchPad::Addon::#{klass}".constantize[v]
-    end
+      v.respond_to?(:machine_name) ? v : "ScratchPad::Addon::#{klass}".constantize[v] rescue nil
+    end.compact
   end
 end

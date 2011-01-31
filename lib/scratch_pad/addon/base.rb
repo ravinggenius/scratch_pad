@@ -21,38 +21,41 @@ module ScratchPad::Addon
       %w[images]
     end
 
-    def self.root(relative = false)
-      reply = Pathname.new(self.superclass.title.pluralize.underscore) + self.title.underscore
-      reply = Rails.root + 'vendor' + 'addons' + reply unless relative
-      reply
+    # NOTE override this method when implementing a gem addon
+    def self.root
+      Rails.root + 'vendor' + 'addons' + self.superclass.machine_name.pluralize + self.machine_name
     end
 
-    def self.images_path(relative = false)
-      root(relative) + 'images'
+    def self.public_path
+      root + 'public'
     end
 
-    def self.scripts_path(relative = false)
-      root(relative) + 'styles'
+    def self.images_path
+      public_path + 'images'
     end
 
-    def self.styles_path(relative = false)
-      root(relative) + 'styles'
+    def self.scripts_path
+      root + 'scripts'
     end
 
-    def self.views_path(relative = false)
-      root(relative) + 'views'
+    def self.styles_path
+      root + 'styles'
+    end
+
+    def self.views_path
+      root + 'views'
     end
 
     def self.images
-      Dir[root + 'images' + '*'].entries.map { |i| Pathname.new i }
+      Dir[images_path + '*'].entries.map { |i| Pathname.new i }
     end
 
     def self.scripts
-      Dir[root + 'scripts' + '*.js'].entries.map { |s| Pathname.new s }
+      Dir[scripts_path + '*.js'].entries.map { |s| Pathname.new s }
     end
 
     def self.styles
-      Dir[root + 'styles' + '*'].entries.map { |s| Pathname.new s }
+      Dir[styles_path + '*'].entries.map { |s| Pathname.new s }
     end
 
     def self.stylesheets

@@ -25,8 +25,8 @@ module ScratchPad::Addon
       super << 'fonts'
     end
 
-    def self.fonts_path(relative = false)
-      root(relative) + 'fonts'
+    def self.fonts_path
+      public_path + 'fonts'
     end
 
     def self.fonts

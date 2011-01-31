@@ -46,7 +46,7 @@ class SASSBuilder
     (@addons + [@theme]).each do |addon|
       imports = addon.styles.map do |path|
         media = path.basename.to_s.split('.').first
-        addon.root(true) + 'styles' + media unless media.starts_with? '_'
+        addon.styles_path + media unless media.starts_with? '_'
       end.compact
       reply << sass_for_imports(imports)
     end
@@ -102,7 +102,7 @@ $experimental-support-for-#{vendor}: #{setting.value.blank? ? 'false' : setting.
     (@addons + [@theme]).each do |addon|
       if File.exist? addon.styles_path + '_variables.sass'
         reply << <<-SASS
-@import '#{addon.styles_path(true) + 'variables'}'
+@import '#{addon.styles_path + 'variables'}'
         SASS
       end
     end

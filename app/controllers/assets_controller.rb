@@ -4,7 +4,7 @@ class AssetsController < ApplicationController
   def static
     addon_type = ScratchPad::Addon::Base[params[:addon_type]]
     addon = addon_type[params[:addon]]
-    asset_type_path = (addon.root + params[:asset_type]).expand_path
+    asset_type_path = (addon.public_path + params[:asset_type]).expand_path
     asset_path = (asset_type_path + params[:asset_name]).expand_path
 
     if File.exists?(asset_path) && addon.static_asset_types.include?(params[:asset_type]) && asset_path.to_path.starts_with?(asset_type_path.to_path)

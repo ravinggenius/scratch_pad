@@ -165,6 +165,8 @@ GEM
     ruby_core_source (0.1.4)
       archive-tar-minitar (>= 0.5.2)
     rubyzip (0.9.4)
+    scratch_pad-filters-maruku (0.0.2)
+      maruku
     selenium-webdriver (0.1.2)
       childprocess (~> 0.1.5)
       ffi (~> 0.6.3)
@@ -206,7 +208,6 @@ DEPENDENCIES
   interactive_editor
   jquery-rails
   looksee
-  maruku
   mongo
   mongo_mapper
   nifty-generators
@@ -218,5 +219,6 @@ DEPENDENCIES
   ruby-debug-ide19
   ruby-debug19
   ruby-prof
+  scratch_pad-filters-maruku
   thin
   wirble

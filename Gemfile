@@ -7,12 +7,13 @@ gem 'compass-susy-plugin'
 gem 'haml'
 gem 'haml-rails'
 gem 'hirb'
-gem 'maruku'
 gem 'mongo'
 gem 'mongo_mapper', :branch => :rails3
 gem 'rails', '~> 3.0'
 gem 'ruby-prof'
 gem 'thin'
+
+gem 'scratch_pad-filters-maruku'
 
 group :development do
   gem 'awesome_print'

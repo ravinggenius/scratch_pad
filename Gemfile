@@ -8,7 +8,7 @@ gem 'haml'
 gem 'haml-rails'
 gem 'hirb'
 gem 'mongo'
-gem 'mongo_mapper', :branch => :rails3
+gem 'mongo_mapper'
 gem 'rails', '~> 3.0'
 gem 'ruby-prof'
 gem 'thin'

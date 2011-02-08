@@ -93,6 +93,7 @@ class ApplicationController < ActionController::Base
   def set_theme_ivars(frontend_backend)
     theme_name = Setting[:theme, frontend_backend]
     theme_name = params[:force_theme] if authorize && params[:force_theme]
+    # TODO if theme is not available, set flash.error and attempt to load default theme
     @selected_theme = ScratchPad::Addon::Theme[theme_name]
     # TODO actually select a layout based on what page or node is being viewed
     layout_name = nil # nil selects the default layout

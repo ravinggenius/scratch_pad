@@ -4,7 +4,7 @@ project_type = :rails
 project_path = Compass::AppIntegration::Rails.root
 environment = Compass::AppIntegration::Rails.env
 
-output_style = :compact
+output_style = (Rails.env.production? ? :compressed : :expanded)
 preferred_syntax = :sass
 relative_assets = false
 

@@ -151,12 +151,14 @@ namespace :sp do
     end
 
     namespace :themes do
-      # invoke with rake sp:addons:themes:activate[frontend,default]
       desc 'Set a Theme as active. Useful for emergency recovery from a broken Theme'
       task :activate, :backend_or_frontend, :theme, :needs => :environment do |t, args|
+        args.with_defaults :backend_or_frontend => :frontend
+        args.with_defaults :theme => (args[:backend_or_frontend].to_sym == :backend ? :default_admin : :default)
         setting = Setting.first_in_scope :theme, args[:backend_or_frontend]
         if setting
           theme = ScratchPad::Addon::Theme[args[:theme]]
+          puts "Setting #{args[:backend_or_frontend]} theme to #{theme.title}"
           theme.enable
           setting.update_attributes :value => theme.machine_name
         end

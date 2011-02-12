@@ -42,7 +42,7 @@ class AssetsController < ApplicationController
     format = format(:css)
     cache_key = [:core, :styles, theme.machine_name, format]
 
-    body = if (Rails.env.to_sym == :production) && !Cache[cache_key].expired?
+    body = if Rails.env.production? && !Cache[cache_key].expired?
       Cache[cache_key].value
     else
       SASSBuilder.new(theme, addons).send(format == :css ? :to_css : :to_sass)
@@ -71,7 +71,7 @@ class AssetsController < ApplicationController
   def gather_scripts!
     cache_key = [:core, :styles, theme.machine_name, :js]
 
-    if Rails.env.to_sym == :production
+    if Rails.env.production?
       return Cache[cache_key].value unless Cache[cache_key].expired?
     end
 

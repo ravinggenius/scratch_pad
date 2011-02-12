@@ -137,7 +137,7 @@ module ApplicationHelper
 <!--[if (gt IE 9)|!(IE)]><!--> <html #{hash_to_attrs attributes.merge(:class => %w[no-js])}>                        <!--<![endif]-->
     HTML
     if should_compress
-      html_open.gsub! /\s+/, ' ' unless should_compress.is_a?(Symbol) && (should_compress != Rails.env.to_sym)
+      html_open.gsub! /\s+/, ' ' unless should_compress.is_a?(Symbol) && !Rails.env.send(should_compress.to_s + '?')
     end
     surround html_open, '</html>', &content
   end

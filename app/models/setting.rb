@@ -19,6 +19,24 @@ class Setting
     all :scope => /^#{scope.join SCOPE_GLUE}/
   end
 
+  def self.global_settings
+    s = Struct.new :scope, :name, :value
+
+   [
+      s.new([:site, :name],                  'Site Name',                          'ScratchPad'),
+      s.new([:site, :tagline],               'Site Tagline',                       '...'),
+      s.new([:user, :password, :min_length], 'Minimum Password Length',            8),
+      s.new([:theme, :frontend],             'Frontend Theme',                     :default),
+      s.new([:theme, :backend],              'Backend Theme',                      :default_admin),
+      s.new([:theme, :support, :khtml],      'Experimental Support For KHTML',     false),
+      s.new([:theme, :support, :microsoft],  'Experimental Support For Microsoft', false),
+      s.new([:theme, :support, :mozilla],    'Experimental Support For Mozilla',   false),
+      s.new([:theme, :support, :opera],      'Experimental Support For Opera',     false),
+      s.new([:theme, :support, :svg],        'Experimental Support For SVG',       true),
+      s.new([:theme, :support, :webkit],     'Experimental Support For WebKit',    false)
+    ] 
+  end
+
   private
 
   def self.load_scope(*scope)

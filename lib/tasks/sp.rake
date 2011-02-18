@@ -23,21 +23,7 @@ namespace :sp do
   namespace :install do
     desc 'Adds the required settings'
     task :settings => [:environment, :users] do
-      S = Struct.new :scope, :name, :value
-
-      [
-        S.new([:site, :name],                  'Site Name',                          'ScratchPad'),
-        S.new([:site, :tagline],               'Site Tagline',                       '...'),
-        S.new([:user, :password, :min_length], 'Minimum Password Length',            8),
-        S.new([:theme, :frontend],             'Frontend Theme',                     :default),
-        S.new([:theme, :backend],              'Backend Theme',                      :default_admin),
-        S.new([:theme, :support, :khtml],      'Experimental Support For KHTML',     false),
-        S.new([:theme, :support, :microsoft],  'Experimental Support For Microsoft', false),
-        S.new([:theme, :support, :mozilla],    'Experimental Support For Mozilla',   false),
-        S.new([:theme, :support, :opera],      'Experimental Support For Opera',     false),
-        S.new([:theme, :support, :svg],        'Experimental Support For SVG',       true),
-        S.new([:theme, :support, :webkit],     'Experimental Support For WebKit',    false)
-      ].each do |s|
+      Setting.global_settings.each do |s|
         s.scope = s.scope.join Setting::SCOPE_GLUE
         setting = Setting.first_or_create :scope => s.scope
         setting.update_attributes :name => s.name, :value => s.value if setting.new?

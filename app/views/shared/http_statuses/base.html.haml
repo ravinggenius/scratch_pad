@@ -1,7 +1,5 @@
-%ul
-  %li= "@exception.inspect #=> #{@exception.inspect}"
-  %li= "@exception.to_s #=> #{@exception.to_s}"
-  %li= "@exception.class.name.split('::').last #=> #{@exception.class.name.split('::').last}"
-  %li= "@exception.status_code #=> #{@exception.status_code}"
-  %li= "@exception.status #=> #{@exception.status}"
-  %li= "@exception.message #=> #{@exception.message}"
+%header
+  %span.h= @exception.status.to_s.titleize
+
+%secion
+  %p= "There was an error with your request: #{@exception.message}. The server responded with a #{@exception.status_code} (#{@exception.status.to_s.camelize})."

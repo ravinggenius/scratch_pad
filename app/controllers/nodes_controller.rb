@@ -16,12 +16,13 @@ class NodesController < ApplicationController
   def show
     @node = Node.find params[:id]
 
+    raise HTTPStatuses::NotFound unless @node.present?
+
     # if extension is present and is in html_extensions list, redirect to human_node_url
     if html_extensions.include? current_extension
       return redirect_to human_node_url(@node.to_path), :status => :moved_permanently
     end
 
-    # TODO handle 404 gracefully
     respond_with @node
   end
 
@@ -37,6 +38,8 @@ class NodesController < ApplicationController
       @node = Node.from_path params[:path]
       @node = Node.from_path extensionless_path(params[:path]) unless @node.present?
 
+      raise HTTPStatuses::NotFound unless @node.present?
+
       if @node.path.present? && (request.path != "/#{@node.path}")
         return redirect_to human_node_url(@node.to_path), :status => :moved_permanently
       end
@@ -45,7 +48,6 @@ class NodesController < ApplicationController
       return redirect_to node_url(node, current_extension), :status => :moved_permanently
     end
 
-    # TODO handle 404 gracefully
     render :action => :show
   end
 

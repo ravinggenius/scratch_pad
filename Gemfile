@@ -10,6 +10,7 @@ gem 'hirb'
 gem 'mongo'
 gem 'mongo_mapper'
 gem 'rails', '~> 3.0'
+gem 'rspec-rails'
 gem 'ruby-prof'
 gem 'thin'
 
@@ -39,5 +40,4 @@ end
 
 group :development, :test do
   gem 'rspec'
-  gem 'rspec-rails'
 end

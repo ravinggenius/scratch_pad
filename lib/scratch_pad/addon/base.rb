@@ -137,7 +137,7 @@ module ScratchPad::Addon
     end
 
     def self.setting(scope)
-      Setting[message_scope, scope]
+      Setting.parse_string_for_global_settings Setting[message_scope, scope]
     end
 
     def self.settings

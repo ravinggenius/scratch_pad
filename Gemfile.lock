@@ -165,8 +165,23 @@ GEM
     ruby_core_source (0.1.4)
       archive-tar-minitar (>= 0.5.2)
     rubyzip (0.9.4)
-    scratch_pad-filters-maruku (0.0.2)
+    scratch_pad-filters-maruku (0.0.3)
       maruku
+    scratch_pad-filters-paragraph_stripper (0.0.1)
+    scratch_pad-node_extensions-list (0.0.1)
+    scratch_pad-node_extensions-page (0.0.1)
+    scratch_pad-node_extensions-post (0.0.1)
+    scratch_pad-node_extensions-table (0.0.1)
+    scratch_pad-node_extensions-text_block (0.0.1)
+    scratch_pad-themes-default (0.0.1)
+      compass-susy-plugin
+    scratch_pad-themes-default_admin (0.0.1)
+      compass-susy-plugin
+    scratch_pad-widgets-branding (0.0.1)
+    scratch_pad-widgets-copyright (0.0.1)
+    scratch_pad-widgets-flash (0.0.1)
+    scratch_pad-widgets-system_menu (0.0.1)
+    scratch_pad-widgets-yielder (0.0.1)
     selenium-webdriver (0.1.3)
       childprocess (~> 0.1.5)
       ffi (~> 0.6.3)
@@ -197,7 +212,6 @@ DEPENDENCIES
   bson_ext
   capybara
   compass
-  compass-susy-plugin
   cucumber
   cucumber-rails
   factory_girl
@@ -220,5 +234,18 @@ DEPENDENCIES
   ruby-debug19
   ruby-prof
   scratch_pad-filters-maruku
+  scratch_pad-filters-paragraph_stripper
+  scratch_pad-node_extensions-list
+  scratch_pad-node_extensions-page
+  scratch_pad-node_extensions-post
+  scratch_pad-node_extensions-table
+  scratch_pad-node_extensions-text_block
+  scratch_pad-themes-default
+  scratch_pad-themes-default_admin
+  scratch_pad-widgets-branding
+  scratch_pad-widgets-copyright
+  scratch_pad-widgets-flash
+  scratch_pad-widgets-system_menu
+  scratch_pad-widgets-yielder
   thin
   wirble

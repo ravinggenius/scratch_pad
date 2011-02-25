@@ -34,7 +34,7 @@ class Setting
       s.new([:theme, :support, :opera],      'Experimental Support For Opera',     false),
       s.new([:theme, :support, :svg],        'Experimental Support For SVG',       true),
       s.new([:theme, :support, :webkit],     'Experimental Support For WebKit',    false)
-    ] 
+    ]
   end
 
   def self.parse_string_for_global_settings(phrase)

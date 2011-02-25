@@ -40,7 +40,7 @@ class Setting
   def self.parse_string_for_global_settings(phrase)
     keys = {}
     global_settings.each { |s| keys[s.scope.join('_').to_sym] = self[s.scope] }
-    phrase % keys
+    (phrase || '') % keys
   end
 
   private

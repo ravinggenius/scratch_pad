@@ -21,9 +21,17 @@ module ScratchPad::Addon
       %w[images]
     end
 
-    # NOTE override this method when implementing a gem addon
+    def self.locate(file)
+      $:.find { |library| File.exists? File.join(library, file) }
+    end
+
     def self.root
-      Rails.root + 'vendor' + 'addons' + self.superclass.machine_name.pluralize + self.machine_name
+      path = locate "scratch_pad-#{addon_type.machine_name.pluralize}-#{machine_name}/#{machine_name}.rb"
+      if path
+        Pathname.new path
+      else
+        Rails.root + 'vendor' + 'addons' + addon_type.machine_name.pluralize + machine_name
+      end
     end
 
     def self.public_path

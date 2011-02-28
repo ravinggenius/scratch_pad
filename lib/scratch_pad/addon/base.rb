@@ -21,17 +21,10 @@ module ScratchPad::Addon
       %w[images]
     end
 
-    def self.locate(file)
-      $:.find { |library| File.exists? File.join(library, file) }
-    end
-
     def self.root
-      path = locate "scratch_pad-#{addon_type.machine_name.pluralize}-#{machine_name}/#{machine_name}.rb"
-      if path
-        Pathname.new path
-      else
-        Rails.root + 'vendor' + 'addons' + addon_type.machine_name.pluralize + machine_name
-      end
+      required_file = "scratch_pad-#{addon_type.machine_name.pluralize}-#{machine_name}/#{machine_name}.rb"
+      path = $:.find { |library| File.exists? File.join(library, required_file) }
+      path ? Pathname.new(path) : (Rails.root + 'vendor' + 'addons' + addon_type.machine_name.pluralize + machine_name)
     end
 
     def self.public_path

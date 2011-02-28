@@ -7,6 +7,9 @@ class User
   include BCrypt
   include Relationship
 
+  # TODO add devise to project
+  #devise :database_authenticatable, :recoverable, :rememberable, :validatable, :registerable
+
   attr_writer :password_confirmation
 
   key :email, String, :required => true, :unique => true

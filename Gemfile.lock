@@ -50,9 +50,11 @@ GEM
     celerity (0.8.8)
     childprocess (0.1.7)
       ffi (~> 0.6.3)
+    chunky_png (0.12.0)
     columnize (0.3.2)
-    compass (0.10.6)
-      haml (>= 3.0.4)
+    compass (0.11.beta.2)
+      chunky_png (~> 0.12.0)
+      sass (>= 3.1.0.alpha.218)
     compass-susy-plugin (0.8.1)
       compass (>= 0.10.0)
     cucumber (0.10.0)
@@ -77,7 +79,7 @@ GEM
       rake (>= 0.8.7)
     gherkin (2.3.3)
       json (~> 1.4.6)
-    haml (3.0.25)
+    haml (3.1.0.alpha.147)
     haml-rails (0.3.4)
       actionpack (~> 3.0)
       activesupport (~> 3.0)
@@ -113,7 +115,7 @@ GEM
       plucky (~> 0.3.6)
     nifty-generators (0.4.5)
     nokogiri (1.4.4)
-    plucky (0.3.6)
+    plucky (0.3.7)
       mongo (~> 1.1)
     polyglot (0.3.1)
     rack (1.2.1)
@@ -165,6 +167,7 @@ GEM
     ruby_core_source (0.1.4)
       archive-tar-minitar (>= 0.5.2)
     rubyzip (0.9.4)
+    sass (3.1.0.alpha.221)
     scratch_pad-filters-maruku (0.0.3)
       maruku
     scratch_pad-filters-paragraph_stripper (0.0.1)
@@ -211,12 +214,12 @@ DEPENDENCIES
   bcrypt-ruby
   bson_ext
   capybara
-  compass
+  compass (~> 0.11.beta)
   cucumber
   cucumber-rails
   factory_girl
   factory_girl_rails
-  haml
+  haml (~> 3.1.0.alpha)
   haml-rails
   hirb
   interactive_editor
@@ -233,6 +236,7 @@ DEPENDENCIES
   ruby-debug-ide19
   ruby-debug19
   ruby-prof
+  sass (~> 3.1.0.alpha)
   scratch_pad-filters-maruku
   scratch_pad-filters-paragraph_stripper
   scratch_pad-node_extensions-list

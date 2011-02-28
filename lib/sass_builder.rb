@@ -130,7 +130,7 @@ $experimental-support-for-#{vendor}: #{setting.value.blank? ? 'false' : setting.
     end.compact.join ', '
 
     reply = others.blank? ? '' : "font-files(#{others})"
-    reply = [reply, "'#{assets_static_path(:theme, @theme.machine_name, :fonts, font_files[:eot])}', eot"].join ', ' if font_files.key? :eot
+    reply = [reply, "'#{assets_static_path(:theme, @theme.machine_name, :fonts, font_files[:eot])}'"].join ', ' if font_files.key? :eot
     reply
   end
 

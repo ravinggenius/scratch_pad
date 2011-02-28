@@ -124,6 +124,7 @@ $experimental-support-for-#{vendor}: #{setting.value.blank? ? 'false' : setting.
     reply
   end
 
+  # FIXME make method clearer
   def font_paths(font_files)
     others = FONT_TYPES.keys.map do |type|
       "'#{assets_static_path(:theme, @theme.machine_name, :fonts, font_files[type])}', #{FONT_TYPES[type]}" if font_files.has_key? type

@@ -124,14 +124,19 @@ $experimental-support-for-#{vendor}: #{setting.value.blank? ? 'false' : setting.
     reply
   end
 
-  # FIXME make method clearer
   def font_paths(font_files)
-    others = FONT_TYPES.keys.map do |type|
-      "'#{assets_static_path(:theme, @theme.machine_name, :fonts, font_files[type])}', #{FONT_TYPES[type]}" if font_files.has_key? type
+    font_path = lambda { |type| assets_static_path :theme, @theme.machine_name, :fonts, font_files[type] }
+
+    other_fonts = FONT_TYPES.keys.map do |type|
+      "'#{font_path.call(type)}', #{FONT_TYPES[type]}" if font_files.has_key? type
     end.compact.join ', '
 
-    reply = others.blank? ? '' : "font-files(#{others})"
-    reply = [reply, "'#{assets_static_path(:theme, @theme.machine_name, :fonts, font_files[:eot])}'"].join ', ' if font_files.key? :eot
+    # wrap non-eot fonts in SASS font-files() method. eot font is specified separately and is not passed to font-files()
+    reply = other_fonts.blank? ? '' : "font-files(#{other_fonts})"
+
+    # select(&:present?) handles the case where we only have an eot font
+    reply = [reply, "'#{font_path.call(:eot)}'"].select(&:present?).join(', ') if font_files.key? :eot
+
     reply
   end
 

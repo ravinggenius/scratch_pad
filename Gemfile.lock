@@ -171,11 +171,11 @@ GEM
     scratch_pad-filters-maruku (0.0.3)
       maruku
     scratch_pad-filters-paragraph_stripper (0.0.1)
-    scratch_pad-node_extensions-list (0.0.1)
-    scratch_pad-node_extensions-page (0.0.1)
-    scratch_pad-node_extensions-post (0.0.1)
-    scratch_pad-node_extensions-table (0.0.1)
-    scratch_pad-node_extensions-text_block (0.0.1)
+    scratch_pad-node_extensions-list (0.0.2)
+    scratch_pad-node_extensions-page (0.0.2)
+    scratch_pad-node_extensions-post (0.0.2)
+    scratch_pad-node_extensions-table (0.0.2)
+    scratch_pad-node_extensions-text_block (0.0.2)
     scratch_pad-themes-default (0.0.1)
       compass-susy-plugin
     scratch_pad-themes-default_admin (0.0.1)

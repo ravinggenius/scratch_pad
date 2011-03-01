@@ -65,7 +65,8 @@ class Node
   end
 
   def self.title
-    name
+    match_data = /^NodeExtensions::(?<ne>.*)::Model$/.match name
+    match_data ? match_data[:ne] : name
   end
 
   def self.machine_name

@@ -27,10 +27,10 @@ namespace :spec do
       :theme,
       :widget
     ].each do |addon_type|
-      desc "Run the code examples in spec/addons/#{addon_type}"
-      RSpec::Core::RakeTask.new(addon_type => spec_prereq) do |t|
-        t.pattern = "./spec/addons/#{addon_type}_spec.rb"
-      end
+      #desc "Run the code examples in spec/addons/#{addon_type}"
+      #RSpec::Core::RakeTask.new(addon_type => spec_prereq) do |t|
+      #  t.pattern = "./spec/addons/#{addon_type}_spec.rb"
+      #end
     end
   end
 end

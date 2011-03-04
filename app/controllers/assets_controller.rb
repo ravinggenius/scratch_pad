@@ -29,7 +29,7 @@ class AssetsController < ApplicationController
         url_for params
       end
     rescue
-      'invalid parameters'
+      raise HTTPStatuses::UnprocessableEntity
     end
   end
 

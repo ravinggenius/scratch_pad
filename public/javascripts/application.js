@@ -80,6 +80,7 @@ jQuery(function ($) {
         } else if (typeof namedRoute === 'object') {
           options = namedRoute;
         }
+        // FIXME check status code
         return $.ajax({
           type: 'GET',
           url: '/assets/routes',

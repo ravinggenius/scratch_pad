@@ -5,7 +5,7 @@ class Setting
 
   key :scope, String, :required => true
   key :name, String, :required => true
-  key :value, String, :required => true
+  key :value, String
 
   def self.[](*scope)
     load_scope(scope).try :value

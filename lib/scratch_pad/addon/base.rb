@@ -130,7 +130,7 @@ module ScratchPad::Addon
       (@descriptions || {})[message_scope]
     end
 
-    def self.register_setting(scope, name, default_value)
+    def self.register_setting(scope, name, default_value = nil)
       ms = message_scope
       @settings ||= {}
       @settings[ms] ||= []

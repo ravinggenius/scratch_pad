@@ -99,4 +99,11 @@ class ApplicationController < ActionController::Base
     layout_name = nil # nil selects the default layout
     @selected_layout = @selected_theme.layout layout_name
   end
+
+  # http://blog.ethanvizitei.com/2009/09/browser-caching-and-rails.html
+  def break_cache!
+    response.headers['Cache-Control'] = 'no-cache, no-store, max-age=0, must-revalidate'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = 'Fri, 01 Jan 1990 00:00:00 GMT'
+  end
 end

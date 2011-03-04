@@ -14,7 +14,7 @@ class Cache
 
   # NOTE MongoMapper implements #valid?
   def expired?
-    value.nil? || ((updated_at + 1.day) < Time.now)
+    value.nil? || ((updated_at + 1.day) < Time.current)
   end
 
   def self.[](*key)

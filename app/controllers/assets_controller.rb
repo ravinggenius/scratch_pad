@@ -35,8 +35,45 @@ class AssetsController < ApplicationController
     end
   end
 
+  # TODO look into using Jammit to concatenate and minify JavaScript
   def scripts
-    render :js => gather_scripts!
+    cache_key = [:core, :scripts, theme.machine_name, :js]
+
+    clear_client_cache! if Cache[cache_key].expired?
+
+    body = if config.perform_caching && !Cache[cache_key].expired?
+      Cache[cache_key].value
+    else
+      script_files = []
+
+      script_files << Rails.root + 'public' + 'vendor' + 'modernizr.js'
+      script_files << Rails.root + 'public' + 'vendor' + 'jquery.js'
+      script_files << Rails.root + 'public' + 'vendor' + 'rails.js'
+
+      script_files << Rails.root + 'public' + 'javascripts' + 'application.js'
+
+      script_files << addons.map { |addon| addon.scripts }
+      script_files << theme.scripts
+
+      value = script_files.flatten.map do |filename|
+        <<-JS
+/**
+ * START #{filename}
+ */
+
+#{filename.read.strip}
+
+/**
+ * END #{filename}
+ */
+        JS
+      end.join("\n" * 5)
+
+      Cache[cache_key].update_attributes! :value => value
+      value
+    end
+
+    render :js => body
   end
 
   # Slightly cludgy syntax is required for now.
@@ -45,13 +82,15 @@ class AssetsController < ApplicationController
     format = format(:css)
     cache_key = [:core, :styles, theme.machine_name, format]
 
-    body = if Rails.env.production? && !Cache[cache_key].expired?
+    clear_client_cache! if Cache[cache_key].expired?
+
+    body = if config.perform_caching && !Cache[cache_key].expired?
       Cache[cache_key].value
     else
-      SASSBuilder.new(theme, addons).send(format == :css ? :to_css : :to_sass)
+      value = SASSBuilder.new(theme, addons).send(format == :css ? :to_css : :to_sass)
+      Cache[cache_key].update_attributes! :value => value
+      value
     end
-
-    Cache[cache_key].update_attributes! :value => body
 
     render :content_type => (format == :css ? 'text/css' : 'text/plain'), :text => body
   end
@@ -68,43 +107,5 @@ class AssetsController < ApplicationController
 
   def theme
     @theme ||= ScratchPad::Addon::Theme[params[:theme]]
-  end
-
-  # TODO look into using Jammit to concatenate JavaScript
-  def gather_scripts!
-    cache_key = [:core, :styles, theme.machine_name, :js]
-
-    if Rails.env.production?
-      return Cache[cache_key].value unless Cache[cache_key].expired?
-    end
-
-    script_files = []
-
-    script_files << Rails.root + 'public' + 'vendor' + 'modernizr.js'
-    script_files << Rails.root + 'public' + 'vendor' + 'jquery.js'
-    script_files << Rails.root + 'public' + 'vendor' + 'rails.js'
-
-    script_files << Rails.root + 'public' + 'javascripts' + 'application.js'
-
-    script_files << addons.map { |addon| addon.scripts }
-    script_files << theme.scripts
-
-    reply = script_files.flatten.map do |filename|
-      <<-JS
-/**
- * START #{filename}
- */
-
-#{File.read(filename).strip}
-
-/**
- * END #{filename}
- */
-      JS
-    end.join("\n" * 5)
-
-    Cache[cache_key].update_attributes! :value => reply
-
-    reply
   end
 end

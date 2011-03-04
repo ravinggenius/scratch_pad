@@ -1,6 +1,7 @@
 class AssetsController < ApplicationController
   layout nil
 
+  # TODO find a way to use Rack::Static instead of this action
   def static
     addon_type = ScratchPad::Addon::Base[params[:addon_type]]
     addon = addon_type[params[:addon]]

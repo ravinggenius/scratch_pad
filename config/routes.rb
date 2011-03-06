@@ -23,8 +23,7 @@ ScratchPad::Application.routes.draw do
     root :to => 'dashboard#index'
   end
 
-  # FIXME a controller is not needed for any of these routes (except, perhaps, :routes)
-  # static files (fonts, images etc) should be handled by Rack::Static
+  # static files (fonts, images etc) are handled by Rack::Static after their first request (they are copied into ./tmp)
   # theme scripts and styles should have proper cache expiring, and really only need to be concatenated in production
   namespace :assets do
     get '/routes', :to => :routes, :as => :routes

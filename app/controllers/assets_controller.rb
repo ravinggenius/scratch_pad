@@ -1,13 +1,19 @@
 class AssetsController < ApplicationController
   layout nil
 
-  # TODO find a way to use Rack::Static instead of this action
   def static
     addon = ScratchPad::Addon::Base[params[:addon_type]][params[:addon]]
     asset_type_path = (addon.public_path + params[:asset_type]).expand_path
     asset_path = (asset_type_path + params[:asset_name]).expand_path
 
     if File.exists?(asset_path) && addon.static_asset_types.include?(params[:asset_type]) && asset_path.to_path.starts_with?(asset_type_path.to_path)
+      # cache files so they get served with Rack::Static on the next request
+      destination = (Rails.root + 'tmp' + 'assets' + params[:addon_type] + params[:addon] + params[:asset_type] + params[:asset_name])
+      destination.dirname.mkpath
+      FileUtils.cp asset_path, destination
+
+      Rails.logger.info "CACHING #{asset_path} TO .#{destination.to_s.sub Rails.root.to_s, ''}"
+
       # https://groups.google.com/group/heroku/browse_thread/thread/e36fd2acc6ba4840
       send_file asset_path, :disposition => 'inline', :content_type => Rack::Mime.mime_type(asset_path.extname)
     else

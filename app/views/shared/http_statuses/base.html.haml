@@ -2,4 +2,4 @@
   %span.h= @exception.status.to_s.titleize
 
 %secion
-  %p= "There was an error with your request: #{@exception.message}. The server responded with a #{@exception.status_code} (#{@exception.status.to_s.camelize})."
+  %p= "There was an error with your request: #{@exception.message}. Technically the server responded with a #{@exception.status_code} (#{@exception.status.to_s.camelize}) status code."

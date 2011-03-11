@@ -16,16 +16,9 @@ gem 'thin'
 group :addons do
   gem 'scratch_pad-filters-maruku'
   gem 'scratch_pad-filters-paragraph_stripper'
-
-  gem 'scratch_pad-node_extensions-list'
-  gem 'scratch_pad-node_extensions-page'
-  gem 'scratch_pad-node_extensions-post'
-  gem 'scratch_pad-node_extensions-table'
   gem 'scratch_pad-node_extensions-text_block'
-
   gem 'scratch_pad-themes-default'
   gem 'scratch_pad-themes-default_admin'
-
   gem 'scratch_pad-widgets-branding'
   gem 'scratch_pad-widgets-copyright'
   gem 'scratch_pad-widgets-flash'

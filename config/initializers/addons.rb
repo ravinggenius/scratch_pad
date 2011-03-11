@@ -9,4 +9,5 @@ base = Rails.root + 'vendor' + 'addons'
 Dir[base + '**' + '*.rb'].each do |name|
   name =~ /^#{Regexp.escape(base.to_s)}\/(.*)\.rb$/
   require base + $1
+  ActiveSupport::Deprecation.warn "Addon (#{name}) should be implemented as a gem."
 end

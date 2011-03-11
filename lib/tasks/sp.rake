@@ -91,14 +91,6 @@ namespace :sp do
     end
   end
 
-  desc 'Load the example content from db/seeds.rb. Should be used for Theme screenshots'
-  task :seed => :environment do
-    Rake::Task['sp:install:users'].invoke
-    seed_file = Rails.root + 'db' + 'seeds.rb'
-    load seed_file if seed_file.exist?
-    puts 'Database has been seeded'
-  end
-
   desc 'List all Addons, grouped by type and status'
   task :addons do
     [

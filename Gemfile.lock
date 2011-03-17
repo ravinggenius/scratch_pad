@@ -170,7 +170,6 @@ GEM
     sass (3.1.0.alpha.221)
     scratch_pad-filters-maruku (0.0.3)
       maruku
-    scratch_pad-filters-paragraph_stripper (0.0.1)
     scratch_pad-node_extensions-text_block (0.0.2)
     scratch_pad-themes-default (0.0.1)
       compass-susy-plugin
@@ -234,7 +233,6 @@ DEPENDENCIES
   ruby-prof
   sass (~> 3.1.0.alpha)
   scratch_pad-filters-maruku
-  scratch_pad-filters-paragraph_stripper
   scratch_pad-node_extensions-text_block
   scratch_pad-themes-default
   scratch_pad-themes-default_admin

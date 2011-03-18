@@ -45,8 +45,7 @@ class SASSBuilder
     # for each addon, gather list of stylesheets and convert to sass import statements
     (@addons + [@theme]).each do |addon|
       imports = addon.styles.map do |path|
-        media = path.basename.to_s.split('.').first
-        addon.styles_path + media unless media.starts_with? '_'
+        path unless path.basename.to_s.starts_with? '_'
       end.compact
       reply << sass_for_imports(imports)
     end

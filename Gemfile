@@ -8,7 +8,7 @@ gem 'haml-rails'
 gem 'hirb'
 gem 'mongo'
 gem 'mongo_mapper'
-gem 'sass', '~> 3.1.0.alpha'
+gem 'sass', '3.1.0.alpha.221' # bug in 3.1.0.alpha.249
 gem 'rails', '~> 3.0'
 gem 'ruby-prof'
 gem 'thin'

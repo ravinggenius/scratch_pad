@@ -133,18 +133,18 @@ module ApplicationHelper
     HTML
   end
 
-  def classy_html_tags(attributes = {}, should_compress = :production, &content)
+  def classy_html_tags(element_name, attributes = {}, should_compress = :production, &content)
     html_open = <<-HTML
-<!--[if lt IE 7]>              <html #{hash_to_attrs attributes.merge(:class => %w[no-js ie ie6 lte9 lte8 lte7 lte6])}> <![endif]-->
-<!--[if IE 7]>                 <html #{hash_to_attrs attributes.merge(:class => %w[no-js ie ie7 lte9 lte8 lte7])}>      <![endif]-->
-<!--[if IE 8]>                 <html #{hash_to_attrs attributes.merge(:class => %w[no-js ie ie8 lte9 lte8])}>           <![endif]-->
-<!--[if IE 9]>                 <html #{hash_to_attrs attributes.merge(:class => %w[no-js ie ie9 lte9])}>                <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html #{hash_to_attrs attributes.merge(:class => %w[no-js])}>                        <!--<![endif]-->
+<!--[if lt IE 7]>              <#{element_name} #{hash_to_attrs attributes.merge(:class => %w[no-js ie ie6 lte9 lte8 lte7 lte6])}> <![endif]-->
+<!--[if IE 7]>                 <#{element_name} #{hash_to_attrs attributes.merge(:class => %w[no-js ie ie7 lte9 lte8 lte7])}>      <![endif]-->
+<!--[if IE 8]>                 <#{element_name} #{hash_to_attrs attributes.merge(:class => %w[no-js ie ie8 lte9 lte8])}>           <![endif]-->
+<!--[if IE 9]>                 <#{element_name} #{hash_to_attrs attributes.merge(:class => %w[no-js ie ie9 lte9])}>                <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <#{element_name} #{hash_to_attrs attributes.merge(:class => %w[no-js])}>                        <!--<![endif]-->
     HTML
     if should_compress
       html_open.gsub! /\s+/, ' ' unless should_compress.is_a?(Symbol) && !Rails.env.send(should_compress.to_s + '?')
     end
-    surround html_open, '</html>', &content
+    surround html_open, "</#{element_name}>", &content
   end
 
   def assets_image_path(addon, path)

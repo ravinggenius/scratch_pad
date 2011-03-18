@@ -16,7 +16,7 @@ class Node
   key :filter_group_id, BSON::ObjectId, :required => true
   key :children_ids, Array, :typecast => 'BSON::ObjectId'
   key :state, String, :required => true, :default => :draft
-  key :title, String, :required => true
+  key :title, String, :required => true # TODO allow node extensions to choose to require :title
 
   timestamps!
   userstamps!
@@ -87,6 +87,7 @@ class Node
     all :state => :published
   end
 
+  # TODO remove these aliases
   alias :name :title
   alias :name= :title=
   alias :author :creator

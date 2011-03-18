@@ -34,6 +34,10 @@ class Node
     (self.children_ids || []).map { |child_id| Node.find child_id }.reject &:blank?
   end
 
+  def children?
+    (self.children_ids || []).present?
+  end
+
   def descendants
     (children + children.map(&:descendants)).reject &:blank?
   end

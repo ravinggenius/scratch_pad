@@ -1,4 +1,4 @@
 %header
   %span.h= node.title
-- unless node.children.empty?
+- if node.children?
   %section= show_node_children node.children

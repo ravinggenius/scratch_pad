@@ -99,10 +99,13 @@ $experimental-support-for-#{vendor}: #{setting.value.blank? ? 'false' : setting.
       SASS
     end
     (@addons + [@theme]).each do |addon|
-      if File.exist? addon.styles_path + '_variables.sass'
-        reply << <<-SASS
-@import '#{addon.styles_path + 'variables'}'
-        SASS
+      %w[ sass scss ].each do |sass_ext|
+        variables_file = addon.styles_path + "_variables.#{sass_ext}"
+        if variables_file.file?
+          reply << <<-SASS
+@import '#{variables_file}'
+          SASS
+        end
       end
     end
     reply

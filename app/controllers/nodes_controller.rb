@@ -39,7 +39,7 @@ class NodesController < ApplicationController
 
       raise HTTPStatuses::NotFound unless @node.present?
 
-      if @node.path.present? && (request.path != "/#{@node.path}")
+      if @node.path.present? && (request.path != '/') && (request.path != "/#{@node.path}")
         return redirect_to human_node_url(@node.to_path), :status => :moved_permanently
       end
     else

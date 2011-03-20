@@ -7,6 +7,7 @@
   * themes specify arbitray layouts
   * each layout has an arbitrary number of (top-level) regions
     * each region will be exposed to the site admin to populate with content (either widgets and nodes)
+* specify any public page as the home page
 
 ## Inspiration
 

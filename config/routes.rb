@@ -34,5 +34,5 @@ ScratchPad::Application.routes.draw do
 
   get '/*path', :to => 'nodes#show_human', :as => :human_node
 
-  root :to => 'nodes#index'
+  root :to => 'home#index'
 end

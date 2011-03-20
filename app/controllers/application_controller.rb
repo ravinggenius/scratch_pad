@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   layout 'application'
 
-  helper_method :current_user
+  helper_method :current_user, :system_menu
 
   MenuItem = Struct.new :name, :href, :children
 
@@ -20,17 +20,27 @@ class ApplicationController < ActionController::Base
     set_theme_ivars :frontend
   end
 
-  # TODO add permissions for each item
-  before_filter do
-    @system_menu = []
+  after_filter do
+    session[:current_user_id] = current_user.id
+  end
 
-    @system_menu << if current_user == User.anonymous
+  def current_user
+    @current_user ||= User.anonymous
+  end
+
+  protected
+
+  # TODO add permissions for each item
+  def system_menu
+    reply = []
+
+    reply << if current_user == User.anonymous
       MenuItem.new('Sign In', new_session_path)
     else
       MenuItem.new('Profile', current_user)
     end
 
-    @system_menu += [
+    reply += [
       MenuItem.new('Dashboard', admin_root_path),
       MenuItem.new('Content', admin_nodes_path, [
         MenuItem.new('New', new_admin_node_path, ScratchPad::Addon::NodeExtension.enabled.sort.map { |extension|
@@ -57,17 +67,9 @@ class ApplicationController < ActionController::Base
         MenuItem.new(addon_type.title.pluralize, admin_addon_configurations_path(addon_type.machine_name))
       })
     ] if authorize
-  end
 
-  after_filter do
-    session[:current_user_id] = current_user.id
+    reply
   end
-
-  def current_user
-    @current_user ||= User.anonymous
-  end
-
-  protected
 
   def current_user=(user)
     @current_user = user

@@ -5,7 +5,6 @@
 * security audit
 * continuity audit
 * allow admin to specify layouts per node type OR controller#action
-* addons should support descriptions
 * improve default themes
 
 ### Hopeful

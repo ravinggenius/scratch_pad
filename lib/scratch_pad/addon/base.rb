@@ -127,7 +127,7 @@ module ScratchPad::Addon
     end
 
     def self.description
-      (@descriptions || {})[message_scope]
+      (@descriptions || {})[message_scope] || title
     end
 
     def self.register_setting(scope, name, default_value = nil)

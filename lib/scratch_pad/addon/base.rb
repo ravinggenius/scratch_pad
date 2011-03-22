@@ -63,6 +63,15 @@ module ScratchPad::Addon
       styles.map { |style| style unless style.basename.to_s.split('.').first.starts_with?('_') }.compact
     end
 
+    def self.find_view(view)
+      addon_class = self
+      # FIXME hard-coding .html.haml is evil
+      until (view_file = addon_class.views_path + "#{view}.html.haml").file?
+        addon_class = addon_class.superclass
+      end
+      view_file
+    end
+
     def self.title
       name.split('::').last
     end

@@ -47,7 +47,7 @@ module ApplicationHelper
   end
 
   def show_addon(addon, view = :show, locals = {})
-    render :file => addon.views_path + view.to_s, :locals => locals
+    render :file => addon.find_view(view), :locals => locals
   end
 
   def show_node(node, part, locals = {})

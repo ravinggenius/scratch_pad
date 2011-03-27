@@ -9,8 +9,8 @@ class NodesController < ApplicationController
     respond_with @nodes
   end
 
-  # GET /nodes/4d1a44571d41c821eb000008.json
-  # GET /nodes/4d1a44571d41c821eb000008.#{custom_extension} # custom formats are expected to be handled by the specific node extension that generate them
+  # GET /nodes/4d1a44571d41c821eb000008.#{custom_extension}
+  # custom formats are expected to be handled by the specific node extension that generate them
   # HTML request get redirected to human_node_url
   def show
     @node = Node.find params[:id]
@@ -25,11 +25,6 @@ class NodesController < ApplicationController
     respond_with @node
   end
 
-  # GET /about
-  # GET /about/us
-  # GET /about/us.html
-  # GET /4d1a44571d41c821eb000008
-  # GET /4d1a44571d41c821eb000008.(x)htm(l)
   # non-HTML requests are redirected to node_url
   def show_human
     # if extension is present and is NOT in html_extensions list, redirect to node_url

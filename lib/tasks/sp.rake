@@ -17,7 +17,8 @@ namespace :sp do
 
   desc 'Wipe out asset cache and force a rebuild. Requires a server restart'
   task :clear_cache => :environment do
-    puts Cache.expire_all
+    Cache.expire_all
+    ScratchPad::StaticAssets.expire_all
   end
 
   namespace :install do

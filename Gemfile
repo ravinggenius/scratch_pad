@@ -40,8 +40,8 @@ end
 group :test do
   gem 'autotest'
   gem 'capybara'
-  gem 'cucumber'
-  gem 'cucumber-rails'
+  #gem 'cucumber' # cucumber depends on term-ansicolor, which conflicts with ScratchPad's Term model
+  #gem 'cucumber-rails'
   gem 'factory_girl'
   gem 'factory_girl_rails'
   gem 'rcov'

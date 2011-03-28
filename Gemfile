@@ -2,10 +2,14 @@ source :rubygems
 
 gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'bson_ext'
+#gem 'cancan'
 gem 'compass', '~> 0.11.beta'
+#gem 'devise' # also look into sorcery
 gem 'haml', '~> 3.1.0.alpha'
 gem 'haml-rails'
 gem 'hirb'
+#gem 'mm-devise'
+#gem 'mm-paranoid'
 gem 'mongo'
 gem 'mongo_mapper'
 gem 'sass', '3.1.0.alpha.221' # bug in 3.1.0.alpha.249

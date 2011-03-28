@@ -17,7 +17,7 @@ RSpec.configure do |config|
   # config.mock_with :rr
   config.mock_with :rspec
 
-  config.after :each do
+  config.after :all do
     MongoMapper.database.collections.each &:remove
   end
 end

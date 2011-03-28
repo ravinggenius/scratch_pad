@@ -1,4 +1,6 @@
-describe 'AssetsController' do
+require 'spec_helper'
+
+describe AssetsController do
   it 'should match the following routes' do
     #route(:controller => 'assets', :action => 'styles', :theme => :example).should == '/assets/example/styles.css'
 

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe AddonBase do
+describe ScratchPad::Addon::Base do
   describe '.[]' do
     it 'loads the addon whose name is sent to it'
   end

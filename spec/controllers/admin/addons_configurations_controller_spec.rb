@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Admin::AddonsController do
+describe Admin::AddonConfigurationsController do
 
   def mock_addon(stubs={})
     (@mock_addon ||= mock_model(Addon).as_null_object).tap do |addon|

@@ -1,3 +1,5 @@
-describe 'Tagging' do
+require 'spec_helper'
+
+describe Tagging do
   it '...'
 end

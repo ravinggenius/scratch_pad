@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe Theme do
-  let(:frontend_theme) { Theme[:default] }
-  let(:backend_theme) { Theme[:default_admin] }
+describe ScratchPad::Addon::Theme do
+  let(:frontend_theme) { ScratchPad::Addon::Theme[:default] }
+  let(:backend_theme) { ScratchPad::Addon::Theme[:default_admin] }
 
   describe '.admin?' do
     it 'has been depricated'
@@ -71,8 +71,8 @@ describe Theme do
   end
 
   describe '.default_regions' do
-    it 'returns a list of scratchpad declared regions which will always be available' do
-      Theme.default_regions.should eql(%w[ head_alpha head_omega body_alpha body_omega ])
+    it 'returns a list of ScratchPad declared regions which will always be available' do
+      ScratchPad::Addon::Theme.default_regions.should eql(%w[ head_alpha head_omega body_alpha body_omega ])
     end
   end
 end

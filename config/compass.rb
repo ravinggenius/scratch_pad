@@ -4,9 +4,10 @@ environment = Compass::AppIntegration::Rails.env
 
 # support for FireSASS
 # TODO find out why this doesn't seem to work
-sass_options = { :debug_info => true }
+sass_options = { :debug_info => !Rails.env.production? }
 
-output_style = (Rails.env.production? ? :compressed : :expanded)
+# some styles fail to be applied with :compressed output
+output_style = (Rails.env.production? ? :compact : :expanded)
 preferred_syntax = :sass
 relative_assets = false
 

@@ -1,1 +1,1 @@
-ScratchPad::StaticAssets.expire_all
+ScratchPad::StaticAssets.delete_all

@@ -79,10 +79,11 @@ module AddonHelper
   end
 
   def theme_tags(theme)
+    # TODO figure somthing out
     style_cache_buster, script_cache_buster = [
-      "?#{Cache[:core, :styles, theme.machine_name, :css].updated_at.to_i}",
-      "?#{Cache[:core, :scripts, theme.machine_name, :js].updated_at.to_i}"
-    ] if ActionController::Base.perform_caching
+      "?0",
+      "?0"
+    ] if false && ActionController::Base.perform_caching
 
     <<-HTML
 <link href="#{assets_styles_path(:theme => theme.machine_name)}#{style_cache_buster}" rel="stylesheet" type="text/css" />

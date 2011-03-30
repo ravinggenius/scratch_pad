@@ -1,6 +1,7 @@
 class AssetsController < ApplicationController
   layout nil
 
+  # TODO merge with ScratchPad::StaticAssets
   def static
     addon = ScratchPad::Addon::Base[params[:addon_type]][params[:addon]]
     asset_type_path = (addon.public_path + params[:asset_type]).expand_path
@@ -40,41 +41,32 @@ class AssetsController < ApplicationController
 
   # TODO look into using Jammit to concatenate and minify JavaScript
   def scripts
-    cache_key = [:core, :scripts, theme.machine_name, :js]
+    script_files = []
 
-    clear_client_cache! if Cache[cache_key].expired?
+    script_files << Rails.root + 'public' + 'vendor' + 'modernizr.js'
+    script_files << Rails.root + 'public' + 'vendor' + 'jquery.js'
+    script_files << Rails.root + 'public' + 'vendor' + 'rails.js'
 
-    body = if config.perform_caching && !Cache[cache_key].expired?
-      Cache[cache_key].value
-    else
-      script_files = []
+    script_files << Rails.root + 'public' + 'javascripts' + 'application.js'
 
-      script_files << Rails.root + 'public' + 'vendor' + 'modernizr.js'
-      script_files << Rails.root + 'public' + 'vendor' + 'jquery.js'
-      script_files << Rails.root + 'public' + 'vendor' + 'rails.js'
+    script_files << addons.map { |addon| addon.scripts }
+    script_files << theme.scripts
 
-      script_files << Rails.root + 'public' + 'javascripts' + 'application.js'
-
-      script_files << addons.map { |addon| addon.scripts }
-      script_files << theme.scripts
-
-      value = script_files.flatten.map do |filename|
-        <<-JS
+    body = script_files.flatten.map do |script_file|
+      <<-JS
 /**
- * START #{filename}
+ * START #{script_file}
  */
 
-#{filename.read.strip}
+#{script_file.read.strip}
 
 /**
- * END #{filename}
+ * END #{script_file}
  */
-        JS
-      end.join("\n" * 5)
+      JS
+    end.join("\n" * 5)
 
-      Cache[cache_key].update_attributes! :value => value
-      value
-    end
+    ScratchPad::StaticAssets.create(Pathname.new(theme.machine_name) + 'scripts.js', body) if config.perform_caching
 
     render :js => body
   end
@@ -83,17 +75,9 @@ class AssetsController < ApplicationController
   # @reference http://groups.google.com/group/haml/browse_thread/thread/e459fbdfa5a6d467/f9ab5f5df3fe77de
   def styles
     format = format(:css)
-    cache_key = [:core, :styles, theme.machine_name, format]
+    body = SASSBuilder.new(theme, addons).send(format == :css ? :to_css : :to_sass)
 
-    clear_client_cache! if Cache[cache_key].expired?
-
-    body = if config.perform_caching && !Cache[cache_key].expired?
-      Cache[cache_key].value
-    else
-      value = SASSBuilder.new(theme, addons).send(format == :css ? :to_css : :to_sass)
-      Cache[cache_key].update_attributes! :value => value
-      value
-    end
+    ScratchPad::StaticAssets.create(Pathname.new(theme.machine_name) + "styles.#{format}" , body) if config.perform_caching
 
     render :content_type => (format == :css ? 'text/css' : 'text/plain'), :text => body
   end

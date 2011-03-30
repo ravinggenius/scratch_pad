@@ -2,6 +2,7 @@ module ScratchPad
   class StaticAssets
     ASSET_ROOT = Rails.root + 'tmp' + 'assets'
 
+    # cache files so they get served with Rack::Static on the next request
     def self.create(name, content)
       full_path = (ASSET_ROOT + name).expand_path
 

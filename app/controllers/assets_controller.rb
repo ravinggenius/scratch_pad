@@ -1,6 +1,51 @@
 class AssetsController < ApplicationController
   layout nil
 
+  # TODO look into using Jammit to concatenate and minify JavaScript
+  def scripts
+    public_dir = Rails.root + 'public'
+
+    script_files = []
+
+    script_files << public_dir + 'vendor' + 'modernizr.js'
+    script_files << public_dir + 'vendor' + 'jquery.js'
+    script_files << public_dir + 'vendor' + 'rails.js'
+
+    script_files << public_dir + 'javascripts' + 'application.js'
+
+    script_files << addons.map(&:scripts)
+    script_files << addon.scripts
+
+    body = script_files.flatten.map do |script_file|
+      <<-JS
+/**
+ * START #{script_file}
+ */
+
+#{script_file.read.strip}
+
+/**
+ * END #{script_file}
+ */
+      JS
+    end.join("\n" * 5)
+
+    ScratchPad::StaticAssets.create assets_scripts_path(addon.machine_name).sub('/assets/', ''), body if config.perform_caching
+
+    render :js => body
+  end
+
+  # Slightly cludgy syntax is required for now.
+  # @reference http://groups.google.com/group/haml/browse_thread/thread/e459fbdfa5a6d467/f9ab5f5df3fe77de
+  def styles
+    format = params[:format] ? params[:format].to_sym : :css
+    body = SASSBuilder.new(addon, addons).send(format == :css ? :to_css : :to_sass)
+
+    ScratchPad::StaticAssets.create assets_styles_path(addon.machine_name, :format => format).sub('/assets/', ''), body if config.perform_caching
+
+    render :content_type => (format == :css ? 'text/css' : 'text/plain'), :text => body
+  end
+
   def static
     asset_type_path = (addon.public_path + params[:asset_type]).expand_path # /path/to/addon/public/images/
     asset_path = (asset_type_path + params[:asset_name]).expand_path        # /path/to/addon/public/images/organization/path/image.png
@@ -50,51 +95,6 @@ class AssetsController < ApplicationController
     end
   end
 
-  # TODO look into using Jammit to concatenate and minify JavaScript
-  def scripts
-    public_dir = Rails.root + 'public'
-
-    script_files = []
-
-    script_files << public_dir + 'vendor' + 'modernizr.js'
-    script_files << public_dir + 'vendor' + 'jquery.js'
-    script_files << public_dir + 'vendor' + 'rails.js'
-
-    script_files << public_dir + 'javascripts' + 'application.js'
-
-    script_files << addons.map(&:scripts)
-    script_files << addon.scripts
-
-    body = script_files.flatten.map do |script_file|
-      <<-JS
-/**
- * START #{script_file}
- */
-
-#{script_file.read.strip}
-
-/**
- * END #{script_file}
- */
-      JS
-    end.join("\n" * 5)
-
-    ScratchPad::StaticAssets.create assets_scripts_path(addon.machine_name).sub('/assets/', ''), body if config.perform_caching
-
-    render :js => body
-  end
-
-  # Slightly cludgy syntax is required for now.
-  # @reference http://groups.google.com/group/haml/browse_thread/thread/e459fbdfa5a6d467/f9ab5f5df3fe77de
-  def styles
-    format = format(:css)
-    body = SASSBuilder.new(addon, addons).send(format == :css ? :to_css : :to_sass)
-
-    ScratchPad::StaticAssets.create assets_styles_path(addon.machine_name, :format => format).sub('/assets/', ''), body if config.perform_caching
-
-    render :content_type => (format == :css ? 'text/css' : 'text/plain'), :text => body
-  end
-
   private
 
   def addon
@@ -103,9 +103,5 @@ class AssetsController < ApplicationController
 
   def addons
     ScratchPad::Addon::Widget.enabled + ScratchPad::Addon::NodeExtension.enabled
-  end
-
-  def format(default_format)
-    params[:format] ? params[:format].to_sym : default_format
   end
 end

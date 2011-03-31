@@ -26,10 +26,10 @@ ScratchPad::Application.routes.draw do
   # static files (fonts, images etc) are handled by Rack::Static after their first request (they are copied into ./tmp)
   # theme scripts and styles should have proper cache expiring, and really only need to be concatenated in production
   namespace :assets do
-    get '/routes', :to => :routes, :as => :routes
+    get '/:addon_type/:addon/scripts.:format', :to => :scripts, :as => :scripts, :defaults => { :addon_type => :theme, :format => :js }
+    get '/:addon_type/:addon/styles.:format', :to => :styles, :as => :styles, :defaults => { :addon_type => :theme, :format => :css }
     get '/:addon_type/:addon/:asset_type/*asset_name', :to => :static, :as => :static
-    get '/:theme/scripts.:format', :to => :scripts, :as => :scripts, :defaults => { :format => :js }
-    get '/:theme/styles.:format', :to => :styles, :as => :styles, :defaults => { :format => :css }
+    get '/routes', :to => :routes, :as => :routes
   end
 
   get '/*path', :to => 'nodes#show_human', :as => :human_node

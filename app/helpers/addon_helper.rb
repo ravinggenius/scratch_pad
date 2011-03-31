@@ -79,16 +79,10 @@ module AddonHelper
   end
 
   def theme_tags(theme)
-    # TODO figure somthing out
-    style_cache_buster, script_cache_buster = [
-      "?0",
-      "?0"
-    ] if false && ActionController::Base.perform_caching
-
-    <<-HTML
-<link href="#{assets_styles_path(:theme => theme.machine_name)}#{style_cache_buster}" rel="stylesheet" type="text/css" />
-<script src="#{assets_scripts_path(:theme => theme.machine_name)}#{script_cache_buster}" type="text/javascript"></script>
-    HTML
+    [
+      stylesheet_link_tag(assets_styles_path(theme.machine_name), :media => :all),
+      javascript_include_tag(assets_scripts_path(theme.machine_name))
+    ].join "\n"
   end
 
   def assets_image_path(addon, path)

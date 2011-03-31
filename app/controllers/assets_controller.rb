@@ -52,13 +52,15 @@ class AssetsController < ApplicationController
 
   # TODO look into using Jammit to concatenate and minify JavaScript
   def scripts
+    public_dir = Rails.root + 'public'
+
     script_files = []
 
-    script_files << Rails.root + 'public' + 'vendor' + 'modernizr.js'
-    script_files << Rails.root + 'public' + 'vendor' + 'jquery.js'
-    script_files << Rails.root + 'public' + 'vendor' + 'rails.js'
+    script_files << public_dir + 'vendor' + 'modernizr.js'
+    script_files << public_dir + 'vendor' + 'jquery.js'
+    script_files << public_dir + 'vendor' + 'rails.js'
 
-    script_files << Rails.root + 'public' + 'javascripts' + 'application.js'
+    script_files << public_dir + 'javascripts' + 'application.js'
 
     script_files << addons.map(&:scripts)
     script_files << addon.scripts

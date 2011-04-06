@@ -24,18 +24,24 @@ class Node
   belongs_to :filter_group
   habtm :nodes, :terms, :glue_model => :tagging
 
-  before_save :set_children_ids
+  before_save do |node|
+    node.children_ids = node.children.map do |child|
+      child.save
+      child.id
+    end
+  end
 
   validates_uniqueness_of :path, :allow_blank => true
   validate :ensure_not_ancestor_of_self
   validate :ensure_valid_state
 
   def children
-    (self.children_ids || []).map { |child_id| Node.find child_id }.reject &:blank?
+    @children ||= (children_ids || []).map { |child_id| Node.find child_id }
+    @children
   end
 
   def children?
-    (self.children_ids || []).present?
+    children.present?
   end
 
   def descendants
@@ -114,11 +120,4 @@ class Node
     states = self.class::STATES.map &:to_s
     errors.add :state, "must be one of #{states.join ', '}" unless states.include? state.to_s
   end
-
-  # TODO move to before_save &block
-  def set_children_ids
-    self.children_ids = children.map &:id
-  end
-
-  protected :children_ids, :children_ids=
 end

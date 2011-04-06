@@ -1,4 +1,8 @@
+# @import under a selector is legal, unless the @imported stylesheet contains @mixins. We put styles into @mixins to allow stylesheets to @import whatever they need.
+# http://groups.google.com/group/haml/browse_thread/thread/e459fbdfa5a6d467/f9ab5f5df3fe77de
+
 # http://compass-style.org/docs/index/variables/
+# http://compass-style.org/docs/reference/compass/support/
 # http://compass-users.googlegroups.com/web/_skeleton.css.sass
 
 class SASSBuilder

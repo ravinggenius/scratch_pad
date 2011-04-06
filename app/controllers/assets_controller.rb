@@ -35,8 +35,6 @@ class AssetsController < ApplicationController
     render :js => body
   end
 
-  # Slightly cludgy syntax is required for now.
-  # @reference http://groups.google.com/group/haml/browse_thread/thread/e459fbdfa5a6d467/f9ab5f5df3fe77de
   def styles
     format = params[:format] ? params[:format].to_sym : :css
     body = SASSBuilder.new(addon, addons).send(format == :css ? :to_css : :to_sass)

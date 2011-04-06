@@ -5,8 +5,8 @@ shared_examples_for 'scratch_pad/addons/base' do |factory|
   context 'multiple configuration' do
     before do 
       #@configurations = [
-      #  Factory.create(factory),
-      #  Factory.create(factory)
+      #  Factory.build(factory),
+      #  Factory.build(factory)
       #]
     end
   end

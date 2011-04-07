@@ -44,8 +44,9 @@ class Node
     children.present?
   end
 
-  def descendants
-    (children + children.map(&:descendants)).reject &:blank?
+  def descendants(root_id = id)
+    raise OwnGrandfatherException, root_id if children.map(&:id).include? root_id
+    (children + children.map { |child| child.descendants root_id }).reject &:blank?
   end
 
   def parse_terms(vocabularies)
@@ -107,11 +108,10 @@ class Node
 
   private
 
-  # TODO factor out exception handling
   def ensure_not_ancestor_of_self
     begin
-      descendants
-    rescue SystemStackError => e
+      descendants id
+    rescue OwnGrandfatherException => e
       errors.add :parent, 'may not be its own descendant'
     end
   end

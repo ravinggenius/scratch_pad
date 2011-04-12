@@ -84,18 +84,13 @@ class Node
     title.underscore
   end
 
-  def self.model_name
-    name = 'node'
-    name.instance_eval do
-      def plural;   pluralize;   end
-      def singular; singularize; end
-      def human;    singularize; end
-    end
-    return name
-  end
-
   def self.published
     all :state => :published
+  end
+
+  # Ensure that subclasses don't misbehave
+  def self.model_name
+    ActiveModel::Name.new Node
   end
 
   # TODO remove these aliases

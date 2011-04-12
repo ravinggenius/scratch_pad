@@ -10,7 +10,7 @@
       = form.text_field :path
     %div.field
       = form.label :filter_group_id, 'Filter Group'
-      = form.collection_select :filter_group_id, @filter_groups, :id, :name, :selected => @node.filter_group.id
+      = form.collection_select :filter_group_id, @filter_groups, :id, :name, :selected => @node.filter_group_id
     %div.field
       = form.label :state, 'State'
       = form.select :state, @node_states, :selected => @node.state

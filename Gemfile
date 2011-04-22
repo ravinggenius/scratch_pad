@@ -10,7 +10,7 @@ gem 'hirb'
 #gem 'mm-paranoid'
 gem 'mongo'
 gem 'mongo_mapper'
-gem 'sass', '3.1.0.alpha.221' # bug in 3.1.0.alpha.249
+gem 'sass', '3.1.0.alpha.221' # https://github.com/nex3/sass/issues/65
 gem 'rails', '~> 3.0'
 gem 'ruby-prof'
 gem 'thin'

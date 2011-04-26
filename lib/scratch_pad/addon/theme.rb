@@ -33,6 +33,22 @@ module ScratchPad::Addon
       (@fonts || {})[message_scope] || []
     end
 
+    def self.favicon
+      ms = message_scope
+      (@favicons || {})[ms]
+    end
+
+    def self.favicon?
+      ms = message_scope
+      (@favicons || {}).key? ms
+    end
+
+    def self.register_favicon(path)
+      ms = message_scope
+      @favicons ||= {}
+      @favicons[ms] = path
+    end
+
     def self.default_layout
       Layout.first(:theme => machine_name, :is_default => true) or Layout.first(:theme => machine_name)
     end

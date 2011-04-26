@@ -5,7 +5,8 @@
 
     -# TODO these should move to widgets
     %title= @title
-    -# %link{ :rel => 'shortcut icon', :href => '/images/favicon.ico' }/
+    - if @selected_theme.favicon?
+      = favicon_link_tag assets_image_path(@selected_theme, @selected_theme.favicon)
     = auto_discovery_link_tag
 
     %meta{ :charset => 'utf-8' }/

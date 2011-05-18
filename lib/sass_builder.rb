@@ -148,7 +148,7 @@ $experimental-support-for-#{vendor}: #{setting.value.blank? ? 'false' : setting.
     reply = ''
     paths.each do |path|
       reply << <<-SASS
-@import '#{path}'
+@import '#{prepare_path_for_import(path)}'
       SASS
     end
     reply
@@ -163,5 +163,11 @@ $experimental-support-for-#{vendor}: #{setting.value.blank? ? 'false' : setting.
 
   def extract_media_key(sheet)
     sheet.basename.to_s.split('.').first.to_sym
+  end
+
+  def prepare_path_for_import(path)
+    reply = Pathname.new path
+    # thank you Chris Eppstein (helped via IRC)
+    reply.absolute? ? reply.relative_path_from(Pathname.new(Compass.configuration.sass_path)) : reply
   end
 end

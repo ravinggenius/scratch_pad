@@ -106,9 +106,7 @@ $experimental-support-for-#{vendor}: #{setting.value.blank? ? 'false' : setting.
       %w[ sass scss ].each do |sass_ext|
         variables_file = addon.styles_path + "_variables.#{sass_ext}"
         if variables_file.file?
-          reply << <<-SASS
-@import '#{variables_file}'
-          SASS
+          reply << sass_for_imports([variables_file])
         end
       end
     end

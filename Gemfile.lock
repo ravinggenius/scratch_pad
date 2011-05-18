@@ -159,9 +159,9 @@ GEM
     scratch_pad-filters-maruku (0.0.3)
       maruku
     scratch_pad-node_extensions-text_block (0.0.2)
-    scratch_pad-themes-default (0.0.1)
+    scratch_pad-themes-default (0.0.2)
       compass-susy-plugin
-    scratch_pad-themes-default_admin (0.0.1)
+    scratch_pad-themes-default_admin (0.0.2)
       compass-susy-plugin
     scratch_pad-widgets-branding (0.0.1)
     scratch_pad-widgets-copyright (0.0.1)

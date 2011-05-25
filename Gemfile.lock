@@ -158,7 +158,11 @@ GEM
     sass (3.1.1)
     scratch_pad-filters-maruku (0.0.3)
       maruku
-    scratch_pad-node_extensions-text_block (0.0.2)
+    scratch_pad-node_extensions-page (0.0.3)
+      scratch_pad-node_extensions-text_block (>= 0.0.3)
+    scratch_pad-node_extensions-post (0.0.4)
+      scratch_pad-node_extensions-text_block (>= 0.0.3)
+    scratch_pad-node_extensions-text_block (0.0.3)
     scratch_pad-themes-default (0.0.2)
       compass-susy-plugin
     scratch_pad-themes-default_admin (0.0.2)
@@ -218,7 +222,8 @@ DEPENDENCIES
   ruby-prof
   sass
   scratch_pad-filters-maruku
-  scratch_pad-node_extensions-text_block
+  scratch_pad-node_extensions-page
+  scratch_pad-node_extensions-post
   scratch_pad-themes-default
   scratch_pad-themes-default_admin
   scratch_pad-widgets-branding

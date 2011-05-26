@@ -4,4 +4,9 @@
 require File.expand_path('../config/application', __FILE__)
 require 'rake'
 
+# http://stackoverflow.com/questions/5287121/undefined-method-task-using-rake-0-9-0-beta-4#6106931
+class Rails::Application
+  include Rake::DSL if defined?(Rake::DSL)
+end
+
 ScratchPad::Application.load_tasks

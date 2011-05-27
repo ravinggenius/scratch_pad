@@ -1,18 +1,24 @@
 ---
+# FIXME including *defaults munges any other key in that section.
+# this only includes when loaded from the rails initializer, but
+# not when executing the same code in irb
 defaults: &defaults
   host: 127.0.0.1
   port: 27017
 
 development:
-  <<: *defaults
+  #<<: *defaults
+  host: 127.0.0.1
   database: scratch_pad_development
 
 test:
-  <<: *defaults
+  #<<: *defaults
+  host: 127.0.0.1
   database: scratch_pad_test
 
 production:
-  <<: *defaults
+  #<<: *defaults
+  host: 127.0.0.1
   database: scratch_pad_production
   username: username
   password: password
